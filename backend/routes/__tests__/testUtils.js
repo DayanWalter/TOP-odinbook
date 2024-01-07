@@ -5,19 +5,15 @@ const express = require('express');
 const app = express();
 // Import request from "supertest"
 const request = require('supertest');
-// Import the 'index' route.
-const index = require('./index');
 // Import the 'user' route.
-const user = require('./user');
+const user = require('../user');
 // Import the 'post' route.
-const post = require('./post');
+const post = require('../post');
 // Import the 'comment' route.
-const comment = require('./comment');
+const comment = require('../comment');
 
 // Parse URL-encoded requests.
 app.use(express.urlencoded({ extended: false }));
-// Use the 'index' route for the root path.
-app.use('/', index);
 // Use the 'user' route for '/user' path.
 app.use('/user', user);
 // Use the 'post' route for '/post' path.

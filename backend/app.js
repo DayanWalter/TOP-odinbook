@@ -18,8 +18,6 @@ const cookieParser = require('cookie-parser');
 // Import the 'morgan' middleware for HTTP request logging.
 const logger = require('morgan');
 
-// Import the 'index' route.
-const indexRouter = require('./routes/index');
 // Import the 'users' route.
 const userRouter = require('./routes/user');
 // Load environment variables from a '.env' file.
@@ -56,8 +54,6 @@ app.use(cookieParser());
 // Serve static files from the 'public' directory.
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use the 'index' route for the root path.
-app.use('/', indexRouter);
 // Use the 'users' route for '/users' path.
 app.use('/user', userRouter);
 
