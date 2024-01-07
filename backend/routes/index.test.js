@@ -1,4 +1,5 @@
 const { app, request } = require('./testUtils');
+
 describe('GET /', () => {
   it('Index route returns title', (done) => {
     request(app)

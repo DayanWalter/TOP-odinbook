@@ -21,7 +21,7 @@ const logger = require('morgan');
 // Import the 'index' route.
 const indexRouter = require('./routes/index');
 // Import the 'users' route.
-const usersRouter = require('./routes/users');
+const userRouter = require('./routes/user');
 // Load environment variables from a '.env' file.
 require('dotenv').config();
 
@@ -59,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Use the 'index' route for the root path.
 app.use('/', indexRouter);
 // Use the 'users' route for '/users' path.
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
