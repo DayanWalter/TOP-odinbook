@@ -22,6 +22,8 @@ const getUserById = function (req, res, next) {
   res.json({ searchedUser });
 };
 const createUser = function (req, res, next) {
+  // TODO: req.body.id ist ein string, er muss formatiert werden
+  allUsers.push(req.body);
   res.json({ post: 'createduser' });
 };
 

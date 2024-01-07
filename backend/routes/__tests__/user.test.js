@@ -31,7 +31,33 @@ describe('user', () => {
   });
   describe('post user route', () => {
     it('should create a new user', (done) => {
-      request(app).post('/user').expect(200, done);
+      request(app)
+        .post('/user')
+        .type('form')
+        .send({ id: 3, name: 'John' })
+        .then(() => {
+          request(app)
+            .get('/user')
+            .expect(
+              {
+                allUsers: [
+                  {
+                    id: 1,
+                    name: 'Peter',
+                  },
+                  {
+                    id: 2,
+                    name: 'Michael',
+                  },
+                  {
+                    id: 3,
+                    name: 'John',
+                  },
+                ],
+              },
+              done
+            );
+        });
     });
     it.todo('should return new user object');
   });
