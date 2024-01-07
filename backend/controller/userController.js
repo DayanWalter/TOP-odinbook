@@ -21,8 +21,12 @@ const getUserById = function (req, res, next) {
   }
   res.json({ searchedUser });
 };
+const createUser = function (req, res, next) {
+  res.json({ post: 'createduser' });
+};
 
 module.exports = {
   getAllUsers,
   getUserById,
+  createUser,
 };

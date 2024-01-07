@@ -29,4 +29,10 @@ describe('user', () => {
       });
     });
   });
+  describe('post user route', () => {
+    it('should create a new user', (done) => {
+      request(app).post('/user').expect(200, done);
+    });
+    it.todo('should return new user object');
+  });
 });
