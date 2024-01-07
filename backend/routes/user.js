@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const user_controller = require('../controller/userController');
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.json({ get: '/' });
-});
-
+// get all users
+router.get('/', user_controller.getAllUsers);
+// get single user
+router.get('/:userid', user_controller.getUserById);
 module.exports = router;

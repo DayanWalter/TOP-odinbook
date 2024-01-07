@@ -10,12 +10,22 @@ describe('user', () => {
     });
     describe('given the user route does exist', () => {
       it('should return a 200', (done) => {
+        request(app).get('/user').expect(200, done);
+        // expect(true).toBe(true);
+      });
+      it('should return allUsers object', (done) => {
         request(app)
           .get('/user')
           .expect('Content-Type', /json/)
-          .expect({ get: '/' })
+          .expect((res) => {
+            expect(res.body).toEqual({
+              allUsers: expect.any(Array),
+            });
+          })
           .expect(200, done);
-        // expect(true).toBe(true);
+      });
+      it('should return user object', (done) => {
+        request(app).get('/user/1').expect(200, done);
       });
     });
   });
