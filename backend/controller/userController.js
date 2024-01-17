@@ -22,9 +22,22 @@ const getUserById = function (req, res, next) {
   res.json({ searchedUser });
 };
 const createUser = function (req, res, next) {
-  // TODO: req.body.id ist ein string, er muss formatiert werden
-  allUsers.push(req.body);
-  res.json({ post: 'createduser' });
+  // convert the id into integer
+  const id = +req.body.id;
+  const name = req.body.name;
+
+  // Search the db for the entered username
+  const searchedUser = allUsers.find((user) => user.name === name);
+  // if name is in database,...
+  if (searchedUser) {
+    // ...return status 422 and error
+    res.status(422).json({ error: 'Username already exists' });
+  }
+  // else create newUser
+  const newUser = { id, name };
+  // and add to database
+  allUsers.push(newUser);
+  res.json({ newUser });
 };
 
 module.exports = {
