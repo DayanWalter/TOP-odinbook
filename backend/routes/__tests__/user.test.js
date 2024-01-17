@@ -77,6 +77,7 @@ describe('user', () => {
                     follows_id: [],
                     posts_id: [],
                     comments_id: [],
+                    reg_date: '12:00',
                   },
                   {
                     id: 2,
@@ -88,6 +89,7 @@ describe('user', () => {
                     follows_id: [],
                     posts_id: [],
                     comments_id: [],
+                    reg_date: '12:00',
                   },
                   {
                     id: 3,
@@ -99,6 +101,7 @@ describe('user', () => {
                     follows_id: [],
                     posts_id: [],
                     comments_id: [],
+                    reg_date: '12:00',
                   },
                 ],
               },

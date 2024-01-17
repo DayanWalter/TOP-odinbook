@@ -9,6 +9,7 @@ const allUsers = [
     follows_id: [],
     posts_id: [],
     comments_id: [],
+    reg_date: '12:00',
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const allUsers = [
     follows_id: [],
     posts_id: [],
     comments_id: [],
+    reg_date: '12:00',
   },
 ];
 
@@ -46,6 +48,7 @@ const createUser = function (req, res, next) {
   const follows_id = [];
   const posts_id = [];
   const comments_id = [];
+  const reg_date = '12:00';
 
   // Search the db for the entered username
   const searchedUser = allUsers.find((user) => user.user_name === user_name);
@@ -65,6 +68,7 @@ const createUser = function (req, res, next) {
     follows_id,
     posts_id,
     comments_id,
+    reg_date,
   };
   // and add to database
   allUsers.push(newUser);
