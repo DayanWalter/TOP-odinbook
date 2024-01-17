@@ -55,7 +55,7 @@ describe('user', () => {
       request(app)
         .post('/user')
         .type('form')
-        .send({ id: 3, name: 'John' })
+        .send({ id: 3, user_name: 'John' })
         .then(() => {
           request(app)
             .get('/user')
@@ -64,15 +64,15 @@ describe('user', () => {
                 allUsers: [
                   {
                     id: 1,
-                    name: 'Peter',
+                    user_name: 'Peter',
                   },
                   {
                     id: 2,
-                    name: 'Michael',
+                    user_name: 'Michael',
                   },
                   {
                     id: 3,
-                    name: 'John',
+                    user_name: 'John',
                   },
                 ],
               },
@@ -84,7 +84,7 @@ describe('user', () => {
       request(app)
         .post('/user')
         .type('form')
-        .send({ id: 4, name: 'Peter' })
+        .send({ id: 4, user_name: 'Peter' })
         .expect((res) => {
           expect(res.body.error).toBe('Username already exists');
         })
