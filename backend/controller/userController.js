@@ -84,9 +84,13 @@ const createUser = function (req, res, next) {
   allUsers.push(newUser);
   res.json({ newUser });
 };
+const updateUser = function (req, res, next) {
+  res.status(404).json({ updateUser: 'put' });
+};
 
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
+  updateUser,
 };

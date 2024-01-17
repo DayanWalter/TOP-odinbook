@@ -134,4 +134,12 @@ describe('user', () => {
       // expect(true).toBe(true);
     });
   });
+  describe('put user route', () => {
+    describe('given the user does not exist', () => {
+      it('should return 404', (done) => {
+        request(app).put('/user/unknown').expect(404, done);
+      });
+    });
+    // describe('given the user does exist');
+  });
 });
