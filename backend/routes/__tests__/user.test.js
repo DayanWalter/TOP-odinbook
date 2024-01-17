@@ -55,7 +55,12 @@ describe('user', () => {
       request(app)
         .post('/user')
         .type('form')
-        .send({ id: 3, user_name: 'John', email: 'John@mail.com' })
+        .send({
+          id: 3,
+          user_name: 'John',
+          email: 'John@mail.com',
+          password: '123',
+        })
         .then(() => {
           request(app)
             .get('/user')
@@ -66,16 +71,19 @@ describe('user', () => {
                     id: 1,
                     user_name: 'Peter',
                     email: 'Peter@mail.com',
+                    password: '123',
                   },
                   {
                     id: 2,
                     user_name: 'Michael',
                     email: 'Michael@mail.com',
+                    password: '123',
                   },
                   {
                     id: 3,
                     user_name: 'John',
                     email: 'John@mail.com',
+                    password: '123',
                   },
                 ],
               },

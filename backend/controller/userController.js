@@ -3,11 +3,13 @@ const allUsers = [
     id: 1,
     user_name: 'Peter',
     email: 'Peter@mail.com',
+    password: '123',
   },
   {
     id: 2,
     user_name: 'Michael',
     email: 'Michael@mail.com',
+    password: '123',
   },
 ];
 
@@ -28,6 +30,7 @@ const createUser = function (req, res, next) {
   const id = +req.body.id;
   const user_name = req.body.user_name;
   const email = req.body.email;
+  const password = req.body.password;
   // Search the db for the entered username
   const searchedUser = allUsers.find((user) => user.user_name === user_name);
   // if name is in database,...
@@ -36,7 +39,7 @@ const createUser = function (req, res, next) {
     res.status(422).json({ error: 'Username already exists' });
   }
   // else create newUser
-  const newUser = { id, user_name, email };
+  const newUser = { id, user_name, email, password };
   // and add to database
   allUsers.push(newUser);
   res.json({ newUser });
