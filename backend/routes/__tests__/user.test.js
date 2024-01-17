@@ -121,5 +121,17 @@ describe('user', () => {
 
       // expect(true).toBe(true);
     });
+    it('should return 422 and error if email is already taken', (done) => {
+      request(app)
+        .post('/user')
+        .type('form')
+        .send({ email: 'Peter@mail.com' })
+        .expect((res) => {
+          expect(res.body.error).toBe('Email already exists');
+        })
+        .expect(422, done);
+
+      // expect(true).toBe(true);
+    });
   });
 });

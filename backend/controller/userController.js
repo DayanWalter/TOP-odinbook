@@ -1,3 +1,4 @@
+// offline
 const allUsers = [
   {
     id: 1,
@@ -57,6 +58,15 @@ const createUser = function (req, res, next) {
     // ...return status 422 and error
     res.status(422).json({ error: 'Username already exists' });
   }
+
+  // Search db for entered email
+  const searchedEmail = allUsers.find((user) => user.email === email);
+  // if email is in database,...
+  if (searchedEmail) {
+    // return status 422 and error
+    res.status(422).json({ error: 'Email already exists' });
+  }
+
   // else create newUser
   const newUser = {
     id,
