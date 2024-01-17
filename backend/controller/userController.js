@@ -4,12 +4,18 @@ const allUsers = [
     user_name: 'Peter',
     email: 'Peter@mail.com',
     password: '123',
+    img_url: 'http://example.com',
+    follower_id: [],
+    follows_id: [],
   },
   {
     id: 2,
     user_name: 'Michael',
     email: 'Michael@mail.com',
     password: '123',
+    img_url: 'http://example.com',
+    follower_id: [],
+    follows_id: [],
   },
 ];
 
@@ -31,6 +37,10 @@ const createUser = function (req, res, next) {
   const user_name = req.body.user_name;
   const email = req.body.email;
   const password = req.body.password;
+  const img_url = 'http://example.com';
+  const follower_id = [];
+  const follows_id = [];
+
   // Search the db for the entered username
   const searchedUser = allUsers.find((user) => user.user_name === user_name);
   // if name is in database,...
@@ -39,7 +49,15 @@ const createUser = function (req, res, next) {
     res.status(422).json({ error: 'Username already exists' });
   }
   // else create newUser
-  const newUser = { id, user_name, email, password };
+  const newUser = {
+    id,
+    user_name,
+    email,
+    password,
+    img_url,
+    follower_id,
+    follows_id,
+  };
   // and add to database
   allUsers.push(newUser);
   res.json({ newUser });
