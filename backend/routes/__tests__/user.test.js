@@ -75,6 +75,8 @@ describe('user', () => {
                     img_url: 'http://example.com',
                     follower_id: [],
                     follows_id: [],
+                    posts_id: [],
+                    comments_id: [],
                   },
                   {
                     id: 2,
@@ -84,6 +86,8 @@ describe('user', () => {
                     img_url: 'http://example.com',
                     follower_id: [],
                     follows_id: [],
+                    posts_id: [],
+                    comments_id: [],
                   },
                   {
                     id: 3,
@@ -93,6 +97,8 @@ describe('user', () => {
                     img_url: 'http://example.com',
                     follower_id: [],
                     follows_id: [],
+                    posts_id: [],
+                    comments_id: [],
                   },
                 ],
               },

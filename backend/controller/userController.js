@@ -7,6 +7,8 @@ const allUsers = [
     img_url: 'http://example.com',
     follower_id: [],
     follows_id: [],
+    posts_id: [],
+    comments_id: [],
   },
   {
     id: 2,
@@ -16,6 +18,8 @@ const allUsers = [
     img_url: 'http://example.com',
     follower_id: [],
     follows_id: [],
+    posts_id: [],
+    comments_id: [],
   },
 ];
 
@@ -40,6 +44,8 @@ const createUser = function (req, res, next) {
   const img_url = 'http://example.com';
   const follower_id = [];
   const follows_id = [];
+  const posts_id = [];
+  const comments_id = [];
 
   // Search the db for the entered username
   const searchedUser = allUsers.find((user) => user.user_name === user_name);
@@ -57,6 +63,8 @@ const createUser = function (req, res, next) {
     img_url,
     follower_id,
     follows_id,
+    posts_id,
+    comments_id,
   };
   // and add to database
   allUsers.push(newUser);
