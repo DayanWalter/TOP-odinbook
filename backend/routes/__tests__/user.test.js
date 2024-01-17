@@ -25,7 +25,7 @@ describe('user', () => {
       });
     });
     describe('given the user route does exist', () => {
-      it('should return a 200', (done) => {
+      it('should return 200', (done) => {
         request(app).get('/user/1').expect(200, done);
         // expect(true).toBe(true);
       });
@@ -139,7 +139,50 @@ describe('user', () => {
       it('should return 404', (done) => {
         request(app).put('/user/unknown').expect(404, done);
       });
+      it('should return searchedUser undefined', (done) => {
+        request(app)
+          .get('/user/unknown')
+          .expect((res) => {
+            expect(res.body.searchedUser).toBeUndefined();
+          })
+          .expect(404, done);
+      });
+      it('should return error message', (done) => {
+        request(app)
+          .get('/user/unknown')
+          .expect((res) => {
+            expect(res.body.error).toBe('User does not exist');
+          })
+          .expect(404, done);
+      });
     });
-    // describe('given the user does exist');
+    describe('given the user does exist', () => {
+      it('should return 200', (done) => {
+        request(app).put('/user/1').expect(200, done);
+      });
+      it('should change userdata', (done) => {
+        request(app)
+          .put('/user/1')
+          .type('form')
+          .send({
+            email: 'Peter2@mail.com',
+          })
+          .expect((res) => {
+            expect(res.body.changedUser).toStrictEqual({
+              id: 1,
+              user_name: 'Peter',
+              email: 'Peter2@mail.com',
+              password: '123',
+              img_url: 'http://example.com',
+              follower_id: [],
+              follows_id: [],
+              posts_id: [],
+              comments_id: [],
+              reg_date: '12:00',
+            });
+          })
+          .expect(200, done);
+      });
+    });
   });
 });

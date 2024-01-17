@@ -85,7 +85,18 @@ const createUser = function (req, res, next) {
   res.json({ newUser });
 };
 const updateUser = function (req, res, next) {
-  res.status(404).json({ updateUser: 'put' });
+  // search in the db(allUsers) for a specific user id
+  const userId = +req.params.userid;
+  const searchedUser = allUsers.find((user) => user.id === userId);
+
+  if (!searchedUser) {
+    res.status(404).json({ error: 'User does not exist' });
+  }
+  const { ...changedFields } = req.body;
+
+  const changedUser = { ...searchedUser, ...changedFields };
+
+  res.json({ changedUser });
 };
 
 module.exports = {
