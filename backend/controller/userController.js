@@ -85,18 +85,34 @@ const createUser = function (req, res, next) {
   res.json({ newUser });
 };
 const updateUser = function (req, res, next) {
-  // search in the db(allUsers) for a specific user id
+  // take the id from the params(later from jwt)
   const userId = +req.params.userid;
+  // search in the db(allUsers) for a specific user id
   const searchedUser = allUsers.find((user) => user.id === userId);
 
   if (!searchedUser) {
     res.status(404).json({ error: 'User does not exist' });
   }
+
   const { ...changedFields } = req.body;
 
   const changedUser = { ...searchedUser, ...changedFields };
 
   res.json({ changedUser });
+};
+const deleteUser = function (req, res, next) {
+  // take the id from the params(later from jwt)
+  const idToDelete = +req.params.userid;
+  // search in the db(allUsers) for a specific user id
+  const deletedUser = allUsers.find((user) => user.id === idToDelete);
+  // update db(filter user out)
+  const newAllUsers = allUsers.filter((user) => user.id !== idToDelete);
+  console.log(newAllUsers);
+  if (!deletedUser) {
+    res.status(404).json({ error: 'User does not exist' });
+  }
+
+  res.json({ deletedUser });
 };
 
 module.exports = {
@@ -104,4 +120,5 @@ module.exports = {
   getUserById,
   createUser,
   updateUser,
+  deleteUser,
 };

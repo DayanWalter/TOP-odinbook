@@ -149,7 +149,7 @@ describe('user', () => {
       });
       it('should return error message', (done) => {
         request(app)
-          .get('/user/unknown')
+          .put('/user/unknown')
           .expect((res) => {
             expect(res.body.error).toBe('User does not exist');
           })
@@ -172,6 +172,46 @@ describe('user', () => {
               id: 1,
               user_name: 'Peter',
               email: 'Peter2@mail.com',
+              password: '123',
+              img_url: 'http://example.com',
+              follower_id: [],
+              follows_id: [],
+              posts_id: [],
+              comments_id: [],
+              reg_date: '12:00',
+            });
+          })
+          .expect(200, done);
+      });
+    });
+  });
+
+  describe('delete user route', () => {
+    describe('given the user does not exist', () => {
+      it('should return 404', (done) => {
+        request(app).delete('/user/unknown').expect(404, done);
+      });
+      it('should return error message', (done) => {
+        request(app)
+          .delete('/user/unknown')
+          .expect((res) => {
+            expect(res.body.error).toBe('User does not exist');
+          })
+          .expect(404, done);
+      });
+    });
+    describe('given the user does exist', () => {
+      it('should return 200', (done) => {
+        request(app).delete('/user/1').expect(200, done);
+      });
+      it('should return correct deleted userdata', (done) => {
+        request(app)
+          .delete('/user/1')
+          .expect((res) => {
+            expect(res.body.deletedUser).toStrictEqual({
+              id: 1,
+              user_name: 'Peter',
+              email: 'Peter@mail.com',
               password: '123',
               img_url: 'http://example.com',
               follower_id: [],

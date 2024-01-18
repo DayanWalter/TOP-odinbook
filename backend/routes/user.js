@@ -10,4 +10,7 @@ router.get('/:userid', user_controller.getUserById);
 router.post('/', user_controller.createUser);
 // change user
 router.put('/:userid', user_controller.updateUser);
+// delete user
+router.delete('/:userid', user_controller.deleteUser);
+
 module.exports = router;
