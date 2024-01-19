@@ -107,12 +107,12 @@ const deleteUser = function (req, res, next) {
   const deletedUser = allUsers.find((user) => user.id === idToDelete);
   // update db(filter user out)
   const newAllUsers = allUsers.filter((user) => user.id !== idToDelete);
-  console.log(newAllUsers);
+  // console.log(newAllUsers);
   if (!deletedUser) {
     res.status(404).json({ error: 'User does not exist' });
   }
 
-  res.json({ deletedUser });
+  res.json({ newAllUsers });
 };
 
 module.exports = {
