@@ -16,18 +16,24 @@ const getUserById = asyncHandler(async (req, res, next) => {
 });
 const createUser = [
   // Validate and sanitize input
-  // TODO: user_name must
   body('user_name', 'Name must be at least 6 characters long')
     .trim()
     .isLength({ min: 6 })
     .escape(),
+  body('user_name').custom(async (value) => {
+    const user = await User.find({ user_name: value });
+    if (user) {
+      throw new Error('Username already in use');
+    }
+  }),
+
   body('email', 'Email must not be empty').isLength({ min: 1 }).escape(),
-  // body('email').custom(async (value) => {
-  //   const user = await User.find({ email: value });
-  //   if (user) {
-  //     throw new Error('E-mail already in use');
-  //   }
-  // }),
+  body('email').custom(async (value) => {
+    const user = await User.find({ email: value });
+    if (user) {
+      throw new Error('E-mail already in use');
+    }
+  }),
 
   body('password', 'Password must be at least 6 characters long').isLength({
     min: 6,
@@ -47,6 +53,7 @@ const createUser = [
           password: hashedPassword,
         });
         console.log(user);
+        user.save();
         // After successful creation, save user in database...
       });
       // ...and send message to frontend
