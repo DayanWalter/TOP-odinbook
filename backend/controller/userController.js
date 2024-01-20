@@ -16,25 +16,35 @@ const getUserById = asyncHandler(async (req, res, next) => {
 });
 const createUser = [
   // Validate and sanitize input
+  // user_name under 6 characters
   body('user_name', 'Name must be at least 6 characters long')
     .trim()
     .isLength({ min: 6 })
     .escape(),
+  // Username already in use
   body('user_name').custom(async (value) => {
     const user = await User.find({ user_name: value });
     if (user) {
       throw new Error('Username already in use');
     }
   }),
-
-  body('email', 'Email must not be empty').isLength({ min: 1 }).escape(),
+  // Email must not be empty
+  body('email', 'Email must not be empty').isLength({ min: 5 }).escape(),
+  // Email already in use
   body('email').custom(async (value) => {
     const user = await User.find({ email: value });
     if (user) {
       throw new Error('E-mail already in use');
     }
   }),
-
+  // Email format invalid
+  body('email').custom(async (value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      throw new Error('Invalid email format');
+    }
+  }),
+  // Password under 6 characters
   body('password', 'Password must be at least 6 characters long').isLength({
     min: 6,
   }),
@@ -64,7 +74,6 @@ const createUser = [
     }
   }),
 ];
-
 const updateUser = function (req, res, next) {
   // take the id from the params(later from jwt)
   const userId = +req.params.userid;
