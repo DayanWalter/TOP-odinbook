@@ -1,15 +1,17 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
+// Validate and sanitize input at createUser
 const { body, validationResult } = require('express-validator');
-// Hash password at createUser
+// Hash password at createUser or compare passwords at loginUser
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const getAllUsers = asyncHandler(async (req, res, next) => {
+const readAllUsers = asyncHandler(async (req, res, next) => {
   const allUsers = await User.find().exec();
   // Modify data which is sent to the frontend(without password etc.)
   res.json({ allUsers });
 });
-const getUserById = asyncHandler(async (req, res, next) => {
+const readUserById = asyncHandler(async (req, res, next) => {
   const searchedUser = await User.findById(req.params.id).exec();
   // Modify data which is sent to the frontend(without password etc.)
   res.json({ searchedUser });
@@ -104,11 +106,30 @@ const deleteUser = function (req, res, next) {
 
   res.json({ newAllUsers });
 };
+const loginUser = asyncHandler(async (req, res, next) => {
+  const { user_name, password } = req.body;
+  const user = await User.findOne({ user_name });
+  const passwordsMatch = bcrypt.compare(password, user.password);
+
+  if (passwordsMatch) {
+    const authenticatedUser = {
+      _id: user._id,
+      user_name,
+    };
+
+    const token = jwt.sign(authenticatedUser, process.env.ACCESS_TOKEN_SECRET);
+
+    res.json({ userLogin: 'Success', token });
+  } else {
+    res.json({ userLogin: 'Failure' });
+  }
+});
 
 module.exports = {
-  getAllUsers,
-  getUserById,
+  readAllUsers,
+  readUserById,
   createUser,
   updateUser,
   deleteUser,
+  loginUser,
 };
