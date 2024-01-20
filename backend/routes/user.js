@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const user_controller = require('../controller/userController');
+// create protected routes
+const passport = require('passport');
+const protectedRoute = passport.authenticate('jwt', { session: false });
 
 // get all users
-router.get('/', user_controller.readAllUsers);
+router.get('/', protectedRoute, user_controller.readAllUsers);
 // get single user
 router.get('/:userid', user_controller.readUserById);
 // create new user

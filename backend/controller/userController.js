@@ -25,7 +25,7 @@ const createUser = [
     .escape(),
   // Username already in use
   body('user_name').custom(async (value) => {
-    const user = await User.find({ user_name: value });
+    const user = await User.findOne({ user_name: value });
     if (user) {
       throw new Error('Username already in use');
     }
@@ -34,7 +34,7 @@ const createUser = [
   body('email', 'Email must not be empty').isLength({ min: 5 }).escape(),
   // Email already in use
   body('email').custom(async (value) => {
-    const user = await User.find({ email: value });
+    const user = await User.findOne({ email: value });
     if (user) {
       throw new Error('E-mail already in use');
     }
@@ -65,8 +65,8 @@ const createUser = [
           password: hashedPassword,
         });
         console.log(user);
-        user.save();
         // After successful creation, save user in database...
+        user.save();
       });
       // ...and send message to frontend
       res.json({ createUser: 'Success' });
