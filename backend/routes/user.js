@@ -5,16 +5,16 @@ const user_controller = require('../controller/userController');
 const passport = require('passport');
 const protectedRoute = passport.authenticate('jwt', { session: false });
 
-// get all users
-router.get('/', protectedRoute, user_controller.readAllUsers);
-// get single user
-router.get('/:userid', user_controller.readUserById);
-// create new user
-router.post('/', user_controller.createUser);
-// change user
-router.put('/:userid', user_controller.updateUser);
-// delete user
-router.delete('/:userid', user_controller.deleteUser);
 // login user
 router.post('/login', user_controller.loginUser);
+// create new user
+router.post('/', user_controller.createUser);
+// read all users
+router.get('/all', protectedRoute, user_controller.readAllUsers);
+// read single user
+router.get('/:userid', protectedRoute, user_controller.readUserById);
+// change user
+router.put('/:userid', protectedRoute, user_controller.updateUser);
+// delete user
+router.delete('/:userid', protectedRoute, user_controller.deleteUser);
 module.exports = router;
