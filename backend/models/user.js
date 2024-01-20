@@ -3,9 +3,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  user_name: { type: String },
-  email: { type: String },
-  password: { type: String },
+  user_name: {
+    type: String,
+    required: true,
+    minLength: [1, 'Username must have at least 1 character'],
+    maxLength: 30,
+    unique: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 30,
+    unique: true,
+  },
+  password: { type: String, required: true },
   img_url: { type: String, default: 'http://www.example.com/' },
   follower_id: [{ type: Schema.Types.ObjectId, ref: 'user' }],
   follows_id: [{ type: Schema.Types.ObjectId, ref: 'user' }],

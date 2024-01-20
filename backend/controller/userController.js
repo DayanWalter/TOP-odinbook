@@ -1,29 +1,62 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
+const { body, validationResult } = require('express-validator');
+// Hash password at createUser
+const bcrypt = require('bcryptjs');
 
 const getAllUsers = asyncHandler(async (req, res, next) => {
   const allUsers = await User.find().exec();
+  // Modify data which is sent to the frontend(without password etc.)
   res.json({ allUsers });
 });
 const getUserById = asyncHandler(async (req, res, next) => {
   const searchedUser = await User.findById(req.params.id).exec();
+  // Modify data which is sent to the frontend(without password etc.)
   res.json({ searchedUser });
 });
-const createUser = asyncHandler(async (req, res, next) => {
+const createUser = [
   // Validate and sanitize input
-  // If no errors:
-  // create new User
-  const user = new User({
-    user_name: req.body.user_name,
-    email: req.body.email,
-    // hash password
-    password: req.body.password,
-  });
-  // After successful creation, save user in database...
+  // TODO: user_name must
+  body('user_name', 'Name must be at least 6 characters long')
+    .trim()
+    .isLength({ min: 6 })
+    .escape(),
+  body('email', 'Email must not be empty').isLength({ min: 1 }).escape(),
+  // body('email').custom(async (value) => {
+  //   const user = await User.find({ email: value });
+  //   if (user) {
+  //     throw new Error('E-mail already in use');
+  //   }
+  // }),
 
-  // ...and send message to frontend
-  res.json({ createUser: 'Success' });
-});
+  body('password', 'Password must be at least 6 characters long').isLength({
+    min: 6,
+  }),
+
+  asyncHandler(async (req, res, next) => {
+    const result = validationResult(req);
+
+    // If no errors:
+    if (result.isEmpty()) {
+      // create new User
+      bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+        const user = new User({
+          user_name: req.body.user_name,
+          email: req.body.email,
+          // hash password
+          password: hashedPassword,
+        });
+        console.log(user);
+        // After successful creation, save user in database...
+      });
+      // ...and send message to frontend
+      res.json({ createUser: 'Success' });
+    } else {
+      result.array().map((error) => console.log(error.msg));
+      res.status(404).json({ createUser: 'Failure', result });
+    }
+  }),
+];
 
 const updateUser = function (req, res, next) {
   // take the id from the params(later from jwt)
