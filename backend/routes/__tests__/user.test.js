@@ -1,19 +1,47 @@
-const { app, request } = require('./testUtils');
+const { app, request } = require('../../testUtils');
+const User = require('../../models/user');
+
 // Start slowly ;)
 describe('user', () => {
   describe('get ALL user route', () => {
     describe('given the user route does exist', () => {
-      it.only('should return allUsers object and status 200', (done) => {
-        request(app)
-          .get('/user')
-          .expect('Content-Type', /json/)
-          .expect((res) => {
-            expect(res.body).toEqual({
-              allUsers: expect.any(Array),
-            });
-          })
-          .expect(200, done);
+      jest.mock('../../models/user');
+
+      describe('getAllUsers route', () => {
+        it.only('should mock User.find and return a list of users', async () => {
+          // Setze das Mock-Verhalten für User.find
+          const mockUserFind = jest
+            .spyOn(User, 'find')
+            .mockImplementation(() => ({
+              exec: jest
+                .fn()
+                .mockResolvedValueOnce([
+                  { username: 'user1' },
+                  { username: 'user2' },
+                ]),
+            }));
+          // Führe die Anfrage durch, um die Route zu testen
+          const response = await request(app).get('/user');
+
+          // Überprüfe, ob die Antwort die erwarteten Daten enthält
+          expect(response.status).toBe(200);
+          expect(response.body).toEqual({
+            allUsers: [{ username: 'user1' }, { username: 'user2' }],
+          });
+          expect(mockUserFind).toHaveBeenCalled();
+        });
       });
+      // it.only('should return allUsers object and status 200', (done) => {
+      //   request(app)
+      //     .get('/user')
+      //     // .expect('Content-Type', /json/)
+      //     .expect((res) => {
+      //       expect(res.body).toEqual({
+      //         allUsers: expect.any(Array),
+      //       });
+      //     })
+      //     .expect(200, done);
+      // }, 10);
     });
     describe('given the user route does not exist', () => {
       it('should return a 404', (done) => {

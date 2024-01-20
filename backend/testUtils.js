@@ -6,11 +6,11 @@ const app = express();
 // Import request from "supertest"
 const request = require('supertest');
 // Import the 'user' route.
-const user = require('../user');
+const user = require('./routes/user');
 // Import the 'post' route.
-const post = require('../post');
+const post = require('./routes/post');
 // Import the 'comment' route.
-const comment = require('../comment');
+const comment = require('./routes/comment');
 
 // Parse URL-encoded requests.
 app.use(express.urlencoded({ extended: false }));

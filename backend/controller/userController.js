@@ -25,41 +25,41 @@ const createUser = asyncHandler(async (req, res, next) => {
   res.json({ createUser: 'Success' });
 });
 
-// const updateUser = function (req, res, next) {
-//   // take the id from the params(later from jwt)
-//   const userId = +req.params.userid;
-//   // search in the db(allUsers) for a specific user id
-//   const searchedUser = allUsers.find((user) => user.id === userId);
+const updateUser = function (req, res, next) {
+  // take the id from the params(later from jwt)
+  const userId = +req.params.userid;
+  // search in the db(allUsers) for a specific user id
+  const searchedUser = allUsers.find((user) => user.id === userId);
 
-//   if (!searchedUser) {
-//     res.status(404).json({ error: 'User does not exist' });
-//   }
+  if (!searchedUser) {
+    res.status(404).json({ error: 'User does not exist' });
+  }
 
-//   const { ...changedFields } = req.body;
+  const { ...changedFields } = req.body;
 
-//   const changedUser = { ...searchedUser, ...changedFields };
+  const changedUser = { ...searchedUser, ...changedFields };
 
-//   res.json({ changedUser });
-// };
-// const deleteUser = function (req, res, next) {
-//   // take the id from the params(later from jwt)
-//   const idToDelete = +req.params.userid;
-//   // search in the db(allUsers) for a specific user id
-//   const deletedUser = allUsers.find((user) => user.id === idToDelete);
-//   // update db(filter user out)
-//   const newAllUsers = allUsers.filter((user) => user.id !== idToDelete);
-//   // console.log(newAllUsers);
-//   if (!deletedUser) {
-//     res.status(404).json({ error: 'User does not exist' });
-//   }
+  res.json({ changedUser });
+};
+const deleteUser = function (req, res, next) {
+  // take the id from the params(later from jwt)
+  const idToDelete = +req.params.userid;
+  // search in the db(allUsers) for a specific user id
+  const deletedUser = allUsers.find((user) => user.id === idToDelete);
+  // update db(filter user out)
+  const newAllUsers = allUsers.filter((user) => user.id !== idToDelete);
+  // console.log(newAllUsers);
+  if (!deletedUser) {
+    res.status(404).json({ error: 'User does not exist' });
+  }
 
-//   res.json({ newAllUsers });
-// };
+  res.json({ newAllUsers });
+};
 
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
-  // updateUser,
-  // deleteUser,
+  updateUser,
+  deleteUser,
 };
