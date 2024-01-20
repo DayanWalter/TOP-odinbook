@@ -6,7 +6,7 @@ const UserSchema = new Schema({
   user_name: { type: String },
   email: { type: String },
   password: { type: String },
-  img_url: { type: String },
+  img_url: { type: String, default: 'http://www.example.com/' },
   follower_id: [{ type: Schema.Types.ObjectId, ref: 'user' }],
   follows_id: [{ type: Schema.Types.ObjectId, ref: 'user' }],
   posts_id: [{ type: Schema.Types.ObjectId, ref: 'post' }],
