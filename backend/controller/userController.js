@@ -70,7 +70,6 @@ const createUser = [
         const user = new User({
           user_name: req.body.user_name,
           email: req.body.email,
-          // hash password
           password: hashedPassword,
         });
         console.log(user);
@@ -91,27 +90,34 @@ const readAllUsers = asyncHandler(async (req, res, next) => {
   res.json({ allUsers });
 });
 const readUserById = asyncHandler(async (req, res, next) => {
-  console.log(req.params);
   const searchedUser = await User.findById(req.params.userid).exec();
   // Modify data which is sent to the frontend(without password etc.)
   res.json({ searchedUser });
 });
-const updateUser = function (req, res, next) {
-  // take the id from the params(later from jwt)
-  const userId = req.params.userid;
+const updateUser = asyncHandler(async (req, res, next) => {
+  // take the id from jwt
+  const userId = req.user._id;
+  // take changes from body
+  const { user_name, email, img_url } = req.body;
   // search in the db(allUsers) for a specific user id
-  const searchedUser = allUsers.find((user) => user.id === userId);
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      user_name,
+      email,
+      img_url,
+    },
+    {
+      new: true,
+    }
+  ).exec();
 
-  if (!searchedUser) {
+  if (!updatedUser) {
     res.status(404).json({ error: 'User does not exist' });
   }
 
-  const { ...changedFields } = req.body;
-
-  const changedUser = { ...searchedUser, ...changedFields };
-
-  res.json({ changedUser });
-};
+  res.json({ updatedUser });
+});
 const deleteUser = function (req, res, next) {
   // take the id from the params(later from jwt)
   const idToDelete = req.params.userid;

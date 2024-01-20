@@ -14,7 +14,7 @@ router.get('/all', protectedRoute, user_controller.readAllUsers);
 // read single user
 router.get('/:userid', protectedRoute, user_controller.readUserById);
 // change user
-router.put('/:userid', protectedRoute, user_controller.updateUser);
+router.put('/', protectedRoute, user_controller.updateUser);
 // delete user
 router.delete('/:userid', protectedRoute, user_controller.deleteUser);
 module.exports = router;
