@@ -21,6 +21,16 @@ const createPost = asyncHandler(async (req, res, next) => {
 });
 // TODO:First add post_id to user at createPost
 const readAllFeedPosts = asyncHandler(async (req, res, next) => {
+  // take req.user._id's follows array
+  const usersFeed = await User.findById(req.user._id)
+    .select('follows_id')
+    .exec();
+  console.log(usersFeed);
+  // find every user in this array
+  // find every post written by these users
+
+  // and send it to client - this is the feed
+
   res.json({ readAllFeedPosts: 'Route works' });
 });
 // TODO:First add post_id to user at createPost
@@ -28,7 +38,8 @@ const readAllUserPosts = asyncHandler(async (req, res, next) => {
   // Take userid from params
   const allUserPosts = await User.findById(req.params.userid)
     .select('posts_id')
-    .populate('posts_id');
+    .populate('posts_id')
+    .exec();
   // Return allUserPosts object to client
   res.json({ readAllUserPosts: 'Route works', allUserPosts });
 });

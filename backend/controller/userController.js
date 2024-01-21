@@ -152,6 +152,11 @@ const deleteUser = asyncHandler(async (req, res, next) => {
 
   res.json({ deletedUser });
 });
+// follow a user
+const followUser = asyncHandler(async (req, res, next) => {
+  // update the logged in user
+  // push the user from params into logged in users follow_id array
+});
 
 module.exports = {
   loginUser,
