@@ -7,20 +7,21 @@ const bcrypt = require('bcryptjs');
 // sign token after user logged in
 const jwt = require('jsonwebtoken');
 
+const generateToken = (user) => {
+  console.log(user._id);
+  const authenticatedUser = {
+    _id: user._id,
+    user_name: user.user_name,
+  };
+  return jwt.sign(authenticatedUser, process.env.ACCESS_TOKEN_SECRET);
+};
+
 const loginUser = asyncHandler(async (req, res, next) => {
   const { user_name, password } = req.body;
   const user = await User.findOne({ user_name });
   const passwordsMatch = await bcrypt.compare(password, user.password);
-
   if (passwordsMatch) {
-    const authenticatedUser = {
-      _id: user._id,
-      user_name,
-    };
-    console.log(authenticatedUser);
-
-    const token = jwt.sign(authenticatedUser, process.env.ACCESS_TOKEN_SECRET);
-
+    const token = generateToken(user);
     res.json({ userLogin: 'Success', token });
   } else {
     res.json({ userLogin: 'Failure' });
