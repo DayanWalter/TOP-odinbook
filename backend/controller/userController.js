@@ -10,13 +10,14 @@ const jwt = require('jsonwebtoken');
 const loginUser = asyncHandler(async (req, res, next) => {
   const { user_name, password } = req.body;
   const user = await User.findOne({ user_name });
-  const passwordsMatch = bcrypt.compare(password, user.password);
+  const passwordsMatch = await bcrypt.compare(password, user.password);
 
   if (passwordsMatch) {
     const authenticatedUser = {
       _id: user._id,
       user_name,
     };
+    console.log(authenticatedUser);
 
     const token = jwt.sign(authenticatedUser, process.env.ACCESS_TOKEN_SECRET);
 
@@ -98,7 +99,10 @@ const updateUser = asyncHandler(async (req, res, next) => {
   // take the id from jwt
   const userId = req.user._id;
   // take changes from body
+
   const { user_name, email, img_url } = req.body;
+  // TEST IF THE EMAIL AND USERNAME FROM BODY ARE NOT ALREADY TAKEN!!!
+
   // search in the db(allUsers) for a specific user id
   const updatedUser = await User.findByIdAndUpdate(
     userId,
@@ -114,24 +118,22 @@ const updateUser = asyncHandler(async (req, res, next) => {
 
   if (!updatedUser) {
     res.status(404).json({ error: 'User does not exist' });
+    return;
   }
 
   res.json({ updatedUser });
 });
-const deleteUser = function (req, res, next) {
-  // take the id from the params(later from jwt)
-  const idToDelete = req.params.userid;
-  // search in the db(allUsers) for a specific user id
-  const deletedUser = allUsers.find((user) => user.id === idToDelete);
-  // update db(filter user out)
-  const newAllUsers = allUsers.filter((user) => user.id !== idToDelete);
-  // console.log(newAllUsers);
+const deleteUser = asyncHandler(async (req, res, next) => {
+  // take the id from jwt
+  const userIdToDelete = req.user._id;
+  const deletedUser = await User.findByIdAndDelete(userIdToDelete).exec();
   if (!deletedUser) {
-    res.status(404).json({ error: 'User does not exist' });
+    res.status(404).json({ error: 'User not found' });
+    return;
   }
 
-  res.json({ newAllUsers });
-};
+  res.json({ deletedUser });
+});
 
 module.exports = {
   loginUser,

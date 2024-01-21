@@ -9,9 +9,9 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.ACCESS_TOKEN_SECRET;
 
 module.exports = new JwtStrategy(opts, async (jwt_payload, done) => {
-  const user = await User.findOne({ username: jwt_payload.username });
+  const user = await User.findOne({ user_name: jwt_payload.user_name });
 
-  if (jwt_payload.username === user.username) {
+  if (jwt_payload.user_name === user.user_name) {
     // return done(null, true);
     // Changed true to user, so I can use _id and username.
     return done(null, user);
