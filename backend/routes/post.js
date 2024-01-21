@@ -10,12 +10,12 @@ router.post('/create', protectedRoute, post_controller.createPost);
 // read all feed posts
 router.get('/feed', protectedRoute, post_controller.readAllFeedPosts);
 // read all user posts
-router.get('/userid/:userid', protectedRoute, post_controller.readAllUserPosts);
+router.get('/user/:userid', protectedRoute, post_controller.readAllUserPosts);
 // read single post
-router.get('/postid/:postid', protectedRoute, post_controller.readPostById);
+router.get('/:postid', protectedRoute, post_controller.readPostById);
 // change post
-router.put('/update', protectedRoute, post_controller.updatePost);
+router.put('/:postid/update', protectedRoute, post_controller.updatePost);
 // delete post
-router.delete('/delete', protectedRoute, post_controller.deletePost);
+router.delete('/:postid/delete', protectedRoute, post_controller.deletePost);
 
 module.exports = router;
