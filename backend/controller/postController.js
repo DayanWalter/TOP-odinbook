@@ -32,10 +32,12 @@ const readPostById = asyncHandler(async (req, res, next) => {
   res.json({ readPostById: 'Route works', searchedPost });
 });
 const updatePost = asyncHandler(async (req, res, next) => {
-  const postId = req.params.postid;
+  // Check if logged in user wrote the post
+
   const content = req.body.content;
+
   const updatedPost = await Post.findByIdAndUpdate(
-    postId,
+    req.params.postid,
     {
       content,
     },
@@ -44,27 +46,40 @@ const updatePost = asyncHandler(async (req, res, next) => {
     }
   ).exec();
 
-  res.json({ updatePost: 'Route works', updatedPost });
-});
-const deletePost = asyncHandler(async (req, res, next) => {
-  // Check if the logged in user wrote the post
-
-  // take the id from jwt
-  const postIdToDelete = req.params.postid;
-  const deletedPost = await Post.findByIdAndDelete(postIdToDelete).exec();
-  if (!deletedPost) {
+  if (!updatedPost) {
     res.status(404).json({ error: 'Post not found' });
     return;
   }
 
-  // Remove post._id from user.posts_id
-  await User.findByIdAndUpdate(
-    req.user._id,
-    { $pull: { posts_id: postIdToDelete } },
-    { new: true } // Return the updated user document
-  );
+  res.json({ updatePost: 'Route works', updatedPost });
+});
+const deletePost = asyncHandler(async (req, res, next) => {
+  // Check if the logged in user wrote the post
+  const post = await Post.findById(req.params.postid)
+    .select('author_id')
+    .exec();
 
-  res.json({ deletePost: 'Route works', deletedPost });
+  if (post.author_id.equals(req.user._id)) {
+    const deletedPost = await Post.findByIdAndDelete(req.params.postid).exec();
+
+    if (!deletedPost) {
+      res.status(404).json({ error: 'Post not found' });
+      return;
+    }
+
+    // Remove post._id from user.posts_id
+    await User.findByIdAndUpdate(
+      req.user._id,
+      { $pull: { posts_id: req.params.postid } },
+      { new: true } // Return the updated user document
+    );
+
+    res.json({ deletePost: 'Route works', deletedPost });
+    return;
+  } else {
+    res.json({ deletePost: 'You did not write this post' });
+    return;
+  }
 });
 
 module.exports = {
