@@ -7,28 +7,38 @@ const bcrypt = require('bcryptjs');
 // sign token after user logged in
 const jwt = require('jsonwebtoken');
 
+/// Helper ///
 const generateToken = (user) => {
-  console.log(user._id);
+  // add the _id and the user_name to an object...
   const authenticatedUser = {
     _id: user._id,
     user_name: user.user_name,
   };
+  // Sign with the object the token, so you can use later both: _id AND user_name
   return jwt.sign(authenticatedUser, process.env.ACCESS_TOKEN_SECRET);
 };
 
+/// CRUD Operations ///
 const loginUser = asyncHandler(async (req, res, next) => {
+  //Take the user_name and password from body
   const { user_name, password } = req.body;
+  // Search for a user with the entered user_name
   const user = await User.findOne({ user_name });
+  // Compare the entered password with the hashed password in the database
   const passwordsMatch = await bcrypt.compare(password, user.password);
+  // If the passwords match...
   if (passwordsMatch) {
+    // Generate a token
     const token = generateToken(user);
+    // send a success message and the token to the client
     res.json({ userLogin: 'Success', token });
   } else {
+    // else send a failure message to the client
     res.json({ userLogin: 'Failure' });
   }
 });
 const createUser = [
-  // Validate and sanitize input
+  /// Validate and sanitize input ///
   // user_name under 6 characters
   body('user_name', 'Name must be at least 6 characters long')
     .trim()
@@ -67,39 +77,40 @@ const createUser = [
 
     // If no errors:
     if (result.isEmpty()) {
-      // create new User
+      // create new User with hashed password
       bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
         const user = new User({
           user_name: req.body.user_name,
           email: req.body.email,
           password: hashedPassword,
         });
-        console.log(user);
-        // After successful creation, save user in database...
+        // After successful creation, save user in database
         user.save();
+        res.json({ createUser: 'Success', user });
       });
-      // ...and send message to frontend
-      res.json({ createUser: 'Success' });
+      // send success message to client
     } else {
+      // List all errors in the console
       result.array().map((error) => console.log(error.msg));
+      // Send failure message to client and the error object
       res.status(404).json({ createUser: 'Failure', result });
     }
   }),
 ];
 const readAllUsers = asyncHandler(async (req, res, next) => {
   const allUsers = await User.find()
-    // Projection(just send to frontend the following:)
+    // Projection(just send to client the following:)
     .select('user_name')
     .exec();
-  // Modify data which is sent to the frontend(without password etc.)
+  // Send data to client
   res.json({ allUsers });
 });
 const readUserById = asyncHandler(async (req, res, next) => {
   const searchedUser = await User.findById(req.params.userid)
-    // Projection(just send to frontend the following:)
+    // Projection(just send to client the following:)
     .select('user_name')
     .exec();
-  // Modify data which is sent to the frontend(without password etc.)
+  // Send data to client
   res.json({ searchedUser });
 });
 const updateUser = asyncHandler(async (req, res, next) => {
