@@ -33,25 +33,33 @@ const readPostById = asyncHandler(async (req, res, next) => {
 });
 const updatePost = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the post
+  // Check if the logged in user wrote the post
+  const post = await Post.findById(req.params.postid)
+    .select('author_id')
+    .exec();
 
-  const content = req.body.content;
+  if (post.author_id.equals(req.user._id)) {
+    const content = req.body.content;
 
-  const updatedPost = await Post.findByIdAndUpdate(
-    req.params.postid,
-    {
-      content,
-    },
-    {
-      new: true,
+    const updatedPost = await Post.findByIdAndUpdate(
+      req.params.postid,
+      {
+        content,
+      },
+      {
+        new: true,
+      }
+    ).exec();
+
+    if (!updatedPost) {
+      res.status(404).json({ error: 'Post not found' });
+      return;
     }
-  ).exec();
 
-  if (!updatedPost) {
-    res.status(404).json({ error: 'Post not found' });
-    return;
+    res.json({ updatePost: 'Route works', updatedPost });
+  } else {
+    res.json({ updatePost: 'You did not write this post' });
   }
-
-  res.json({ updatePost: 'Route works', updatedPost });
 });
 const deletePost = asyncHandler(async (req, res, next) => {
   // Check if the logged in user wrote the post
