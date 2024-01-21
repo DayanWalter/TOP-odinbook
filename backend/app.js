@@ -18,8 +18,11 @@ const cookieParser = require('cookie-parser');
 // Import the 'morgan' middleware for HTTP request logging.
 const logger = require('morgan');
 
-// Import the 'users' route.
+// Import the 'user' route.
 const userRouter = require('./routes/user');
+// Import the 'post' route.
+const postRouter = require('./routes/post');
+
 // Load environment variables from a '.env' file.
 require('dotenv').config();
 
@@ -54,8 +57,10 @@ app.use(cookieParser());
 // Serve static files from the 'public' directory.
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Use the 'users' route for '/users' path.
+// Use the 'user' route for '/user' path.
 app.use('/api/user', userRouter);
+// Use the 'post' route for '/post' path.
+app.use('/api/post', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
