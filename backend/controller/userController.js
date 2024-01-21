@@ -86,12 +86,18 @@ const createUser = [
   }),
 ];
 const readAllUsers = asyncHandler(async (req, res, next) => {
-  const allUsers = await User.find().exec();
+  const allUsers = await User.find()
+    // Projection(just send to frontend the following:)
+    .select('user_name')
+    .exec();
   // Modify data which is sent to the frontend(without password etc.)
   res.json({ allUsers });
 });
 const readUserById = asyncHandler(async (req, res, next) => {
-  const searchedUser = await User.findById(req.params.userid).exec();
+  const searchedUser = await User.findById(req.params.userid)
+    // Projection(just send to frontend the following:)
+    .select('user_name')
+    .exec();
   // Modify data which is sent to the frontend(without password etc.)
   res.json({ searchedUser });
 });
