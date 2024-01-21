@@ -25,7 +25,12 @@ const readAllFeedPosts = asyncHandler(async (req, res, next) => {
 });
 // TODO:First add post_id to user at createPost
 const readAllUserPosts = asyncHandler(async (req, res, next) => {
-  res.json({ readAllUserPosts: 'Route works' });
+  // Take userid from params
+  const allUserPosts = await User.findById(req.params.userid)
+    .select('posts_id')
+    .populate('posts_id');
+  // Return allUserPosts object to client
+  res.json({ readAllUserPosts: 'Route works', allUserPosts });
 });
 const readPostById = asyncHandler(async (req, res, next) => {
   const searchedPost = await Post.findById(req.params.postid).exec();
@@ -33,7 +38,6 @@ const readPostById = asyncHandler(async (req, res, next) => {
 });
 const updatePost = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the post
-  // Check if the logged in user wrote the post
   const post = await Post.findById(req.params.postid)
     .select('author_id')
     .exec();
