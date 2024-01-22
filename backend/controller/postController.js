@@ -1,9 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const Post = require('../models/post');
-// Validate and sanitize input at createPost
 const { body, validationResult } = require('express-validator');
-// TODO: Validate and sanitize
 const createPost = [
   body('content').trim().isLength({ max: 200 }).escape(),
 
@@ -46,9 +44,9 @@ const readUserPosts = asyncHandler(async (req, res, next) => {
   const userPosts = await User.findById(req.params.userid)
     .select('posts_id')
     .populate('posts_id');
-
-  // Return UserPosts object to client
-  res.json({ readUserPosts: 'Route works', userPosts });
+  const posts = userPosts.posts_id;
+  // Return posts object to client
+  res.json({ readUserPosts: 'Route works', posts });
 });
 const readPostById = asyncHandler(async (req, res, next) => {
   const searchedPost = await Post.findById(req.params.postid);

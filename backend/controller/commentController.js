@@ -2,9 +2,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const Post = require('../models/post');
 const Comment = require('../models/comment');
-// Validate and sanitize input at createPost
 const { body, validationResult } = require('express-validator');
-// TODO: Validate and sanitize
 const createComment = [
   body('content').trim().isLength({ max: 200 }).escape(),
 
@@ -39,20 +37,21 @@ const createComment = [
   }),
 ];
 const readPostComments = asyncHandler(async (req, res, next) => {
-  // Take userid from params
+  // Take postid from params
   const postComments = await Post.findById(req.params.postid)
     .select('comments_id')
     .populate('comments_id');
+  const comments = postComments.comments_id;
 
-  res.json({ readPostComments: 'Route works', postComments });
+  res.json({ readPostComments: 'Route works', comments });
 });
 const readUserComments = asyncHandler(async (req, res, next) => {
   // Take userid from params
   const userComments = await User.findById(req.params.userid)
     .select('comments_id')
     .populate('comments_id');
-
-  res.json({ readUserComments: 'Route works', userComments });
+  const comments = userComments.comments_id;
+  res.json({ readUserComments: 'Route works', comments });
 });
 const readCommentById = asyncHandler(async (req, res, next) => {
   const searchedComment = await Comment.findById(req.params.commentid);
