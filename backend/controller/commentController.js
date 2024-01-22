@@ -114,8 +114,8 @@ const deleteComment = asyncHandler(async (req, res, next) => {
 // TODO:
 const likeComment = asyncHandler(async (req, res, next) => {
   // update the req.params.postid
-  const addUserId = await Post.findByIdAndUpdate(
-    req.params.postid,
+  const addUserId = await Comment.findByIdAndUpdate(
+    req.params.commentid,
     {
       // push the req.user._id into likes_id array
       $push: { likes_id: req.user._id },
@@ -125,12 +125,12 @@ const likeComment = asyncHandler(async (req, res, next) => {
       new: true,
     }
   );
-  res.json({ likePost: 'Route works', addUserId });
+  res.json({ likeComment: 'Route works', addUserId });
 });
 const unlikeComment = asyncHandler(async (req, res, next) => {
-  // update the req.params.postid
-  const removeUserId = await Post.findByIdAndUpdate(
-    req.params.postid,
+  // update the req.params.commentid
+  const removeUserId = await Comment.findByIdAndUpdate(
+    req.params.commentid,
     {
       // pull the req.user._id of of likes_id array
       $pull: { likes_id: req.user._id },
@@ -141,7 +141,7 @@ const unlikeComment = asyncHandler(async (req, res, next) => {
     }
   );
 
-  res.json({ likePost: 'Route works', removeUserId });
+  res.json({ likeComment: 'Route works', removeUserId });
 });
 
 module.exports = {
