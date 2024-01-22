@@ -7,52 +7,56 @@ const { body, validationResult } = require('express-validator');
 // TODO: Validate and sanitize
 const createComment = asyncHandler(async (req, res, next) => {
   // Validate and sanitize input(body)
-  const post = new Post({
+  const comment = new Comment({
     author_id: req.user._id,
     content: req.body.content,
+    post_id: req.params.postid,
   });
   // Save to database
-  await post.save();
+  await comment.save();
 
-  // Add post._id to posts_id
+  // Add comment._id to user._id
   await User.findByIdAndUpdate(req.user._id, {
-    $push: { posts_id: post._id },
+    $push: { comments_id: comment._id },
   });
-  res.json({ createPost: 'Route works', post });
-});
-const readAllPostComments = asyncHandler(async (req, res, next) => {
-  // take req.user._id's follows array
-  const user = await User.findById(req.user._id).select('follows_id');
-  // Map over array and pull out ._id of every user
-  const followedUserIds = user.follows_id.map((follow) => follow._id);
-  // Search for posts in which the author_id is the same as the user._id
-  const feed = await Post.find({ author_id: { $in: followedUserIds } });
+  // Add comment._id to post._id
+  await Post.findByIdAndUpdate(req.params.postid, {
+    $push: { comments_id: comment._id },
+  });
 
-  res.json({ readAllFeedPosts: 'Route works', feed });
+  res.json({ createComment: 'Route works', comment });
 });
-// TODO:
-const readAllUserComments = asyncHandler(async (req, res, next) => {
+const readPostComments = asyncHandler(async (req, res, next) => {
   // Take userid from params
-  const allUserPosts = await User.findById(req.params.userid)
-    .select('posts_id')
-    .populate('posts_id');
+  const postComments = await Post.findById(req.params.postid)
+    .select('comments_id')
+    .populate('comments_id');
 
-  // Return allUserPosts object to client
-  res.json({ readAllUserPosts: 'Route works', allUserPosts });
+  res.json({ readPostComments: 'Route works', postComments });
+});
+const readUserComments = asyncHandler(async (req, res, next) => {
+  // Take userid from params
+  const userComments = await User.findById(req.params.userid)
+    .select('comments_id')
+    .populate('comments_id');
+
+  res.json({ readUserComments: 'Route works', userComments });
 });
 const readCommentById = asyncHandler(async (req, res, next) => {
-  const searchedPost = await Post.findById(req.params.postid);
-  res.json({ readPostById: 'Route works', searchedPost });
+  const searchedComment = await Comment.findById(req.params.commentid);
+  res.json({ readCommentById: 'Route works', searchedComment });
 });
 const updateComment = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the post
-  const post = await Post.findById(req.params.postid).select('author_id');
+  const comment = await Comment.findById(req.params.commentid).select(
+    'author_id'
+  );
 
-  if (post.author_id.equals(req.user._id)) {
+  if (comment.author_id.equals(req.user._id)) {
     const content = req.body.content;
 
-    const updatedPost = await Post.findByIdAndUpdate(
-      req.params.postid,
+    const updatedComment = await Comment.findByIdAndUpdate(
+      req.params.commentid,
       {
         content,
       },
@@ -61,42 +65,53 @@ const updateComment = asyncHandler(async (req, res, next) => {
       }
     );
 
-    if (!updatedPost) {
-      res.status(404).json({ error: 'Post not found' });
+    if (!updatedComment) {
+      res.status(404).json({ error: 'Comment not found' });
       return;
     }
 
-    res.json({ updatePost: 'Route works', updatedPost });
+    res.json({ updateComment: 'Route works', updatedComment });
   } else {
-    res.json({ updatePost: 'You did not write this post' });
+    res.json({ updateComment: 'You did not write this comment' });
   }
 });
 const deleteComment = asyncHandler(async (req, res, next) => {
   // Check if the logged in user wrote the post
-  const post = await Post.findById(req.params.postid).select('author_id');
+  const comment = await Comment.findById(req.params.commentid).select(
+    'author_id'
+  );
 
-  if (post.author_id.equals(req.user._id)) {
-    const deletedPost = await Post.findByIdAndDelete(req.params.postid);
+  if (comment.author_id.equals(req.user._id)) {
+    const deletedComment = await Comment.findByIdAndDelete(
+      req.params.commentid
+    );
 
-    if (!deletedPost) {
-      res.status(404).json({ error: 'Post not found' });
+    if (!deletedComment) {
+      res.status(404).json({ error: 'Comment not found' });
       return;
     }
 
-    // Remove post._id from user.posts_id
+    // Remove comment._id from user.comments_id
     await User.findByIdAndUpdate(
       req.user._id,
-      { $pull: { posts_id: req.params.postid } },
+      { $pull: { comments_id: req.params.commentid } },
+      { new: true } // Return the updated user document
+    );
+    // Remove comment._id from req.params.postid
+    await Post.findByIdAndUpdate(
+      req.params.postid,
+      { $pull: { comments_id: req.params.commentid } },
       { new: true } // Return the updated user document
     );
 
-    res.json({ deletePost: 'Route works', deletedPost });
+    res.json({ deleteComment: 'Route works', deletedComment });
     return;
   } else {
-    res.json({ deletePost: 'You did not write this post' });
+    res.json({ deleteComment: 'You did not write this post' });
     return;
   }
 });
+// TODO:
 const likeComment = asyncHandler(async (req, res, next) => {
   // update the req.params.postid
   const addUserId = await Post.findByIdAndUpdate(
@@ -131,8 +146,8 @@ const unlikeComment = asyncHandler(async (req, res, next) => {
 
 module.exports = {
   createComment,
-  readAllPostComments,
-  readAllUserComments,
+  readPostComments,
+  readUserComments,
   readCommentById,
   updateComment,
   deleteComment,

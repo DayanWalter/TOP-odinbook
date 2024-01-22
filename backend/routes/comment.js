@@ -6,18 +6,22 @@ const passport = require('passport');
 const protectedRoute = passport.authenticate('jwt', { session: false });
 
 // create new comment
-router.post('/create', protectedRoute, comment_controller.createComment);
-// read all feed comments
+router.post(
+  '/:postid/create',
+  protectedRoute,
+  comment_controller.createComment
+);
+// read post comments
 router.get(
   '/post/:postid',
   protectedRoute,
-  comment_controller.readAllPostComments
+  comment_controller.readPostComments
 );
-// read all user comments
+// read user comments
 router.get(
   '/user/:userid',
   protectedRoute,
-  comment_controller.readAllUserComments
+  comment_controller.readUserComments
 );
 // read single comment
 router.get('/:commentid', protectedRoute, comment_controller.readCommentById);

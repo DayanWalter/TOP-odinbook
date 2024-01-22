@@ -7,10 +7,10 @@ const protectedRoute = passport.authenticate('jwt', { session: false });
 
 // create new post
 router.post('/create', protectedRoute, post_controller.createPost);
-// read all feed posts
-router.get('/feed', protectedRoute, post_controller.readAllFeedPosts);
-// read all user posts
-router.get('/user/:userid', protectedRoute, post_controller.readAllUserPosts);
+// read feed posts
+router.get('/feed', protectedRoute, post_controller.readFeedPosts);
+// read user posts
+router.get('/user/:userid', protectedRoute, post_controller.readUserPosts);
 // read single post
 router.get('/:postid', protectedRoute, post_controller.readPostById);
 // change post

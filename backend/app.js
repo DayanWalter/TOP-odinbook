@@ -22,6 +22,8 @@ const logger = require('morgan');
 const userRouter = require('./routes/user');
 // Import the 'post' route.
 const postRouter = require('./routes/post');
+// Import the 'comment' route.
+const commentRouter = require('./routes/comment');
 
 // Load environment variables from a '.env' file.
 require('dotenv').config();
@@ -61,6 +63,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/user', userRouter);
 // Use the 'post' route for '/post' path.
 app.use('/api/post', postRouter);
+// Use the 'post' route for '/post' path.
+app.use('/api/comment', commentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

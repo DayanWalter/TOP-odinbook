@@ -19,7 +19,7 @@ const createPost = asyncHandler(async (req, res, next) => {
   });
   res.json({ createPost: 'Route works', post });
 });
-const readAllFeedPosts = asyncHandler(async (req, res, next) => {
+const readFeedPosts = asyncHandler(async (req, res, next) => {
   // take req.user._id's follows array
   const user = await User.findById(req.user._id).select('follows_id');
   // Map over array and pull out ._id of every user
@@ -27,16 +27,16 @@ const readAllFeedPosts = asyncHandler(async (req, res, next) => {
   // Search for posts in which the author_id is the same as the user._id
   const feed = await Post.find({ author_id: { $in: followedUserIds } });
 
-  res.json({ readAllFeedPosts: 'Route works', feed });
+  res.json({ readFeedPosts: 'Route works', feed });
 });
-const readAllUserPosts = asyncHandler(async (req, res, next) => {
+const readUserPosts = asyncHandler(async (req, res, next) => {
   // Take userid from params
-  const allUserPosts = await User.findById(req.params.userid)
+  const userPosts = await User.findById(req.params.userid)
     .select('posts_id')
     .populate('posts_id');
 
-  // Return allUserPosts object to client
-  res.json({ readAllUserPosts: 'Route works', allUserPosts });
+  // Return UserPosts object to client
+  res.json({ readUserPosts: 'Route works', userPosts });
 });
 const readPostById = asyncHandler(async (req, res, next) => {
   const searchedPost = await Post.findById(req.params.postid);
@@ -129,8 +129,8 @@ const unlikePost = asyncHandler(async (req, res, next) => {
 
 module.exports = {
   createPost,
-  readAllFeedPosts,
-  readAllUserPosts,
+  readFeedPosts,
+  readUserPosts,
   readPostById,
   updatePost,
   deletePost,
