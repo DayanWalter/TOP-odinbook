@@ -19,33 +19,36 @@ const createPost = asyncHandler(async (req, res, next) => {
   });
   res.json({ createPost: 'Route works', post });
 });
-// TODO:First add post_id to user at createPost
 const readAllFeedPosts = asyncHandler(async (req, res, next) => {
   // take req.user._id's follows array
-  const usersFeed = await User.findById(req.user._id)
+  const user = await User.findById(req.user._id)
     .select('follows_id')
-    .exec();
-  console.log(usersFeed);
+    .populate({
+      path: 'follows_id',
+      select: 'posts_id',
+      populate: {
+        path: 'posts_id',
+      },
+    })
+    // Make request smaller
+    .lean();
 
-  // find every user in this array
-  // find every post written by these users
+  const feed = user.follows_id.flatMap((element) => element.posts_id);
 
-  // and send it to client - this is the feed
-
-  res.json({ readAllFeedPosts: 'Route works', usersFeed });
+  res.json({ readAllFeedPosts: 'Route works', feed });
 });
-// TODO:First add post_id to user at createPost
 const readAllUserPosts = asyncHandler(async (req, res, next) => {
   // Take userid from params
   const allUserPosts = await User.findById(req.params.userid)
     .select('posts_id')
     .populate('posts_id')
-    .exec();
+    // Make request smaller
+    .lean();
   // Return allUserPosts object to client
   res.json({ readAllUserPosts: 'Route works', allUserPosts });
 });
 const readPostById = asyncHandler(async (req, res, next) => {
-  const searchedPost = await Post.findById(req.params.postid).exec();
+  const searchedPost = await Post.findById(req.params.postid).lean();
   res.json({ readPostById: 'Route works', searchedPost });
 });
 const updatePost = asyncHandler(async (req, res, next) => {
