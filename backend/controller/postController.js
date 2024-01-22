@@ -26,12 +26,13 @@ const readAllFeedPosts = asyncHandler(async (req, res, next) => {
     .select('follows_id')
     .exec();
   console.log(usersFeed);
+
   // find every user in this array
   // find every post written by these users
 
   // and send it to client - this is the feed
 
-  res.json({ readAllFeedPosts: 'Route works' });
+  res.json({ readAllFeedPosts: 'Route works', usersFeed });
 });
 // TODO:First add post_id to user at createPost
 const readAllUserPosts = asyncHandler(async (req, res, next) => {

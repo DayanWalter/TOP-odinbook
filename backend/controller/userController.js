@@ -154,8 +154,57 @@ const deleteUser = asyncHandler(async (req, res, next) => {
 });
 // follow a user
 const followUser = asyncHandler(async (req, res, next) => {
-  // update the logged in user
-  // push the user from params into logged in users follow_id array
+  // update the req.user._id
+  const addUserFollowsId = await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      // push the req.params.userid into req.user._id follows_id array
+      $push: { follows_id: req.params.userid },
+    },
+
+    {
+      new: true,
+    }
+  );
+  // update the req.params.userid
+  const addUserFollowerId = await User.findByIdAndUpdate(
+    req.params.userid,
+    {
+      // push req.user._id into req.params.userid follower_id array
+      $push: { follower_id: req.user._id },
+    },
+
+    {
+      new: true,
+    }
+  );
+  res.json({ addUserFollowsId, addUserFollowerId });
+});
+// follow a user
+const unFollowUser = asyncHandler(async (req, res, next) => {
+  // update the req.user._id
+  const removeUserFollowsId = await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      // pull req.params.userid out of req.user._id follows_id array
+      $pull: { follows_id: req.params.userid },
+    },
+    {
+      new: true,
+    }
+  );
+  // update the req.params.userid
+  const removeUserFollowerId = await User.findByIdAndUpdate(
+    req.params.userid,
+    {
+      // pull req.user._id out of req.params.userid follower_id array
+      $pull: { follower_id: req.user._id },
+    },
+    {
+      new: true,
+    }
+  );
+  res.json({ removeUserFollowsId, removeUserFollowerId });
 });
 
 module.exports = {
@@ -165,4 +214,6 @@ module.exports = {
   readUserById,
   updateUser,
   deleteUser,
+  followUser,
+  unFollowUser,
 };
