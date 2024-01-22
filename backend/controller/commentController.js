@@ -1,10 +1,11 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/user');
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 // Validate and sanitize input at createPost
 const { body, validationResult } = require('express-validator');
 // TODO: Validate and sanitize
-const createPost = asyncHandler(async (req, res, next) => {
+const createComment = asyncHandler(async (req, res, next) => {
   // Validate and sanitize input(body)
   const post = new Post({
     author_id: req.user._id,
@@ -19,7 +20,7 @@ const createPost = asyncHandler(async (req, res, next) => {
   });
   res.json({ createPost: 'Route works', post });
 });
-const readAllFeedPosts = asyncHandler(async (req, res, next) => {
+const readAllPostComments = asyncHandler(async (req, res, next) => {
   // take req.user._id's follows array
   const user = await User.findById(req.user._id).select('follows_id');
   // Map over array and pull out ._id of every user
@@ -29,7 +30,8 @@ const readAllFeedPosts = asyncHandler(async (req, res, next) => {
 
   res.json({ readAllFeedPosts: 'Route works', feed });
 });
-const readAllUserPosts = asyncHandler(async (req, res, next) => {
+// TODO:
+const readAllUserComments = asyncHandler(async (req, res, next) => {
   // Take userid from params
   const allUserPosts = await User.findById(req.params.userid)
     .select('posts_id')
@@ -38,11 +40,11 @@ const readAllUserPosts = asyncHandler(async (req, res, next) => {
   // Return allUserPosts object to client
   res.json({ readAllUserPosts: 'Route works', allUserPosts });
 });
-const readPostById = asyncHandler(async (req, res, next) => {
+const readCommentById = asyncHandler(async (req, res, next) => {
   const searchedPost = await Post.findById(req.params.postid);
   res.json({ readPostById: 'Route works', searchedPost });
 });
-const updatePost = asyncHandler(async (req, res, next) => {
+const updateComment = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the post
   const post = await Post.findById(req.params.postid).select('author_id');
 
@@ -69,7 +71,7 @@ const updatePost = asyncHandler(async (req, res, next) => {
     res.json({ updatePost: 'You did not write this post' });
   }
 });
-const deletePost = asyncHandler(async (req, res, next) => {
+const deleteComment = asyncHandler(async (req, res, next) => {
   // Check if the logged in user wrote the post
   const post = await Post.findById(req.params.postid).select('author_id');
 
@@ -95,7 +97,7 @@ const deletePost = asyncHandler(async (req, res, next) => {
     return;
   }
 });
-const likePost = asyncHandler(async (req, res, next) => {
+const likeComment = asyncHandler(async (req, res, next) => {
   // update the req.params.postid
   const addUserId = await Post.findByIdAndUpdate(
     req.params.postid,
@@ -110,7 +112,7 @@ const likePost = asyncHandler(async (req, res, next) => {
   );
   res.json({ likePost: 'Route works', addUserId });
 });
-const unlikePost = asyncHandler(async (req, res, next) => {
+const unlikeComment = asyncHandler(async (req, res, next) => {
   // update the req.params.postid
   const removeUserId = await Post.findByIdAndUpdate(
     req.params.postid,
@@ -128,12 +130,12 @@ const unlikePost = asyncHandler(async (req, res, next) => {
 });
 
 module.exports = {
-  createPost,
-  readAllFeedPosts,
-  readAllUserPosts,
-  readPostById,
-  updatePost,
-  deletePost,
-  likePost,
-  unlikePost,
+  createComment,
+  readAllPostComments,
+  readAllUserComments,
+  readCommentById,
+  updateComment,
+  deleteComment,
+  likeComment,
+  unlikeComment,
 };

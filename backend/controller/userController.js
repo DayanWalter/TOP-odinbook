@@ -152,7 +152,6 @@ const deleteUser = asyncHandler(async (req, res, next) => {
 
   res.json({ deletedUser });
 });
-// follow a user
 const followUser = asyncHandler(async (req, res, next) => {
   // update the req.user._id
   const addUserFollowsId = await User.findByIdAndUpdate(
@@ -180,7 +179,6 @@ const followUser = asyncHandler(async (req, res, next) => {
   );
   res.json({ addUserFollowsId, addUserFollowerId });
 });
-// follow a user
 const unFollowUser = asyncHandler(async (req, res, next) => {
   // update the req.user._id
   const removeUserFollowsId = await User.findByIdAndUpdate(

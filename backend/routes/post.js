@@ -17,5 +17,9 @@ router.get('/:postid', protectedRoute, post_controller.readPostById);
 router.put('/:postid/update', protectedRoute, post_controller.updatePost);
 // delete post
 router.delete('/:postid/delete', protectedRoute, post_controller.deletePost);
+// like post
+router.put('/:postid/like', protectedRoute, post_controller.likePost);
+// unlike post
+router.put('/:postid/unlike', protectedRoute, post_controller.unlikePost);
 
 module.exports = router;
