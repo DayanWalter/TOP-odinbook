@@ -4,21 +4,33 @@ const Post = require('../models/post');
 // Validate and sanitize input at createPost
 const { body, validationResult } = require('express-validator');
 // TODO: Validate and sanitize
-const createPost = asyncHandler(async (req, res, next) => {
-  // Validate and sanitize input(body)
-  const post = new Post({
-    author_id: req.user._id,
-    content: req.body.content,
-  });
-  // Save to database
-  await post.save();
+const createPost = [
+  body('content').trim().isLength({ max: 200 }).escape(),
 
-  // Add post._id to posts_id
-  await User.findByIdAndUpdate(req.user._id, {
-    $push: { posts_id: post._id },
-  });
-  res.json({ createPost: 'Route works', post });
-});
+  asyncHandler(async (req, res, next) => {
+    const result = validationResult(req);
+    if (result.isEmpty()) {
+      // Validate and sanitize input(body)
+      const post = new Post({
+        author_id: req.user._id,
+        content: req.body.content,
+      });
+      // Save to database
+      await post.save();
+
+      // Add post._id to posts_id
+      await User.findByIdAndUpdate(req.user._id, {
+        $push: { posts_id: post._id },
+      });
+      res.json({ createPost: 'Route works', post });
+    } else {
+      // List all errors in the console
+      result.array().map((error) => console.log(error.msg));
+      // Send failure message to client and the error object
+      res.status(404).json({ createPost: 'Failure', result });
+    }
+  }),
+];
 const readFeedPosts = asyncHandler(async (req, res, next) => {
   // take req.user._id's follows array
   const user = await User.findById(req.user._id).select('follows_id');

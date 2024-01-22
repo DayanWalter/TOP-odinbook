@@ -5,27 +5,39 @@ const Comment = require('../models/comment');
 // Validate and sanitize input at createPost
 const { body, validationResult } = require('express-validator');
 // TODO: Validate and sanitize
-const createComment = asyncHandler(async (req, res, next) => {
-  // Validate and sanitize input(body)
-  const comment = new Comment({
-    author_id: req.user._id,
-    content: req.body.content,
-    post_id: req.params.postid,
-  });
-  // Save to database
-  await comment.save();
+const createComment = [
+  body('content').trim().isLength({ max: 200 }).escape(),
 
-  // Add comment._id to user._id
-  await User.findByIdAndUpdate(req.user._id, {
-    $push: { comments_id: comment._id },
-  });
-  // Add comment._id to post._id
-  await Post.findByIdAndUpdate(req.params.postid, {
-    $push: { comments_id: comment._id },
-  });
+  asyncHandler(async (req, res, next) => {
+    const result = validationResult(req);
+    if (result.isEmpty()) {
+      // Validate and sanitize input(body)
+      const comment = new Comment({
+        author_id: req.user._id,
+        content: req.body.content,
+        post_id: req.params.postid,
+      });
+      // Save to database
+      await comment.save();
 
-  res.json({ createComment: 'Route works', comment });
-});
+      // Add comment._id to user._id
+      await User.findByIdAndUpdate(req.user._id, {
+        $push: { comments_id: comment._id },
+      });
+      // Add comment._id to post._id
+      await Post.findByIdAndUpdate(req.params.postid, {
+        $push: { comments_id: comment._id },
+      });
+
+      res.json({ createComment: 'Route works', comment });
+    } else {
+      // List all errors in the console
+      result.array().map((error) => console.log(error.msg));
+      // Send failure message to client and the error object
+      res.status(404).json({ createComment: 'Failure', result });
+    }
+  }),
+];
 const readPostComments = asyncHandler(async (req, res, next) => {
   // Take userid from params
   const postComments = await Post.findById(req.params.postid)
@@ -111,7 +123,6 @@ const deleteComment = asyncHandler(async (req, res, next) => {
     return;
   }
 });
-// TODO:
 const likeComment = asyncHandler(async (req, res, next) => {
   // update the req.params.postid
   const addUserId = await Comment.findByIdAndUpdate(
