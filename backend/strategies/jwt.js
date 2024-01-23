@@ -13,7 +13,7 @@ module.exports = new JwtStrategy(opts, async (jwt_payload, done) => {
 
   if (jwt_payload.user_name === user.user_name) {
     // return done(null, true);
-    // Changed true to user, so I can use _id and username.
+    // Changed true to user, so I can use _id and user_name.
     return done(null, user);
   }
   return done(null, false);
