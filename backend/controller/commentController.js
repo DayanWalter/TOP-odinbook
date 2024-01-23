@@ -69,7 +69,7 @@ const readCommentById = asyncHandler(async (req, res, next) => {
   res.json({ readCommentById: 'Route works', searchedComment });
 });
 const updateComment = asyncHandler(async (req, res, next) => {
-  // Check if logged in user wrote the post
+  // Check if logged in user wrote the comment
   // Get the comment._id from params and look for the author
   const comment = await Comment.findById(req.params.commentid).select(
     'author_id'
@@ -91,44 +91,46 @@ const updateComment = asyncHandler(async (req, res, next) => {
     );
     // Send the updated comment to client
     res.json({ updateComment: 'Route works', updatedComment });
+    return;
   } else {
     // If the logged in user is not the author of the comment, send 404 and message
     res.status(404).json({ updateComment: 'You did not write this comment' });
   }
 });
 const deleteComment = asyncHandler(async (req, res, next) => {
-  // Check if the logged in user wrote the post
+  // Check if the logged in user wrote the comment
+  // Get the comment._id from params and look for the author
   const comment = await Comment.findById(req.params.commentid).select(
     'author_id'
   );
-
+  // If the logged in user is the author of the comment...
   if (comment.author_id.equals(req.user._id)) {
+    // Get the id for the comment from the params and delete comment
     const deletedComment = await Comment.findByIdAndDelete(
       req.params.commentid
     );
-
-    if (!deletedComment) {
-      res.status(404).json({ error: 'Comment not found' });
-      return;
-    }
-
-    // Remove comment._id from user.comments_id
+    // Find comments_id array from user
     await User.findByIdAndUpdate(
       req.user._id,
+      // Remove comment._id from user.comments_id
       { $pull: { comments_id: req.params.commentid } },
-      { new: true } // Return the updated user document
+      // Return the updated user document
+      { new: true }
     );
-    // Remove comment._id from req.params.postid
+    // Find comments_id array from post
     await Post.findByIdAndUpdate(
       req.params.postid,
+      // Remove comment._id from req.params.postid
       { $pull: { comments_id: req.params.commentid } },
-      { new: true } // Return the updated user document
+      // Return the updated post document
+      { new: true }
     );
-
+    // Send the deleted comment to client
     res.json({ deleteComment: 'Route works', deletedComment });
     return;
   } else {
-    res.json({ deleteComment: 'You did not write this post' });
+    // If the logged in user is not the author of the comment, send 404 and message
+    res.status(404).json({ deleteComment: 'You did not write this post' });
     return;
   }
 });
