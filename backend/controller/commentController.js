@@ -135,19 +135,30 @@ const deleteComment = asyncHandler(async (req, res, next) => {
   }
 });
 const likeComment = asyncHandler(async (req, res, next) => {
-  // update the req.params.postid
-  const addUserId = await Comment.findByIdAndUpdate(
-    req.params.commentid,
-    {
-      // push the req.user._id into likes_id array
-      $push: { likes_id: req.user._id },
-    },
+  // Search for the comment
+  const comment = await Comment.findOne({
+    _id: req.params.commentid,
+    // CHeck if the user is in the likes_id array
+    likes_id: { $in: req.user._id },
+  });
+  // If the user is NOT in the likes_id
+  if (!comment) {
+    // update the req.params.commentid
+    const addUserId = await Comment.findByIdAndUpdate(
+      req.params.commentid,
+      {
+        // push the req.user._id into likes_id array
+        $push: { likes_id: req.user._id },
+      },
 
-    {
-      new: true,
-    }
-  );
-  res.json({ likeComment: 'Route works', addUserId });
+      {
+        new: true,
+      }
+    );
+    res.json({ likeComment: 'Route works', addUserId });
+  } else {
+    res.json({ likeComment: 'User already liked comment' });
+  }
 });
 const unlikeComment = asyncHandler(async (req, res, next) => {
   // update the req.params.commentid

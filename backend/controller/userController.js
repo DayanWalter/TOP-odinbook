@@ -97,7 +97,7 @@ const createUser = [
     }
   }),
 ];
-const readAllUsers = asyncHandler(async (req, res, next) => {
+const readUsers = asyncHandler(async (req, res, next) => {
   const allUsers = await User.find()
     // Projection(just send to client the following:)
     // .select('user_name')
@@ -208,7 +208,7 @@ const unFollowUser = asyncHandler(async (req, res, next) => {
 module.exports = {
   loginUser,
   createUser,
-  readAllUsers,
+  readUsers,
   readUserById,
   updateUser,
   deleteUser,

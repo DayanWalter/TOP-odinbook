@@ -10,7 +10,7 @@ router.post('/login', user_controller.loginUser);
 // create new user
 router.post('/create', user_controller.createUser);
 // read all users
-router.get('/all', protectedRoute, user_controller.readAllUsers);
+router.get('/all', protectedRoute, user_controller.readUsers);
 // read single user
 router.get('/:userid', protectedRoute, user_controller.readUserById);
 // change user
