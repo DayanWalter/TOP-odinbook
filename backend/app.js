@@ -19,11 +19,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 // Import the 'user' route.
-const userRouter = require('./routes/user');
+const userRouter = require('./routes/userRouter');
 // Import the 'post' route.
-const postRouter = require('./routes/post');
+const postRouter = require('./routes/postRouter');
 // Import the 'comment' route.
-const commentRouter = require('./routes/comment');
+const commentRouter = require('./routes/commentRouter');
 
 // Load environment variables from a '.env' file.
 require('dotenv').config();
