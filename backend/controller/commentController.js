@@ -7,31 +7,38 @@ const createComment = [
   body('content').trim().isLength({ max: 200 }).escape(),
 
   asyncHandler(async (req, res, next) => {
+    // Validate and sanitize input(body)
     const result = validationResult(req);
+    // If the message is shorter than 200 chars
     if (result.isEmpty()) {
-      // Validate and sanitize input(body)
+      // Create new comment
       const comment = new Comment({
+        // Get the author_id from the jwt
         author_id: req.user._id,
+        // Get the content from the body
         content: req.body.content,
+        // Get the post_id from the params
         post_id: req.params.postid,
       });
       // Save to database
       await comment.save();
 
-      // Add comment._id to user._id
+      // Update author
       await User.findByIdAndUpdate(req.user._id, {
+        // Push comment._id into comments_id array of author
         $push: { comments_id: comment._id },
       });
-      // Add comment._id to post._id
+      // Update Post
       await Post.findByIdAndUpdate(req.params.postid, {
+        // Push comment._id into comments_id array of post
         $push: { comments_id: comment._id },
       });
-
+      // Send comment to client
       res.json({ createComment: 'Route works', comment });
     } else {
       // List all errors in the console
       result.array().map((error) => console.log(error.msg));
-      // Send failure message to client and the error object
+      // Send status 404,failure message and result(error object) to client
       res.status(404).json({ createComment: 'Failure', result });
     }
   }),
