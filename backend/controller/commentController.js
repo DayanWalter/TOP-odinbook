@@ -54,11 +54,13 @@ const readPostComments = asyncHandler(async (req, res, next) => {
   res.json({ readPostComments: 'Route works', comments });
 });
 const readUserComments = asyncHandler(async (req, res, next) => {
-  // Take userid from params
+  // Take userid from params and search for user
   const userComments = await User.findById(req.params.userid)
     .select('comments_id')
     .populate('comments_id');
+  // get the comments_id array
   const comments = userComments.comments_id;
+  // Send the comments array to client
   res.json({ readUserComments: 'Route works', comments });
 });
 const readCommentById = asyncHandler(async (req, res, next) => {
