@@ -64,36 +64,36 @@ const readUserComments = asyncHandler(async (req, res, next) => {
   res.json({ readUserComments: 'Route works', comments });
 });
 const readCommentById = asyncHandler(async (req, res, next) => {
+  // get comment._id from params and search for comment
   const searchedComment = await Comment.findById(req.params.commentid);
   res.json({ readCommentById: 'Route works', searchedComment });
 });
 const updateComment = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the post
+  // Get the comment._id from params and look for the author
   const comment = await Comment.findById(req.params.commentid).select(
     'author_id'
   );
-
+  // If the logged in user is the author of the comment...
   if (comment.author_id.equals(req.user._id)) {
+    // Get the content from the body
     const content = req.body.content;
-
+    // Get the id for the comment from the params and update comment
     const updatedComment = await Comment.findByIdAndUpdate(
       req.params.commentid,
       {
         content,
       },
+      // Return the changed comment
       {
         new: true,
       }
     );
-
-    if (!updatedComment) {
-      res.status(404).json({ error: 'Comment not found' });
-      return;
-    }
-
+    // Send the updated comment to client
     res.json({ updateComment: 'Route works', updatedComment });
   } else {
-    res.json({ updateComment: 'You did not write this comment' });
+    // If the logged in user is not the author of the comment, send 404 and message
+    res.status(404).json({ updateComment: 'You did not write this comment' });
   }
 });
 const deleteComment = asyncHandler(async (req, res, next) => {
