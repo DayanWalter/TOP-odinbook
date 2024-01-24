@@ -93,7 +93,7 @@ const createUser = [
       // List all errors in the console
       result.array().map((error) => console.log(error.msg));
       // Send failure message to client and the error object
-      res.status(404).json({ createUser: 'Failure', result });
+      res.status(400).json({ error: result });
     }
   }),
 ];

@@ -22,7 +22,7 @@ const CreatePost = () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${authToken}`, // Include the authentication token in the request headers
       },
-      body: JSON.stringify({ content }), // Convert post content to JSON and include it in the request body
+      body: JSON.stringify({ content }),
     };
 
     try {
