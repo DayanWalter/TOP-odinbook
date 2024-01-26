@@ -1,5 +1,5 @@
 // DeleteUser.jsx
-export default function DeleteUser({ userId }) {
+export default function DeleteUser() {
   const handleDeleteUser = async () => {
     const authToken = localStorage.getItem('authToken');
 

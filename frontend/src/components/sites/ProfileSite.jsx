@@ -45,6 +45,9 @@ export default function ProfileSite() {
       <p>ID: {userData._id}</p>
       <p>Name: {userData.user_name}</p>
       <p>Email: {userData.email}</p>
+      <button>Follow</button>
+      <button>UnFollow</button>
+      <button>Private Message</button>
     </div>
   );
 }

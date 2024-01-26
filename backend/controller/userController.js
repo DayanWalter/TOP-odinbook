@@ -131,6 +131,8 @@ const readUserById = asyncHandler(async (req, res, next) => {
   res.json({ searchedUser });
 });
 const updateUser = asyncHandler(async (req, res, next) => {
+  //TODO: Generate token from updated user and send it to client
+
   // take the id from jwt
   const userId = req.user._id;
   // take changes from body
