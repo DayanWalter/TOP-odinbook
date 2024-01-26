@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const CreateUser = () => {
+export default function CreateUser() {
   const [userData, setUserData] = useState({
     user_name: '',
     email: '',
@@ -131,6 +131,4 @@ const CreateUser = () => {
       </button>
     </div>
   );
-};
-
-export default CreateUser;
+}

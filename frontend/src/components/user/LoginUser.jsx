@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const LoginUser = () => {
+export default function LoginUser() {
   const [userData, setUserData] = useState({
     user_name: '',
     password: '',
@@ -101,6 +101,4 @@ const LoginUser = () => {
       </button>
     </div>
   );
-};
-
-export default LoginUser;
+}
