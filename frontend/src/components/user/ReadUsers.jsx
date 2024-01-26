@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ReadUsers() {
   const [usersData, setUsersData] = useState();
@@ -44,7 +45,9 @@ export default function ReadUsers() {
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {usersData ? (
         usersData.allUsers.map((user) => (
-          <li key={user._id}>{user.user_name}</li>
+          <li key={user._id}>
+            <a href={`/user/${user._id}`}>{user.user_name}</a>
+          </li>
         ))
       ) : (
         <div>Click on search button...</div>
