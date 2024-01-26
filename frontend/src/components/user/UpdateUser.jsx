@@ -6,7 +6,8 @@ export default function UpdateUser() {
     email: '',
     img_url: '',
   });
-  //   const [error, setError] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
 
   const authToken = localStorage.getItem('authToken');
   // Split the payload of the jwt and convert the ._id part
@@ -30,9 +31,15 @@ export default function UpdateUser() {
           requestOptions
         );
         const data = await response.json();
+        if (!response.ok) {
+          setError(data.error.errors[0].msg);
+          return;
+        }
         setUserData(data.searchedUser);
+        setError('');
       } catch (error) {
         console.error('Error while fetching user:', error);
+        setError(error);
       }
     };
 
@@ -40,6 +47,7 @@ export default function UpdateUser() {
   }, [userId]);
 
   const handleUpdateUser = async () => {
+    setSuccess(false);
     // Parameters for the backend request
     const requestOptions = {
       method: 'PUT',
@@ -57,17 +65,20 @@ export default function UpdateUser() {
       );
       const data = await response.json();
 
-      //   if (!response.ok) {
-      //     setError(data.error.errors[0].msg);
-      //     return;
-      //   }
+      if (!response.ok) {
+        setError(data.error.errors[0].msg);
+        return;
+      }
       // Save the token, e.g., in local storage
       localStorage.setItem('authToken', data.token);
 
       console.log('User updated:', data);
+      setError('');
     } catch (error) {
       console.error('Error while updating user:', error);
+      setError(error);
     }
+    setSuccess(true);
   };
 
   const handleChange = (e) => {
@@ -120,8 +131,8 @@ export default function UpdateUser() {
           onChange={handleChange}
         />
       </label> */}
-      {/* {error && <div style={{ color: 'red' }}>{error}</div>} */}
-
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {success && <div style={{ color: 'green' }}>User updated!</div>}
       <button onClick={handleUpdateUser}>Update User</button>
     </div>
   );
