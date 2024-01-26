@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import LoginSite from './components/sites/LoginSite.jsx';
-import ProfileSite from './components/sites/ProfileSite.jsx';
 import IndexSite from './components/sites/IndexSite.jsx';
 import CreateUser from './components/user/CreateUser.jsx';
 import LoginUser from './components/user/LoginUser.jsx';
 import DeleteUser from './components/user/DeleteUser.jsx';
 import ReadUsers from './components/user/ReadUsers.jsx';
 import UpdateUser from './components/user/UpdateUser.jsx';
+import ReadUserById from './components/user/ReadUserById.jsx';
 
 const router = createBrowserRouter([
   {
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
   // },
   {
     path: '/user/:userid',
-    element: <ProfileSite />,
+    element: <ReadUserById />,
     loader({ params }) {
       return params;
     },

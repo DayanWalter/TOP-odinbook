@@ -126,6 +126,8 @@ const readUserById = asyncHandler(async (req, res, next) => {
   const searchedUser = await User.findById(req.params.userid)
     // Projection(just send to client the following:)
     // .select('user_name')
+    .populate('follows_id')
+    .populate('follower_id')
     .exec();
   // Send data to client
   res.json({ searchedUser });

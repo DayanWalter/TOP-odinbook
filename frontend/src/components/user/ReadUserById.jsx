@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
-import UpdateUser from '../user/UpdateUser';
+import { Link, useLoaderData } from 'react-router-dom';
 
-export default function ProfileSite() {
+export default function ReadUserById() {
   const [userData, setUserData] = useState(null);
   const loaderData = useLoaderData();
   const userId = loaderData.userid;
@@ -27,6 +26,7 @@ export default function ProfileSite() {
         );
         const data = await response.json();
         setUserData(data.searchedUser);
+        console.log(userData);
       } catch (error) {
         console.error('Error while fetching user:', error);
       }
@@ -41,11 +41,22 @@ export default function ProfileSite() {
 
   return (
     <div>
-      <div>ProfileSite</div>
+      {console.log(userData)}
+      <div>ReadUserById</div>
       <h1>User Profile:</h1>
       <p>ID: {userData._id}</p>
       <p>Name: {userData.user_name}</p>
       <p>Email: {userData.email}</p>
+      <p>
+        Follows:
+        {userData &&
+          userData.follows_id.map((user) => (
+            <li key={user._id}>
+              <Link to={`/user/${user._id}`}>{user.user_name}</Link>
+            </li>
+          ))}
+      </p>
+      <p>Follower:</p>
       <button>Follow</button>
       <button>UnFollow</button>
       <button>Private Message</button>

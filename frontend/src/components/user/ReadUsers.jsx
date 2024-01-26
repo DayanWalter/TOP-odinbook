@@ -46,7 +46,7 @@ export default function ReadUsers() {
       {usersData ? (
         usersData.allUsers.map((user) => (
           <li key={user._id}>
-            <a href={`/user/${user._id}`}>{user.user_name}</a>
+            <Link to={`/user/${user._id}`}>{user.user_name}</Link>
           </li>
         ))
       ) : (
