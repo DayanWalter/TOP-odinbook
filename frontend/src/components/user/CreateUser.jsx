@@ -89,34 +89,42 @@ const CreateUser = () => {
   return (
     <div>
       <h1>Create a New User:</h1>
-      <label>Username:</label>
-      <input
-        type="text"
-        name="user_name"
-        value={userData.user_name}
-        onChange={handleChange}
-      />
-      <label>Email:</label>
-      <input
-        type="text"
-        name="email"
-        value={userData.email}
-        onChange={handleChange}
-      />
-      <label>Password:</label>
-      <input
-        type="password"
-        name="password"
-        value={userData.password}
-        onChange={handleChange}
-      />
-      <label>Repeat Password:</label>
-      <input
-        type="password"
-        name="repeatPassword"
-        value={userData.repeatPassword}
-        onChange={handleChange}
-      />
+      <label>
+        Username:
+        <input
+          type="text"
+          name="user_name"
+          value={userData.user_name}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Email:
+        <input
+          type="text"
+          name="email"
+          value={userData.email}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Password:
+        <input
+          type="password"
+          name="password"
+          value={userData.password}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Repeat Password:
+        <input
+          type="password"
+          name="repeatPassword"
+          value={userData.repeatPassword}
+          onChange={handleChange}
+        />
+      </label>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       <button onClick={handleCreateUser} disabled={loading}>
         {loading ? `Creating User: ${userData.user_name}` : 'Create User'}

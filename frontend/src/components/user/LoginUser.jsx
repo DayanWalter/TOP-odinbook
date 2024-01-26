@@ -76,21 +76,25 @@ const LoginUser = () => {
   return (
     <div>
       <h1>Login:</h1>
-      <label>Username:</label>
-      <input
-        type="text"
-        name="user_name"
-        value={userData.user_name}
-        onChange={handleChange}
-      />
+      <label>
+        Username:
+        <input
+          type="text"
+          name="user_name"
+          value={userData.user_name}
+          onChange={handleChange}
+        />
+      </label>
 
-      <label>Password:</label>
-      <input
-        type="password"
-        name="password"
-        value={userData.password}
-        onChange={handleChange}
-      />
+      <label>
+        Password:
+        <input
+          type="password"
+          name="password"
+          value={userData.password}
+          onChange={handleChange}
+        />
+      </label>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       <button onClick={handleLoginUser} disabled={loading}>
         {loading ? `Login User: ${userData.user_name}` : 'Login User'}
