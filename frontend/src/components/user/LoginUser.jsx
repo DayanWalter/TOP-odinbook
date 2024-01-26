@@ -74,7 +74,7 @@ export default function LoginUser() {
   };
 
   return (
-    <div>
+    <div id="loginUser">
       <h1>Login:</h1>
       <label>
         Username:

@@ -87,7 +87,7 @@ export default function CreateUser() {
   };
 
   return (
-    <div>
+    <div id="createUser">
       <h1>Create a New User:</h1>
       <label>
         Username:
