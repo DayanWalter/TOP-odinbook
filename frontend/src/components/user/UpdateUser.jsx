@@ -4,8 +4,9 @@ export default function UpdateUser() {
   const [userData, setUserData] = useState({
     user_name: '',
     email: '',
-    password: '',
+    img_url: '',
   });
+  //   const [error, setError] = useState('');
 
   const authToken = localStorage.getItem('authToken');
   // Split the payload of the jwt and convert the ._id part
@@ -30,7 +31,6 @@ export default function UpdateUser() {
         );
         const data = await response.json();
         setUserData(data.searchedUser);
-        console.log(userData);
       } catch (error) {
         console.error('Error while fetching user:', error);
       }
@@ -56,6 +56,14 @@ export default function UpdateUser() {
         requestOptions
       );
       const data = await response.json();
+
+      //   if (!response.ok) {
+      //     setError(data.error.errors[0].msg);
+      //     return;
+      //   }
+      // Save the token, e.g., in local storage
+      localStorage.setItem('authToken', data.token);
+
       console.log('User updated:', data);
     } catch (error) {
       console.error('Error while updating user:', error);
@@ -112,6 +120,7 @@ export default function UpdateUser() {
           onChange={handleChange}
         />
       </label> */}
+      {/* {error && <div style={{ color: 'red' }}>{error}</div>} */}
 
       <button onClick={handleUpdateUser}>Update User</button>
     </div>

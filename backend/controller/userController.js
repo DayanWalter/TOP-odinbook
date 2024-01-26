@@ -130,36 +130,49 @@ const readUserById = asyncHandler(async (req, res, next) => {
   // Send data to client
   res.json({ searchedUser });
 });
-const updateUser = asyncHandler(async (req, res, next) => {
-  //TODO: Generate token from updated user and send it to client
-
-  // take the id from jwt
-  const userId = req.user._id;
-  // take changes from body
-
-  const { user_name, email, img_url } = req.body;
-  // TEST IF THE EMAIL AND USERNAME FROM BODY ARE NOT ALREADY TAKEN!!!
-
-  // search in the db(allUsers) for a specific user id
-  const updatedUser = await User.findByIdAndUpdate(
-    userId,
-    {
-      user_name,
-      email,
-      img_url,
-    },
-    {
-      new: true,
+const updateUser = [
+  body('user_name').custom(async (value) => {
+    const user = await User.findOne({ user_name: value });
+    if (user) {
+      throw new Error('Username already exist, choose please another name.');
     }
-  ).exec();
+  }),
 
-  if (!updatedUser) {
-    res.status(404).json({ error: 'User does not exist' });
-    return;
-  }
+  asyncHandler(async (req, res, next) => {
+    const result = validationResult(req);
 
-  res.json({ updatedUser });
-});
+    //TODO: Generate token from updated user and send it to client
+    if (result.isEmpty()) {
+      // take the id from jwt
+      const userId = req.user._id;
+      // take changes from body
+
+      const { user_name, email, img_url } = req.body;
+      // TEST IF THE EMAIL AND USERNAME FROM BODY ARE NOT ALREADY TAKEN!!!
+
+      // search in the db(allUsers) for a specific user id
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        {
+          user_name,
+          email,
+          img_url,
+        },
+        {
+          new: true,
+        }
+      ).exec();
+      const token = generateToken(updatedUser);
+
+      res.json({ updatedUser: 'Success', token });
+    } else {
+      // List all errors in the console
+      result.array().map((error) => console.log(error.msg));
+      // Send failure message to client and the error object
+      res.status(400).json({ error: result });
+    }
+  }),
+];
 const deleteUser = asyncHandler(async (req, res, next) => {
   // take the id from jwt
   const userIdToDelete = req.user._id;

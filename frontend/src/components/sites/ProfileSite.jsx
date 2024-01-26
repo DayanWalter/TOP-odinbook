@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import UpdateUser from '../user/UpdateUser';
 
 export default function ProfileSite() {
   const [userData, setUserData] = useState(null);
