@@ -19,24 +19,41 @@ const generateToken = (user) => {
 };
 
 /// CRUD Operations ///
-const loginUser = asyncHandler(async (req, res, next) => {
-  //Take the user_name and password from body
-  const { user_name, password } = req.body;
-  // Search for a user with the entered user_name
-  const user = await User.findOne({ user_name });
-  // Compare the entered password with the hashed password in the database
-  const passwordsMatch = await bcrypt.compare(password, user.password);
-  // If the passwords match...
-  if (passwordsMatch) {
-    // Generate a token
-    const token = generateToken(user);
-    // send a success message and the token to the client
-    res.json({ userLogin: 'Success', token });
-  } else {
-    // else send a failure message to the client
-    res.json({ userLogin: 'Failure' });
-  }
-});
+const loginUser = [
+  body('user_name').custom(async (value) => {
+    const user = await User.findOne({ user_name: value });
+    if (!user) {
+      throw new Error('User does not exist');
+    }
+  }),
+
+  asyncHandler(async (req, res, next) => {
+    const result = validationResult(req);
+    if (result.isEmpty()) {
+      //Take the user_name and password from body
+      const { user_name, password } = req.body;
+      // Search for a user with the entered user_name
+      const user = await User.findOne({ user_name });
+      // Compare the entered password with the hashed password in the database
+      const passwordsMatch = await bcrypt.compare(password, user.password);
+      // If the passwords match...
+      if (passwordsMatch) {
+        // Generate a token
+        const token = generateToken(user);
+        // send a success message and the token to the client
+        res.json({ userLogin: 'Success', token });
+      } else {
+        // else send a failure message to the client
+        res.json({ userLogin: 'Failure' });
+      }
+    } else {
+      // List all errors in the console
+      result.array().map((error) => console.log(error.msg));
+      // Send failure message to client and the error object
+      res.status(400).json({ error: result });
+    }
+  }),
+];
 const createUser = [
   /// Validate and sanitize input ///
   // user_name under 6 characters
