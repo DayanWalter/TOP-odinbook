@@ -32,7 +32,7 @@ export default function ReadUsers() {
         setUsersData(data);
       } catch (error) {
         console.error('Error while fetching users:', error);
-        setError('Error in fetching user data');
+        setError('Error during fetching user data. Please try again.');
       } finally {
         setLoading(false);
       }
