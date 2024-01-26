@@ -3,6 +3,8 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 export default function ReadUserById() {
   const [userData, setUserData] = useState(null);
+  const [showFollows, setShowFollows] = useState(false);
+
   const loaderData = useLoaderData();
   const userId = loaderData.userid;
 
@@ -35,6 +37,9 @@ export default function ReadUserById() {
     fetchData();
   }, [userId]);
 
+  const handleShowFollows = () => {
+    showFollows ? setShowFollows(false) : setShowFollows(true);
+  };
   if (!userData) {
     return <div>Loading...</div>;
   }
@@ -50,11 +55,15 @@ export default function ReadUserById() {
       <p>
         Follows:
         {userData &&
+          showFollows &&
           userData.follows_id.map((user) => (
             <li key={user._id}>
               <Link to={`/user/${user._id}`}>{user.user_name}</Link>
             </li>
           ))}
+        <button onClick={handleShowFollows}>
+          {showFollows ? 'Hide' : 'Show'}
+        </button>
       </p>
       <p>Follower:</p>
       <button>Follow</button>
