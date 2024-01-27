@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import UpdatePost from './UpdatePost';
 
 export default function ReadPostById() {
   const [postData, setPostData] = useState(null);
@@ -76,6 +77,7 @@ export default function ReadPostById() {
           <p>Content: {postData.content}</p>
           <p>Author: {postData.author_id.user_name}</p>
           <button onClick={handleShowComments}>Show Comments</button>
+          <UpdatePost postId={postId} />
         </>
       )}
     </div>

@@ -39,6 +39,7 @@ const readFeedPosts = asyncHandler(async (req, res, next) => {
 
   res.json({ readFeedPosts: 'Route works', feed });
 });
+// Useful?
 const readUserPosts = asyncHandler(async (req, res, next) => {
   // Take userid from params
   const userPosts = await User.findById(req.params.userid)
