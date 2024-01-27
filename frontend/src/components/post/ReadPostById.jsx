@@ -1,19 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import FollowUser from './FollowUser';
-import UnFollowUser from './UnFollowUser';
-import FollowList from './FollowList';
 
-export default function ReadUserById() {
-  const [userData, setUserData] = useState(null);
+export default function ReadPostById() {
+  const [postData, setPostData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [showFollows, setShowFollows] = useState(false);
-  const [showFollower, setShowFollower] = useState(false);
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  //   const [showFollower, setShowFollower] = useState(false);
+  //   const [isFollowing, setIsFollowing] = useState(false);
 
   // id from params
   const loaderData = useLoaderData();
-  const userId = loaderData.userid;
+  const postId = loaderData.postid;
 
   // id from logged in user
   const authToken = localStorage.getItem('authToken');
@@ -36,17 +33,17 @@ export default function ReadUserById() {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:3000/api/user/${userId}`,
+          `http://localhost:3000/api/post/${postId}`,
           requestOptions
         );
         const data = await response.json();
-        setUserData(data.searchedUser);
+        setPostData(data.searchedPost);
 
-        const isFollowingUser = searchForFollower(
-          data.searchedUser.follower_id,
-          loggedInUserId
-        );
-        setIsFollowing(isFollowingUser);
+        // const isFollowingUser = searchForFollower(
+        //   data.searchedUser.follower_id,
+        //   loggedInUserId
+        // );
+        // setIsFollowing(isFollowingUser);
       } catch (error) {
         console.error('Error while fetching user:', error);
       } finally {
@@ -55,52 +52,30 @@ export default function ReadUserById() {
     };
 
     fetchData();
-  }, [userId, isFollowing]);
+  }, [postId]);
 
-  const handleShowFollows = () => {
-    showFollows ? setShowFollows(false) : setShowFollows(true);
+  const handleShowComments = () => {
+    showComments ? setShowComments(false) : setShowComments(true);
   };
-  const handleShowFollower = () => {
-    showFollower ? setShowFollower(false) : setShowFollower(true);
-  };
+  //   const handleShowFollower = () => {
+  //     showFollower ? setShowFollower(false) : setShowFollower(true);
+  //   };
 
-  function searchForFollower(arr, loggedInUserId) {
-    return arr.some((obj) => obj._id === loggedInUserId);
-  }
+  //   function searchForFollower(arr, loggedInUserId) {
+  //     return arr.some((obj) => obj._id === loggedInUserId);
+  //   }
 
   return (
     <div>
       {loading && <div>Loading...</div>}
-      {userData && (
+      {postData && (
         <>
-          <div>ReadUserById</div>
-          <h1>User Profile:</h1>
-          <p>ID: {userData._id}</p>
-          <p>Name: {userData.user_name}</p>
-          <p>Email: {userData.email}</p>
-          <p>Follows:</p>
-
-          {showFollows && userData.follows_id && (
-            <FollowList follows={userData.follows_id} />
-          )}
-          <button onClick={handleShowFollows}>
-            {showFollows ? 'Hide' : 'Show'}
-          </button>
-          <p>Follower:</p>
-
-          {showFollower && userData.follower_id && (
-            <FollowList follows={userData.follower_id} />
-          )}
-          <button onClick={handleShowFollower}>
-            {showFollower ? 'Hide' : 'Show'}
-          </button>
-
-          {isFollowing ? (
-            <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
-          ) : (
-            <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
-          )}
-          <button>Private Message</button>
+          <div>ReadPostById</div>
+          <h1>Post:</h1>
+          <p>ID: {postData._id}</p>
+          <p>Content: {postData.content}</p>
+          <p>Author: {postData.author_id.user_name}</p>
+          <button onClick={handleShowComments}>Show Comments</button>
         </>
       )}
     </div>

@@ -12,6 +12,7 @@ import ReadUserById from './components/user/ReadUserById.jsx';
 import FollowUser from './components/user/FollowUser.jsx';
 import CreatePost from './components/post/CreatePost.jsx';
 import ReadFeedPosts from './components/post/ReadFeedPosts.jsx';
+import ReadPostById from './components/post/ReadPostById.jsx';
 
 const router = createBrowserRouter([
   {
