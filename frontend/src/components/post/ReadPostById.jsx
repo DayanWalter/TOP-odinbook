@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import UpdatePost from './UpdatePost';
+import DeletePost from './DeletePost';
 
 export default function ReadPostById() {
   const [postData, setPostData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  //   const [showFollower, setShowFollower] = useState(false);
-  //   const [isFollowing, setIsFollowing] = useState(false);
+  // const [showFollower, setShowFollower] = useState(false);
+  const [isAuthor, setIsAuthor] = useState(false);
 
   // id from params
   const loaderData = useLoaderData();
@@ -40,11 +41,11 @@ export default function ReadPostById() {
         const data = await response.json();
         setPostData(data.searchedPost);
 
-        // const isFollowingUser = searchForFollower(
-        //   data.searchedUser.follower_id,
-        //   loggedInUserId
-        // );
-        // setIsFollowing(isFollowingUser);
+        const isAuthorOfPost = searchForAuthor(
+          data.searchedPost.author_id,
+          loggedInUserId
+        );
+        setIsAuthor(isAuthorOfPost);
       } catch (error) {
         console.error('Error while fetching user:', error);
       } finally {
@@ -62,9 +63,9 @@ export default function ReadPostById() {
   //     showFollower ? setShowFollower(false) : setShowFollower(true);
   //   };
 
-  //   function searchForFollower(arr, loggedInUserId) {
-  //     return arr.some((obj) => obj._id === loggedInUserId);
-  //   }
+  function searchForAuthor(author, loggedInUserId) {
+    return author._id === loggedInUserId;
+  }
 
   return (
     <div>
@@ -77,7 +78,8 @@ export default function ReadPostById() {
           <p>Content: {postData.content}</p>
           <p>Author: {postData.author_id.user_name}</p>
           <button onClick={handleShowComments}>Show Comments</button>
-          <UpdatePost postId={postId} />
+          {isAuthor ? <UpdatePost postId={postId} /> : ''}
+          {isAuthor ? <DeletePost postId={postId} /> : ''}
         </>
       )}
     </div>
