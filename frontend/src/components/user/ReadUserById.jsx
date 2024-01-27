@@ -3,12 +3,17 @@ import { Link, useLoaderData } from 'react-router-dom';
 import FollowUser from './FollowUser';
 import UnFollowUser from './UnFollowUser';
 import FollowList from './FollowList';
+import PostList from './PostList';
+import CommentList from './CommentList';
 
 export default function ReadUserById() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showFollows, setShowFollows] = useState(false);
   const [showFollower, setShowFollower] = useState(false);
+  const [showPosts, setShowPosts] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+
   const [isFollowing, setIsFollowing] = useState(false);
 
   // id from params
@@ -51,6 +56,10 @@ export default function ReadUserById() {
         console.error('Error while fetching user:', error);
       } finally {
         setLoading(false);
+        setShowFollows(false);
+        setShowFollower(false);
+        setShowPosts(false);
+        setShowComments(false);
       }
     };
 
@@ -62,6 +71,12 @@ export default function ReadUserById() {
   };
   const handleShowFollower = () => {
     showFollower ? setShowFollower(false) : setShowFollower(true);
+  };
+  const handleShowPosts = () => {
+    showPosts ? setShowPosts(false) : setShowPosts(true);
+  };
+  const handleShowComments = () => {
+    showComments ? setShowComments(false) : setShowComments(true);
   };
 
   function searchForFollower(arr, loggedInUserId) {
@@ -79,7 +94,6 @@ export default function ReadUserById() {
           <p>Name: {userData.user_name}</p>
           <p>Email: {userData.email}</p>
           <p>Follows:</p>
-
           {showFollows && userData.follows_id && (
             <FollowList follows={userData.follows_id} />
           )}
@@ -87,14 +101,26 @@ export default function ReadUserById() {
             {showFollows ? 'Hide' : 'Show'}
           </button>
           <p>Follower:</p>
-
           {showFollower && userData.follower_id && (
             <FollowList follows={userData.follower_id} />
           )}
           <button onClick={handleShowFollower}>
             {showFollower ? 'Hide' : 'Show'}
           </button>
-
+          <p>Posts:</p>
+          {showPosts && userData.posts_id && (
+            <PostList posts={userData.posts_id} />
+          )}
+          <button onClick={handleShowPosts}>
+            {showPosts ? 'Hide' : 'Show'}
+          </button>
+          <p>Comments:</p>
+          {showComments && userData.comments_id && (
+            <CommentList comments={userData.comments_id} />
+          )}
+          <button onClick={handleShowComments}>
+            {showComments ? 'Hide' : 'Show'}
+          </button>
           {isFollowing ? (
             <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
           ) : (

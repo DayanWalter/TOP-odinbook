@@ -134,6 +134,14 @@ const readUserById = asyncHandler(async (req, res, next) => {
       path: 'follower_id',
       select: 'user_name',
     })
+    .populate({
+      path: 'posts_id',
+      select: 'content',
+    })
+    .populate({
+      path: 'comments_id',
+      select: 'content',
+    })
 
     // .populate('follows_id')
     // .populate('follower_id')
