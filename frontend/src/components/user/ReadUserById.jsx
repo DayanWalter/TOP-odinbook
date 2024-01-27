@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import FollowUser from './FollowUser';
 import UnFollowUser from './UnFollowUser';
+import FollowList from './FollowList';
 
 export default function ReadUserById() {
   const [userData, setUserData] = useState(null);
@@ -51,13 +52,6 @@ export default function ReadUserById() {
     showFollower ? setShowFollower(false) : setShowFollower(true);
   };
 
-  // if (!userData) {
-  //   return <div>Loading...</div>;
-  // }
-
-  {
-    /* {console.log(userData.follower_id)} */
-  }
   return (
     <div>
       {loading && <div>Loading...</div>}
@@ -68,30 +62,22 @@ export default function ReadUserById() {
           <p>ID: {userData._id}</p>
           <p>Name: {userData.user_name}</p>
           <p>Email: {userData.email}</p>
-          <p>
-            Follows:
-            {showFollows &&
-              userData.follows_id.map((user) => (
-                <li key={user._id}>
-                  <Link to={`/user/${user._id}`}>{user.user_name}</Link>
-                </li>
-              ))}
-            <button onClick={handleShowFollows}>
-              {showFollows ? 'Hide' : 'Show'}
-            </button>
-          </p>
-          <p>
-            Follower:
-            {showFollower &&
-              userData.follower_id.map((user) => (
-                <li key={user._id}>
-                  <Link to={`/user/${user._id}`}>{user.user_name}</Link>
-                </li>
-              ))}
-            <button onClick={handleShowFollower}>
-              {showFollower ? 'Hide' : 'Show'}
-            </button>
-          </p>
+          <p>Follows:</p>
+
+          {showFollows && userData.follows_id && (
+            <FollowList follows={userData.follows_id} />
+          )}
+          <button onClick={handleShowFollows}>
+            {showFollows ? 'Hide' : 'Show'}
+          </button>
+          <p>Follower:</p>
+
+          {showFollower && userData.followed_id && (
+            <FollowList follows={userData.followed_id} />
+          )}
+          <button onClick={handleShowFollower}>
+            {showFollower ? 'Hide' : 'Show'}
+          </button>
 
           {isFollowing ? (
             <UnFollowUser userId={userId} />
