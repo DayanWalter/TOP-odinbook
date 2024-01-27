@@ -4,6 +4,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 export default function ReadUserById() {
   const [userData, setUserData] = useState(null);
   const [showFollows, setShowFollows] = useState(false);
+  const [showFollower, setShowFollower] = useState(false);
 
   const loaderData = useLoaderData();
   const userId = loaderData.userid;
@@ -40,6 +41,10 @@ export default function ReadUserById() {
   const handleShowFollows = () => {
     showFollows ? setShowFollows(false) : setShowFollows(true);
   };
+  const handleShowFollower = () => {
+    showFollower ? setShowFollower(false) : setShowFollower(true);
+  };
+
   if (!userData) {
     return <div>Loading...</div>;
   }
@@ -65,7 +70,19 @@ export default function ReadUserById() {
           {showFollows ? 'Hide' : 'Show'}
         </button>
       </p>
-      <p>Follower:</p>
+      <p>
+        Follower:
+        {userData &&
+          showFollower &&
+          userData.follower_id.map((user) => (
+            <li key={user._id}>
+              <Link to={`/user/${user._id}`}>{user.user_name}</Link>
+            </li>
+          ))}
+        <button onClick={handleShowFollower}>
+          {showFollower ? 'Hide' : 'Show'}
+        </button>
+      </p>
       <button>Follow</button>
       <button>UnFollow</button>
       <button>Private Message</button>
