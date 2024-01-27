@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function UnFollowUser({ userId }) {
+export default function UnFollowUser({ userId, setIsFollowing }) {
   const handleUnFollowUser = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -22,13 +22,14 @@ export default function UnFollowUser({ userId }) {
 
       if (response.ok) {
         // Update the state to indicate that the user is now being followed
-        setIsFollowing(false);
         console.log('User unfollowed successfully.');
       } else {
         console.error('Error following user:', response.status);
       }
     } catch (error) {
       console.error('Error following user:', error);
+    } finally {
+      setIsFollowing(false);
     }
   };
 

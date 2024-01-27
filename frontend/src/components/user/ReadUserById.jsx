@@ -11,13 +11,19 @@ export default function ReadUserById() {
   const [showFollower, setShowFollower] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
 
+  // id from params
   const loaderData = useLoaderData();
   const userId = loaderData.userid;
 
+  // id from logged in user
+  const authToken = localStorage.getItem('authToken');
+  // Split the payload of the jwt and convert the ._id part
+  const payload = JSON.parse(atob(authToken.split('.')[1]));
+  // Define the username you are looking for
+  const loggedInUserId = payload._id;
+
   useEffect(() => {
     const fetchData = async () => {
-      const authToken = localStorage.getItem('authToken');
-
       // Parameters for the backend request
       const requestOptions = {
         method: 'GET',
@@ -35,6 +41,12 @@ export default function ReadUserById() {
         );
         const data = await response.json();
         setUserData(data.searchedUser);
+
+        const isFollowingUser = searchForFollower(
+          data.searchedUser.follower_id,
+          loggedInUserId
+        );
+        setIsFollowing(isFollowingUser);
       } catch (error) {
         console.error('Error while fetching user:', error);
       } finally {
@@ -43,7 +55,7 @@ export default function ReadUserById() {
     };
 
     fetchData();
-  }, [userId]);
+  }, [userId, isFollowing]);
 
   const handleShowFollows = () => {
     showFollows ? setShowFollows(false) : setShowFollows(true);
@@ -51,6 +63,10 @@ export default function ReadUserById() {
   const handleShowFollower = () => {
     showFollower ? setShowFollower(false) : setShowFollower(true);
   };
+
+  function searchForFollower(arr, loggedInUserId) {
+    return arr.some((obj) => obj._id === loggedInUserId);
+  }
 
   return (
     <div>
@@ -72,17 +88,17 @@ export default function ReadUserById() {
           </button>
           <p>Follower:</p>
 
-          {showFollower && userData.followed_id && (
-            <FollowList follows={userData.followed_id} />
+          {showFollower && userData.follower_id && (
+            <FollowList follows={userData.follower_id} />
           )}
           <button onClick={handleShowFollower}>
             {showFollower ? 'Hide' : 'Show'}
           </button>
 
           {isFollowing ? (
-            <UnFollowUser userId={userId} />
+            <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
           ) : (
-            <FollowUser userId={userId} />
+            <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
           )}
           <button>Private Message</button>
         </>

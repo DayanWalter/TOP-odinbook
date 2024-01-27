@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function FollowUser({ userId }) {
+export default function FollowUser({ userId, setIsFollowing }) {
   const handleFollowUser = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -22,13 +22,14 @@ export default function FollowUser({ userId }) {
 
       if (response.ok) {
         // Update the state to indicate that the user is now being followed
-        setIsFollowing(true);
         console.log('User followed successfully.');
       } else {
         console.error('Error following user:', response.status);
       }
     } catch (error) {
       console.error('Error following user:', error);
+    } finally {
+      setIsFollowing(true);
     }
   };
 
