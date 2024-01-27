@@ -9,6 +9,7 @@ import DeleteUser from './components/user/DeleteUser.jsx';
 import ReadUsers from './components/user/ReadUsers.jsx';
 import UpdateUser from './components/user/UpdateUser.jsx';
 import ReadUserById from './components/user/ReadUserById.jsx';
+import FollowUser from './components/user/FollowUser.jsx';
 
 const router = createBrowserRouter([
   {
