@@ -1,7 +1,7 @@
 // Importing the 'useState' hook from React for managing state in functional components
 import { useState } from 'react';
 
-const CreatePost = () => {
+export default function CreatePost() {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -30,7 +30,10 @@ const CreatePost = () => {
       setLoading(true);
 
       // Make the POST request to create a new post
-      const response = await fetch('/api/post/create', requestOptions);
+      const response = await fetch(
+        'http://localhost:3000/api/post/create',
+        requestOptions
+      );
 
       // Throw an error if the response indicates a failure
       if (!response.ok) {
@@ -66,6 +69,4 @@ const CreatePost = () => {
       </button>
     </div>
   );
-};
-
-export default CreatePost;
+}

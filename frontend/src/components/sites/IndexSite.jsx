@@ -1,13 +1,9 @@
-import CreateUser from '../user/CreateUser';
-import LoginUser from '../user/LoginUser';
-import ReadUsers from '../user/ReadUsers';
-import DeleteUser from '../user/DeleteUser';
-import UpdateUser from '../user/UpdateUser';
 import { Link } from 'react-router-dom';
 
 export default function IndexSite() {
   return (
     <div>
+      <h1>User:</h1>
       <ul>
         <li>
           <Link to={`user/create`}>CreateUser</Link>
@@ -16,16 +12,25 @@ export default function IndexSite() {
           <Link to={`user/login`}>LoginUser</Link>
         </li>
         <li>
-          <Link to={`users`}>ReadUsers</Link>
+          <Link to={`users`}>ReadUsers(protected)</Link>
         </li>
         <li>
-          <Link to={`user/delete`}>DeleteUser</Link>
+          <Link to={`user/delete`}>DeleteUser(protected)</Link>
         </li>
         <li>
-          <Link to={`user/update`}>UpdateUser</Link>
+          <Link to={`user/update`}>UpdateUser(protected)</Link>
         </li>
       </ul>
-      {/* <UpdateUser /> */}
+      <h1>Post:</h1>
+      <ul>
+        <li>
+          <Link to={'post/create'}>CreatePost(protected)</Link>
+        </li>
+        <li>
+          <Link to={'post/feed'}>ReadFeedPosts(protected)</Link>
+        </li>
+      </ul>
+      <h1>Comment:</h1>
     </div>
   );
 }

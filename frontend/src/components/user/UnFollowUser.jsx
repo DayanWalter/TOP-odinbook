@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export default function UnFollowUser({ userId, setIsFollowing }) {
   const handleUnFollowUser = async () => {
     const authToken = localStorage.getItem('authToken');

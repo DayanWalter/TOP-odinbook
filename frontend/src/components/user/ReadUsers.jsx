@@ -9,6 +9,12 @@ export default function ReadUsers() {
   const handleReadUsers = async () => {
     const authToken = localStorage.getItem('authToken');
 
+    // Log an error if authentication token is not available
+    if (!authToken) {
+      console.error('Authentication token not available.');
+      setError('Authentication token not available.');
+      return;
+    }
     // Parameters for the backend request
     const requestOptions = {
       method: 'GET',
@@ -24,11 +30,11 @@ export default function ReadUsers() {
         'http://localhost:3000/api/user/all',
         requestOptions
       );
-      const data = await response.json();
       if (!response.ok) {
         setError(data.error.errors[0].msg);
         return;
       }
+      const data = await response.json();
 
       setUsersData(data);
     } catch (error) {
