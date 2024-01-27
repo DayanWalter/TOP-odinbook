@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import UpdatePost from './UpdatePost';
 import DeletePost from './DeletePost';
+import UnLikePost from './UnLikePost';
+import LikePost from './LikePost';
 
 export default function ReadPostById() {
   const [postData, setPostData] = useState(null);
@@ -9,7 +11,7 @@ export default function ReadPostById() {
   const [showComments, setShowComments] = useState(false);
   // const [showFollower, setShowFollower] = useState(false);
   const [isAuthor, setIsAuthor] = useState(false);
-
+  const [isLiking, setIsLiking] = useState(false);
   // id from params
   const loaderData = useLoaderData();
   const postId = loaderData.postid;
@@ -46,10 +48,17 @@ export default function ReadPostById() {
           loggedInUserId
         );
         setIsAuthor(isAuthorOfPost);
+        console.log(data.searchedPost);
+        const isLikingPost = searchForLikes(
+          data.searchedPost.likes_id,
+          loggedInUserId
+        );
+        setIsLiking(isLikingPost);
       } catch (error) {
         console.error('Error while fetching user:', error);
       } finally {
         setLoading(false);
+        // remove show...
       }
     };
 
@@ -66,6 +75,9 @@ export default function ReadPostById() {
   function searchForAuthor(author, loggedInUserId) {
     return author._id === loggedInUserId;
   }
+  function searchForLikes(arr, loggedInUserId) {
+    return arr.some((obj) => obj === loggedInUserId);
+  }
 
   return (
     <div>
@@ -78,6 +90,11 @@ export default function ReadPostById() {
           <p>Content: {postData.content}</p>
           <p>Author: {postData.author_id.user_name}</p>
           <button onClick={handleShowComments}>Show Comments</button>
+          {isLiking ? (
+            <UnLikePost postId={postId} setIsLiking={setIsLiking} />
+          ) : (
+            <LikePost postId={postId} setIsLiking={setIsLiking} />
+          )}
           {isAuthor ? <UpdatePost postId={postId} /> : ''}
           {isAuthor ? <DeletePost postId={postId} /> : ''}
         </>
