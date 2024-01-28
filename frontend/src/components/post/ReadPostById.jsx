@@ -48,7 +48,7 @@ export default function ReadPostById() {
           loggedInUserId
         );
         setIsAuthor(isAuthorOfPost);
-        console.log(data.searchedPost);
+
         const isLikingPost = searchForLikes(
           data.searchedPost.likes_id,
           loggedInUserId
