@@ -5,12 +5,15 @@ export default function IndexSite() {
     <div>
       <h1>User:</h1>
       <ul>
+        <h2>SignUpSite.jsx:</h2>
         <li>
           <Link to={`user/create`}>CreateUser</Link>
         </li>
+        <h2>LoginSite.jsx:</h2>
         <li>
           <Link to={`user/login`}>LoginUser</Link>
         </li>
+        <h2>MainSite.jsx:</h2>
         <li>
           <Link to={`users`}>ReadUsers(protected)</Link>
         </li>

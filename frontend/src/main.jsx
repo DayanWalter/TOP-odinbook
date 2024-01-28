@@ -8,11 +8,11 @@ import LoginUser from './components/user/LoginUser.jsx';
 import DeleteUser from './components/user/DeleteUser.jsx';
 import ReadUsers from './components/user/ReadUsers.jsx';
 import UpdateUser from './components/user/UpdateUser.jsx';
-import ReadUserById from './components/user/ReadUserById.jsx';
-import FollowUser from './components/user/FollowUser.jsx';
+
 import CreatePost from './components/post/CreatePost.jsx';
 import ReadFeedPosts from './components/post/ReadFeedPosts.jsx';
 import ReadPostById from './components/post/ReadPostById.jsx';
+import ProfileSite from './components/sites/ProfileSite.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/user/:userid',
-    element: <ReadUserById />,
+    element: <ProfileSite />,
     loader({ params }) {
       return params;
     },
