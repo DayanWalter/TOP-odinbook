@@ -11,8 +11,8 @@ import UpdateUser from './components/user/UpdateUser.jsx';
 
 import CreatePost from './components/post/CreatePost.jsx';
 import ReadFeedPosts from './components/post/ReadFeedPosts.jsx';
-import ReadPostById from './components/post/ReadPostById.jsx';
 import ProfileSite from './components/sites/ProfileSite.jsx';
+import PostSite from './components/sites/PostSite.jsx';
 
 const router = createBrowserRouter([
   {
@@ -20,6 +20,7 @@ const router = createBrowserRouter([
     element: <IndexSite />,
     // errorElement: <ErrorSite />,
   },
+  // User
   {
     path: '/user/:userid',
     element: <ProfileSite />,
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
     path: '/user/update',
     element: <UpdateUser />,
   },
+  // Post
   {
     path: '/post/create',
     element: <CreatePost />,
@@ -57,11 +59,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/post/:postid',
-    element: <ReadPostById />,
+    element: <PostSite />,
     loader({ params }) {
       return params;
     },
   },
+  // Comment
 ]);
 
 // <CreateUser />

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import UpdatePost from './UpdatePost';
-import DeletePost from './DeletePost';
-import UnLikePost from './UnLikePost';
-import LikePost from './LikePost';
+import UnLikePost from '../post/UnLikePost';
+import LikePost from '../post/LikePost';
+import UpdatePost from '../post/UpdatePost';
+import DeletePost from '../post/DeletePost';
 
-export default function ReadPostById() {
+export default function PostSite() {
   const [postData, setPostData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -84,7 +84,7 @@ export default function ReadPostById() {
       {loading && <div>Loading...</div>}
       {postData && (
         <>
-          <div>ReadPostById</div>
+          <div>PostSite.jsx</div>
           <h1>Post:</h1>
           <p>ID: {postData._id}</p>
           <p>Content: {postData.content}</p>
