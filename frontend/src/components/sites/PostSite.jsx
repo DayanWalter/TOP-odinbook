@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import CommentList from '../user/CommentList';
+import CommentList from '../comment/CommentList';
 import CreateComment from '../comment/CreateComment';
 import UnLikePost from '../post/UnLikePost';
 import LikePost from '../post/LikePost';

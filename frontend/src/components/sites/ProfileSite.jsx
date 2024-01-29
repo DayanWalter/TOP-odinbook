@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import FollowList from '../user/FollowList';
-import PostList from '../user/PostList';
-import CommentList from '../user/CommentList';
+import PostList from '../post/PostList';
+import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';
 import FollowUser from '../user/FollowUser';
 
