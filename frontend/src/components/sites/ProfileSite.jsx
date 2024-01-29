@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
-import FollowList from '../user/FollowList';
+import { useLoaderData } from 'react-router-dom';
+import FollowList from '../user/UserList';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';
 import FollowUser from '../user/FollowUser';
+import UserList from '../user/UserList';
 
 export default function ProfileSite() {
   const [userData, setUserData] = useState(null);
@@ -64,7 +65,7 @@ export default function ProfileSite() {
     };
 
     fetchData();
-  }, [userId, isFollowing]);
+  }, [userId, isFollowing, authToken, loggedInUserId]);
 
   const handleShowFollows = () => {
     showFollows ? setShowFollows(false) : setShowFollows(true);
@@ -95,14 +96,14 @@ export default function ProfileSite() {
           <p>Email: {userData.email}</p>
           <p>Follows:</p>
           {showFollows && userData.follows_id && (
-            <FollowList follows={userData.follows_id} />
+            <UserList users={userData.follows_id} />
           )}
           <button onClick={handleShowFollows}>
             {showFollows ? 'Hide' : 'Show'}
           </button>
           <p>Follower:</p>
           {showFollower && userData.follower_id && (
-            <FollowList follows={userData.follower_id} />
+            <UserList users={userData.follower_id} />
           )}
           <button onClick={handleShowFollower}>
             {showFollower ? 'Hide' : 'Show'}

@@ -44,7 +44,7 @@ export default function UpdateUser() {
     };
 
     fetchData();
-  }, [userId]);
+  }, [userId, authToken]);
 
   const handleUpdateUser = async () => {
     setSuccess(false);
