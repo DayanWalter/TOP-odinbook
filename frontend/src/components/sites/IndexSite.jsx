@@ -14,9 +14,12 @@ export default function IndexSite() {
           <Link to={`user/login`}>LoginUser</Link>
         </li>
         <h2>MainSite.jsx:</h2>
+        <h3>ProfileSite.jsx:</h3>
+        <p>Everyone:</p>
         <li>
           <Link to={`users`}>ReadUsers(protected)</Link>
         </li>
+        <p>Logged in User:</p>
         <li>
           <Link to={`user/delete`}>DeleteUser(protected)</Link>
         </li>
@@ -26,6 +29,7 @@ export default function IndexSite() {
       </ul>
       <h1>Post:</h1>
       <ul>
+        <p>Logged in User:</p>
         <li>
           <Link to={'post/create'}>CreatePost(protected)</Link>
         </li>

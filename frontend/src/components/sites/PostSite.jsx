@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import UnLikePost from '../post/UnLikePost';
 import LikePost from '../post/LikePost';
 import UpdatePost from '../post/UpdatePost';
@@ -63,7 +63,7 @@ export default function PostSite() {
     };
 
     fetchData();
-  }, [postId]);
+  }, [postId, authToken, loggedInUserId]);
 
   const handleShowComments = () => {
     showComments ? setShowComments(false) : setShowComments(true);
