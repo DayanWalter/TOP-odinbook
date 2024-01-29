@@ -65,7 +65,7 @@ export default function PostSite() {
     };
 
     fetchData();
-  }, [postId, authToken, loggedInUserId]);
+  }, [postId, isLiking, authToken, loggedInUserId]);
 
   const handleShowComments = () => {
     showComments ? setShowComments(false) : setShowComments(true);
@@ -83,7 +83,7 @@ export default function PostSite() {
 
   return (
     <div>
-      {loading && <div>Loading...</div>}
+      {loading && <div></div>}
       {postData && (
         <>
           <div>PostSite.jsx</div>
@@ -91,14 +91,14 @@ export default function PostSite() {
           <p>ID: {postData._id}</p>
           <p>Content: {postData.content}</p>
           <p>Author: {postData.author_id.user_name}</p>
-          <p>Comments:</p>
-          {console.log(postData.comments_id)}
+          <p>Has {postData.comments_id.length} Comments:</p>
           {showComments && postData.comments_id && (
             <CommentList comments={postData.comments_id} />
           )}
           <button onClick={handleShowComments}>
             {showComments ? 'Hide' : 'Show'}
           </button>
+          <p>Has {postData.likes_id.length} likes</p>
           {isLiking ? (
             <UnLikePost postId={postId} setIsLiking={setIsLiking} />
           ) : (

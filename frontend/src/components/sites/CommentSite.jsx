@@ -61,7 +61,7 @@ export default function CommentSite() {
     };
 
     fetchData();
-  }, [commentId, authToken, loggedInUserId]);
+  }, [commentId, isLiking, authToken, loggedInUserId]);
 
   //   const handleShowFollower = () => {
   //     showFollower ? setShowFollower(false) : setShowFollower(true);
@@ -76,7 +76,7 @@ export default function CommentSite() {
 
   return (
     <div>
-      {loading && <div>Loading...</div>}
+      {loading && <div></div>}
       {commentData && (
         <>
           <div>CommentSite.jsx</div>
@@ -84,7 +84,7 @@ export default function CommentSite() {
           <p>ID: {commentData._id}</p>
           <p>Content: {commentData.content}</p>
           <p>Author: {commentData.author_id.user_name}</p>
-
+          <p>Has {commentData.likes_id.length} likes</p>
           {isLiking ? (
             <UnLikeComment commentId={commentId} setIsLiking={setIsLiking} />
           ) : (
