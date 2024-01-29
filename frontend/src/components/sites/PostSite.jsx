@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import CommentList from '../user/CommentList';
+import CreateComment from '../comment/CreateComment';
 import UnLikePost from '../post/UnLikePost';
 import LikePost from '../post/LikePost';
 import UpdatePost from '../post/UpdatePost';
@@ -89,7 +91,15 @@ export default function PostSite() {
           <p>ID: {postData._id}</p>
           <p>Content: {postData.content}</p>
           <p>Author: {postData.author_id.user_name}</p>
-          <button onClick={handleShowComments}>Show Comments</button>
+          <p>Comments:</p>
+          {console.log(postData.comments_id)}
+          {showComments && postData.comments_id && (
+            <CommentList comments={postData.comments_id} />
+          )}
+          <button onClick={handleShowComments}>
+            {showComments ? 'Hide' : 'Show'}
+          </button>
+          <CreateComment postId={postId} />
           {isLiking ? (
             <UnLikePost postId={postId} setIsLiking={setIsLiking} />
           ) : (

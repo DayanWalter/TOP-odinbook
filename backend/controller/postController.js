@@ -50,10 +50,16 @@ const readUserPosts = asyncHandler(async (req, res, next) => {
   res.json({ readUserPosts: 'Route works', posts });
 });
 const readPostById = asyncHandler(async (req, res, next) => {
-  const searchedPost = await Post.findById(req.params.postid).populate({
-    path: 'author_id',
-    select: 'user_name',
-  });
+  const searchedPost = await Post.findById(req.params.postid)
+    .populate({
+      path: 'author_id',
+      select: 'user_name',
+    })
+    .populate({
+      path: 'comments_id',
+      select: 'content',
+    });
+
   res.json({ readPostById: 'Route works', searchedPost });
 });
 const updatePost = asyncHandler(async (req, res, next) => {

@@ -13,6 +13,7 @@ import CreatePost from './components/post/CreatePost.jsx';
 import ReadFeedPosts from './components/post/ReadFeedPosts.jsx';
 import ProfileSite from './components/sites/ProfileSite.jsx';
 import PostSite from './components/sites/PostSite.jsx';
+import CommentSite from './components/sites/CommentSite.jsx';
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,13 @@ const router = createBrowserRouter([
     },
   },
   // Comment
+  {
+    path: '/comment/:commentid',
+    element: <CommentSite />,
+    loader({ params }) {
+      return params;
+    },
+  },
 ]);
 
 // <CreateUser />

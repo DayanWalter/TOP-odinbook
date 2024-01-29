@@ -65,7 +65,12 @@ const readUserComments = asyncHandler(async (req, res, next) => {
 });
 const readCommentById = asyncHandler(async (req, res, next) => {
   // get comment._id from params and search for comment
-  const searchedComment = await Comment.findById(req.params.commentid);
+  const searchedComment = await Comment.findById(req.params.commentid).populate(
+    {
+      path: 'author_id',
+      select: 'user_name',
+    }
+  );
   res.json({ readCommentById: 'Route works', searchedComment });
 });
 const updateComment = asyncHandler(async (req, res, next) => {
