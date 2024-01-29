@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import FollowList from '../user/UserList';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';
@@ -86,7 +85,7 @@ export default function ProfileSite() {
 
   return (
     <div>
-      {loading && <div>Loading...</div>}
+      {loading && <div></div>}
       {userData && (
         <>
           <div>ProfileSite.jsx</div>
@@ -94,28 +93,32 @@ export default function ProfileSite() {
           <p>ID: {userData._id}</p>
           <p>Name: {userData.user_name}</p>
           <p>Email: {userData.email}</p>
-          <p>Follows:</p>
+          <p>img_url: {userData.img_url}</p>
+          <p>
+            Member since: {new Date(userData.reg_date).toLocaleDateString()}
+          </p>
+          <p>Follows {userData.follows_id.length} people:</p>
           {showFollows && userData.follows_id && (
             <UserList users={userData.follows_id} />
           )}
           <button onClick={handleShowFollows}>
             {showFollows ? 'Hide' : 'Show'}
           </button>
-          <p>Follower:</p>
+          <p>Has {userData.follower_id.length} Follower:</p>
           {showFollower && userData.follower_id && (
             <UserList users={userData.follower_id} />
           )}
           <button onClick={handleShowFollower}>
             {showFollower ? 'Hide' : 'Show'}
           </button>
-          <p>Posts:</p>
+          <p>Wrote {userData.posts_id.length} Posts:</p>
           {showPosts && userData.posts_id && (
             <PostList posts={userData.posts_id} />
           )}
           <button onClick={handleShowPosts}>
             {showPosts ? 'Hide' : 'Show'}
           </button>
-          <p>Comments:</p>
+          <p>Wrote {userData.comments_id.length} Comments:</p>
           {showComments && userData.comments_id && (
             <CommentList comments={userData.comments_id} />
           )}
@@ -127,7 +130,8 @@ export default function ProfileSite() {
           ) : (
             <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
           )}
-          <button>Private Message</button>
+          {/* TODO: */}
+          {/* <button>Private Message</button> */}
         </>
       )}
     </div>

@@ -99,12 +99,12 @@ export default function PostSite() {
           <button onClick={handleShowComments}>
             {showComments ? 'Hide' : 'Show'}
           </button>
-          <CreateComment postId={postId} />
           {isLiking ? (
             <UnLikePost postId={postId} setIsLiking={setIsLiking} />
           ) : (
             <LikePost postId={postId} setIsLiking={setIsLiking} />
           )}
+          <CreateComment postId={postId} />
           {isAuthor ? <UpdatePost postId={postId} /> : ''}
           {isAuthor ? <DeletePost postId={postId} /> : ''}
         </>

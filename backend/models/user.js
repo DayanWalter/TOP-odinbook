@@ -25,5 +25,10 @@ const UserSchema = new Schema({
   comments_id: [{ type: Schema.Types.ObjectId, ref: 'comment' }],
   reg_date: { type: Date, default: Date.now },
 });
+UserSchema.virtual('formatted_reg_date').get(function () {
+  // DD.MM.YYYY
+  console.log(this.reg_date);
+  return this.reg_date.toLocaleDateString('de-DE');
+});
 
 module.exports = mongoose.model('user', UserSchema);
