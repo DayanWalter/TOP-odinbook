@@ -68,7 +68,6 @@ const updatePost = asyncHandler(async (req, res, next) => {
 
   if (post.author_id.equals(req.user._id)) {
     const content = req.body.content;
-
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.postid,
       {

@@ -58,11 +58,15 @@ export default function CreatePost() {
   return (
     <div>
       <h1>Create a New Post:</h1>
-
-      <label>Content:</label>
-      {/* Look at comment or user creation,changed accordingly */}
-      <textarea value={content} onChange={(e) => setContent(e.target.value)} />
-
+      <form>
+        <label>
+          Content:
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </label>
+      </form>
       {error && <div style={{ color: 'red' }}>{error}</div>}
 
       <button onClick={handleCreatePost} disabled={loading}>

@@ -8,10 +8,6 @@ export default function UpdatePost({ postId }) {
   const [success, setSuccess] = useState(false);
 
   const authToken = localStorage.getItem('authToken');
-  // Split the payload of the jwt and convert the ._id part
-  const payload = JSON.parse(atob(authToken.split('.')[1]));
-  // Define the username you are looking for
-  const userId = payload._id;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +58,6 @@ export default function UpdatePost({ postId }) {
         requestOptions
       );
       const data = await response.json();
-
       if (!response.ok) {
         setError(data.error.errors[0].msg);
         return;
@@ -90,16 +85,17 @@ export default function UpdatePost({ postId }) {
   return (
     <div>
       <h1>Update Post:</h1>
-      <label>
-        Content:
-        <input
-          type="text"
-          name="content"
-          value={postData.content}
-          onChange={handleChange}
-        />
-      </label>
-
+      <form>
+        <label>
+          Content:
+          <textarea
+            type="text"
+            name="content"
+            value={postData.content}
+            onChange={handleChange}
+          />
+        </label>
+      </form>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>Post updated!</div>}
       <button onClick={handleUpdatePost}>Update Post</button>

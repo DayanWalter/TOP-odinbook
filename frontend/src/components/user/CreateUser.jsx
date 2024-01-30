@@ -89,7 +89,7 @@ export default function CreateUser() {
   return (
     <div id="createUserComponent">
       <h1>Create a New User:</h1>
-      <form id="createUserForm">
+      <form className="mainForm">
         <label>
           Username:
           <input

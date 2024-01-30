@@ -92,6 +92,7 @@ export default function UpdateUser() {
   return (
     <div>
       <h1>Update User:</h1>
+      <form className="mainForm"></form>
       <label>
         Username:
         <input

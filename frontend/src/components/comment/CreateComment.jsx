@@ -59,10 +59,12 @@ export default function CreateComment({ postId }) {
   return (
     <div>
       <h1>Create a New Comment:</h1>
-
-      <label>Content:</label>
-      <textarea value={content} onChange={handleChange} />
-
+      <form>
+        <label>
+          Content:
+          <textarea value={content} onChange={handleChange} />
+        </label>
+      </form>
       {error && <div style={{ color: 'red' }}>{error}</div>}
 
       <button onClick={handleCreateComment} disabled={loading}>

@@ -90,16 +90,17 @@ export default function UpdateComment({ commentId }) {
   return (
     <div>
       <h1>Update Comment:</h1>
-      <label>
-        Content:
-        <input
-          type="text"
-          name="content"
-          value={commentData.content}
-          onChange={handleChange}
-        />
-      </label>
-
+      <form>
+        <label>
+          Content:
+          <textarea
+            type="text"
+            name="content"
+            value={commentData.content}
+            onChange={handleChange}
+          />
+        </label>
+      </form>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>Comment updated!</div>}
       <button onClick={handleUpdateComment}>Update Comment</button>

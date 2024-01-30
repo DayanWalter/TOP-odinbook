@@ -74,31 +74,33 @@ export default function LoginUser() {
   };
 
   return (
-    <div id="loginUser">
+    <div id="loginUserComponent">
       <h1>Login:</h1>
-      <label>
-        Username:
-        <input
-          type="text"
-          name="user_name"
-          value={userData.user_name}
-          onChange={handleChange}
-        />
-      </label>
+      <form className="mainForm">
+        <label>
+          Username:
+          <input
+            type="text"
+            name="user_name"
+            value={userData.user_name}
+            onChange={handleChange}
+          />
+        </label>
 
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={userData.password}
-          onChange={handleChange}
-        />
-      </label>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <button onClick={handleLoginUser} disabled={loading}>
-        {loading ? `Login User: ${userData.user_name}` : 'Login User'}
-      </button>
+        <label>
+          Password:
+          <input
+            type="password"
+            name="password"
+            value={userData.password}
+            onChange={handleChange}
+          />
+        </label>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+        <button onClick={handleLoginUser} disabled={loading}>
+          {loading ? `Login User: ${userData.user_name}` : 'Login User'}
+        </button>
+      </form>
     </div>
   );
 }
