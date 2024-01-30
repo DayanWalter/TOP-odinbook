@@ -11,9 +11,10 @@ export default function PostSite() {
   const [postData, setPostData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  // const [showFollower, setShowFollower] = useState(false);
+
   const [isAuthor, setIsAuthor] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
+
   // id from params
   const loaderData = useLoaderData();
   const postId = loaderData.postid;
