@@ -87,48 +87,50 @@ export default function CreateUser() {
   };
 
   return (
-    <div id="createUser">
+    <div id="createUserComponent">
       <h1>Create a New User:</h1>
-      <label>
-        Username:
-        <input
-          type="text"
-          name="user_name"
-          value={userData.user_name}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Email:
-        <input
-          type="text"
-          name="email"
-          value={userData.email}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={userData.password}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Repeat Password:
-        <input
-          type="password"
-          name="repeatPassword"
-          value={userData.repeatPassword}
-          onChange={handleChange}
-        />
-      </label>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <button onClick={handleCreateUser} disabled={loading}>
-        {loading ? `Creating User: ${userData.user_name}` : 'Create User'}
-      </button>
+      <form id="createUserForm">
+        <label>
+          Username:
+          <input
+            type="text"
+            name="user_name"
+            value={userData.user_name}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Email:
+          <input
+            type="text"
+            name="email"
+            value={userData.email}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            name="password"
+            value={userData.password}
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Repeat Password:
+          <input
+            type="password"
+            name="repeatPassword"
+            value={userData.repeatPassword}
+            onChange={handleChange}
+          />
+        </label>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+        <button onClick={handleCreateUser} disabled={loading}>
+          {loading ? `Creating User: ${userData.user_name}` : 'Create User'}
+        </button>
+      </form>
     </div>
   );
 }

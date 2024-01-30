@@ -14,6 +14,8 @@ import ReadFeedPosts from './components/post/ReadFeedPosts.jsx';
 import ProfileSite from './components/sites/ProfileSite.jsx';
 import PostSite from './components/sites/PostSite.jsx';
 import CommentSite from './components/sites/CommentSite.jsx';
+import SignUpSite from './components/sites/SignUpSite.jsx';
+import LoginSite from './components/sites/LoginSite.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,12 +26,21 @@ const router = createBrowserRouter([
 
   // User
   {
+    path: '/signup',
+    element: <SignUpSite />,
+  },
+  {
+    path: '/login',
+    element: <LoginSite />,
+  },
+  {
     path: '/user/:userid',
     element: <ProfileSite />,
     loader({ params }) {
       return params;
     },
   },
+
   {
     path: '/user/create',
     element: <CreateUser />,

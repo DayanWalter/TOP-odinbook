@@ -7,9 +7,15 @@ export default function IndexSite() {
       <ul>
         <h2>SignUpSite.jsx:</h2>
         <li>
+          <Link to={`signup`}>Signup</Link>
+        </li>
+        <li>
           <Link to={`user/create`}>CreateUser</Link>
         </li>
         <h2>LoginSite.jsx:</h2>
+        <li>
+          <Link to={`login`}>Login</Link>
+        </li>
         <li>
           <Link to={`user/login`}>LoginUser</Link>
         </li>
