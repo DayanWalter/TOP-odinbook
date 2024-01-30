@@ -9,38 +9,10 @@ export default function CreateUser() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [passwordsMatchError, setPasswordsMatchError] = useState(false);
 
-  const validateForm = () => {
-    if (userData.user_name.length < 6) {
-      setError('Username must be at least 6 characters long.');
-      return false;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(userData.email)) {
-      setError('Invalid email format.');
-      return false;
-    }
-
-    if (userData.password !== userData.repeatPassword) {
-      setError('Passwords are not the same.');
-      return false;
-    }
-
-    if (userData.password.length < 6 || userData.repeatPassword.length < 6) {
-      setError('Passwords must be at least 6 characters long.');
-      return false;
-    }
-
-    setError('');
-    return true;
-  };
-
-  const handleCreateUser = async () => {
-    if (!validateForm()) {
-      return;
-    }
-
+  const handleCreateUser = async (e) => {
+    e.preventDefault();
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -84,52 +56,78 @@ export default function CreateUser() {
       ...prevData,
       [name]: value,
     }));
+    // Check if passwords are equal
+    if (name === 'repeatPassword') {
+      setPasswordsMatchError(value !== userData.password);
+    }
   };
 
   return (
     <div id="createUserComponent">
-      <h1>Create a New User:</h1>
+      <h1>CreateUser.jsx</h1>
       <form className="mainForm">
-        <label>
-          Username:
+        <div className="input-group">
+          <label className="input-group_label">Username:</label>
           <input
+            className="input-group_input"
             type="text"
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
+            pattern="[a-z0-9]{6,}"
           />
-        </label>
-        <label>
-          Email:
+          <span className="input-group_error">
+            Username must be at least 6 characters long
+          </span>
+        </div>
+        <div className="input-group">
+          <label className="input-group_label">Email:</label>
           <input
-            type="text"
+            className="input-group_input"
+            type="email"
             name="email"
             value={userData.email}
             onChange={handleChange}
           />
-        </label>
-        <label>
-          Password:
+          <span className="input-group_error">Email has the wrong format</span>
+        </div>
+        <div className="input-group">
+          <label className="input-group_label">Password:</label>
           <input
+            className="input-group_input"
             type="password"
             name="password"
             value={userData.password}
             onChange={handleChange}
+            pattern="[a-z0-9]{8,}"
           />
-        </label>
-        <label>
-          Repeat Password:
+          <span className="input-group_error">
+            Password must be at least 8 characters long
+          </span>
+        </div>
+        <div className="input-group">
+          <label className="input-group_label">Repeat Password:</label>
           <input
+            className={`input-group_input ${
+              passwordsMatchError ? 'invalid' : ''
+            }`}
             type="password"
             name="repeatPassword"
             value={userData.repeatPassword}
             onChange={handleChange}
           />
-        </label>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-        <button onClick={handleCreateUser} disabled={loading}>
-          {loading ? `Creating User: ${userData.user_name}` : 'Create User'}
+          {/* {passwordsMatchError && ( */}
+          <span className="input-group_error">Passwords do not match</span>
+          {/* )} */}
+        </div>
+        <button
+          className="form-btn"
+          onClick={handleCreateUser}
+          disabled={loading}
+        >
+          {loading ? `Creating User: ${userData.user_name}` : 'Signup'}
         </button>
+        {error && <div style={{ color: 'red', fontSize: '1rem' }}>{error}</div>}
       </form>
     </div>
   );
