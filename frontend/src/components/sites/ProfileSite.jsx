@@ -5,6 +5,8 @@ import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';
 import FollowUser from '../user/FollowUser';
 import UserList from '../user/UserList';
+import UpdateUser from '../user/UpdateUser';
+import DeleteUser from '../user/DeleteUser';
 
 export default function ProfileSite() {
   const [userData, setUserData] = useState(null);
@@ -14,6 +16,7 @@ export default function ProfileSite() {
   const [showPosts, setShowPosts] = useState(false);
   const [showComments, setShowComments] = useState(false);
 
+  const [isLoggedInUser, setIsLoggedInUser] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
 
   // id from params
@@ -47,6 +50,12 @@ export default function ProfileSite() {
         const data = await response.json();
         setUserData(data.searchedUser);
 
+        const userIsLoggedIn = searchLoggedInUser(
+          data.searchedUser._id,
+          loggedInUserId
+        );
+        setIsLoggedInUser(userIsLoggedIn);
+
         const isFollowingUser = searchForFollower(
           data.searchedUser.follower_id,
           loggedInUserId
@@ -78,6 +87,10 @@ export default function ProfileSite() {
   const handleShowComments = () => {
     showComments ? setShowComments(false) : setShowComments(true);
   };
+
+  function searchLoggedInUser(profileId, loggedInUserId) {
+    return profileId === loggedInUserId;
+  }
 
   function searchForFollower(arr, loggedInUserId) {
     return arr.some((obj) => obj._id === loggedInUserId);
@@ -130,6 +143,8 @@ export default function ProfileSite() {
           ) : (
             <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
           )}
+          {isLoggedInUser ? <UpdateUser /> : ''}
+          {isLoggedInUser ? <DeleteUser /> : ''}
           {/* TODO: */}
           {/* <button>Private Message</button> */}
         </>
