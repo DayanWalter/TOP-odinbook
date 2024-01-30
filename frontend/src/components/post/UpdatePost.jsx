@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 
 export default function UpdatePost({ postId }) {
-  const [postData, setPostData] = useState({
-    content: '',
-  });
+  const [content, setContent] = useState('');
+
+  // const [postData, setPostData] = useState({
+  //   content: '',
+  // });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
@@ -29,7 +31,8 @@ export default function UpdatePost({ postId }) {
           setError(data.error.errors[0].msg);
           return;
         }
-        setPostData(data.searchedPost);
+        setContent(data.searchedPost.content);
+        // setPostData(data.searchedPost);
         setError('');
       } catch (error) {
         console.error('Error while fetching post:', error);
@@ -49,7 +52,8 @@ export default function UpdatePost({ postId }) {
         Authorization: `Bearer ${authToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(postData),
+      // body: JSON.stringify(postData),
+      body: JSON.stringify({ content }),
     };
 
     try {
@@ -74,13 +78,13 @@ export default function UpdatePost({ postId }) {
     setSuccess(true);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setPostData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setPostData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   return (
     <div>
@@ -91,8 +95,10 @@ export default function UpdatePost({ postId }) {
           <textarea
             type="text"
             name="content"
-            value={postData.content}
-            onChange={handleChange}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            // value={postData.content}
+            // onChange={handleChange}
           />
         </label>
       </form>

@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 
 export default function UpdateComment({ commentId }) {
-  const [commentData, setCommentData] = useState({
-    content: '',
-  });
+  // const [commentData, setCommentData] = useState({
+  //   content: '',
+  // });
+  const [content, setContent] = useState('');
+
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
   const authToken = localStorage.getItem('authToken');
-  // Split the payload of the jwt and convert the ._id part
-  const payload = JSON.parse(atob(authToken.split('.')[1]));
-  // Define the username you are looking for
-  const userId = payload._id;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +31,9 @@ export default function UpdateComment({ commentId }) {
           setError(data.error.errors[0].msg);
           return;
         }
-        setCommentData(data.searchedComment);
+        setContent(data.searchedComment.content);
+
+        // setCommentData(data.searchedComment);
         setError('');
       } catch (error) {
         console.error('Error while fetching comment:', error);
@@ -53,7 +53,8 @@ export default function UpdateComment({ commentId }) {
         Authorization: `Bearer ${authToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(commentData),
+      // body: JSON.stringify(commentData),
+      body: JSON.stringify({ content }),
     };
 
     try {
@@ -79,13 +80,13 @@ export default function UpdateComment({ commentId }) {
     setSuccess(true);
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCommentData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setCommentData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   return (
     <div>
@@ -96,8 +97,10 @@ export default function UpdateComment({ commentId }) {
           <textarea
             type="text"
             name="content"
-            value={commentData.content}
-            onChange={handleChange}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            // value={commentData.content}
+            // onChange={handleChange}
           />
         </label>
       </form>
