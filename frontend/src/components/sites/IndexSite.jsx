@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 
 export default function IndexSite() {
+  const authToken = localStorage.getItem('authToken');
+  // Split the payload of the jwt and convert the ._id part
+  const payload = JSON.parse(atob(authToken.split('.')[1]));
+  // Define the username you are looking for
+  const userId = payload._id;
+
   return (
     <div>
       <h1>User:</h1>
@@ -26,6 +32,10 @@ export default function IndexSite() {
           <Link to={`users`}>ReadUsers(protected)</Link>
         </li>
         <p>Logged in User:</p>
+        <li>
+          <Link to={`/user/${userId}`}>ProfileSite(protected)</Link>
+        </li>
+
         <li>
           <Link to={`user/delete`}>DeleteUser(protected)</Link>
         </li>
