@@ -1,3 +1,5 @@
+import styles from './Form.module.css';
+
 import { useState } from 'react';
 
 export default function CreateUser() {
@@ -67,74 +69,78 @@ export default function CreateUser() {
 
   return (
     <div id="createUserComponent">
-      <form className="mainForm">
-        <div className="input-group">
-          <label htmlFor="user_name" className="input-group_label">
+      <form className={styles.mainForm}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="user_name" className={styles.inputGroup_label}>
             Username:
           </label>
           <input
             id="user_name"
-            className="input-group_input"
+            className={styles.inputGroup_input}
             type="text"
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
             pattern="[a-zA-Z0-9]{6,}"
           />
-          <span className="input-group_error">
+          <span className={styles.inputGroup_error}>
             Username must be at least 6 characters long
           </span>
         </div>
-        <div className="input-group">
-          <label htmlFor="email" className="input-group_label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="email" className={styles.inputGroup_label}>
             Email:
           </label>
           <input
             id="email"
-            className="input-group_input"
+            className={styles.inputGroup_input}
             type="email"
             name="email"
             value={userData.email}
             onChange={handleChange}
             autoComplete="true"
           />
-          <span className="input-group_error">Email has the wrong format</span>
+          <span className={styles.inputGroup_error}>
+            Email has the wrong format
+          </span>
         </div>
-        <div className="input-group">
-          <label htmlFor="password" className="input-group_label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="password" className={styles.inputGroup_label}>
             Password:
           </label>
           <input
             id="password"
-            className="input-group_input"
+            className={styles.inputGroup_input}
             type="password"
             name="password"
             value={userData.password}
             onChange={handleChange}
             pattern="[a-zA-Z0-9]{6,}"
           />
-          <span className="input-group_error">
+          <span className={styles.inputGroup_error}>
             Password must be at least 6 characters long
           </span>
         </div>
-        <div className="input-group">
-          <label htmlFor="repeatPassword" className="input-group_label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="repeatPassword" className={styles.inputGroup_label}>
             Repeat Password:
           </label>
           <input
             id="repeatPassword"
-            className={`input-group_input ${
-              passwordsMatchError ? 'invalid' : ''
+            className={`${styles.inputGroup_input} ${
+              passwordsMatchError ? `${styles.invalid}` : ''
             }`}
             type="password"
             name="repeatPassword"
             value={userData.repeatPassword}
             onChange={handleChange}
           />
-          <span className="input-group_error">Passwords do not match</span>
+          <span className={styles.inputGroup_error}>
+            Passwords do not match
+          </span>
         </div>
         <button
-          className="form-btn"
+          className={styles.formBtn}
           onClick={handleCreateUser}
           disabled={loading}
         >

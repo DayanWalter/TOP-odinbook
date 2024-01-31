@@ -1,0 +1,91 @@
+.mainForm {
+  background-color: color-mix(in srgb, rgb(255, 255, 255), transparent 20%);
+  display: flex;
+  flex-direction: column;
+  padding: 3.5rem;
+  width: clamp(275px, 100%, 450px);
+  align-items: center;
+  border-radius: 1rem;
+  backdrop-filter: blur(2px);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.inputGroup {
+  width: 100%;
+}
+
+.inputGroup_input {
+  width: 100%;
+  display: block;
+  padding: 0.3rem;
+  margin-top: 0.5rem;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 0.2rem;
+}
+
+.inputGroup_label {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+/* Input */
+.inputGroup_input:not(:focus):invalid,
+.inputGroup_input:not(:focus).invalid {
+  border: 1px solid red;
+  animation: error-shake 500ms;
+}
+/* Error Span */
+.inputGroup_input:not(:focus):invalid ~ .inputGroup_error,
+.inputGroup_input:not(:focus).invalid ~ .inputGroup_error {
+  visibility: visible;
+  animation: error-shake 500ms;
+}
+.inputGroup_error {
+  color: red;
+  display: block;
+  visibility: hidden;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 0.7rem;
+}
+.inputGroup_error,
+.inputGroup_input {
+  --left: 0;
+  left: var(--left);
+  position: relative;
+}
+.formBtn {
+  font-size: 20px;
+  padding: 0.5rem 2rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+.formBtn:hover {
+  cursor: pointer;
+}
+.formBtn:active {
+  transform: scale(0.95);
+}
+
+@keyframes error-shake {
+  0% {
+    --left: -8px;
+  }
+  20% {
+    --left: 6px;
+  }
+  40% {
+    --left: -4px;
+  }
+  60% {
+    --left: 2px;
+  }
+  80% {
+    --left: -1px;
+  }
+  100% {
+    --left: 0;
+  }
+}
