@@ -88,6 +88,13 @@ const createUser = [
   body('password', 'Password must be at least 6 characters long').isLength({
     min: 6,
   }),
+  // Custom validation for repeatPassword
+  body('repeatPassword').custom(async (value, { req }) => {
+    if (value !== req.body.password) {
+      throw new Error('Passwords do not match');
+    }
+    return true; // Return true if validation passes
+  }),
 
   asyncHandler(async (req, res, next) => {
     const result = validationResult(req);

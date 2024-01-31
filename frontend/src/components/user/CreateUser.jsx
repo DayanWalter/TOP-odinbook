@@ -13,6 +13,9 @@ export default function CreateUser() {
 
   const handleCreateUser = async (e) => {
     e.preventDefault();
+    if (passwordsMatchError) {
+      return;
+    }
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -99,10 +102,10 @@ export default function CreateUser() {
             name="password"
             value={userData.password}
             onChange={handleChange}
-            pattern="[a-z0-9]{8,}"
+            pattern="[a-z0-9]{6,}"
           />
           <span className="input-group_error">
-            Password must be at least 8 characters long
+            Password must be at least 6 characters long
           </span>
         </div>
         <div className="input-group">
@@ -116,9 +119,7 @@ export default function CreateUser() {
             value={userData.repeatPassword}
             onChange={handleChange}
           />
-          {/* {passwordsMatchError && ( */}
           <span className="input-group_error">Passwords do not match</span>
-          {/* )} */}
         </div>
         <button
           className="form-btn"
