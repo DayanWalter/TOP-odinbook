@@ -11,5 +11,11 @@
     no-repeat;
 } */
 :root {
-  --primary-color: #5900ca;
+  --primary-color-cta-button: rgba(64, 0, 255, 1);
+  --secondary-color-cta-button: rgba(64, 0, 255, 0.75);
+  --secondary-color: #c000ff;
+  --tertiary-color: #003fff;
+  --primary-color: #4000ff;
+  --background-color: #f0f2f5;
+  --error-color: red;
 }

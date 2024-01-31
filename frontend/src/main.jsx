@@ -16,12 +16,13 @@ import PostSite from './components/sites/PostSite.jsx';
 import CommentSite from './components/sites/CommentSite.jsx';
 import SignUpSite from './components/sites/SignUpSite.jsx';
 import LoginSite from './components/sites/LoginSite.jsx';
+import ErrorSite from './components/sites/ErrorSite.jsx';
 
 const router = createBrowserRouter([
   {
     index: true,
     element: <IndexSite />,
-    // errorElement: <ErrorSite />,
+    errorElement: <ErrorSite />,
   },
 
   // User
