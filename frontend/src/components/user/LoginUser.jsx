@@ -8,26 +8,8 @@ export default function LoginUser() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const validateForm = () => {
-    if (userData.user_name.length < 6) {
-      setError('Username must be at least 6 characters long.');
-      return false;
-    }
-
-    if (userData.password.length < 6) {
-      setError('Passwords must be at least 6 characters long.');
-      return false;
-    }
-
-    setError('');
-    return true;
-  };
-
-  const handleLoginUser = async () => {
-    if (!validateForm()) {
-      return;
-    }
-
+  const handleLoginUser = async (e) => {
+    e.preventDefault();
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -87,7 +69,7 @@ export default function LoginUser() {
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
-            pattern="[a-z0-9]{6,}"
+            pattern="[a-zA-Z0-9]{6,}"
           />
           <span className="input-group_error">
             Username must be at least 6 characters long
@@ -105,7 +87,7 @@ export default function LoginUser() {
             name="password"
             value={userData.password}
             onChange={handleChange}
-            pattern="[a-z0-9]{6,}"
+            pattern="[a-zA-Z0-9]{6,}"
           />
           <span className="input-group_error">
             Password must be at least 6 characters long

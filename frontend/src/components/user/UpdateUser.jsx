@@ -46,7 +46,8 @@ export default function UpdateUser() {
     fetchData();
   }, [userId, authToken]);
 
-  const handleUpdateUser = async () => {
+  const handleUpdateUser = async (e) => {
+    e.preventDefault();
     setSuccess(false);
     // Parameters for the backend request
     const requestOptions = {
@@ -90,51 +91,65 @@ export default function UpdateUser() {
   };
 
   return (
-    <div>
+    <div id="updateUserComponent">
       <h1>Update User:</h1>
-      <form className="mainForm"></form>
-      <label>
-        Username:
-        <input
-          type="text"
-          name="user_name"
-          value={userData.user_name}
-          onChange={handleChange}
-        />
-      </label>
+      <form className="mainForm">
+        <div className="input-group">
+          <label htmlFor="user_name" className="input-group_label">
+            Username:
+          </label>
+          <input
+            id="user_name"
+            className="input-group_input"
+            type="text"
+            name="user_name"
+            value={userData.user_name}
+            onChange={handleChange}
+            pattern="[a-zA-Z0-9]{6,}"
+          />
+          <span className="input-group_error">
+            Username must be at least 6 characters long
+          </span>
+        </div>
 
-      <label>
-        Email:
-        <input
-          type="text"
-          name="email"
-          value={userData.email}
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Image Url:
-        <input
-          type="text"
-          name="img_url"
-          value={userData.img_url}
-          onChange={handleChange}
-        />
-      </label>
+        <div className="input-group">
+          <label htmlFor="email" className="input-group_label">
+            Email:
+          </label>
+          <input
+            id="email"
+            className="input-group_input"
+            type="email"
+            name="email"
+            value={userData.email}
+            onChange={handleChange}
+            autoComplete="true"
+          />
+          <span className="input-group_error">Email has the wrong format</span>
+        </div>
+        <div className="input-group">
+          <label htmlFor="img_url" className="input-group_label">
+            Image Url:
+          </label>
+          <input
+            id="img_url"
+            className="input-group_input"
+            type="text"
+            name="img_url"
+            value={userData.img_url}
+            onChange={handleChange}
+          />
+          <span className="input-group_error">
+            img_url has the wrong format
+          </span>
+        </div>
 
-      {/* Add password change later */}
-      {/* <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={userData.password}
-          onChange={handleChange}
-        />
-      </label> */}
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      {success && <div style={{ color: 'green' }}>User updated!</div>}
-      <button onClick={handleUpdateUser}>Update User</button>
+        <button className="form-btn" onClick={handleUpdateUser}>
+          Update User
+        </button>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {success && <div style={{ color: 'green' }}>User updated!</div>}
+      </form>
     </div>
   );
 }

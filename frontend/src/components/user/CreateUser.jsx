@@ -79,7 +79,7 @@ export default function CreateUser() {
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
-            pattern="[a-z0-9]{6,}"
+            pattern="[a-zA-Z0-9]{6,}"
           />
           <span className="input-group_error">
             Username must be at least 6 characters long
@@ -111,7 +111,7 @@ export default function CreateUser() {
             name="password"
             value={userData.password}
             onChange={handleChange}
-            pattern="[a-z0-9]{6,}"
+            pattern="[a-zA-Z0-9]{6,}"
           />
           <span className="input-group_error">
             Password must be at least 6 characters long
