@@ -67,7 +67,6 @@ export default function CreateUser() {
 
   return (
     <div id="createUserComponent">
-      <h1>CreateUser.jsx</h1>
       <form className="mainForm">
         <div className="input-group">
           <label className="input-group_label">Username:</label>

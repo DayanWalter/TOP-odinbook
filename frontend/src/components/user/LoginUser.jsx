@@ -75,31 +75,44 @@ export default function LoginUser() {
 
   return (
     <div id="loginUserComponent">
-      <h1>Login:</h1>
       <form className="mainForm">
-        <label>
-          Username:
+        <div className="input-group">
+          <label className="input-group_label">Username:</label>
           <input
+            className="input-group_input"
             type="text"
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
+            pattern="[a-z0-9]{6,}"
           />
-        </label>
+          <span className="input-group_error">
+            Username must be at least 6 characters long
+          </span>
+        </div>
 
-        <label>
-          Password:
+        <div className="input-group">
+          <label className="input-group_label">Password:</label>
           <input
+            className="input-group_input"
             type="password"
             name="password"
             value={userData.password}
             onChange={handleChange}
+            pattern="[a-z0-9]{6,}"
           />
-        </label>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-        <button onClick={handleLoginUser} disabled={loading}>
+          <span className="input-group_error">
+            Password must be at least 6 characters long
+          </span>
+        </div>
+        <button
+          className="form-btn"
+          onClick={handleLoginUser}
+          disabled={loading}
+        >
           {loading ? `Login User: ${userData.user_name}` : 'Login User'}
         </button>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
     </div>
   );
