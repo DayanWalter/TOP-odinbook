@@ -77,8 +77,11 @@ export default function LoginUser() {
     <div id="loginUserComponent">
       <form className="mainForm">
         <div className="input-group">
-          <label className="input-group_label">Username:</label>
+          <label htmlFor="user_name" className="input-group_label">
+            Username:
+          </label>
           <input
+            id="user_name"
             className="input-group_input"
             type="text"
             name="user_name"
@@ -92,8 +95,11 @@ export default function LoginUser() {
         </div>
 
         <div className="input-group">
-          <label className="input-group_label">Password:</label>
+          <label htmlFor="password" className="input-group_label">
+            Password:
+          </label>
           <input
+            id="password"
             className="input-group_input"
             type="password"
             name="password"

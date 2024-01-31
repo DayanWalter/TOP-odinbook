@@ -69,8 +69,11 @@ export default function CreateUser() {
     <div id="createUserComponent">
       <form className="mainForm">
         <div className="input-group">
-          <label className="input-group_label">Username:</label>
+          <label htmlFor="user_name" className="input-group_label">
+            Username:
+          </label>
           <input
+            id="user_name"
             className="input-group_input"
             type="text"
             name="user_name"
@@ -83,19 +86,26 @@ export default function CreateUser() {
           </span>
         </div>
         <div className="input-group">
-          <label className="input-group_label">Email:</label>
+          <label htmlFor="email" className="input-group_label">
+            Email:
+          </label>
           <input
+            id="email"
             className="input-group_input"
             type="email"
             name="email"
             value={userData.email}
             onChange={handleChange}
+            autoComplete="true"
           />
           <span className="input-group_error">Email has the wrong format</span>
         </div>
         <div className="input-group">
-          <label className="input-group_label">Password:</label>
+          <label htmlFor="password" className="input-group_label">
+            Password:
+          </label>
           <input
+            id="password"
             className="input-group_input"
             type="password"
             name="password"
@@ -108,8 +118,11 @@ export default function CreateUser() {
           </span>
         </div>
         <div className="input-group">
-          <label className="input-group_label">Repeat Password:</label>
+          <label htmlFor="repeatPassword" className="input-group_label">
+            Repeat Password:
+          </label>
           <input
+            id="repeatPassword"
             className={`input-group_input ${
               passwordsMatchError ? 'invalid' : ''
             }`}
