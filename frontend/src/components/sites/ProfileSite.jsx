@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import styles from './Site.module.css';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';
@@ -97,47 +98,55 @@ export default function ProfileSite() {
   }
 
   return (
-    <div>
+    <div className={styles.profileSite}>
       {loading && <div></div>}
       {userData && (
         <>
           <div>ProfileSite.jsx</div>
-          <h1>User Profile:</h1>
-          <p>ID: {userData._id}</p>
-          <p>Name: {userData.user_name}</p>
-          <p>Email: {userData.email}</p>
-          <p>img_url: {userData.img_url}</p>
-          <p>
-            Member since: {new Date(userData.reg_date).toLocaleDateString()}
-          </p>
-          <p>Follows {userData.follows_id.length} people:</p>
-          {showFollows && userData.follows_id && (
-            <UserList users={userData.follows_id} />
-          )}
-          <button onClick={handleShowFollows}>
-            {showFollows ? 'Hide' : 'Show'}
-          </button>
-          <p>Has {userData.follower_id.length} Follower:</p>
-          {showFollower && userData.follower_id && (
-            <UserList users={userData.follower_id} />
-          )}
-          <button onClick={handleShowFollower}>
-            {showFollower ? 'Hide' : 'Show'}
-          </button>
-          <p>Wrote {userData.posts_id.length} Posts:</p>
-          {showPosts && userData.posts_id && (
-            <PostList posts={userData.posts_id} />
-          )}
-          <button onClick={handleShowPosts}>
-            {showPosts ? 'Hide' : 'Show'}
-          </button>
-          <p>Wrote {userData.comments_id.length} Comments:</p>
-          {showComments && userData.comments_id && (
-            <CommentList comments={userData.comments_id} />
-          )}
-          <button onClick={handleShowComments}>
-            {showComments ? 'Hide' : 'Show'}
-          </button>
+          <h1>{userData.user_name}</h1>
+          <div>{userData.posts_id.length} Posts</div>
+          {/* Main */}
+          <div className={styles.contactInfo}>
+            <div>Picture</div>
+            <p>Name: {userData.user_name}</p>
+            <p>Description:</p>
+            <p>Location:</p>
+            <p>Website:</p>
+            <p>
+              Member since: {new Date(userData.reg_date).toLocaleDateString()}
+            </p>
+          </div>
+          {/* Lists */}
+          <div className={styles.lists}>
+            <p>Follows {userData.follows_id.length} people:</p>
+            {showFollows && userData.follows_id && (
+              <UserList users={userData.follows_id} />
+            )}
+            <button onClick={handleShowFollows}>
+              {showFollows ? 'Hide' : 'Show'}
+            </button>
+            <p>Has {userData.follower_id.length} Follower:</p>
+            {showFollower && userData.follower_id && (
+              <UserList users={userData.follower_id} />
+            )}
+            <button onClick={handleShowFollower}>
+              {showFollower ? 'Hide' : 'Show'}
+            </button>
+            <p>Wrote {userData.posts_id.length} Posts:</p>
+            {showPosts && userData.posts_id && (
+              <PostList posts={userData.posts_id} />
+            )}
+            <button onClick={handleShowPosts}>
+              {showPosts ? 'Hide' : 'Show'}
+            </button>
+            <p>Wrote {userData.comments_id.length} Comments:</p>
+            {showComments && userData.comments_id && (
+              <CommentList comments={userData.comments_id} />
+            )}
+            <button onClick={handleShowComments}>
+              {showComments ? 'Hide' : 'Show'}
+            </button>
+          </div>
           {isFollowing ? (
             <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
           ) : (

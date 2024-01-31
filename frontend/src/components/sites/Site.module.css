@@ -16,3 +16,18 @@
   align-items: center;
   justify-content: center;
 }
+.profileSite {
+  background-color: aqua;
+}
+.contactInfo {
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.lists {
+  background-color: pink;
+  border: 1px solid black;
+  display: flex;
+}
