@@ -1,3 +1,4 @@
+import styles from './Form.module.css';
 import { useState, useEffect } from 'react';
 
 export default function UpdateUser() {
@@ -93,58 +94,60 @@ export default function UpdateUser() {
   return (
     <div id="updateUserComponent">
       <h1>Update User:</h1>
-      <form className="mainForm">
-        <div className="input-group">
-          <label htmlFor="user_name" className="input-group_label">
+      <form className={styles.mainForm}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="user_name" className={styles.inputGroup_label}>
             Username:
           </label>
           <input
             id="user_name"
-            className="input-group_input"
+            className={styles.inputGroup_input}
             type="text"
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
             pattern="[a-zA-Z0-9]{6,}"
           />
-          <span className="input-group_error">
+          <span className={styles.inputGroup_error}>
             Username must be at least 6 characters long
           </span>
         </div>
 
-        <div className="input-group">
-          <label htmlFor="email" className="input-group_label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="email" className={styles.inputGroup_label}>
             Email:
           </label>
           <input
             id="email"
-            className="input-group_input"
+            className={styles.inputGroup_input}
             type="email"
             name="email"
             value={userData.email}
             onChange={handleChange}
             autoComplete="true"
           />
-          <span className="input-group_error">Email has the wrong format</span>
+          <span className={styles.inputGroup_error}>
+            Email has the wrong format
+          </span>
         </div>
-        <div className="input-group">
-          <label htmlFor="img_url" className="input-group_label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="img_url" className={styles.inputGroup_label}>
             Image Url:
           </label>
           <input
             id="img_url"
-            className="input-group_input"
+            className={styles.inputGroup_input}
             type="text"
             name="img_url"
             value={userData.img_url}
             onChange={handleChange}
           />
-          <span className="input-group_error">
+          <span className={styles.inputGroup_error}>
             img_url has the wrong format
           </span>
         </div>
 
-        <button className="form-btn" onClick={handleUpdateUser}>
+        <button className={styles.formBtn} onClick={handleUpdateUser}>
           Update User
         </button>
         {error && <div style={{ color: 'red' }}>{error}</div>}
