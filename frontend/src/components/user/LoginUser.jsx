@@ -1,3 +1,4 @@
+import styles from './Form.module.css';
 import { useState } from 'react';
 
 export default function LoginUser() {
@@ -57,44 +58,44 @@ export default function LoginUser() {
 
   return (
     <div id="loginUserComponent">
-      <form className="mainForm">
-        <div className="input-group">
-          <label htmlFor="user_name" className="input-group_label">
+      <form className={styles.mainForm}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="user_name" className={styles.inputGroup_label}>
             Username:
           </label>
           <input
             id="user_name"
-            className="input-group_input"
+            className={styles.inputGroup_input}
             type="text"
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
             pattern="[a-zA-Z0-9]{6,}"
           />
-          <span className="input-group_error">
+          <span className={styles.inputGroup_error}>
             Username must be at least 6 characters long
           </span>
         </div>
 
-        <div className="input-group">
-          <label htmlFor="password" className="input-group_label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="password" className={styles.inputGroup_label}>
             Password:
           </label>
           <input
             id="password"
-            className="input-group_input"
+            className={styles.inputGroup_input}
             type="password"
             name="password"
             value={userData.password}
             onChange={handleChange}
             pattern="[a-zA-Z0-9]{6,}"
           />
-          <span className="input-group_error">
+          <span className={styles.inputGroup_error}>
             Password must be at least 6 characters long
           </span>
         </div>
         <button
-          className="form-btn"
+          className={styles.formBtn}
           onClick={handleLoginUser}
           disabled={loading}
         >
