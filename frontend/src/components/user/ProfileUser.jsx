@@ -18,6 +18,8 @@ export default function ProfileUser() {
   const [showComments, setShowComments] = useState(false);
 
   const [isLoggedInUser, setIsLoggedInUser] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   const [isFollowing, setIsFollowing] = useState(false);
 
   // id from params
@@ -76,6 +78,15 @@ export default function ProfileUser() {
     fetchData();
   }, [userId, isFollowing, authToken, loggedInUserId]);
 
+  const handleModal = () => {
+    isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
+  };
+  const handleOverlayClick = (event) => {
+    if (event.target.id === 'overlay') {
+      setIsOpenModal(false);
+    }
+  };
+
   const handleShowFollows = () => {
     showFollows ? setShowFollows(false) : setShowFollows(true);
   };
@@ -107,6 +118,7 @@ export default function ProfileUser() {
           <div className={styles.heroImage}>
             <div className={styles.profilePicture}></div>
           </div>
+          <button onClick={handleModal}>Edit Profile</button>
           {/* Main */}
           <div className={styles.contactInfo}>
             <p>Name: {userData.user_name}</p>
@@ -161,10 +173,23 @@ export default function ProfileUser() {
           ) : (
             <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
           )}
-          {isLoggedInUser ? <UpdateUser /> : ''}
-          {isLoggedInUser ? <DeleteUser /> : ''}
-          {/* TODO: */}
-          {/* <button>Private Message</button> */}
+          {
+            isOpenModal &&
+              (isLoggedInUser ? (
+                <div
+                  id="overlay"
+                  className={styles.overlay}
+                  onClick={handleOverlayClick}
+                >
+                  <div className={styles.modal}>
+                    <UpdateUser />
+                  </div>
+                </div>
+              ) : (
+                ''
+              ))
+            // isLoggedInUser ? <DeleteUser /> : ''
+          }
         </>
       )}
     </div>
