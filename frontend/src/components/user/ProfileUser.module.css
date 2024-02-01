@@ -43,8 +43,8 @@
 .lists {
   background-color: pink;
   border: 1px solid black;
-  /* display: flex;
-  justify-content: space-between; */
+  display: flex;
+  justify-content: space-between;
 }
 .modal {
   position: absolute;
@@ -54,6 +54,7 @@
 }
 .overlay {
   background-color: color-mix(in srgb, grey, transparent 20%);
+  backdrop-filter: blur(1px);
   height: 100%;
   width: 100%;
   position: absolute;
