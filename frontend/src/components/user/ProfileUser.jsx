@@ -16,10 +16,7 @@ import { mdiCalendarMonthOutline } from '@mdi/js';
 export default function ProfileUser() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [showFollows, setShowFollows] = useState(false);
-  const [showFollower, setShowFollower] = useState(false);
-  const [showPosts, setShowPosts] = useState(false);
-  const [showComments, setShowComments] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const [isLoggedInUser, setIsLoggedInUser] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -72,10 +69,7 @@ export default function ProfileUser() {
         console.error('Error while fetching user:', error);
       } finally {
         setLoading(false);
-        setShowFollows(false);
-        setShowFollower(false);
-        setShowPosts(false);
-        setShowComments(false);
+        setActiveIndex(0);
       }
     };
 
@@ -89,19 +83,6 @@ export default function ProfileUser() {
     if (event.target.id === 'overlay') {
       setIsOpenModal(false);
     }
-  };
-
-  const handleShowFollows = () => {
-    showFollows ? setShowFollows(false) : setShowFollows(true);
-  };
-  const handleShowFollower = () => {
-    showFollower ? setShowFollower(false) : setShowFollower(true);
-  };
-  const handleShowPosts = () => {
-    showPosts ? setShowPosts(false) : setShowPosts(true);
-  };
-  const handleShowComments = () => {
-    showComments ? setShowComments(false) : setShowComments(true);
   };
 
   function searchLoggedInUser(profileId, loggedInUserId) {
@@ -136,43 +117,72 @@ export default function ProfileUser() {
               {new Date(userData.reg_date).toLocaleDateString()}
             </div>
           </div>
-          {/* Lists */}
-          <div className={styles.listButtons}>
-            <button className={styles.listButton} onClick={handleShowFollows}>
-              {userData.follows_id.length} Following
-            </button>
-
-            <button className={styles.listButton} onClick={handleShowFollower}>
-              {userData.follower_id.length} Followers
-            </button>
-
-            <button className={styles.listButton} onClick={handleShowPosts}>
-              {userData.posts_id.length} Posts
-            </button>
-
-            <button className={styles.listButton} onClick={handleShowComments}>
-              {userData.comments_id.length} Comments
-            </button>
-          </div>
-          <div className="listContainer">
-            {showFollows && userData.follows_id && (
-              <UserList users={userData.follows_id} />
-            )}
-            {showFollower && userData.follower_id && (
-              <UserList users={userData.follower_id} />
-            )}
-            {showPosts && userData.posts_id && (
-              <PostList posts={userData.posts_id} />
-            )}
-            {showComments && userData.comments_id && (
-              <CommentList comments={userData.comments_id} />
-            )}
-          </div>
           {isFollowing ? (
             <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
           ) : (
             <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
           )}
+          {/* Lists */}
+          <div className={styles.listButtons}>
+            <button
+              className={`${styles.listButton} ${
+                activeIndex === 0 ? styles.activeButton : ''
+              }`}
+              onClick={() => {
+                setActiveIndex(0);
+              }}
+            >
+              {userData.follows_id.length} Following
+            </button>
+
+            <button
+              className={`${styles.listButton} ${
+                activeIndex === 1 ? styles.activeButton : ''
+              }`}
+              onClick={() => {
+                setActiveIndex(1);
+              }}
+            >
+              {userData.follower_id.length} Followers
+            </button>
+
+            <button
+              className={`${styles.listButton} ${
+                activeIndex === 2 ? styles.activeButton : ''
+              }`}
+              onClick={() => {
+                setActiveIndex(2);
+              }}
+            >
+              {userData.posts_id.length} Posts
+            </button>
+
+            <button
+              className={`${styles.listButton} ${
+                activeIndex === 3 ? styles.activeButton : ''
+              }`}
+              onClick={() => {
+                setActiveIndex(3);
+              }}
+            >
+              {userData.comments_id.length} Comments
+            </button>
+          </div>
+          <div className={styles.listContainer}>
+            {activeIndex === 0 && userData.follows_id && (
+              <UserList users={userData.follows_id} />
+            )}
+            {activeIndex === 1 && userData.follower_id && (
+              <UserList users={userData.follower_id} />
+            )}
+            {activeIndex === 2 && userData.posts_id && (
+              <PostList posts={userData.posts_id} />
+            )}
+            {activeIndex === 3 && userData.comments_id && (
+              <CommentList comments={userData.comments_id} />
+            )}
+          </div>
+
           {
             isOpenModal &&
               (isLoggedInUser ? (

@@ -57,11 +57,17 @@
   background: none;
   padding: 0;
   margin: 0;
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 2px solid transparent;
 }
 .listButton:hover {
   cursor: pointer;
-  background-color: var(--secondary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+.activeButton {
+  border-bottom: 2px solid var(--primary-color);
+}
+.listContainer {
+  border-top: 1px solid black;
 }
 .modal {
   position: absolute;
