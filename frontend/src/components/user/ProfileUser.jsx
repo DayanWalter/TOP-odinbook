@@ -12,6 +12,7 @@ import DeleteUser from '../user/DeleteUser';
 import Icon from '@mdi/react';
 import { mdiMapMarkerOutline } from '@mdi/js';
 import { mdiCalendarMonthOutline } from '@mdi/js';
+import { mdiArrowUp } from '@mdi/js';
 
 export default function ProfileUser() {
   const [userData, setUserData] = useState(null);
@@ -114,121 +115,124 @@ export default function ProfileUser() {
   }
 
   return (
-    <div id="profileUserContainer" className={styles.profileUserContainer}>
-      {loading && <div></div>}
-      {userData && (
-        <>
-          <h3>{userData.user_name}</h3>
-
-          <div>{userData.posts_id.length} Posts</div>
-          <div className={styles.heroImage}>
-            <div className={styles.profilePicture}></div>
-          </div>
-          <button onClick={handleModal}>Edit Profile</button>
-          {/* Main */}
-          <div className={styles.contactInfo}>
-            <h1>{userData.user_name}</h1>
-            {isFollowing ? (
-              <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
-            ) : (
-              <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
-            )}
-            <p>I am funny and fresh!</p>
-            <div className={styles.iconGroup}>
-              <Icon path={mdiMapMarkerOutline} size={1} />
-              New York
-            </div>
-            <div className={styles.iconGroup}>
-              <Icon path={mdiCalendarMonthOutline} size={1} />
-              {new Date(userData.reg_date).toLocaleDateString()}
-            </div>
-          </div>
-
-          {/* Lists */}
-          <div className={styles.listButtons}>
-            <button
-              className={`${styles.listButton} ${
-                activeIndex === 0 ? styles.activeButton : ''
-              }`}
-              onClick={() => {
-                setActiveIndex(0);
-              }}
-            >
-              {userData.follows_id.length} Following
-            </button>
-
-            <button
-              className={`${styles.listButton} ${
-                activeIndex === 1 ? styles.activeButton : ''
-              }`}
-              onClick={() => {
-                setActiveIndex(1);
-              }}
-            >
-              {userData.follower_id.length} Followers
-            </button>
-
-            <button
-              className={`${styles.listButton} ${
-                activeIndex === 2 ? styles.activeButton : ''
-              }`}
-              onClick={() => {
-                setActiveIndex(2);
-              }}
-            >
-              {userData.posts_id.length} Posts
-            </button>
-
-            <button
-              className={`${styles.listButton} ${
-                activeIndex === 3 ? styles.activeButton : ''
-              }`}
-              onClick={() => {
-                setActiveIndex(3);
-              }}
-            >
-              {userData.comments_id.length} Comments
-            </button>
-          </div>
-          <div className={styles.listContainer}>
-            {activeIndex === 0 && userData.follows_id && (
-              <UserList users={userData.follows_id} />
-            )}
-            {activeIndex === 1 && userData.follower_id && (
-              <UserList users={userData.follower_id} />
-            )}
-            {activeIndex === 2 && userData.posts_id && (
-              <PostList posts={userData.posts_id} />
-            )}
-            {activeIndex === 3 && userData.comments_id && (
-              <CommentList comments={userData.comments_id} />
-            )}
-          </div>
-
-          {
-            isOpenModal &&
-              (isLoggedInUser ? (
-                <div
-                  id="overlay"
-                  className={styles.overlay}
-                  onClick={handleOverlayClick}
-                >
-                  <div className={styles.modal}>
-                    <UpdateUser />
-                  </div>
-                </div>
-              ) : (
-                ''
-              ))
-            // isLoggedInUser ? <DeleteUser /> : ''
-          }
-          {showButton && (
-            <button className={styles.scrollUpButton} onClick={handleScrollUp}>
-              TOP
-            </button>
-          )}
-        </>
+    <>
+      {showButton && (
+        <button className={styles.scrollUpButton} onClick={handleScrollUp}>
+          <Icon path={mdiArrowUp} size={2} />
+        </button>
       )}
-    </div>
+
+      <div id="profileUserContainer" className={styles.profileUserContainer}>
+        {loading && <div></div>}
+        {userData && (
+          <>
+            <h3>{userData.user_name}</h3>
+
+            <div>{userData.posts_id.length} Posts</div>
+            <div className={styles.heroImage}>
+              <div className={styles.profilePicture}></div>
+            </div>
+            <button onClick={handleModal}>Edit Profile</button>
+            {/* Main */}
+            <div className={styles.contactInfo}>
+              <h1>{userData.user_name}</h1>
+              {isFollowing ? (
+                <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
+              ) : (
+                <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
+              )}
+              <p>I am funny and fresh!</p>
+              <div className={styles.iconGroup}>
+                <Icon path={mdiMapMarkerOutline} size={1} />
+                New York
+              </div>
+              <div className={styles.iconGroup}>
+                <Icon path={mdiCalendarMonthOutline} size={1} />
+                {new Date(userData.reg_date).toLocaleDateString()}
+              </div>
+            </div>
+
+            {/* Lists */}
+            <div className={styles.listButtons}>
+              <button
+                className={`${styles.listButton} ${
+                  activeIndex === 0 ? styles.activeButton : ''
+                }`}
+                onClick={() => {
+                  setActiveIndex(0);
+                }}
+              >
+                {userData.follows_id.length} Following
+              </button>
+
+              <button
+                className={`${styles.listButton} ${
+                  activeIndex === 1 ? styles.activeButton : ''
+                }`}
+                onClick={() => {
+                  setActiveIndex(1);
+                }}
+              >
+                {userData.follower_id.length} Followers
+              </button>
+
+              <button
+                className={`${styles.listButton} ${
+                  activeIndex === 2 ? styles.activeButton : ''
+                }`}
+                onClick={() => {
+                  setActiveIndex(2);
+                }}
+              >
+                {userData.posts_id.length} Posts
+              </button>
+
+              <button
+                className={`${styles.listButton} ${
+                  activeIndex === 3 ? styles.activeButton : ''
+                }`}
+                onClick={() => {
+                  setActiveIndex(3);
+                }}
+              >
+                {userData.comments_id.length} Comments
+              </button>
+            </div>
+            <div className={styles.listContainer}>
+              {activeIndex === 0 && userData.follows_id && (
+                <UserList users={userData.follows_id} />
+              )}
+              {activeIndex === 1 && userData.follower_id && (
+                <UserList users={userData.follower_id} />
+              )}
+              {activeIndex === 2 && userData.posts_id && (
+                <PostList posts={userData.posts_id} />
+              )}
+              {activeIndex === 3 && userData.comments_id && (
+                <CommentList comments={userData.comments_id} />
+              )}
+            </div>
+
+            {
+              isOpenModal &&
+                (isLoggedInUser ? (
+                  <div
+                    id="overlay"
+                    className={styles.overlay}
+                    onClick={handleOverlayClick}
+                  >
+                    <div className={styles.modal}>
+                      <UpdateUser />
+                    </div>
+                  </div>
+                ) : (
+                  ''
+                ))
+              // isLoggedInUser ? <DeleteUser /> : ''
+            }
+          </>
+        )}
+      </div>
+    </>
   );
 }

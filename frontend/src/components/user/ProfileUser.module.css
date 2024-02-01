@@ -21,11 +21,18 @@
   border-radius: 20px;
 }
 .scrollUpButton {
-  background-color: var(--primary-color);
-  position: relative;
-  top: 0;
-  right: 0;
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  border: none;
+  background: var(--tertiary-color);
+  border-radius: 50%;
 }
+
+.scrollUpButton:hover {
+  cursor: pointer;
+}
+
 .heroImage {
   /* Change to url */
   background-color: var(--tertiary-color);
@@ -79,6 +86,7 @@
 .listContainer {
   border-top: 1px solid rgb(167, 167, 167);
 }
+
 .modal {
   position: absolute;
   top: 50%;
