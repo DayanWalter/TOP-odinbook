@@ -19,6 +19,7 @@
 .heroImage {
   /* Change to url */
   background-color: var(--tertiary-color);
+  min-width: 230px;
   width: 100%;
   height: 200px;
   margin-bottom: 100px;
@@ -38,7 +39,12 @@
   /* transform: translate(-50%, -50%); */
 }
 .contactInfo {
-  background-color: green;
+  /* display: flex;
+  flex-direction: column; */
+  width: 50%;
+}
+.iconGroup {
+  display: flex;
 }
 .lists {
   background-color: pink;

@@ -8,6 +8,10 @@ import FollowUser from '../user/FollowUser';
 import UserList from '../user/UserList';
 import UpdateUser from '../user/UpdateUser';
 import DeleteUser from '../user/DeleteUser';
+// Icons
+import Icon from '@mdi/react';
+import { mdiMapMarkerOutline } from '@mdi/js';
+import { mdiCalendarMonthOutline } from '@mdi/js';
 
 export default function ProfileUser() {
   const [userData, setUserData] = useState(null);
@@ -113,7 +117,7 @@ export default function ProfileUser() {
       {loading && <div></div>}
       {userData && (
         <>
-          <h1>{userData.user_name}</h1>
+          <h3>{userData.user_name}</h3>
           <div>{userData.posts_id.length} Posts</div>
           <div className={styles.heroImage}>
             <div className={styles.profilePicture}></div>
@@ -121,13 +125,16 @@ export default function ProfileUser() {
           <button onClick={handleModal}>Edit Profile</button>
           {/* Main */}
           <div className={styles.contactInfo}>
-            <p>Name: {userData.user_name}</p>
-            <p>Description:</p>
-            <p>Location:</p>
-            <p>Website:</p>
-            <p>
-              Member since: {new Date(userData.reg_date).toLocaleDateString()}
-            </p>
+            <h1>{userData.user_name}</h1>
+            <p>I am funny and fresh!</p>
+            <div className={styles.iconGroup}>
+              <Icon path={mdiMapMarkerOutline} size={1} />
+              New York
+            </div>
+            <div className={styles.iconGroup}>
+              <Icon path={mdiCalendarMonthOutline} size={1} />
+              {new Date(userData.reg_date).toLocaleDateString()}
+            </div>
           </div>
           {/* Lists */}
           <div className={styles.lists}>
