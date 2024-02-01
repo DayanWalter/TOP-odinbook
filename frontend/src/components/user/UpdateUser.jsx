@@ -92,67 +92,64 @@ export default function UpdateUser() {
   };
 
   return (
-    <div id="updateUserComponent">
-      <h1>Update User:</h1>
-      <form className={styles.mainForm}>
-        <div className={styles.inputGroup}>
-          <label htmlFor="user_name" className={styles.inputGroup_label}>
-            Username:
-          </label>
-          <input
-            id="user_name"
-            className={styles.inputGroup_input}
-            type="text"
-            name="user_name"
-            value={userData.user_name}
-            onChange={handleChange}
-            pattern="[a-zA-Z0-9]{6,}"
-          />
-          <span className={styles.inputGroup_error}>
-            Username must be at least 6 characters long
-          </span>
-        </div>
+    <form className={styles.mainForm}>
+      <div className={styles.inputGroup}>
+        <label htmlFor="user_name" className={styles.inputGroup_label}>
+          Username:
+        </label>
+        <input
+          id="user_name"
+          className={styles.inputGroup_input}
+          type="text"
+          name="user_name"
+          value={userData.user_name}
+          onChange={handleChange}
+          pattern="[a-zA-Z0-9]{6,}"
+        />
+        <span className={styles.inputGroup_error}>
+          Username must be at least 6 characters long
+        </span>
+      </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="email" className={styles.inputGroup_label}>
-            Email:
-          </label>
-          <input
-            id="email"
-            className={styles.inputGroup_input}
-            type="email"
-            name="email"
-            value={userData.email}
-            onChange={handleChange}
-            autoComplete="true"
-          />
-          <span className={styles.inputGroup_error}>
-            Email has the wrong format
-          </span>
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="img_url" className={styles.inputGroup_label}>
-            Image Url:
-          </label>
-          <input
-            id="img_url"
-            className={styles.inputGroup_input}
-            type="text"
-            name="img_url"
-            value={userData.img_url}
-            onChange={handleChange}
-          />
-          <span className={styles.inputGroup_error}>
-            img_url has the wrong format
-          </span>
-        </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="email" className={styles.inputGroup_label}>
+          Email:
+        </label>
+        <input
+          id="email"
+          className={styles.inputGroup_input}
+          type="email"
+          name="email"
+          value={userData.email}
+          onChange={handleChange}
+          autoComplete="true"
+        />
+        <span className={styles.inputGroup_error}>
+          Email has the wrong format
+        </span>
+      </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="img_url" className={styles.inputGroup_label}>
+          Image Url:
+        </label>
+        <input
+          id="img_url"
+          className={styles.inputGroup_input}
+          type="text"
+          name="img_url"
+          value={userData.img_url}
+          onChange={handleChange}
+        />
+        <span className={styles.inputGroup_error}>
+          img_url has the wrong format
+        </span>
+      </div>
 
-        <button className={styles.formBtn} onClick={handleUpdateUser}>
-          Update User
-        </button>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-        {success && <div style={{ color: 'green' }}>User updated!</div>}
-      </form>
-    </div>
+      <button className={styles.formBtn} onClick={handleUpdateUser}>
+        Update User
+      </button>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {success && <div style={{ color: 'green' }}>User updated!</div>}
+    </form>
   );
 }

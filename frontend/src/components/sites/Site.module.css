@@ -17,17 +17,10 @@
   justify-content: center;
 }
 .profileSite {
-  background-color: aqua;
-}
-.contactInfo {
-  background-color: green;
+  background-color: var(--background-color);
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-}
-.lists {
-  background-color: pink;
-  border: 1px solid black;
-  display: flex;
+  justify-content: center;
 }
