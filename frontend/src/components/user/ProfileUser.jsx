@@ -23,6 +23,7 @@ export default function ProfileUser() {
 
   const [isFollowing, setIsFollowing] = useState(false);
 
+  const [showButton, setShowButton] = useState(false);
   // id from params
   const loaderData = useLoaderData();
   const userId = loaderData.userid;
@@ -75,6 +76,25 @@ export default function ProfileUser() {
 
     fetchData();
   }, [userId, isFollowing, authToken, loggedInUserId]);
+  useEffect(() => {
+    const userContainer = document.getElementById('profileUserContainer');
+
+    const handleScrollButtonVisibility = () => {
+      console.log('Scroll Top:', userContainer.scrollTop);
+      setShowButton(userContainer.scrollTop > 10);
+    };
+
+    userContainer.addEventListener('scroll', handleScrollButtonVisibility);
+
+    return () => {
+      userContainer.removeEventListener('scroll', handleScrollButtonVisibility);
+    };
+  }, []);
+  const handleScrollUp = () => {
+    document
+      .getElementById('profileUserContainer')
+      .scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleModal = () => {
     isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
@@ -94,11 +114,12 @@ export default function ProfileUser() {
   }
 
   return (
-    <div className={styles.profileUserContainer}>
+    <div id="profileUserContainer" className={styles.profileUserContainer}>
       {loading && <div></div>}
       {userData && (
         <>
           <h3>{userData.user_name}</h3>
+
           <div>{userData.posts_id.length} Posts</div>
           <div className={styles.heroImage}>
             <div className={styles.profilePicture}></div>
@@ -107,6 +128,11 @@ export default function ProfileUser() {
           {/* Main */}
           <div className={styles.contactInfo}>
             <h1>{userData.user_name}</h1>
+            {isFollowing ? (
+              <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
+            ) : (
+              <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
+            )}
             <p>I am funny and fresh!</p>
             <div className={styles.iconGroup}>
               <Icon path={mdiMapMarkerOutline} size={1} />
@@ -117,11 +143,7 @@ export default function ProfileUser() {
               {new Date(userData.reg_date).toLocaleDateString()}
             </div>
           </div>
-          {isFollowing ? (
-            <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
-          ) : (
-            <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
-          )}
+
           {/* Lists */}
           <div className={styles.listButtons}>
             <button
@@ -200,6 +222,11 @@ export default function ProfileUser() {
               ))
             // isLoggedInUser ? <DeleteUser /> : ''
           }
+          {showButton && (
+            <button className={styles.scrollUpButton} onClick={handleScrollUp}>
+              TOP
+            </button>
+          )}
         </>
       )}
     </div>
