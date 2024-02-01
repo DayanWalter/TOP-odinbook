@@ -137,43 +137,36 @@ export default function ProfileUser() {
             </div>
           </div>
           {/* Lists */}
-          <div className={styles.lists}>
-            <div className={styles.listGroup}>
-              <p> {userData.follows_id.length} Following</p>
-              {showFollows && userData.follows_id && (
-                <UserList users={userData.follows_id} />
-              )}
-              <button onClick={handleShowFollows}>
-                {showFollows ? 'Hide' : 'Show'}
-              </button>
-            </div>
-            <div className={styles.listGroup}>
-              <p>{userData.follower_id.length} Followers</p>
-              {showFollower && userData.follower_id && (
-                <UserList users={userData.follower_id} />
-              )}
-              <button onClick={handleShowFollower}>
-                {showFollower ? 'Hide' : 'Show'}
-              </button>
-            </div>
-            <div className={styles.listGroup}>
-              <p>{userData.posts_id.length} Posts</p>
-              {showPosts && userData.posts_id && (
-                <PostList posts={userData.posts_id} />
-              )}
-              <button onClick={handleShowPosts}>
-                {showPosts ? 'Hide' : 'Show'}
-              </button>
-            </div>
-            <div className={styles.listGroup}>
-              <p>{userData.comments_id.length} Comments</p>
-              {showComments && userData.comments_id && (
-                <CommentList comments={userData.comments_id} />
-              )}
-              <button onClick={handleShowComments}>
-                {showComments ? 'Hide' : 'Show'}
-              </button>
-            </div>
+          <div className={styles.listButtons}>
+            <button className={styles.listButton} onClick={handleShowFollows}>
+              {userData.follows_id.length} Following
+            </button>
+
+            <button className={styles.listButton} onClick={handleShowFollower}>
+              {userData.follower_id.length} Followers
+            </button>
+
+            <button className={styles.listButton} onClick={handleShowPosts}>
+              {userData.posts_id.length} Posts
+            </button>
+
+            <button className={styles.listButton} onClick={handleShowComments}>
+              {userData.comments_id.length} Comments
+            </button>
+          </div>
+          <div className="listContainer">
+            {showFollows && userData.follows_id && (
+              <UserList users={userData.follows_id} />
+            )}
+            {showFollower && userData.follower_id && (
+              <UserList users={userData.follower_id} />
+            )}
+            {showPosts && userData.posts_id && (
+              <PostList posts={userData.posts_id} />
+            )}
+            {showComments && userData.comments_id && (
+              <CommentList comments={userData.comments_id} />
+            )}
           </div>
           {isFollowing ? (
             <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />

@@ -46,11 +46,22 @@
 .iconGroup {
   display: flex;
 }
-.lists {
-  background-color: pink;
-  border: 1px solid black;
+.listButtons {
+  /* background-color: pink; */
+  /* border: 1px solid black; */
   display: flex;
   justify-content: space-between;
+}
+.listButton {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  border-bottom: 2px solid var(--primary-color);
+}
+.listButton:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
 }
 .modal {
   position: absolute;
