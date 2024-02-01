@@ -1,26 +1,15 @@
-.loginSite {
-  background-color: var(--background-color);
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.signupSite {
-  background-color: var(--background-color);
-  /* background-color: #8a4eff; */
-  /* background-color: rgb(253, 255, 192); */
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+.loginSite,
+.signupSite,
 .profileSite {
   background-color: var(--background-color);
   height: 100vh;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.loginSite,
+.signupSite {
   justify-content: center;
 }

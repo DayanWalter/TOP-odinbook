@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import styles from './Profile.module.css';
+import styles from './ProfileUser.module.css';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';
@@ -104,10 +104,11 @@ export default function ProfileUser() {
         <>
           <h1>{userData.user_name}</h1>
           <div>{userData.posts_id.length} Posts</div>
-          <div className={styles.heroimage}>Heroimage</div>
+          <div className={styles.heroImage}>
+            <div className={styles.profilePicture}></div>
+          </div>
           {/* Main */}
           <div className={styles.contactInfo}>
-            <div>Picture</div>
             <p>Name: {userData.user_name}</p>
             <p>Description:</p>
             <p>Location:</p>
