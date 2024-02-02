@@ -123,9 +123,19 @@ export default function ProfileUser() {
           <h3>{userData.user_name}</h3>
 
           <div>{userData.posts_id.length} Posts</div>
-          <div className={styles.heroImage}>
-            <div className={styles.profilePicture}></div>
+          <div className={styles.headerSection}>
+            <img
+              className={styles.profilePicture}
+              src={userData.avatar_url}
+              alt="Avatar"
+            />
+            <img
+              className={styles.heroImage}
+              src={userData.avatar_url}
+              alt="Hero Image"
+            />
           </div>
+
           <button onClick={handleModal}>Edit Profile</button>
           {/* Main */}
           <div className={styles.contactInfo}>

@@ -30,29 +30,38 @@
 .scrollUpButton:hover {
   cursor: pointer;
 }
+.headerSection {
+  position: relative;
 
-.heroImage {
-  /* Change to url */
-  background-color: var(--tertiary-color);
   min-width: 230px;
-  /* width: 100%; */
   height: 200px;
   margin-bottom: 100px;
 }
+.heroImage {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
 
 .profilePicture {
-  /* change to url */
-  background-color: var(--secondary-color);
   height: 200px;
   width: 200px;
   border: 5px solid white;
   border-radius: 50%;
-  /* z-index: 1; */
-  position: relative;
+  overflow: hidden;
+  position: absolute;
   top: 95px;
   left: 15px;
-  /* transform: translate(-50%, -50%); */
+  z-index: 1;
 }
+
+.roundedImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .contactInfo {
   /* display: flex;
   flex-direction: column; */
