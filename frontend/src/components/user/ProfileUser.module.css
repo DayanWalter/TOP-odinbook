@@ -1,13 +1,9 @@
 .profileUserContainer {
-  /* color: rgb(117, 117, 117); */
   background-color: white;
-  display: flex;
-  flex-direction: column;
   padding: 3.5rem;
   width: clamp(275px, 100%, 950px);
   max-height: 80%;
   overflow-y: auto;
-  /* align-items: center; */
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
@@ -32,7 +28,7 @@
 }
 .headerSection {
   position: relative;
-
+  background-color: aqua;
   min-width: 230px;
   height: 200px;
   margin-bottom: 100px;
