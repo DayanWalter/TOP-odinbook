@@ -135,7 +135,7 @@ const readUserById = asyncHandler(async (req, res, next) => {
     .select('-password')
     .populate({
       path: 'follows_id',
-      select: 'user_name reg_date',
+      select: 'user_name reg_date avatar',
     })
     .populate({
       path: 'follower_id',

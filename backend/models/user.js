@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { faker } = require('@faker-js/faker');
 
 const Schema = mongoose.Schema;
 

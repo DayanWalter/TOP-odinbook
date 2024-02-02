@@ -10,6 +10,7 @@ export default function UserList({ users }) {
           <Link to={`/user/${user._id}`}>
             <UserListCard
               user_name={user.user_name}
+              avatar={user.avatar}
               reg_date={user.reg_date}
             ></UserListCard>
           </Link>

@@ -8,5 +8,11 @@
   height: 100px;
   width: 100px;
   border-radius: 50%;
-  background-color: var(--secondary-color);
+  overflow: hidden;
+  /* background-color: var(--secondary-color); */
+}
+.roundedImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
