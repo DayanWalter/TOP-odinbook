@@ -6,6 +6,9 @@ export default function UpdateUser() {
     user_name: '',
     email: '',
     img_url: '',
+    avatar_url: '',
+    location: '',
+    bio: '',
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -130,7 +133,7 @@ export default function UpdateUser() {
       </div>
       <div className={styles.inputGroup}>
         <label htmlFor="img_url" className={styles.inputGroup_label}>
-          Image Url:
+          Header url:
         </label>
         <input
           id="img_url"
@@ -142,6 +145,57 @@ export default function UpdateUser() {
         />
         <span className={styles.inputGroup_error}>
           img_url has the wrong format
+        </span>
+      </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="avatar_url" className={styles.inputGroup_label}>
+          Profile picture Url:
+        </label>
+        <input
+          id="avatar_url"
+          className={styles.inputGroup_input}
+          type="text"
+          name="avatar_url"
+          value={userData.avatar_url}
+          onChange={handleChange}
+        />
+        <span className={styles.inputGroup_error}>
+          avatar_url has the wrong format
+        </span>
+      </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="user_name" className={styles.inputGroup_label}>
+          Bio:
+        </label>
+        {/* Bio */}
+        <input
+          id="bio"
+          className={styles.inputGroup_input}
+          type="text"
+          name="bio"
+          value={userData.bio}
+          onChange={handleChange}
+          pattern="[a-zA-Z0-9]{0,60}"
+        />
+        <span className={styles.inputGroup_error}>
+          Bio mustnt be longer than 60 chars
+        </span>
+      </div>
+      <div className={styles.inputGroup}>
+        <label htmlFor="location" className={styles.inputGroup_label}>
+          Location:
+        </label>
+        <input
+          id="location"
+          className={styles.inputGroup_input}
+          type="text"
+          name="location"
+          value={userData.location}
+          onChange={handleChange}
+          pattern="[a-zA-Z0-9]{3,}"
+        />
+        <span className={styles.inputGroup_error}>
+          Location must be at least 3 characters long
         </span>
       </div>
 

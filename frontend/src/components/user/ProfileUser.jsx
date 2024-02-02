@@ -13,6 +13,7 @@ import Icon from '@mdi/react';
 import { mdiMapMarkerOutline } from '@mdi/js';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiArrowUp } from '@mdi/js';
+import { mdiFeather } from '@mdi/js';
 
 export default function ProfileUser() {
   const [userData, setUserData] = useState(null);
@@ -147,10 +148,15 @@ export default function ProfileUser() {
             ) : (
               <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
             )}
-            <p>I am funny and fresh!</p>
+
+            <div className={styles.iconGroup}>
+              <Icon path={mdiFeather} size={1} />
+              {userData.bio}
+            </div>
+
             <div className={styles.iconGroup}>
               <Icon path={mdiMapMarkerOutline} size={1} />
-              New York
+              {userData.location}
             </div>
             <div className={styles.iconGroup}>
               <Icon path={mdiCalendarMonthOutline} size={1} />
