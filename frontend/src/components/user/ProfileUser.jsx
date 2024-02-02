@@ -153,22 +153,21 @@ export default function ProfileUser() {
             ) : (
               <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
             )}
-
-            <div className={styles.iconGroup}>
-              <Icon path={mdiFeather} size={1} />
-              {userData.bio}
-            </div>
-
-            <div className={styles.iconGroup}>
-              <Icon path={mdiMapMarkerOutline} size={1} />
-              {userData.location}
-            </div>
-            <div className={styles.iconGroup}>
-              <Icon path={mdiCalendarMonthOutline} size={1} />
-              {new Date(userData.reg_date).toLocaleDateString()}
+            <div className={styles.contactInfo}>
+              <div className={styles.iconGroup}>
+                <Icon path={mdiFeather} size={1} />
+                {userData.bio}
+              </div>
+              <div className={styles.iconGroup}>
+                <Icon path={mdiMapMarkerOutline} size={1} />
+                {userData.location}
+              </div>
+              <div className={styles.iconGroup}>
+                <Icon path={mdiCalendarMonthOutline} size={1} />
+                {new Date(userData.reg_date).toLocaleDateString()}
+              </div>
             </div>
           </div>
-
           {/* List Buttons */}
           <div className={styles.listButtons}>
             <button

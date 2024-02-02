@@ -58,9 +58,7 @@
   right: 20px;
 }
 .contactInfo {
-  /* display: flex;
-  flex-direction: column; */
-  /* width: 50%; */
+  margin: 15px 0;
 }
 .iconGroup {
   display: flex;
