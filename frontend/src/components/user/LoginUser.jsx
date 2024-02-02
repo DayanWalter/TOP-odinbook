@@ -1,7 +1,8 @@
 import styles from './Form.module.css';
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 export default function LoginUser() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     user_name: '',
     password: '',
@@ -40,6 +41,7 @@ export default function LoginUser() {
         user_name: '',
         password: '',
       });
+      navigate('/');
     } catch (error) {
       console.error('Error during user login:', error);
       setError('Error during user login. Please try again.');

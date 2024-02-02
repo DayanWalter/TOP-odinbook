@@ -173,7 +173,7 @@ const updateUser = [
       const userId = req.user._id;
       // take changes from body
 
-      const { user_name, email, img_url } = req.body;
+      const { user_name, email, img_url, avatar_url, location, bio } = req.body;
       // TEST IF THE EMAIL AND USERNAME FROM BODY ARE NOT ALREADY TAKEN!!!
 
       // search in the db(allUsers) for a specific user id
@@ -183,6 +183,9 @@ const updateUser = [
           user_name,
           email,
           img_url,
+          avatar_url,
+          location,
+          bio,
         },
         {
           new: true,

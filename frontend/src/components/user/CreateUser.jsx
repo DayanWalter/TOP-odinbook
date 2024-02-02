@@ -1,8 +1,10 @@
 import styles from './Form.module.css';
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateUser() {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     user_name: '',
     email: '',
@@ -47,6 +49,7 @@ export default function CreateUser() {
         password: '',
         repeatPassword: '',
       });
+      navigate('/login');
     } catch (error) {
       console.error('Error during user creation:', error);
       setError('Error during user creation. Please try again.');

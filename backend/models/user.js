@@ -19,6 +19,8 @@ const UserSchema = new Schema({
     unique: true,
   },
   password: { type: String, required: true },
+  location: { type: String },
+  bio: { type: String },
   img_url: { type: String, default: faker.image.urlLoremFlickr() },
   avatar_url: { type: String, default: faker.image.avatar() },
   follower_id: [{ type: Schema.Types.ObjectId, ref: 'user' }],
