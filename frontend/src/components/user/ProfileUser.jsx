@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import styles from './ProfileUser.module.css';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
@@ -14,6 +14,7 @@ import { mdiMapMarkerOutline } from '@mdi/js';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiArrowUp } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
+import { mdiArrowLeft } from '@mdi/js';
 
 export default function ProfileUser() {
   const [userData, setUserData] = useState(null);
@@ -121,9 +122,13 @@ export default function ProfileUser() {
       {loading && <div></div>}
       {userData && (
         <>
-          <h3>{userData.user_name}</h3>
+          <Link to={'/'}>
+            <div className={styles.iconGroup}>
+              <Icon path={mdiArrowLeft} size={1} />
+              <p>{userData.user_name}</p>
+            </div>
+          </Link>
 
-          <div>{userData.posts_id.length} Posts</div>
           <div className={styles.headerSection}>
             <img
               className={styles.profilePicture}

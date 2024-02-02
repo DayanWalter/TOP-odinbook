@@ -64,6 +64,7 @@
 }
 .iconGroup {
   display: flex;
+  gap: 15px;
 }
 .listButtons {
   /* background-color: pink; */
