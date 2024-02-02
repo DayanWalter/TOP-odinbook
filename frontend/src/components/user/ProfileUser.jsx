@@ -131,12 +131,14 @@ export default function ProfileUser() {
             />
             <img
               className={styles.heroImage}
-              src={userData.avatar_url}
+              src={userData.img_url}
               alt="Hero Image"
             />
           </div>
 
-          <button onClick={handleModal}>Edit Profile</button>
+          <button className={styles.editProfileButton} onClick={handleModal}>
+            Edit Profile
+          </button>
           {/* Main */}
           <div className={styles.contactInfo}>
             <h1>{userData.user_name}</h1>

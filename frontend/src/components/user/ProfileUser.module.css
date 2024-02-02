@@ -15,8 +15,8 @@
   border-radius: 20px;
 }
 .scrollUpButton {
-  position: absolute;
-  bottom: 50px;
+  position: fixed;
+  bottom: 15px;
   right: 50px;
   border: none;
   background: var(--tertiary-color);
@@ -28,7 +28,6 @@
 }
 .headerSection {
   position: relative;
-  background-color: aqua;
   min-width: 230px;
   height: 200px;
   margin-bottom: 100px;
@@ -52,16 +51,16 @@
   z-index: 1;
 }
 
-.roundedImage {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+.editProfileButton {
+  padding: 10px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }
-
 .contactInfo {
   /* display: flex;
   flex-direction: column; */
-  width: 50%;
+  /* width: 50%; */
 }
 .iconGroup {
   display: flex;
