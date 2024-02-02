@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import styles from './UserList.module.css';
 import UserListCard from './UserListCard';
 
 export default function UserList({ users }) {
   return (
-    <ul>
+    <ul className={styles.listContainer}>
       {users.map((user) => (
         <li key={user._id}>
           {console.log(user)}

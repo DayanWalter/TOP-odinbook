@@ -169,7 +169,7 @@ export default function ProfileUser() {
             </div>
           </div>
 
-          {/* Lists */}
+          {/* List Buttons */}
           <div className={styles.listButtons}>
             <button
               className={`${styles.listButton} ${
@@ -215,6 +215,7 @@ export default function ProfileUser() {
               {userData.comments_id.length} Comments
             </button>
           </div>
+          {/* List Container */}
           <div className={styles.listContainer}>
             {activeIndex === 0 && userData.follows_id && (
               <UserList users={userData.follows_id} />

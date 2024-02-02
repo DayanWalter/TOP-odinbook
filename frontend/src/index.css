@@ -10,6 +10,9 @@ a {
   text-decoration: none;
   color: inherit;
 }
+li {
+  list-style: none;
+}
 /* body {
   background: url(https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D)
     no-repeat;
