@@ -25,4 +25,5 @@ li {
   --primary-color: #4000ff;
   --background-color: #f0f2f5;
   --error-color: red;
+  --danger-color: red;
 }

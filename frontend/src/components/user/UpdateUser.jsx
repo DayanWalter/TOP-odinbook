@@ -1,3 +1,4 @@
+import DeleteUser from './DeleteUser';
 import styles from './Form.module.css';
 import { useState, useEffect } from 'react';
 
@@ -149,7 +150,7 @@ export default function UpdateUser() {
       </div>
       <div className={styles.inputGroup}>
         <label htmlFor="avatar_url" className={styles.inputGroup_label}>
-          Profile picture Url:
+          Profile picture url:
         </label>
         <input
           id="avatar_url"
@@ -160,7 +161,7 @@ export default function UpdateUser() {
           onChange={handleChange}
         />
         <span className={styles.inputGroup_error}>
-          avatar_url has the wrong format
+          Profile picture url has the wrong format
         </span>
       </div>
       <div className={styles.inputGroup}>
@@ -202,6 +203,7 @@ export default function UpdateUser() {
       <button className={styles.formBtn} onClick={handleUpdateUser}>
         Update User
       </button>
+      <DeleteUser />
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>User updated!</div>}
     </form>

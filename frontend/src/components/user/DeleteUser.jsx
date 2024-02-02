@@ -1,4 +1,9 @@
 // DeleteUser.jsx
+import styles from './Form.module.css';
+import Icon from '@mdi/react';
+
+import { mdiAlertOutline } from '@mdi/js';
+
 export default function DeleteUser() {
   const handleDeleteUser = async () => {
     const authToken = localStorage.getItem('authToken');
@@ -30,8 +35,10 @@ export default function DeleteUser() {
 
   return (
     <div id="deleteUser">
-      <h1>Delete User:</h1>
-      <button onClick={handleDeleteUser}>Delete User</button>
+      <button className={styles.deleteButton} onClick={handleDeleteUser}>
+        <Icon path={mdiAlertOutline} size={1} />
+        Delete User
+      </button>
     </div>
   );
 }

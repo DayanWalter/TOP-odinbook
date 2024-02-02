@@ -74,6 +74,24 @@
 .formBtn:active {
   transform: scale(0.95);
 }
+.deleteButton {
+  display: flex;
+  gap: 15px;
+  font-size: 20px;
+  padding: 0.5rem 2rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--danger-color);
+  color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  --left: 0;
+  left: var(--left);
+  position: relative;
+}
+.deleteButton:hover {
+  cursor: pointer;
+  animation: error-shake 500ms infinite;
+}
 
 @keyframes error-shake {
   0% {
