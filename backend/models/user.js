@@ -19,6 +19,7 @@ const UserSchema = new Schema({
   },
   password: { type: String, required: true },
   img_url: { type: String, default: 'http://www.example.com/' },
+  avatar: { type: String, default: faker.image.avatar() },
   follower_id: [{ type: Schema.Types.ObjectId, ref: 'user' }],
   follows_id: [{ type: Schema.Types.ObjectId, ref: 'user' }],
   posts_id: [{ type: Schema.Types.ObjectId, ref: 'post' }],

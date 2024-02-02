@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
-import ListItemCard from '../ListItemCard';
+import UserListCard from './UserListCard';
 
 export default function UserList({ users }) {
   return (
     <ul>
       {users.map((user) => (
         <li key={user._id}>
+          {console.log(user)}
           <Link to={`/user/${user._id}`}>
-            <ListItemCard user_name="user_name"></ListItemCard>
-            {user.user_name}
+            <UserListCard
+              user_name={user.user_name}
+              reg_date={user.reg_date}
+            ></UserListCard>
           </Link>
         </li>
       ))}
