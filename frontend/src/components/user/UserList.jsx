@@ -11,7 +11,7 @@ export default function UserList({ users }) {
             <UserListCard
               user_name={user.user_name}
               avatar_url={user.avatar_url}
-              location={user.location}
+              posts_id={user.posts_id}
               reg_date={user.reg_date}
             ></UserListCard>
           </Link>
