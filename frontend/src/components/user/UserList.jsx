@@ -7,7 +7,6 @@ export default function UserList({ users }) {
     <ul className={styles.listContainer}>
       {users.map((user) => (
         <li key={user._id}>
-          {console.log(user)}
           <Link to={`/user/${user._id}`}>
             <UserListCard
               user_name={user.user_name}

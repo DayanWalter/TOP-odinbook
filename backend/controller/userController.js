@@ -157,10 +157,20 @@ const readUserById = asyncHandler(async (req, res, next) => {
   res.json({ searchedUser });
 });
 const updateUser = [
-  body('user_name').custom(async (value) => {
+  body('user_name').custom(async (value, { req }) => {
+    console.log(req.user);
     const user = await User.findOne({ user_name: value });
-    if (user) {
-      throw new Error('Username already exist, choose please another name.');
+    // if the user_name exists && the value(user_name) !== logged in user(req.user.user_name)...
+    if (user && value !== req.user.user_name) {
+      throw new Error('Username already exist.');
+    }
+  }),
+  body('email').custom(async (value, { req }) => {
+    console.log(req.user);
+    const user = await User.findOne({ email: value });
+    // if the email exists && the value(email) !== logged in user email(req.user.email)...
+    if (user && value !== req.user.email) {
+      throw new Error('Email already exist.');
     }
   }),
 
