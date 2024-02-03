@@ -16,21 +16,22 @@ export default function PostListCard({
       {/* <div className={styles.profilePicture}> */}
       {/* </div> */}
       <div className={styles.stats}>
-        <div>{author}</div>
-        <div>{content}</div>
+        <div className={styles.author}>{author}</div>
+        <div className={styles.content}>{content}</div>
+        <div className={styles.footer}>
+          <div className={styles.iconGroup}>
+            <Icon path={mdiChatOutline} size={1} />
+            <div>{comments.length}</div>
+          </div>
+          <div className={styles.iconGroup}>
+            <Icon path={mdiHeartOutline} size={1} />
+            <div>{likes.length}</div>
+          </div>
 
-        <div className={styles.iconGroup}>
-          <Icon path={mdiChatOutline} size={1} />
-          <div>{comments.length}</div>
-        </div>
-        <div className={styles.iconGroup}>
-          <Icon path={mdiHeartOutline} size={1} />
-          <div>{likes.length}</div>
-        </div>
-
-        <div className={styles.iconGroup}>
-          <Icon path={mdiCalendarMonthOutline} size={1} />
-          {new Date(posting_date).toLocaleDateString()}
+          <div className={styles.iconGroup}>
+            <Icon path={mdiCalendarMonthOutline} size={1} />
+            {new Date(posting_date).toLocaleDateString()}
+          </div>
         </div>
       </div>
     </div>

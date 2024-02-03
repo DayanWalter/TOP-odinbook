@@ -6,7 +6,9 @@
   padding: 15px;
   min-width: 300px;
 }
-
+.card:hover {
+  background-color: var(--background-color);
+}
 .roundedImage {
   height: 80px;
   width: 80px;
