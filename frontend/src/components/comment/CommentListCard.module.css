@@ -1,0 +1,26 @@
+.card {
+  /* display: flex; */
+  border-top: 1px solid black;
+  gap: 2rem;
+  padding: 15px;
+  min-width: 300px;
+}
+.card:hover {
+  background-color: var(--background-color);
+}
+
+.iconGroup {
+  display: flex;
+  gap: 5px;
+}
+.author {
+  font-size: 15px;
+  color: grey;
+}
+.content {
+  font-size: 20px;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

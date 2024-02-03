@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import CommentListCard from './CommentListCard';
 
 export default function CommentList({ comments }) {
   console.log(comments);
@@ -7,17 +8,12 @@ export default function CommentList({ comments }) {
       {comments.map((comment) => (
         <li key={comment._id}>
           <Link to={`/comment/${comment._id}`}>
-            <p>
-              Content:
-              {comment.content}
-            </p>
-            <p>Author:{comment.author_id.user_name}</p>
-
-            <p>
-              Written at:
-              {new Date(comment.posting_date).toLocaleDateString()}
-            </p>
-            <p>Likes:{comment.likes_id.length}</p>
+            <CommentListCard
+              author={comment.author_id.user_name}
+              posting_date={comment.posting_date}
+              likes={comment.likes_id}
+              content={comment.content}
+            />
           </Link>
         </li>
       ))}
