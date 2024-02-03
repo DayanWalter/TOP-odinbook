@@ -57,7 +57,6 @@ const readPostById = asyncHandler(async (req, res, next) => {
     })
     .populate({
       path: 'comments_id',
-      select: 'content',
     });
 
   res.json({ readPostById: 'Route works', searchedPost });

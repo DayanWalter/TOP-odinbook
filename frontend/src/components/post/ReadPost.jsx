@@ -92,6 +92,7 @@ export default function ReadPost() {
           <p>Content: {postData.content}</p>
           <p>Author: {postData.author_id.user_name}</p>
           <p>Has {postData.comments_id.length} Comments:</p>
+          {console.log(postData.comments_id)}
           {showComments && postData.comments_id && (
             <CommentList comments={postData.comments_id} />
           )}
