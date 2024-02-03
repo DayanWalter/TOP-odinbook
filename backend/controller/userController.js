@@ -141,17 +141,22 @@ const readUserById = asyncHandler(async (req, res, next) => {
       path: 'follower_id',
       select: 'user_name reg_date avatar_url posts_id',
     })
+    // TODO:
     .populate({
       path: 'posts_id',
-      select: 'content',
+      populate: {
+        path: 'author_id',
+        select: 'user_name',
+      },
     })
     .populate({
       path: 'comments_id',
-      select: 'content',
+      populate: {
+        path: 'author_id',
+        select: 'user_name',
+      },
     })
 
-    // .populate('follows_id')
-    // .populate('follower_id')
     .exec();
   // Send data to client
   res.json({ searchedUser });
