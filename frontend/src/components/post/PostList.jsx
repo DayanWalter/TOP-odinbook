@@ -9,10 +9,10 @@ export default function PostList({ posts }) {
         <li key={post._id}>
           <Link to={`/post/${post._id}`}>
             <PostListCard
-              author_name={post.author_id.user_name}
+              author={post.author_id.user_name}
               posting_date={post.posting_date}
-              comments_id={post.comments_id}
-              likes_id={post.likes_id}
+              comments={post.comments_id}
+              likes={post.likes_id}
               content={post.content}
             />
           </Link>

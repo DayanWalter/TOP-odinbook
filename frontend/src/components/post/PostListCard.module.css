@@ -1,0 +1,12 @@
+.card {
+  /* display: flex; */
+  border: 1px solid black;
+  gap: 2rem;
+  padding: 15px;
+  min-width: 300px;
+}
+
+.iconGroup {
+  display: flex;
+  gap: 5px;
+}
