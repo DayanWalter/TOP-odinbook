@@ -58,10 +58,8 @@ export default function CommentCreate({ postId }) {
 
   return (
     <div>
-      <h1>Create a New Comment:</h1>
       <form>
         <label>
-          Content:
           <textarea value={content} onChange={handleChange} />
         </label>
       </form>

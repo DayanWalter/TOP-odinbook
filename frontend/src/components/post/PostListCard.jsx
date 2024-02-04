@@ -7,7 +7,7 @@ import { mdiHeartOutline } from '@mdi/js';
 import PostEdit from './PostEdit';
 import CommentCreate from '../comment/CommentCreate';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function PostListCard({
@@ -19,13 +19,12 @@ export default function PostListCard({
   posting_date,
 }) {
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenModalCommentCreate, setIsOpenModalCommentCreate] =
-    useState(false);
+  const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
+  const [isOpenCommentList, setIsOpenCommentList] = useState(false);
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
       setIsOpenModal(false);
-      setIsOpenModalCommentCreate(false);
     }
   };
   const handlePostEdit = () => {
@@ -34,7 +33,17 @@ export default function PostListCard({
   };
 
   const handleCommentCreate = () => {
-    setIsOpenModalCommentCreate(true);
+    isOpenCommentCreate
+      ? setIsOpenCommentCreate(false)
+      : setIsOpenCommentCreate(true);
+  };
+  const handleShowCommentList = () => {
+    isOpenCommentList
+      ? setIsOpenCommentList(false)
+      : setIsOpenCommentList(true);
+  };
+  const handlePostLike = () => {
+    console.log(postId);
   };
   return (
     <>
@@ -44,28 +53,33 @@ export default function PostListCard({
         {/* Button um modal zu öffnen um post updaten zu können */}
         <button onClick={handlePostEdit}>Post Edit</button>
         <button onClick={handleCommentCreate}>Comment Create</button>
+        <button onClick={handlePostLike}>Post Like</button>
 
-        <Link to={`/post/${postId}`}>
-          <div className={styles.stats}>
-            <div className={styles.author}>{author}</div>
-            <div className={styles.content}>{content}</div>
-            <div className={styles.footer}>
-              <div className={styles.iconGroup}>
-                <Icon path={mdiChatOutline} size={1} />
-                <div>{comments.length}</div>
-              </div>
-              <div className={styles.iconGroup}>
-                <Icon path={mdiHeartOutline} size={1} />
-                <div>{likes.length}</div>
-              </div>
+        {/* <Link to={`/post/${postId}`}> */}
+        <div className={styles.stats}>
+          <div className={styles.author}>{author}</div>
+          <div className={styles.content}>{content}</div>
+          <div className={styles.footer}>
+            <div className={styles.iconGroup}>
+              <Icon
+                onClick={handleShowCommentList}
+                path={mdiChatOutline}
+                size={1}
+              />
+              <div>{comments.length}</div>
+            </div>
+            <div className={styles.iconGroup}>
+              <Icon path={mdiHeartOutline} size={1} />
+              <div>{likes.length}</div>
+            </div>
 
-              <div className={styles.iconGroup}>
-                <Icon path={mdiCalendarMonthOutline} size={1} />
-                {new Date(posting_date).toLocaleDateString()}
-              </div>
+            <div className={styles.iconGroup}>
+              <Icon path={mdiCalendarMonthOutline} size={1} />
+              {new Date(posting_date).toLocaleDateString()}
             </div>
           </div>
-        </Link>
+        </div>
+        {/* </Link> */}
       </div>
       {isOpenModal && (
         <div
@@ -78,17 +92,13 @@ export default function PostListCard({
           </div>
         </div>
       )}
-      {isOpenModalCommentCreate && (
-        <div
-          id="overlay"
-          className={styles.overlay}
-          onClick={handleOverlayClick}
-        >
-          <div className={styles.modal}>
-            <CommentCreate postId={postId} />
-          </div>
+      {isOpenCommentCreate && (
+        <div className={styles.commentCreate}>
+          <CommentCreate postId={postId} />
         </div>
       )}
+      {/* Todo: show real comment list under post */}
+      {isOpenCommentList && <div>COMMENTLIST</div>}
     </>
   );
 }
