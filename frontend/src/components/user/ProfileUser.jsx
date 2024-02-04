@@ -7,7 +7,8 @@ import UnFollowUser from '../user/UnFollowUser';
 import FollowUser from '../user/FollowUser';
 import UserList from '../user/UserList';
 import UpdateUser from '../user/UpdateUser';
-import DeleteUser from '../user/DeleteUser';
+// import DeleteUser from '../user/DeleteUser';
+
 // Icons
 import Icon from '@mdi/react';
 import { mdiMapMarkerOutline } from '@mdi/js';

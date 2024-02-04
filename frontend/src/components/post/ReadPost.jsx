@@ -16,6 +16,10 @@ export default function ReadPost() {
   const [isAuthor, setIsAuthor] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
 
+  //EDIT:
+  const [isOpenModal, setIsOpenModal] = useState(true);
+  const [isLoggedInUser, setIsLoggedInUser] = useState(true);
+
   // id from params
   const loaderData = useLoaderData();
   const postId = loaderData.postid;
@@ -83,11 +87,23 @@ export default function ReadPost() {
     return arr.some((obj) => obj === loggedInUserId);
   }
 
+  const handleModal = () => {
+    isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
+  };
+  const handleOverlayClick = (event) => {
+    if (event.target.id === 'overlay') {
+      setIsOpenModal(false);
+    }
+  };
+
   return (
     <div className={styles.postContainer}>
       {loading && <div></div>}
       {postData && (
         <>
+          <button className={styles.editProfileButton} onClick={handleModal}>
+            Edit Profile
+          </button>
           <p>ID: {postData._id}</p>
           <p>Content: {postData.content}</p>
           <p>Author: {postData.author_id.user_name}</p>
@@ -106,8 +122,25 @@ export default function ReadPost() {
             <LikePost postId={postId} setIsLiking={setIsLiking} />
           )}
           <CreateComment postId={postId} />
-          {isAuthor ? <UpdatePost postId={postId} /> : ''}
+          {/* {isAuthor ? <UpdatePost postId={postId} /> : ''} */}
           {isAuthor ? <DeletePost postId={postId} /> : ''}
+          {
+            isOpenModal &&
+              (isLoggedInUser ? (
+                <div
+                  id="overlay"
+                  className={styles.overlay}
+                  onClick={handleOverlayClick}
+                >
+                  <div className={styles.modal}>
+                    <UpdatePost postId={postId} />
+                  </div>
+                </div>
+              ) : (
+                ''
+              ))
+            /// isLoggedInUser ? <DeleteUser /> : ''
+          }
         </>
       )}
     </div>
