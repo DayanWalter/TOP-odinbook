@@ -5,16 +5,19 @@ import { mdiChatOutline } from '@mdi/js';
 import { mdiHeartOutline } from '@mdi/js';
 
 export default function PostListCard({
+  postId,
   author,
   content,
   comments,
   likes,
   posting_date,
 }) {
+  console.log(postId);
   return (
     <div className={styles.card}>
       {/* <div className={styles.profilePicture}> */}
       {/* </div> */}
+      {/* Button um modal zu öffnen um post updaten zu können */}
       <div className={styles.stats}>
         <div className={styles.author}>{author}</div>
         <div className={styles.content}>{content}</div>

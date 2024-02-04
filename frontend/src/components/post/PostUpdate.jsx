@@ -13,7 +13,7 @@ export default function UpdatePost({ postId }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Parameters for the backend request
+      // Parameters for the backend requestr
       const requestOptions = {
         method: 'GET',
         headers: {
