@@ -16,6 +16,7 @@ import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiArrowUp } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
 import { mdiArrowLeft } from '@mdi/js';
+import EditUser from './EditUser';
 
 export default function ProfileUser() {
   const [userData, setUserData] = useState(null);
@@ -244,7 +245,7 @@ export default function ProfileUser() {
                   onClick={handleOverlayClick}
                 >
                   <div className={styles.modal}>
-                    <UpdateUser />
+                    <EditUser />
                   </div>
                 </div>
               ) : (

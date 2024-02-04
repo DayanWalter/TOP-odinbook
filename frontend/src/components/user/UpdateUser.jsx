@@ -96,7 +96,7 @@ export default function UpdateUser() {
   };
 
   return (
-    <form className={styles.mainForm}>
+    <>
       <div className={styles.inputGroup}>
         <label htmlFor="user_name" className={styles.inputGroup_label}>
           Username:
@@ -203,9 +203,8 @@ export default function UpdateUser() {
       <button className={styles.formBtn} onClick={handleUpdateUser}>
         Update User
       </button>
-      <DeleteUser />
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>User updated!</div>}
-    </form>
+    </>
   );
 }
