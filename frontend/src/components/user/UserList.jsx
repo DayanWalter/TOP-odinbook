@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import styles from './UserList.module.css';
+import styles from '../../css/UserList.module.css';
 import UserListCard from './UserListCard';
 
 export default function UserList({ users }) {

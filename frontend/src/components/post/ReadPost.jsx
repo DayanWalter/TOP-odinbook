@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import styles from './ReadPost.module.css';
+import styles from '../../css/ReadPost.module.css';
 import CommentList from '../comment/CommentList';
 import CreateComment from '../comment/CreateComment';
 import UnLikePost from '../post/UnLikePost';
 import LikePost from '../post/LikePost';
-import UpdatePost from '../post/UpdatePost';
-import DeletePost from '../post/DeletePost';
+// import UpdatePost from '../post/UpdatePost';
+// import DeletePost from '../post/DeletePost';
 import EditPost from './EditPost';
 
 export default function ReadPost() {

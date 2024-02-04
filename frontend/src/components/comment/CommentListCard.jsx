@@ -1,4 +1,4 @@
-import styles from './CommentListCard.module.css';
+import styles from '../../css/CommentListCard.module.css';
 import Icon from '@mdi/react';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiHeartOutline } from '@mdi/js';

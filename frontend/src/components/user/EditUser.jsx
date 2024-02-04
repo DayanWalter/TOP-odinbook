@@ -1,6 +1,6 @@
 import UpdateUser from './UpdateUser';
 import DeleteUser from './DeleteUser';
-import styles from './EditUser.module.css';
+import styles from '../../css/EditUser.module.css';
 
 export default function EditUser() {
   return (

@@ -1,5 +1,5 @@
 // DeleteUser.jsx
-import styles from './Form.module.css';
+import styles from '../../css/Form.module.css';
 import Icon from '@mdi/react';
 
 import { mdiAlertOutline } from '@mdi/js';

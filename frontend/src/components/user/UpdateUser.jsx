@@ -1,4 +1,4 @@
-import styles from './Form.module.css';
+import styles from '../../css/Form.module.css';
 import { useState, useEffect } from 'react';
 
 export default function UpdateUser() {

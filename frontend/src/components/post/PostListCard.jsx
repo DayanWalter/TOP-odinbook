@@ -1,4 +1,4 @@
-import styles from './PostListCard.module.css';
+import styles from '../../css/PostListCard.module.css';
 import Icon from '@mdi/react';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiChatOutline } from '@mdi/js';

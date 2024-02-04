@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import styles from './ProfileUser.module.css';
+import styles from '../../css/ProfileUser.module.css';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';
 import FollowUser from '../user/FollowUser';
 import UserList from '../user/UserList';
-import UpdateUser from '../user/UpdateUser';
+// import UpdateUser from '../user/UpdateUser';
 // import DeleteUser from '../user/DeleteUser';
 
 // Icons
