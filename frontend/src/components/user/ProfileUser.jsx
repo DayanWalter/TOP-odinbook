@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import styles from '../../css/ProfileUser.module.css';
+import styles from '../../css/UserProfile.module.css';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';

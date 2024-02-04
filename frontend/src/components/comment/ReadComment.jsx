@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import styles from '../../css/ReadComment.module.css';
+import styles from '../../css/CommentRead.module.css';
 
 import UnLikeComment from '../comment/UnLikeComment';
 import LikeComment from '../comment/LikeComment';
