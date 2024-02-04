@@ -101,10 +101,10 @@ export default function UpdatePost({ postId }) {
             // onChange={handleChange}
           />
         </label>
+        <button onClick={handleUpdatePost}>Update Post</button>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {success && <div style={{ color: 'green' }}>Post updated!</div>}
       </form>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      {success && <div style={{ color: 'green' }}>Post updated!</div>}
-      <button onClick={handleUpdatePost}>Update Post</button>
     </div>
   );
 }

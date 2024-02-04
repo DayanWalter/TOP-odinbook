@@ -7,6 +7,7 @@ import UnLikePost from '../post/UnLikePost';
 import LikePost from '../post/LikePost';
 import UpdatePost from '../post/UpdatePost';
 import DeletePost from '../post/DeletePost';
+import EditPost from './EditPost';
 
 export default function ReadPost() {
   const [postData, setPostData] = useState(null);
@@ -17,8 +18,7 @@ export default function ReadPost() {
   const [isLiking, setIsLiking] = useState(false);
 
   //EDIT:
-  const [isOpenModal, setIsOpenModal] = useState(true);
-  const [isLoggedInUser, setIsLoggedInUser] = useState(true);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   // id from params
   const loaderData = useLoaderData();
@@ -101,8 +101,8 @@ export default function ReadPost() {
       {loading && <div></div>}
       {postData && (
         <>
-          <button className={styles.editProfileButton} onClick={handleModal}>
-            Edit Profile
+          <button className={styles.editPostButton} onClick={handleModal}>
+            Edit Post
           </button>
           <p>ID: {postData._id}</p>
           <p>Content: {postData.content}</p>
@@ -123,17 +123,17 @@ export default function ReadPost() {
           )}
           <CreateComment postId={postId} />
           {/* {isAuthor ? <UpdatePost postId={postId} /> : ''} */}
-          {isAuthor ? <DeletePost postId={postId} /> : ''}
+          {/* {isAuthor ? <DeletePost postId={postId} /> : ''} */}
           {
             isOpenModal &&
-              (isLoggedInUser ? (
+              (isAuthor ? (
                 <div
                   id="overlay"
                   className={styles.overlay}
                   onClick={handleOverlayClick}
                 >
                   <div className={styles.modal}>
-                    <UpdatePost postId={postId} />
+                    <EditPost postId={postId} />
                   </div>
                 </div>
               ) : (

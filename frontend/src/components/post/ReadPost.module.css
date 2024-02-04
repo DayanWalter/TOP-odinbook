@@ -14,7 +14,7 @@
   background-color: var(--tertiary-color);
   border-radius: 20px;
 }
-.editProfileButton {
+.editPostButton {
   padding: 10px;
   position: fixed;
   top: 20px;

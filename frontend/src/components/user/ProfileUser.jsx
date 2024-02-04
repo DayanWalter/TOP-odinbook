@@ -39,6 +39,7 @@ export default function ProfileUser() {
   // Define the username you are looking for
   const loggedInUserId = payload._id;
 
+  // Get Profile(User) Data
   useEffect(() => {
     const fetchData = async () => {
       // Parameters for the backend request
@@ -59,10 +60,12 @@ export default function ProfileUser() {
         const data = await response.json();
         setUserData(data.searchedUser);
 
+        // Check if the user is logged in user
         const userIsLoggedIn = searchLoggedInUser(
           data.searchedUser._id,
           loggedInUserId
         );
+
         setIsLoggedInUser(userIsLoggedIn);
 
         const isFollowingUser = searchForFollower(
@@ -81,6 +84,7 @@ export default function ProfileUser() {
     fetchData();
   }, [userId, isFollowing, authToken, loggedInUserId]);
 
+  // ScrollUp Button
   useEffect(() => {
     const userContainer = document.getElementById('profileUserContainer');
 
