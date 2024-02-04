@@ -1,5 +1,5 @@
 // DeleteUser.jsx
-export default function DeleteComment({ commentId }) {
+export default function CommentDelete({ commentId }) {
   const handleDeleteComment = async () => {
     const authToken = localStorage.getItem('authToken');
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function UpdateComment({ commentId }) {
+export default function CommentUpdate({ commentId }) {
   // const [commentData, setCommentData] = useState({
   //   content: '',
   // });

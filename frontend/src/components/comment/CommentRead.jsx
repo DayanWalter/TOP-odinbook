@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+
 import styles from '../../css/CommentRead.module.css';
 
-import UnLikeComment from '../comment/UnLikeComment';
-import LikeComment from '../comment/LikeComment';
-import UpdateComment from '../comment/UpdateComment';
-import DeleteComment from '../comment/DeleteComment';
+import CommentUnlike from './CommentUnlike';
+import CommentLike from './CommentLike';
+import CommentUpdate from './CommentUpdate';
+import CommentDelete from './CommentDelete';
 
-export default function CommentSite() {
+export default function CommentRead() {
   const [commentData, setCommentData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isAuthor, setIsAuthor] = useState(false);
@@ -86,12 +87,12 @@ export default function CommentSite() {
           <p>Author: {commentData.author_id.user_name}</p>
           <p>Has {commentData.likes_id.length} likes</p>
           {isLiking ? (
-            <UnLikeComment commentId={commentId} setIsLiking={setIsLiking} />
+            <CommentUnlike commentId={commentId} setIsLiking={setIsLiking} />
           ) : (
-            <LikeComment commentId={commentId} setIsLiking={setIsLiking} />
+            <CommentLike commentId={commentId} setIsLiking={setIsLiking} />
           )}
-          {isAuthor ? <UpdateComment commentId={commentId} /> : ''}
-          {isAuthor ? <DeleteComment commentId={commentId} /> : ''}
+          {isAuthor ? <CommentUpdate commentId={commentId} /> : ''}
+          {isAuthor ? <CommentDelete commentId={commentId} /> : ''}
         </>
       )}
     </div>

@@ -1,5 +1,5 @@
-export default function LikeComment({ commentId, setIsLiking }) {
-  const handleLikeComment = async () => {
+export default function CommentUnlike({ commentId, setIsLiking }) {
+  const handleUnLikeComment = async () => {
     const authToken = localStorage.getItem('authToken');
 
     // Parameters for the backend request
@@ -14,26 +14,26 @@ export default function LikeComment({ commentId, setIsLiking }) {
     try {
       // Execute the backend request
       const response = await fetch(
-        `http://localhost:3000/api/comment/${commentId}/like`,
+        `http://localhost:3000/api/comment/${commentId}/unlike`,
         requestOptions
       );
 
       if (response.ok) {
-        // Update the state to indicate that the comment is liked
-        console.log('Comment liked successfully.');
+        // Update the state to indicate that the comment is now unliked
+        console.log('Comment successfully unliked.');
       } else {
-        console.error('Error liking comment:', response.status);
+        console.error('Error unliking comment:', response.status);
       }
     } catch (error) {
-      console.error('Error liking comment:', error);
+      console.error('Error unliking comment:', error);
     } finally {
-      setIsLiking(true);
+      setIsLiking(false);
     }
   };
 
   return (
     <div>
-      <button onClick={handleLikeComment}>Like Comment</button>
+      <button onClick={handleUnLikeComment}>UnLike Comment</button>
     </div>
   );
 }

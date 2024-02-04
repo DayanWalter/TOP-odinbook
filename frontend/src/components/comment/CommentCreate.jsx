@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function CreateComment({ postId }) {
+export default function CommentCreate({ postId }) {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

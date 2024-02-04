@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import styles from '../../css/PostRead.module.css';
+// Comment
 import CommentList from '../comment/CommentList';
-import CreateComment from '../comment/CreateComment';
+import CommentCreate from '../comment/CommentCreate';
+// Post
 import PostUnLike from './PostUnLike';
 import PostLike from './PostLike';
 // import UpdatePost from '../post/UpdatePost';
@@ -121,7 +123,7 @@ export default function ReadPost() {
           ) : (
             <PostLike postId={postId} setIsLiking={setIsLiking} />
           )}
-          <CreateComment postId={postId} />
+          <CommentCreate postId={postId} />
           {/* {isAuthor ? <UpdatePost postId={postId} /> : ''} */}
           {/* {isAuthor ? <DeletePost postId={postId} /> : ''} */}
           {
