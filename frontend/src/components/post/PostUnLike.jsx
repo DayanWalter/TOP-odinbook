@@ -1,3 +1,7 @@
+import Icon from '@mdi/react';
+
+import { mdiHeart } from '@mdi/js';
+
 export default function PostUnLike({ postId, setIsLiking }) {
   const handleUnLikePost = async () => {
     const authToken = localStorage.getItem('authToken');
@@ -33,7 +37,7 @@ export default function PostUnLike({ postId, setIsLiking }) {
 
   return (
     <div>
-      <button onClick={handleUnLikePost}>UnLike Post</button>
+      <Icon onClick={handleUnLikePost} path={mdiHeart} size={1} />
     </div>
   );
 }

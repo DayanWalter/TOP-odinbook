@@ -1,7 +1,7 @@
 import Icon from '@mdi/react';
 
 import { mdiHeartOutline } from '@mdi/js';
-export default function LikePost({ postId, setIsLiking }) {
+export default function PostLike({ postId, setIsLiking }) {
   const handlePostLike = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -37,8 +37,6 @@ export default function LikePost({ postId, setIsLiking }) {
   return (
     <div>
       <Icon onClick={handlePostLike} path={mdiHeartOutline} size={1} />
-
-      {/* <button onClick={handleLikePost}>Like Post</button> */}
     </div>
   );
 }

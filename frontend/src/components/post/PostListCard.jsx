@@ -2,14 +2,14 @@ import styles from '../../css/PostListCard.module.css';
 import Icon from '@mdi/react';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiChatOutline } from '@mdi/js';
-import { mdiHeartOutline } from '@mdi/js';
 
 import PostEdit from './PostEdit';
 import CommentCreate from '../comment/CommentCreate';
 
 // import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import LikePost from './PostLike';
+import { useEffect, useState } from 'react';
+import PostLike from './PostLike';
+import PostUnLike from './PostUnLike';
 
 export default function PostListCard({
   postId,
@@ -19,10 +19,27 @@ export default function PostListCard({
   likes,
   posting_date,
 }) {
+  // id from logged in user
+  const authToken = localStorage.getItem('authToken');
+  // Split the payload of the jwt and convert the ._id part
+  const payload = JSON.parse(atob(authToken.split('.')[1]));
+  // Define the username you are looking for
+  const loggedInUserId = payload._id;
+
+  console.log(likes);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
   const [isOpenCommentList, setIsOpenCommentList] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
+
+  function searchForLikes(arr, loggedInUserId) {
+    return arr.some((obj) => obj === loggedInUserId);
+  }
+
+  useEffect(() => {
+    const isLikingPost = searchForLikes(likes, loggedInUserId);
+    setIsLiking(isLikingPost);
+  }, []);
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
@@ -43,9 +60,6 @@ export default function PostListCard({
     isOpenCommentList
       ? setIsOpenCommentList(false)
       : setIsOpenCommentList(true);
-  };
-  const handlePostLike = () => {
-    console.log(postId);
   };
 
   return (
@@ -71,8 +85,11 @@ export default function PostListCard({
               <div>{comments.length}</div>
             </div>
             <div className={styles.iconGroup}>
-              {/* <Icon onClick={handlePostLike} path={mdiHeartOutline} size={1} /> */}
-              <LikePost postId={postId} setIsLiking={setIsLiking} />
+              {isLiking ? (
+                <PostUnLike postId={postId} setIsLiking={setIsLiking} />
+              ) : (
+                <PostLike postId={postId} setIsLiking={setIsLiking} />
+              )}
               <div>{likes.length}</div>
             </div>
 
