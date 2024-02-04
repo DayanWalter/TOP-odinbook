@@ -1,11 +1,11 @@
 import styles from './Site.module.css';
 
-import ReadPost from '../post/ReadPost';
+import PostRead from '../post/PostRead';
 
 export default function PostSite() {
   return (
     <div className={styles.profileSite}>
-      <ReadPost />
+      <PostRead />
     </div>
   );
 }

@@ -3,11 +3,11 @@ import { useLoaderData } from 'react-router-dom';
 import styles from '../../css/PostRead.module.css';
 import CommentList from '../comment/CommentList';
 import CreateComment from '../comment/CreateComment';
-import UnLikePost from '../post/UnLikePost';
-import LikePost from '../post/LikePost';
+import PostUnLike from './PostUnLike';
+import PostLike from './PostLike';
 // import UpdatePost from '../post/UpdatePost';
 // import DeletePost from '../post/DeletePost';
-import EditPost from './EditPost';
+import PostEdit from './PostEdit';
 
 export default function ReadPost() {
   const [postData, setPostData] = useState(null);
@@ -117,9 +117,9 @@ export default function ReadPost() {
           </button>
           <p>Has {postData.likes_id.length} likes</p>
           {isLiking ? (
-            <UnLikePost postId={postId} setIsLiking={setIsLiking} />
+            <PostUnLike postId={postId} setIsLiking={setIsLiking} />
           ) : (
-            <LikePost postId={postId} setIsLiking={setIsLiking} />
+            <PostLike postId={postId} setIsLiking={setIsLiking} />
           )}
           <CreateComment postId={postId} />
           {/* {isAuthor ? <UpdatePost postId={postId} /> : ''} */}
@@ -133,7 +133,7 @@ export default function ReadPost() {
                   onClick={handleOverlayClick}
                 >
                   <div className={styles.modal}>
-                    <EditPost postId={postId} />
+                    <PostEdit postId={postId} />
                   </div>
                 </div>
               ) : (

@@ -1,4 +1,4 @@
-export default function UnLikePost({ postId, setIsLiking }) {
+export default function PostUnLike({ postId, setIsLiking }) {
   const handleUnLikePost = async () => {
     const authToken = localStorage.getItem('authToken');
 
