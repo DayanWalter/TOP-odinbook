@@ -4,7 +4,7 @@ import Icon from '@mdi/react';
 
 import { mdiAlertOutline } from '@mdi/js';
 
-export default function DeleteUser() {
+export default function UserDelete() {
   const handleDeleteUser = async () => {
     const authToken = localStorage.getItem('authToken');
 

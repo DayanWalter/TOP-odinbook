@@ -3,7 +3,7 @@ import styles from '../../css/Form.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function CreateUser() {
+export default function UserCreate() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     user_name: '',

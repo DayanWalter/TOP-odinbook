@@ -1,11 +1,11 @@
 import styles from './Site.module.css';
 
-import ProfileUser from '../user/ProfileUser';
+import UserProfile from '../user/UserProfile';
 
 export default function ProfileSite() {
   return (
     <div className={styles.profileSite}>
-      <ProfileUser />
+      <UserProfile />
     </div>
   );
 }

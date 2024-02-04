@@ -1,4 +1,4 @@
-export default function FollowUser({ userId, setIsFollowing }) {
+export default function UserFollow({ userId, setIsFollowing }) {
   const handleFollowUser = async () => {
     const authToken = localStorage.getItem('authToken');
 

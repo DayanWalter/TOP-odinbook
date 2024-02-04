@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import UserList from './UserList';
 
-export default function ReadUsers() {
+export default function UsersRead() {
   const [usersData, setUsersData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

@@ -1,4 +1,4 @@
-export default function UnFollowUser({ userId, setIsFollowing }) {
+export default function UserUnFollow({ userId, setIsFollowing }) {
   const handleUnFollowUser = async () => {
     const authToken = localStorage.getItem('authToken');
 

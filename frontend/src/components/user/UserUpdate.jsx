@@ -1,7 +1,7 @@
 import styles from '../../css/Form.module.css';
 import { useState, useEffect } from 'react';
 
-export default function UpdateUser() {
+export default function UserUpdate() {
   const [userData, setUserData] = useState({
     user_name: '',
     email: '',

@@ -3,9 +3,9 @@ import { Link, useLoaderData } from 'react-router-dom';
 import styles from '../../css/UserProfile.module.css';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
-import UnFollowUser from '../user/UnFollowUser';
-import FollowUser from '../user/FollowUser';
-import UserList from '../user/UserList';
+import UserUnFollow from './UserUnFollow';
+import UserFollow from '../user/UserFollow';
+import UserList from './UserList';
 import UserEdit from './UserEdit';
 // import UpdateUser from '../user/UpdateUser';
 // import DeleteUser from '../user/DeleteUser';
@@ -18,7 +18,7 @@ import { mdiArrowUp } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
 import { mdiArrowLeft } from '@mdi/js';
 
-export default function ProfileUser() {
+export default function UserProfile() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -155,9 +155,9 @@ export default function ProfileUser() {
           <div className={styles.contactInfo}>
             <h1>{userData.user_name}</h1>
             {isFollowing ? (
-              <UnFollowUser userId={userId} setIsFollowing={setIsFollowing} />
+              <UserUnFollow userId={userId} setIsFollowing={setIsFollowing} />
             ) : (
-              <FollowUser userId={userId} setIsFollowing={setIsFollowing} />
+              <UserFollow userId={userId} setIsFollowing={setIsFollowing} />
             )}
             <div className={styles.contactInfo}>
               <div className={styles.iconGroup}>

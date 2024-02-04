@@ -1,15 +1,14 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import IndexSite from './components/sites/IndexSite.jsx';
-import CreateUser from './components/user/CreateUser.jsx';
-import LoginUser from './components/user/LoginUser.jsx';
-import DeleteUser from './components/user/DeleteUser.jsx';
-import ReadUsers from './components/user/ReadUsers.jsx';
-import UpdateUser from './components/user/UpdateUser.jsx';
+import UserCreate from './components/user/UserCreate.jsx';
+import UserLogin from './components/user/UserLogin.jsx';
+import UserDelete from './components/user/UserDelete.jsx';
+import UsersRead from './components/user/UsersRead.jsx';
+import UserUpdate from './components/user/UserUpdate.jsx';
 
-import CreatePost from './components/post/CreatePost.jsx';
+import PostCreate from './components/post/CreatePost.jsx';
 import ReadFeedPosts from './components/post/ReadFeedPosts.jsx';
 import ProfileSite from './components/sites/ProfileSite.jsx';
 import PostSite from './components/sites/PostSite.jsx';
@@ -44,28 +43,28 @@ const router = createBrowserRouter([
 
   {
     path: '/user/create',
-    element: <CreateUser />,
+    element: <UserCreate />,
   },
   {
     path: '/user/login',
-    element: <LoginUser />,
+    element: <UserLogin />,
   },
   {
     path: '/user/delete',
-    element: <DeleteUser />,
+    element: <UserDelete />,
   },
   {
     path: '/users',
-    element: <ReadUsers />,
+    element: <UsersRead />,
   },
   {
     path: '/user/update',
-    element: <UpdateUser />,
+    element: <UserUpdate />,
   },
   // Post
   {
     path: '/post/create',
-    element: <CreatePost />,
+    element: <PostCreate />,
   },
   {
     path: '/post/feed',

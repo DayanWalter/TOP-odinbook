@@ -1,12 +1,12 @@
-import UpdateUser from './UpdateUser';
-import DeleteUser from './DeleteUser';
+import UserUpdate from './UserUpdate';
+import UserDelete from './UserDelete';
 import styles from '../../css/UserEdit.module.css';
 
-export default function EditUser() {
+export default function UserEdit() {
   return (
     <form className={styles.editUserContainer}>
-      <UpdateUser />
-      <DeleteUser />
+      <UserUpdate />
+      <UserDelete />
     </form>
   );
 }
