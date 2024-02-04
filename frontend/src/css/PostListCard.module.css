@@ -24,3 +24,19 @@
   display: flex;
   justify-content: space-between;
 }
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.overlay {
+  background-color: color-mix(in srgb, grey, transparent 20%);
+  backdrop-filter: blur(1px);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
