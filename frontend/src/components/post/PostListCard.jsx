@@ -9,6 +9,7 @@ import CommentCreate from '../comment/CommentCreate';
 
 // import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import LikePost from './PostLike';
 
 export default function PostListCard({
   postId,
@@ -21,6 +22,7 @@ export default function PostListCard({
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
   const [isOpenCommentList, setIsOpenCommentList] = useState(false);
+  const [isLiking, setIsLiking] = useState(false);
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
@@ -45,6 +47,7 @@ export default function PostListCard({
   const handlePostLike = () => {
     console.log(postId);
   };
+
   return (
     <>
       <div className={styles.card}>
@@ -53,7 +56,6 @@ export default function PostListCard({
         {/* Button um modal zu öffnen um post updaten zu können */}
         <button onClick={handlePostEdit}>Post Edit</button>
         <button onClick={handleCommentCreate}>Comment Create</button>
-        <button onClick={handlePostLike}>Post Like</button>
 
         {/* <Link to={`/post/${postId}`}> */}
         <div className={styles.stats}>
@@ -69,7 +71,8 @@ export default function PostListCard({
               <div>{comments.length}</div>
             </div>
             <div className={styles.iconGroup}>
-              <Icon path={mdiHeartOutline} size={1} />
+              {/* <Icon onClick={handlePostLike} path={mdiHeartOutline} size={1} /> */}
+              <LikePost postId={postId} setIsLiking={setIsLiking} />
               <div>{likes.length}</div>
             </div>
 
