@@ -1,4 +1,3 @@
-import DeleteUser from './DeleteUser';
 import styles from './Form.module.css';
 import { useState, useEffect } from 'react';
 
@@ -97,6 +96,7 @@ export default function UpdateUser() {
 
   return (
     <>
+      {/* User Name */}
       <div className={styles.inputGroup}>
         <label htmlFor="user_name" className={styles.inputGroup_label}>
           Username:
@@ -114,7 +114,7 @@ export default function UpdateUser() {
           Username must be at least 6 characters long
         </span>
       </div>
-
+      {/* Email */}
       <div className={styles.inputGroup}>
         <label htmlFor="email" className={styles.inputGroup_label}>
           Email:
@@ -132,6 +132,7 @@ export default function UpdateUser() {
           Email has the wrong format
         </span>
       </div>
+      {/* Header Image */}
       <div className={styles.inputGroup}>
         <label htmlFor="img_url" className={styles.inputGroup_label}>
           Header url:
@@ -148,6 +149,7 @@ export default function UpdateUser() {
           img_url has the wrong format
         </span>
       </div>
+      {/* Avatar */}
       <div className={styles.inputGroup}>
         <label htmlFor="avatar_url" className={styles.inputGroup_label}>
           Profile picture url:
@@ -164,11 +166,11 @@ export default function UpdateUser() {
           Profile picture url has the wrong format
         </span>
       </div>
+      {/* Bio */}
       <div className={styles.inputGroup}>
         <label htmlFor="user_name" className={styles.inputGroup_label}>
           Bio:
         </label>
-        {/* Bio */}
         <input
           id="bio"
           className={styles.inputGroup_input}
@@ -179,9 +181,10 @@ export default function UpdateUser() {
           pattern="[a-zA-Z0-9]{0,60}"
         />
         <span className={styles.inputGroup_error}>
-          Bio mustnt be longer than 60 chars
+          Bio mustn&apos;t be longer than 60 chars
         </span>
       </div>
+      {/* Location */}
       <div className={styles.inputGroup}>
         <label htmlFor="location" className={styles.inputGroup_label}>
           Location:
@@ -193,6 +196,7 @@ export default function UpdateUser() {
           name="location"
           value={userData.location}
           onChange={handleChange}
+          // TOO: Add special chars to regex
           pattern="[a-zA-Z0-9]{3,}"
         />
         <span className={styles.inputGroup_error}>

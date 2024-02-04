@@ -1,4 +1,4 @@
-.mainForm {
+.form {
   color: rgb(117, 117, 117);
   background-color: white;
   display: flex;
@@ -11,6 +11,7 @@
   /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
+/* Input/Label */
 .inputGroup {
   width: 100%;
 }
@@ -58,7 +59,9 @@
   left: var(--left);
   position: relative;
 }
-.formBtn {
+
+/* Button */
+.updateBtn {
   font-size: 20px;
   padding: 0.5rem 2rem;
   margin-bottom: 0.5rem;
@@ -67,14 +70,14 @@
   border-radius: 5px;
   border: 1px solid black;
 }
-.formBtn:hover {
+.updateBtn:hover {
   cursor: pointer;
   background-color: var(--secondary-color-cta-button);
 }
-.formBtn:active {
+.updateBtn:active {
   transform: scale(0.95);
 }
-.deleteButton {
+.deleteBtn {
   display: flex;
   gap: 15px;
   font-size: 20px;
@@ -88,11 +91,11 @@
   left: var(--left);
   position: relative;
 }
-.deleteButton:hover {
+.deleteBtn:hover {
   cursor: pointer;
   animation: error-shake 500ms infinite;
 }
-
+/* Animations */
 @keyframes error-shake {
   0% {
     --left: -8px;

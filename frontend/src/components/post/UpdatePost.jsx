@@ -43,7 +43,8 @@ export default function UpdatePost({ postId }) {
     fetchData();
   }, [postId]);
 
-  const handleUpdatePost = async () => {
+  const handleUpdatePost = async (e) => {
+    e.preventDefault();
     setSuccess(false);
     // Parameters for the backend request
     const requestOptions = {
@@ -87,24 +88,21 @@ export default function UpdatePost({ postId }) {
   // };
 
   return (
-    <div>
-      <h1>Update Post:</h1>
-      <form>
-        <label>
-          Content:
-          <textarea
-            type="text"
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            // value={postData.content}
-            // onChange={handleChange}
-          />
-        </label>
-        <button onClick={handleUpdatePost}>Update Post</button>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-        {success && <div style={{ color: 'green' }}>Post updated!</div>}
-      </form>
-    </div>
+    <>
+      <label>
+        Content:
+        <textarea
+          type="text"
+          name="content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          // value={postData.content}
+          // onChange={handleChange}
+        />
+      </label>
+      <button onClick={handleUpdatePost}>Update Post</button>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {success && <div style={{ color: 'green' }}>Post updated!</div>}
+    </>
   );
 }
