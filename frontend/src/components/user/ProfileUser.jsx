@@ -6,6 +6,7 @@ import CommentList from '../comment/CommentList';
 import UnFollowUser from '../user/UnFollowUser';
 import FollowUser from '../user/FollowUser';
 import UserList from '../user/UserList';
+import UserEdit from './UserEdit';
 // import UpdateUser from '../user/UpdateUser';
 // import DeleteUser from '../user/DeleteUser';
 
@@ -16,7 +17,6 @@ import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiArrowUp } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
 import { mdiArrowLeft } from '@mdi/js';
-import EditUser from './EditUser';
 
 export default function ProfileUser() {
   const [userData, setUserData] = useState(null);
@@ -245,7 +245,7 @@ export default function ProfileUser() {
                   onClick={handleOverlayClick}
                 >
                   <div className={styles.modal}>
-                    <EditUser />
+                    <UserEdit />
                   </div>
                 </div>
               ) : (

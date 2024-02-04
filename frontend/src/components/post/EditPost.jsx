@@ -1,6 +1,6 @@
 import DeletePost from './DeletePost';
 import UpdatePost from './UpdatePost';
-import styles from '../../css/EditUser.module.css';
+import styles from '../../css/PostEdit.module.css';
 
 export default function EditPost({ postId }) {
   return (
