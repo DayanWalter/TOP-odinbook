@@ -26,7 +26,6 @@ export default function PostListCard({
   // Define the username you are looking for
   const loggedInUserId = payload._id;
 
-  console.log(likes);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
   const [isOpenCommentList, setIsOpenCommentList] = useState(false);
@@ -39,7 +38,7 @@ export default function PostListCard({
   useEffect(() => {
     const isLikingPost = searchForLikes(likes, loggedInUserId);
     setIsLiking(isLikingPost);
-  }, []);
+  }, [likes, loggedInUserId]);
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {

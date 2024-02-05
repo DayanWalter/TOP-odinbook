@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import PostListCard from './PostListCard';
 
 export default function PostList({ posts }) {
-  console.log(posts);
   return (
     <ul>
       {posts.map((post) => (
