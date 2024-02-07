@@ -22,6 +22,7 @@ export default function PostListCard({ postId }) {
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
   const [isOpenCommentList, setIsOpenCommentList] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
+  const [commentCreated, setCommentCreated] = useState(null);
 
   // id from logged in user
   const authToken = localStorage.getItem('authToken');
@@ -78,7 +79,7 @@ export default function PostListCard({ postId }) {
 
   useEffect(() => {
     fetchPostData();
-  }, [postId, isLiking, authToken, loggedInUserId]);
+  }, [postId, isLiking, commentCreated, authToken, loggedInUserId]);
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
@@ -158,7 +159,11 @@ export default function PostListCard({ postId }) {
           )}
           {isOpenCommentCreate && (
             <div className={styles.commentCreate}>
-              <CommentCreate postId={postId} />
+              <CommentCreate
+                postId={postId}
+                commentCreated={commentCreated}
+                setCommentCreated={setCommentCreated}
+              />
             </div>
           )}
           {/* Todo: show real comment list under post */}

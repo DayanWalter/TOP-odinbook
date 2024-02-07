@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-export default function CommentCreate({ postId }) {
+export default function CommentCreate({
+  postId,
+  commentCreated,
+  setCommentCreated,
+}) {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -50,6 +54,7 @@ export default function CommentCreate({ postId }) {
       setError('Error during comment creation. Please try again.');
       console.error('Error during comment creation:', error);
     } finally {
+      commentCreated ? setCommentCreated(false) : setCommentCreated(true);
       // Set loading state to false, indicating the end of the API request
       setLoading(false);
     }
