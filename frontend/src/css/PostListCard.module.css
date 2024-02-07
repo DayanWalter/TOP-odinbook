@@ -20,6 +20,13 @@
 .content {
   font-size: 20px;
 }
+.commentList {
+  /* background-color: var(--background-color); */
+  border-left: 1px solid grey;
+  /* margin: 1rem; */
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
 .footer {
   display: flex;
   justify-content: space-between;

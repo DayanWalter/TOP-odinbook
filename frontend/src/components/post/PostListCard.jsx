@@ -162,7 +162,11 @@ export default function PostListCard({ postId }) {
             </div>
           )}
           {/* Todo: show real comment list under post */}
-          {isOpenCommentList && <CommentList comments={postData.comments_id} />}
+          <div className={styles.commentList}>
+            {isOpenCommentList && (
+              <CommentList comments={postData.comments_id} />
+            )}
+          </div>
         </>
       )}
     </>
