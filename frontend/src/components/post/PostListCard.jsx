@@ -2,6 +2,8 @@ import styles from '../../css/PostListCard.module.css';
 import Icon from '@mdi/react';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiChatOutline } from '@mdi/js';
+import { mdiFileEditOutline } from '@mdi/js';
+import { mdiChatPlusOutline } from '@mdi/js';
 
 import PostEdit from './PostEdit';
 import CommentCreate from '../comment/CommentCreate';
@@ -106,14 +108,24 @@ export default function PostListCard({ postId }) {
       {postData && (
         <>
           <div className={styles.card}>
-            {/* Open modal for editing post if user is author */}
-            {isAuthor ? (
-              <button onClick={handlePostEdit}>Post Edit</button>
-            ) : (
-              ''
-            )}
+            <div className={styles.editSection}>
+              {/* Open modal for editing post if user is author */}
+              {isAuthor ? (
+                <Icon
+                  path={mdiFileEditOutline}
+                  size={1}
+                  onClick={handlePostEdit}
+                />
+              ) : (
+                ''
+              )}
 
-            <button onClick={handleCommentCreate}>Comment Create</button>
+              <Icon
+                path={mdiChatPlusOutline}
+                size={1}
+                onClick={handleCommentCreate}
+              />
+            </div>
 
             <div className={styles.stats}>
               <div className={styles.author}>

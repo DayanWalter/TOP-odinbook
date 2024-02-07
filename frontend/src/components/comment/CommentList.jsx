@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import CommentListCard from './CommentListCard';
 
 export default function CommentList({ comments }) {

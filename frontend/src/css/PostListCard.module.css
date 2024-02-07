@@ -8,7 +8,11 @@
 .card:hover {
   background-color: var(--background-color);
 }
-
+.editSection {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
 .iconGroup {
   display: flex;
   gap: 5px;
