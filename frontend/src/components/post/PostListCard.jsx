@@ -10,6 +10,7 @@ import CommentCreate from '../comment/CommentCreate';
 import { useEffect, useState } from 'react';
 import PostLike from './PostLike';
 import PostUnLike from './PostUnLike';
+import CommentList from '../comment/CommentList';
 
 export default function PostListCard({ postId }) {
   const [postData, setPostData] = useState(null);
@@ -113,7 +114,6 @@ export default function PostListCard({ postId }) {
 
             <button onClick={handleCommentCreate}>Comment Create</button>
 
-            {/* <Link to={`/post/${postId}`}> */}
             <div className={styles.stats}>
               <div className={styles.author}>
                 {postData.author_id.user_name}
@@ -162,7 +162,7 @@ export default function PostListCard({ postId }) {
             </div>
           )}
           {/* Todo: show real comment list under post */}
-          {isOpenCommentList && <div>COMMENTLIST</div>}
+          {isOpenCommentList && <CommentList comments={postData.comments_id} />}
         </>
       )}
     </>

@@ -79,14 +79,6 @@ export default function UpdatePost({ postId }) {
     setSuccess(true);
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setPostData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
   return (
     <>
       <label>
@@ -96,8 +88,6 @@ export default function UpdatePost({ postId }) {
           name="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          // value={postData.content}
-          // onChange={handleChange}
         />
       </label>
       <button onClick={handleUpdatePost}>Update Post</button>
