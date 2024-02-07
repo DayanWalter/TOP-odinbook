@@ -76,13 +76,13 @@ export default function UserProfile() {
       console.error('Error while fetching user:', error);
     } finally {
       setLoading(false);
-      setActiveIndex(0);
+      // setActiveIndex(0);
     }
   };
   // Get Profile(User) Data
   useEffect(() => {
     fetchUserData();
-  }, [userIdFromParams, isFollowing, authToken, loggedInUserId]);
+  }, [userIdFromParams, isFollowing, authToken, loggedInUserId, activeIndex]);
 
   // ScrollUp Button
   useEffect(() => {
