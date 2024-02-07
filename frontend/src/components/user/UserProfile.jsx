@@ -31,7 +31,7 @@ export default function UserProfile() {
   const [showButton, setShowButton] = useState(false);
   // id from params
   const loaderData = useLoaderData();
-  const userId = loaderData.userid;
+  const userIdFromParams = loaderData.userid;
 
   // id from logged in user
   const authToken = localStorage.getItem('authToken');
@@ -40,50 +40,49 @@ export default function UserProfile() {
   // Define the username you are looking for
   const loggedInUserId = payload._id;
 
-  // Get Profile(User) Data
-  useEffect(() => {
-    const fetchData = async () => {
-      // Parameters for the backend request
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
-        },
-      };
-
-      try {
-        setLoading(true);
-        const response = await fetch(
-          `http://localhost:3000/api/user/${userId}`,
-          requestOptions
-        );
-        const data = await response.json();
-        setUserData(data.searchedUser);
-
-        // Check if the user is logged in user
-        const userIsLoggedIn = searchLoggedInUser(
-          data.searchedUser._id,
-          loggedInUserId
-        );
-
-        setIsLoggedInUser(userIsLoggedIn);
-
-        const isFollowingUser = searchForFollower(
-          data.searchedUser.follower_id,
-          loggedInUserId
-        );
-        setIsFollowing(isFollowingUser);
-      } catch (error) {
-        console.error('Error while fetching user:', error);
-      } finally {
-        setLoading(false);
-        setActiveIndex(0);
-      }
+  const fetchUserData = async () => {
+    // Parameters for the backend request
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+      },
     };
 
-    fetchData();
-  }, [userId, isFollowing, authToken, loggedInUserId]);
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `http://localhost:3000/api/user/${userIdFromParams}`,
+        requestOptions
+      );
+      const data = await response.json();
+      setUserData(data.searchedUser);
+
+      // Check if the user is logged in user
+      const userIsLoggedIn = searchLoggedInUser(
+        data.searchedUser._id,
+        loggedInUserId
+      );
+
+      setIsLoggedInUser(userIsLoggedIn);
+
+      const isFollowingUser = searchForFollower(
+        data.searchedUser.follower_id,
+        loggedInUserId
+      );
+      setIsFollowing(isFollowingUser);
+    } catch (error) {
+      console.error('Error while fetching user:', error);
+    } finally {
+      setLoading(false);
+      setActiveIndex(0);
+    }
+  };
+  // Get Profile(User) Data
+  useEffect(() => {
+    fetchUserData();
+  }, [userIdFromParams, isFollowing, authToken, loggedInUserId]);
 
   // ScrollUp Button
   useEffect(() => {
@@ -155,9 +154,15 @@ export default function UserProfile() {
           <div className={styles.contactInfo}>
             <h1>{userData.user_name}</h1>
             {isFollowing ? (
-              <UserUnFollow userId={userId} setIsFollowing={setIsFollowing} />
+              <UserUnFollow
+                userId={userIdFromParams}
+                setIsFollowing={setIsFollowing}
+              />
             ) : (
-              <UserFollow userId={userId} setIsFollowing={setIsFollowing} />
+              <UserFollow
+                userId={userIdFromParams}
+                setIsFollowing={setIsFollowing}
+              />
             )}
             <div className={styles.contactInfo}>
               <div className={styles.iconGroup}>
