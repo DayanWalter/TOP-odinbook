@@ -37,52 +37,47 @@ export default function PostListCard({ postId }) {
     return arr.some((obj) => obj === loggedInUserId);
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // Parameters for the backend request
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
-        },
-      };
-
-      try {
-        setLoading(true);
-        const response = await fetch(
-          `http://localhost:3000/api/post/${postId}`,
-          requestOptions
-        );
-        const data = await response.json();
-        setPostData(data.searchedPost);
-
-        const isAuthorOfPost = searchForAuthor(
-          data.searchedPost.author_id,
-          loggedInUserId
-        );
-        setIsAuthor(isAuthorOfPost);
-
-        const isLikingPost = searchForLikes(
-          data.searchedPost.likes_id,
-          loggedInUserId
-        );
-        setIsLiking(isLikingPost);
-      } catch (error) {
-        console.error('Error while fetching user:', error);
-      } finally {
-        setLoading(false);
-        // remove show...
-      }
+  const fetchPostData = async () => {
+    // Parameters for the backend request
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+      },
     };
 
-    fetchData();
-  }, [postId, isLiking, authToken, loggedInUserId]);
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `http://localhost:3000/api/post/${postId}`,
+        requestOptions
+      );
+      const data = await response.json();
+      setPostData(data.searchedPost);
 
-  // useEffect(() => {
-  //   const isLikingPost = searchForLikes(likes, loggedInUserId);
-  //   setIsLiking(isLikingPost);
-  // }, [likes, loggedInUserId]);
+      const isAuthorOfPost = searchForAuthor(
+        data.searchedPost.author_id,
+        loggedInUserId
+      );
+      setIsAuthor(isAuthorOfPost);
+
+      const isLikingPost = searchForLikes(
+        data.searchedPost.likes_id,
+        loggedInUserId
+      );
+      setIsLiking(isLikingPost);
+    } catch (error) {
+      console.error('Error while fetching user:', error);
+    } finally {
+      setLoading(false);
+      // remove show...
+    }
+  };
+
+  useEffect(() => {
+    fetchPostData();
+  }, [postId, isLiking, authToken, loggedInUserId]);
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
@@ -90,7 +85,6 @@ export default function PostListCard({ postId }) {
     }
   };
   const handlePostEdit = () => {
-    console.log(postId);
     setIsOpenModal(true);
   };
 
@@ -104,15 +98,19 @@ export default function PostListCard({ postId }) {
       ? setIsOpenCommentList(false)
       : setIsOpenCommentList(true);
   };
-  console.log(postData);
   return (
     <>
       {loading && <div></div>}
       {postData && (
         <>
           <div className={styles.card}>
-            {/* Button um modal zu öffnen um post updaten zu können */}
-            <button onClick={handlePostEdit}>Post Edit</button>
+            {/* Open modal for editing post if user is author */}
+            {isAuthor ? (
+              <button onClick={handlePostEdit}>Post Edit</button>
+            ) : (
+              ''
+            )}
+
             <button onClick={handleCommentCreate}>Comment Create</button>
 
             {/* <Link to={`/post/${postId}`}> */}
