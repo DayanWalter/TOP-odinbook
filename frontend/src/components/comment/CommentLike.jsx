@@ -1,5 +1,9 @@
+import Icon from '@mdi/react';
+
+import { mdiHeartOutline } from '@mdi/js';
+
 export default function CommentLike({ commentId, setIsLiking }) {
-  const handleLikeComment = async () => {
+  const handleCommentLike = async () => {
     const authToken = localStorage.getItem('authToken');
 
     // Parameters for the backend request
@@ -33,7 +37,7 @@ export default function CommentLike({ commentId, setIsLiking }) {
 
   return (
     <div>
-      <button onClick={handleLikeComment}>Like Comment</button>
+      <Icon onClick={handleCommentLike} path={mdiHeartOutline} size={1} />
     </div>
   );
 }

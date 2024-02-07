@@ -1,5 +1,8 @@
+import Icon from '@mdi/react';
+
+import { mdiHeart } from '@mdi/js';
 export default function CommentUnlike({ commentId, setIsLiking }) {
-  const handleUnLikeComment = async () => {
+  const handleCommentUnlike = async () => {
     const authToken = localStorage.getItem('authToken');
 
     // Parameters for the backend request
@@ -33,7 +36,7 @@ export default function CommentUnlike({ commentId, setIsLiking }) {
 
   return (
     <div>
-      <button onClick={handleUnLikeComment}>UnLike Comment</button>
+      <Icon onClick={handleCommentUnlike} path={mdiHeart} size={1} />
     </div>
   );
 }

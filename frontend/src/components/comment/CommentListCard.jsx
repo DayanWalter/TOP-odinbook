@@ -5,6 +5,9 @@ import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiHeartOutline } from '@mdi/js';
 import { useEffect, useState } from 'react';
 
+import CommentLike from './CommentLike';
+import CommentUnlike from './CommentUnlike';
+
 export default function CommentListCard({ commentId }) {
   const [commentData, setCommentData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -88,7 +91,18 @@ export default function CommentListCard({ commentId }) {
               <div className={styles.content}>{commentData.content}</div>
               <div className={styles.footer}>
                 <div className={styles.iconGroup}>
-                  <Icon path={mdiHeartOutline} size={1} />
+                  {isLiking ? (
+                    <CommentUnlike
+                      commentId={commentId}
+                      setIsLiking={setIsLiking}
+                    />
+                  ) : (
+                    <CommentLike
+                      commentId={commentId}
+                      setIsLiking={setIsLiking}
+                    />
+                  )}
+
                   <div>{commentData.likes_id.length}</div>
                 </div>
 
