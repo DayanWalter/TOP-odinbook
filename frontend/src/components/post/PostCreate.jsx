@@ -1,10 +1,12 @@
-// Importing the 'useState' hook from React for managing state in functional components
+import styles from '../../css/Form.module.css';
 import { useState } from 'react';
 
 export default function PostCreate() {
   const [content, setContent] = useState('');
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const [success, setSuccess] = useState(false);
 
   const handleCreatePost = async () => {
     const authToken = localStorage.getItem('authToken');
@@ -52,25 +54,37 @@ export default function PostCreate() {
     } finally {
       // Set loading state to false, indicating the end of the API request
       setLoading(false);
+      setSuccess(true);
     }
   };
 
   return (
-    <div>
-      <form>
-        <label>
-          Content:
-          <textarea
+    <>
+      <form className={styles.form}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="content" className={styles.inputGroup_label}>
+            Post:
+          </label>
+          <input
+            id="content"
+            className={styles.inputGroup_input}
+            type="text"
+            name="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            autoComplete="off"
           />
-        </label>
-      </form>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+        </div>
+        <span className={styles.inputGroup_error}>
+          Something did not work...
+        </span>
 
-      <button onClick={handleCreatePost} disabled={loading}>
-        {loading ? 'Creating Post...' : 'Create Post'}
-      </button>
-    </div>
+        <button onClick={handleCreatePost} className={styles.formBtn}>
+          Create Post
+        </button>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {success && <div style={{ color: 'green' }}>Post created!</div>}
+      </form>
+    </>
   );
 }

@@ -4,10 +4,6 @@ import { useState, useEffect } from 'react';
 
 export default function UpdatePost({ postId }) {
   const [content, setContent] = useState('');
-
-  // const [postData, setPostData] = useState({
-  //   content: '',
-  // });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
