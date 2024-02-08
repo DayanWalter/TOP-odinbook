@@ -169,17 +169,18 @@ export default function UserProfile() {
           {/* Main */}
           <div className={styles.contactInfo}>
             <h1>{userData.user_name}</h1>
-            {isFollowing ? (
-              <UserUnFollow
-                userId={userIdFromParams}
-                setIsFollowing={setIsFollowing}
-              />
-            ) : (
-              <UserFollow
-                userId={userIdFromParams}
-                setIsFollowing={setIsFollowing}
-              />
-            )}
+            {!isLoggedInUser &&
+              (isFollowing ? (
+                <UserUnFollow
+                  userId={userIdFromParams}
+                  setIsFollowing={setIsFollowing}
+                />
+              ) : (
+                <UserFollow
+                  userId={userIdFromParams}
+                  setIsFollowing={setIsFollowing}
+                />
+              ))}
             <div className={styles.contactInfo}>
               <div className={styles.iconGroup}>
                 <Icon path={mdiFeather} size={1} />
