@@ -1,12 +1,13 @@
 .card {
   /* display: flex; */
-  border-top: 1px solid black;
+  border-bottom: 1px solid grey;
   gap: 2rem;
   padding: 15px;
   min-width: 300px;
 }
 .card:hover {
   background-color: var(--background-color);
+  border-radius: 5px;
 }
 .editSection {
   display: flex;

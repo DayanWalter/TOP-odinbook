@@ -1,6 +1,6 @@
 .card {
   display: flex;
-  border: 1px solid black;
+  border-bottom: 1px solid grey;
   gap: 2rem;
   /* justify-content: space-between; */
   padding: 15px;
@@ -8,6 +8,7 @@
 }
 .card:hover {
   background-color: var(--background-color);
+  border-radius: 5px;
 }
 .roundedImage {
   height: 80px;
