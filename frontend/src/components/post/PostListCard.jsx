@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import PostLike from './PostLike';
 import PostUnLike from './PostUnLike';
 import CommentList from '../comment/CommentList';
+import { Link } from 'react-router-dom';
 
 export default function PostListCard({ postId }) {
   const [postData, setPostData] = useState(null);
@@ -101,7 +102,6 @@ export default function PostListCard({ postId }) {
     isOpenCommentList
       ? setIsOpenCommentList(false)
       : setIsOpenCommentList(true);
-    // }
   };
   return (
     <>
@@ -136,7 +136,9 @@ export default function PostListCard({ postId }) {
 
             <div className={styles.stats}>
               <div className={styles.author}>
-                {postData.author_id.user_name}
+                <Link to={`/user/${postData.author_id._id}`}>
+                  {postData.author_id.user_name}
+                </Link>
               </div>
               <div className={styles.content}>{postData.content}</div>
               <div className={styles.footer}>

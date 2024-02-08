@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 import CommentLike from './CommentLike';
 import CommentUnlike from './CommentUnlike';
 import CommentEdit from './CommentEdit';
+import { Link } from 'react-router-dom';
 
 export default function CommentListCard({ commentId }) {
   const [commentData, setCommentData] = useState(null);
@@ -112,7 +113,9 @@ export default function CommentListCard({ commentId }) {
 
             <div className={styles.stats}>
               <div className={styles.author}>
-                {commentData.author_id.user_name}
+                <Link to={`/user/${commentData.author_id._id}`}>
+                  {commentData.author_id.user_name}
+                </Link>
               </div>
               <div className={styles.content}>{commentData.content}</div>
               <div className={styles.footer}>
