@@ -20,24 +20,22 @@ import UserUpdate from './components/user/UserUpdate.jsx';
 import PostCreate from './components/post/PostCreate.jsx';
 import PostFeed from './components/post/PostFeed.jsx';
 
-// Comment
-
 const router = createBrowserRouter([
-  {
-    index: true,
-    element: <IndexSite />,
-    errorElement: <ErrorSite />,
-  },
-
   // User
   {
     path: '/signup',
     element: <SignUpSite />,
   },
   {
+    index: true,
+    path: '/',
+    element: <LoginSite />,
+  },
+  {
     path: '/login',
     element: <LoginSite />,
   },
+
   {
     path: '/user/:userid',
     element: <ProfileSite />,
@@ -45,57 +43,7 @@ const router = createBrowserRouter([
       return params;
     },
   },
-
-  {
-    path: '/user/create',
-    element: <UserCreate />,
-  },
-  {
-    path: '/user/login',
-    element: <UserLogin />,
-  },
-  {
-    path: '/user/delete',
-    element: <UserDelete />,
-  },
-  {
-    path: '/users',
-    element: <UsersRead />,
-  },
-  {
-    path: '/user/update',
-    element: <UserUpdate />,
-  },
-  // Post
-  {
-    path: '/post/create',
-    element: <PostCreate />,
-  },
-  {
-    path: '/post/feed',
-    element: <PostFeed />,
-  },
-  {
-    path: '/post/:postid',
-    element: <PostSite />,
-    loader({ params }) {
-      return params;
-    },
-  },
-  // Comment
-  {
-    path: '/comment/:commentid',
-    element: <CommentSite />,
-    loader({ params }) {
-      return params;
-    },
-  },
 ]);
-
-// <CreateUser />
-// <LoginUser />
-// <ReadUsers />
-// <DeleteUser />
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

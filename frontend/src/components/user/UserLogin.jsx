@@ -4,6 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 export default function UserLogin() {
   const navigate = useNavigate();
+  const authToken = localStorage.getItem('authToken');
+  // Split the payload of the jwt and convert the ._id part
+  const payload = JSON.parse(atob(authToken.split('.')[1]));
+  // Define the username you are looking for
+  const userId = payload._id;
+
   const [userData, setUserData] = useState({
     user_name: '',
     password: '',
@@ -42,7 +48,7 @@ export default function UserLogin() {
         user_name: '',
         password: '',
       });
-      navigate('/');
+      navigate(`/user/${userId}`);
     } catch (error) {
       console.error('Error during user login:', error);
       setError('Error during user login. Please try again.');
