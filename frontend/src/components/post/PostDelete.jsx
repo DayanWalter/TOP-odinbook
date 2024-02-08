@@ -1,4 +1,4 @@
-// DeleteUser.jsx
+import styles from '../../css/Form.module.css';
 export default function DeletePost({ postId }) {
   const handleDeletePost = async () => {
     const authToken = localStorage.getItem('authToken');
@@ -30,8 +30,9 @@ export default function DeletePost({ postId }) {
 
   return (
     <div id="deletePost">
-      <h1>Delete Post:</h1>
-      <button onClick={handleDeletePost}>Delete Post</button>
+      <button onClick={handleDeletePost} className={styles.deleteBtn}>
+        Delete Post
+      </button>
     </div>
   );
 }

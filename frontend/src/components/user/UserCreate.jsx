@@ -72,7 +72,7 @@ export default function UserCreate() {
 
   return (
     <div id="createUserComponent">
-      <form className={styles.mainForm}>
+      <form className={styles.form}>
         <div className={styles.inputGroup}>
           <label htmlFor="user_name" className={styles.inputGroup_label}>
             Username:

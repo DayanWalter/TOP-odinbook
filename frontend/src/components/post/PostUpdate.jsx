@@ -1,3 +1,5 @@
+import styles from '../../css/Form.module.css';
+
 import { useState, useEffect } from 'react';
 
 export default function UpdatePost({ postId }) {
@@ -81,16 +83,25 @@ export default function UpdatePost({ postId }) {
 
   return (
     <>
-      <label>
-        Content:
-        <textarea
+      <div className={styles.inputGroup}>
+        <label htmlFor="content" className={styles.inputGroup_label}>
+          Postcontent:
+        </label>
+        <input
+          id="content"
+          className={styles.inputGroup_input}
           type="text"
           name="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          autoComplete="off"
         />
-      </label>
-      <button onClick={handleUpdatePost}>Update Post</button>
+      </div>
+      <span className={styles.inputGroup_error}>Something did not work...</span>
+
+      <button onClick={handleUpdatePost} className={styles.formBtn}>
+        Update Post
+      </button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>Post updated!</div>}
     </>

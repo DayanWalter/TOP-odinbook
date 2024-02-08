@@ -61,7 +61,7 @@ export default function UserLogin() {
 
   return (
     <div id="loginUserComponent">
-      <form className={styles.mainForm}>
+      <form className={styles.form}>
         <div className={styles.inputGroup}>
           <label htmlFor="user_name" className={styles.inputGroup_label}>
             Username:

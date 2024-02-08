@@ -35,7 +35,7 @@ export default function UserDelete() {
 
   return (
     <div id="deleteUser">
-      <button className={styles.deleteButton} onClick={handleDeleteUser}>
+      <button className={styles.deleteBtn} onClick={handleDeleteUser}>
         <Icon path={mdiAlertOutline} size={1} />
         Delete User
       </button>

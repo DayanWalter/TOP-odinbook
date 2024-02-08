@@ -109,6 +109,7 @@ export default function UserUpdate() {
           value={userData.user_name}
           onChange={handleChange}
           pattern="[a-zA-Z0-9]{6,}"
+          autoComplete="off"
         />
         <span className={styles.inputGroup_error}>
           Username must be at least 6 characters long
@@ -144,6 +145,7 @@ export default function UserUpdate() {
           name="img_url"
           value={userData.img_url}
           onChange={handleChange}
+          autoComplete="off"
         />
         <span className={styles.inputGroup_error}>
           img_url has the wrong format
@@ -161,6 +163,7 @@ export default function UserUpdate() {
           name="avatar_url"
           value={userData.avatar_url}
           onChange={handleChange}
+          autoComplete="off"
         />
         <span className={styles.inputGroup_error}>
           Profile picture url has the wrong format
@@ -179,6 +182,7 @@ export default function UserUpdate() {
           value={userData.bio}
           onChange={handleChange}
           pattern="[a-zA-Z0-9]{0,60}"
+          autoComplete="off"
         />
         <span className={styles.inputGroup_error}>
           Bio mustn&apos;t be longer than 60 chars
@@ -196,8 +200,9 @@ export default function UserUpdate() {
           name="location"
           value={userData.location}
           onChange={handleChange}
-          // TOO: Add special chars to regex
+          // TODO: Add special chars to regex
           pattern="[a-zA-Z0-9]{3,}"
+          autoComplete="off"
         />
         <span className={styles.inputGroup_error}>
           Location must be at least 3 characters long

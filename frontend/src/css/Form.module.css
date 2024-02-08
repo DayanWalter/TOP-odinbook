@@ -61,7 +61,8 @@
 }
 
 /* Button */
-.updateBtn {
+.updateBtn,
+.formBtn {
   font-size: 20px;
   padding: 0.5rem 2rem;
   margin-bottom: 0.5rem;
@@ -70,7 +71,8 @@
   border-radius: 5px;
   border: 1px solid black;
 }
-.updateBtn:hover {
+.updateBtn:hover,
+.formBtn:hover {
   cursor: pointer;
   background-color: var(--secondary-color-cta-button);
 }

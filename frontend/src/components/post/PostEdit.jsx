@@ -5,7 +5,7 @@ import styles from '../../css/PostEdit.module.css';
 export default function PostEdit({ postId }) {
   return (
     <>
-      <form className={styles.editUserContainer}>
+      <form className={styles.editPostContainer}>
         <PostUpdate postId={postId} />
 
         <PostDelete postId={postId} />
