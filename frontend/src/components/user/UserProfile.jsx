@@ -43,6 +43,7 @@ export default function UserProfile() {
   const payload = JSON.parse(atob(authToken.split('.')[1]));
   // Define the username you are looking for
   const loggedInUserId = payload._id;
+  const loggedInUserName = payload.user_name;
 
   const fetchUserData = async () => {
     // Parameters for the backend request
@@ -140,10 +141,10 @@ export default function UserProfile() {
       {loading && <div></div>}
       {userData && (
         <>
-          <Link to={'/'}>
+          <Link to={`/user/${loggedInUserId}`}>
             <div className={styles.iconGroup}>
               <Icon path={mdiArrowLeft} size={1} />
-              <p>{userData.user_name}</p>
+              <p>{loggedInUserName}</p>
             </div>
           </Link>
 
@@ -163,12 +164,16 @@ export default function UserProfile() {
           <button className={styles.editProfileBtn} onClick={handleModal}>
             Edit Profile
           </button>
-          <button
-            className={styles.postCreateBtn}
-            onClick={handlePostCreateModal}
-          >
-            New Post
-          </button>
+
+          {isLoggedInUser && (
+            <button
+              className={styles.postCreateBtn}
+              onClick={handlePostCreateModal}
+            >
+              New Post
+            </button>
+          )}
+
           {/* Main */}
           <div className={styles.contactInfo}>
             <h1>{userData.user_name}</h1>
