@@ -97,8 +97,7 @@ export default function PostListCard({ postId }) {
       ? setIsOpenCommentCreate(false)
       : setIsOpenCommentCreate(true);
   };
-  const handleShowCommentList = (event) => {
-    // if (event.target.id === 'card') {
+  const handleShowCommentList = () => {
     isOpenCommentList
       ? setIsOpenCommentList(false)
       : setIsOpenCommentList(true);
@@ -165,7 +164,6 @@ export default function PostListCard({ postId }) {
                 </div>
               </div>
             </div>
-            {/* </Link> */}
           </div>
           {isOpenModal && (
             <div

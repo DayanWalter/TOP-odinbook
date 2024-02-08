@@ -3,10 +3,15 @@ import styles from '../../css/CommentListCard.module.css';
 import Icon from '@mdi/react';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiHeartOutline } from '@mdi/js';
+import { mdiChatOutline } from '@mdi/js';
+import { mdiFileEditOutline } from '@mdi/js';
+import { mdiChatPlusOutline } from '@mdi/js';
+
 import { useEffect, useState } from 'react';
 
 import CommentLike from './CommentLike';
 import CommentUnlike from './CommentUnlike';
+import CommentEdit from './CommentEdit';
 
 export default function CommentListCard({ commentId }) {
   const [commentData, setCommentData] = useState(null);
@@ -76,14 +81,35 @@ export default function CommentListCard({ commentId }) {
     fetchCommentData();
   }, [commentId, isLiking, authToken, loggedInUserId]);
 
+  const handleOverlayClick = (event) => {
+    if (event.target.id === 'overlay') {
+      setIsOpenModal(false);
+    }
+  };
+  const handleCommentEdit = () => {
+    setIsOpenModal(true);
+  };
+
   return (
     <>
       {loading && <div></div>}
       {commentData && (
         <>
           <div className={styles.card}>
-            {/* <div className={styles.profilePicture}> */}
-            {/* </div> */}
+            <div className={styles.editSection}>
+              {/* Open modal for editing post if user is author */}
+              {isAuthor ? (
+                <Icon
+                  path={mdiFileEditOutline}
+                  size={1}
+                  onClick={handleCommentEdit}
+                  className={styles.icon}
+                />
+              ) : (
+                ''
+              )}
+            </div>
+
             <div className={styles.stats}>
               <div className={styles.author}>
                 {commentData.author_id.user_name}
@@ -113,6 +139,17 @@ export default function CommentListCard({ commentId }) {
               </div>
             </div>
           </div>
+          {isOpenModal && (
+            <div
+              id="overlay"
+              className={styles.overlay}
+              onClick={handleOverlayClick}
+            >
+              <div className={styles.modal}>
+                <CommentEdit commentId={commentId} />
+              </div>
+            </div>
+          )}
         </>
       )}
     </>

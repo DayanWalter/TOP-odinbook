@@ -85,7 +85,7 @@ export default function UpdatePost({ postId }) {
     <>
       <div className={styles.inputGroup}>
         <label htmlFor="content" className={styles.inputGroup_label}>
-          Postcontent:
+          Post:
         </label>
         <input
           id="content"

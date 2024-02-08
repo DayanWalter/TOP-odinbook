@@ -1,0 +1,13 @@
+.editCommentContainer {
+  color: rgb(117, 117, 117);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 3.5rem;
+  width: clamp(275px, 100%, 450px);
+  align-items: center;
+  border-radius: 8px;
+  /* backdrop-filter: blur(2px); */
+  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+}

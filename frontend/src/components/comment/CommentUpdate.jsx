@@ -1,3 +1,5 @@
+import styles from '../../css/Form.module.css';
+
 import { useState, useEffect } from 'react';
 
 export default function CommentUpdate({ commentId }) {
@@ -44,7 +46,8 @@ export default function CommentUpdate({ commentId }) {
     fetchData();
   }, [commentId]);
 
-  const handleUpdateComment = async () => {
+  const handleUpdateComment = async (e) => {
+    e.preventDefault();
     setSuccess(false);
     // Parameters for the backend request
     const requestOptions = {
@@ -53,7 +56,6 @@ export default function CommentUpdate({ commentId }) {
         Authorization: `Bearer ${authToken}`,
         'Content-Type': 'application/json',
       },
-      // body: JSON.stringify(commentData),
       body: JSON.stringify({ content }),
     };
 
@@ -80,33 +82,29 @@ export default function CommentUpdate({ commentId }) {
     setSuccess(true);
   };
 
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setCommentData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
-
   return (
-    <div>
-      <h1>Update Comment:</h1>
-      <form>
-        <label>
-          Content:
-          <textarea
-            type="text"
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            // value={commentData.content}
-            // onChange={handleChange}
-          />
+    <>
+      <div className={styles.inputGroup}>
+        <label htmlFor="content" className={styles.inputGroup_label}>
+          Comment:
         </label>
-      </form>
+        <input
+          id="content"
+          className={styles.inputGroup_input}
+          type="text"
+          name="content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          autoComplete="off"
+        />
+      </div>
+      <span className={styles.inputGroup_error}>Something did not work...</span>
+
+      <button onClick={handleUpdateComment} className={styles.formBtn}>
+        Update Comment
+      </button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>Comment updated!</div>}
-      <button onClick={handleUpdateComment}>Update Comment</button>
-    </div>
+    </>
   );
 }

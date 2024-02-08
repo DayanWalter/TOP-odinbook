@@ -1,4 +1,4 @@
-// DeleteUser.jsx
+import styles from '../../css/Form.module.css';
 export default function CommentDelete({ commentId }) {
   const handleDeleteComment = async () => {
     const authToken = localStorage.getItem('authToken');
@@ -30,8 +30,9 @@ export default function CommentDelete({ commentId }) {
 
   return (
     <div id="deleteComment">
-      <h1>Delete Comment:</h1>
-      <button onClick={handleDeleteComment}>Delete Comment</button>
+      <button onClick={handleDeleteComment} className={styles.deleteBtn}>
+        Delete Comment
+      </button>
     </div>
   );
 }
