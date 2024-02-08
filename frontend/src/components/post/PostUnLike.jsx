@@ -1,3 +1,5 @@
+import styles from '../../css/PostLikeUnlike.module.css';
+
 import Icon from '@mdi/react';
 
 import { mdiHeart } from '@mdi/js';
@@ -37,7 +39,12 @@ export default function PostUnLike({ postId, setIsLiking }) {
 
   return (
     <div>
-      <Icon onClick={handleUnLikePost} path={mdiHeart} size={1} />
+      <Icon
+        onClick={handleUnLikePost}
+        path={mdiHeart}
+        size={1}
+        className={styles.icon}
+      />
     </div>
   );
 }

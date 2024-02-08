@@ -1,3 +1,5 @@
+import styles from '../../css/CommentLikeUnlike.module.css';
+
 import Icon from '@mdi/react';
 
 import { mdiHeart } from '@mdi/js';
@@ -36,7 +38,12 @@ export default function CommentUnlike({ commentId, setIsLiking }) {
 
   return (
     <div>
-      <Icon onClick={handleCommentUnlike} path={mdiHeart} size={1} />
+      <Icon
+        onClick={handleCommentUnlike}
+        path={mdiHeart}
+        size={1}
+        className={styles.icon}
+      />
     </div>
   );
 }

@@ -1,0 +1,6 @@
+.icon:hover {
+  cursor: pointer;
+}
+.icon:active {
+  transform: scale(0.95);
+}

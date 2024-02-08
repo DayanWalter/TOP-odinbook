@@ -121,6 +121,7 @@ export default function PostListCard({ postId }) {
                   path={mdiFileEditOutline}
                   size={1}
                   onClick={handlePostEdit}
+                  className={styles.icon}
                 />
               ) : (
                 ''
@@ -130,6 +131,7 @@ export default function PostListCard({ postId }) {
                 path={mdiChatPlusOutline}
                 size={1}
                 onClick={handleCommentCreate}
+                className={styles.icon}
               />
             </div>
 
@@ -144,6 +146,7 @@ export default function PostListCard({ postId }) {
                     onClick={handleShowCommentList}
                     path={mdiChatOutline}
                     size={1}
+                    className={styles.icon}
                   />
                   <div>{postData.comments_id.length}</div>
                 </div>

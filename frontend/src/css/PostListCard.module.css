@@ -17,6 +17,12 @@
   display: flex;
   gap: 5px;
 }
+.icon:hover {
+  cursor: pointer;
+}
+.icon:active {
+  transform: scale(0.95);
+}
 .author {
   font-size: 15px;
   color: grey;
