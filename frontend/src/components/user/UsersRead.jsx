@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserList from './UserList';
 
 export default function UsersRead() {
@@ -44,19 +44,18 @@ export default function UsersRead() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    handleReadUsers();
+  }, []);
 
   return (
     <div id="userList">
-      <h1>User List:</h1>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {usersData ? (
         <UserList users={usersData.allUsers} />
       ) : (
         <div>Click on search button...</div>
       )}
-      <button onClick={handleReadUsers} disabled={loading}>
-        {loading ? 'Fetching Users Data...' : ' Get all Users Data '}
-      </button>
     </div>
   );
 }

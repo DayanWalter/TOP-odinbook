@@ -19,6 +19,7 @@ import { mdiFeather } from '@mdi/js';
 import { mdiArrowLeft } from '@mdi/js';
 import PostFeed from '../post/PostFeed';
 import PostCreate from '../post/PostCreate';
+import UsersRead from './UsersRead';
 
 export default function UserProfile() {
   const [userData, setUserData] = useState(null);
@@ -111,11 +112,13 @@ export default function UserProfile() {
   const handleModal = () => {
     isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
   };
+
   const handlePostCreateModal = () => {
     isOpenPostCreateModal
       ? setIsOpenPostCreateModal(false)
       : setIsOpenPostCreateModal(true);
   };
+
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
       setIsOpenModal(false);
@@ -169,6 +172,7 @@ export default function UserProfile() {
           {/* Main */}
           <div className={styles.contactInfo}>
             <h1>{userData.user_name}</h1>
+            {/* Show follow/unfollow button, if profile is not logged in user */}
             {!isLoggedInUser &&
               (isFollowing ? (
                 <UserUnFollow
@@ -198,16 +202,18 @@ export default function UserProfile() {
           </div>
           {/* List Buttons */}
           <div className={styles.listButtons}>
-            <button
-              className={`${styles.listButton} ${
-                activeIndex === 0 ? styles.activeButton : ''
-              }`}
-              onClick={() => {
-                setActiveIndex(0);
-              }}
-            >
-              Feed
-            </button>
+            {isLoggedInUser && (
+              <button
+                className={`${styles.listButton} ${
+                  activeIndex === 0 ? styles.activeButton : ''
+                }`}
+                onClick={() => {
+                  setActiveIndex(0);
+                }}
+              >
+                Feed
+              </button>
+            )}
 
             <button
               className={`${styles.listButton} ${
@@ -252,6 +258,18 @@ export default function UserProfile() {
             >
               {userData.comments_id.length} Comments
             </button>
+            {isLoggedInUser && (
+              <button
+                className={`${styles.listButton} ${
+                  activeIndex === 5 ? styles.activeButton : ''
+                }`}
+                onClick={() => {
+                  setActiveIndex(5);
+                }}
+              >
+                All User
+              </button>
+            )}
           </div>
           {/* List Container */}
           <div className={styles.listContainer}>
@@ -268,6 +286,7 @@ export default function UserProfile() {
             {activeIndex === 4 && userData.comments_id && (
               <CommentList comments={userData.comments_id} />
             )}
+            {activeIndex === 5 && <UsersRead />}
           </div>
 
           {
