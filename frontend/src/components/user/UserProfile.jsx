@@ -17,6 +17,8 @@ import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiArrowUp } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
 import { mdiArrowLeft } from '@mdi/js';
+import { mdiNotePlusOutline } from '@mdi/js';
+
 import PostFeed from '../post/PostFeed';
 import PostCreate from '../post/PostCreate';
 import UsersRead from './UsersRead';
@@ -166,12 +168,20 @@ export default function UserProfile() {
           </button>
 
           {isLoggedInUser && (
-            <button
-              className={styles.postCreateBtn}
-              onClick={handlePostCreateModal}
-            >
-              New Post
-            </button>
+            <div className={styles.iconContainer}>
+              <Icon
+                path={mdiNotePlusOutline}
+                size={2}
+                onClick={handlePostCreateModal}
+                className={styles.icon}
+              />
+            </div>
+            // <button
+            //   className={styles.postCreateBtn}
+            //   onClick={handlePostCreateModal}
+            // >
+            //   New Post
+            // </button>
           )}
 
           {/* Main */}

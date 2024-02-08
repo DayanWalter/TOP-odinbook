@@ -50,7 +50,15 @@
   left: 15px;
   z-index: 1;
 }
-
+.iconContainer {
+  text-align: end;
+}
+.icon {
+  color: var(--tertiary-color);
+}
+.icon:hover {
+  cursor: pointer;
+}
 .editProfileBtn {
   padding: 10px;
   position: fixed;
@@ -76,6 +84,14 @@
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 550px) {
+  .listButtons {
+    /* background-color: aqua; */
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+  }
+}
 .listButton {
   border: none;
   background: none;
@@ -92,7 +108,7 @@
 }
 .listContainer {
   border-top: 1px solid rgb(167, 167, 167);
-  padding-top: 3.5rem;
+  margin-top: 3.5rem;
 }
 
 .modal {
