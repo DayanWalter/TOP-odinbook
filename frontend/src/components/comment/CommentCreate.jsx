@@ -1,3 +1,5 @@
+import styles from '../../css/Form.module.css';
+
 import { useState } from 'react';
 
 export default function CommentCreate({
@@ -63,14 +65,23 @@ export default function CommentCreate({
 
   return (
     <div>
-      <form>
-        <label>
-          <textarea value={content} onChange={handleChange} />
-        </label>
-      </form>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      <div className={styles.inputGroup}>
+        <label htmlFor="content" className={styles.inputGroup_label}></label>
+        <input
+          id="content"
+          value={content}
+          onChange={handleChange}
+          autoComplete="off"
+        />
+      </div>
+      <span className={styles.inputGroup_error}>Something did not work...</span>
 
-      <button onClick={handleCreateComment} disabled={loading}>
+      <button
+        onClick={handleCreateComment}
+        disabled={loading}
+        className={styles.formBtn}
+      >
+        {error && <div style={{ color: 'red' }}>{error}</div>}
         {loading ? 'Creating Comment...' : 'Create Comment'}
       </button>
     </div>
