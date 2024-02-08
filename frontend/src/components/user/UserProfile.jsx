@@ -17,6 +17,7 @@ import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiArrowUp } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
 import { mdiArrowLeft } from '@mdi/js';
+import PostFeed from '../post/PostFeed';
 
 export default function UserProfile() {
   const [userData, setUserData] = useState(null);
@@ -189,7 +190,7 @@ export default function UserProfile() {
                 setActiveIndex(0);
               }}
             >
-              {userData.follows_id.length} Following
+              Feed
             </button>
 
             <button
@@ -200,7 +201,7 @@ export default function UserProfile() {
                 setActiveIndex(1);
               }}
             >
-              {userData.follower_id.length} Followers
+              {userData.follows_id.length} Following
             </button>
 
             <button
@@ -211,7 +212,7 @@ export default function UserProfile() {
                 setActiveIndex(2);
               }}
             >
-              {userData.posts_id.length} Posts
+              {userData.follower_id.length} Followers
             </button>
 
             <button
@@ -222,21 +223,33 @@ export default function UserProfile() {
                 setActiveIndex(3);
               }}
             >
+              {userData.posts_id.length} Posts
+            </button>
+
+            <button
+              className={`${styles.listButton} ${
+                activeIndex === 4 ? styles.activeButton : ''
+              }`}
+              onClick={() => {
+                setActiveIndex(4);
+              }}
+            >
               {userData.comments_id.length} Comments
             </button>
           </div>
           {/* List Container */}
           <div className={styles.listContainer}>
-            {activeIndex === 0 && userData.follows_id && (
+            {activeIndex === 0 && <PostFeed />}
+            {activeIndex === 1 && userData.follows_id && (
               <UserList users={userData.follows_id} />
             )}
-            {activeIndex === 1 && userData.follower_id && (
+            {activeIndex === 2 && userData.follower_id && (
               <UserList users={userData.follower_id} />
             )}
-            {activeIndex === 2 && userData.posts_id && (
+            {activeIndex === 3 && userData.posts_id && (
               <PostList posts={userData.posts_id} />
             )}
-            {activeIndex === 3 && userData.comments_id && (
+            {activeIndex === 4 && userData.comments_id && (
               <CommentList comments={userData.comments_id} />
             )}
           </div>

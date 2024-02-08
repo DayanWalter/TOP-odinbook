@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import PostList from './PostList';
 
-export default function ReadFeedPosts() {
+export default function PostFeed() {
   const [feed, setFeed] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -52,26 +53,15 @@ export default function ReadFeedPosts() {
       setLoading(false);
     }
   };
+  useEffect(() => {
+    handleFetchFeed();
+  }, []);
 
   return (
     <div id="feedList">
-      <h2>Feed List:</h2>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {loading && <p>Loading feed...</p>}
-      {feed ? (
-        <ul>
-          {feed.map((post) => (
-            <li key={post._id}>
-              <Link to={`/post/${post._id}`}>{post.content}</Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>Click on search button...</div>
-      )}
-      <button onClick={handleFetchFeed} disabled={loading}>
-        {loading ? 'Fetching Feed Data...' : ' Get all Feed Data '}
-      </button>
+      {feed && <PostList posts={feed} />}
     </div>
   );
 }
