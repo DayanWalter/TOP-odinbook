@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 // Sites
-import IndexSite from './components/sites/IndexSite.jsx';
 import ProfileSite from './components/sites/ProfileSite.jsx';
 import PostSite from './components/sites/PostSite.jsx';
 import CommentSite from './components/sites/CommentSite.jsx';

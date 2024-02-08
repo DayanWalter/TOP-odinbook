@@ -1,7 +1,7 @@
 // Importing the 'useState' hook from React for managing state in functional components
 import { useState } from 'react';
 
-export default function CreatePost() {
+export default function PostCreate() {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -57,7 +57,6 @@ export default function CreatePost() {
 
   return (
     <div>
-      <h1>Create a New Post:</h1>
       <form>
         <label>
           Content:

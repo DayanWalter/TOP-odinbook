@@ -181,11 +181,11 @@ export default function UserUpdate() {
           name="bio"
           value={userData.bio}
           onChange={handleChange}
-          pattern="[a-zA-Z0-9]{0,60}"
+          pattern="[a-zA-Z0-9 ]{0,60}"
           autoComplete="off"
         />
         <span className={styles.inputGroup_error}>
-          Bio mustn&apos;t be longer than 60 chars
+          Bio must be shorter than 60 chars
         </span>
       </div>
       {/* Location */}

@@ -18,6 +18,7 @@ import { mdiArrowUp } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
 import { mdiArrowLeft } from '@mdi/js';
 import PostFeed from '../post/PostFeed';
+import PostCreate from '../post/PostCreate';
 
 export default function UserProfile() {
   const [userData, setUserData] = useState(null);
@@ -26,6 +27,7 @@ export default function UserProfile() {
 
   const [isLoggedInUser, setIsLoggedInUser] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenPostCreateModal, setIsOpenPostCreateModal] = useState(false);
 
   const [isFollowing, setIsFollowing] = useState(false);
 
@@ -109,9 +111,16 @@ export default function UserProfile() {
   const handleModal = () => {
     isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
   };
+  const handlePostCreateModal = () => {
+    isOpenPostCreateModal
+      ? setIsOpenPostCreateModal(false)
+      : setIsOpenPostCreateModal(true);
+  };
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
       setIsOpenModal(false);
+      setIsOpenPostCreateModal(false);
+      fetchUserData();
     }
   };
 
@@ -148,8 +157,14 @@ export default function UserProfile() {
             />
           </div>
 
-          <button className={styles.editProfileButton} onClick={handleModal}>
+          <button className={styles.editProfileBtn} onClick={handleModal}>
             Edit Profile
+          </button>
+          <button
+            className={styles.postCreateBtn}
+            onClick={handlePostCreateModal}
+          >
+            New Post
           </button>
           {/* Main */}
           <div className={styles.contactInfo}>
@@ -264,6 +279,24 @@ export default function UserProfile() {
                 >
                   <div className={styles.modal}>
                     <UserEdit />
+                  </div>
+                </div>
+              ) : (
+                ''
+              ))
+            /// isLoggedInUser ? <DeleteUser /> : ''
+          }
+
+          {
+            isOpenPostCreateModal &&
+              (isLoggedInUser ? (
+                <div
+                  id="overlay"
+                  className={styles.overlay}
+                  onClick={handleOverlayClick}
+                >
+                  <div className={styles.modal}>
+                    <PostCreate />
                   </div>
                 </div>
               ) : (
