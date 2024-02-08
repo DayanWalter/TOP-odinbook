@@ -97,17 +97,23 @@ export default function PostListCard({ postId }) {
       ? setIsOpenCommentCreate(false)
       : setIsOpenCommentCreate(true);
   };
-  const handleShowCommentList = () => {
+  const handleShowCommentList = (event) => {
+    // if (event.target.id === 'card') {
     isOpenCommentList
       ? setIsOpenCommentList(false)
       : setIsOpenCommentList(true);
+    // }
   };
   return (
     <>
       {loading && <div></div>}
       {postData && (
         <>
-          <div className={styles.card}>
+          <div
+            id="card"
+            className={styles.card}
+            // onClick={handleShowCommentList}
+          >
             <div className={styles.editSection}>
               {/* Open modal for editing post if user is author */}
               {isAuthor ? (
