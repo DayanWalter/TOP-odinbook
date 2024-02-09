@@ -23,7 +23,7 @@
 .scrollUpButton {
   position: fixed;
   bottom: 15px;
-  right: 50px;
+  right: 150px;
   border: none;
   background: var(--tertiary-color);
   border-radius: 50%;
@@ -71,6 +71,13 @@
   top: 20px;
   right: 20px;
 }
+.logoutBtn {
+  padding: 10px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
 .postCreateBtn {
   padding: 10px;
   /* position: absolute;

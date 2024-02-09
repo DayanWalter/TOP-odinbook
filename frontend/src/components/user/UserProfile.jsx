@@ -166,6 +166,9 @@ export default function UserProfile() {
           <button className={styles.editProfileBtn} onClick={handleModal}>
             Edit Profile
           </button>
+          <Link to={'/logout'}>
+            <button className={styles.logoutBtn}>Logout</button>
+          </Link>
 
           {isLoggedInUser && (
             <div className={styles.iconContainer}>
@@ -304,41 +307,35 @@ export default function UserProfile() {
             {activeIndex === 5 && <UsersRead />}
           </div>
 
-          {
-            isOpenModal &&
-              (isLoggedInUser ? (
-                <div
-                  id="overlay"
-                  className={styles.overlay}
-                  onClick={handleOverlayClick}
-                >
-                  <div className={styles.modal}>
-                    <UserEdit />
-                  </div>
+          {isOpenModal &&
+            (isLoggedInUser ? (
+              <div
+                id="overlay"
+                className={styles.overlay}
+                onClick={handleOverlayClick}
+              >
+                <div className={styles.modal}>
+                  <UserEdit />
                 </div>
-              ) : (
-                ''
-              ))
-            /// isLoggedInUser ? <DeleteUser /> : ''
-          }
+              </div>
+            ) : (
+              ''
+            ))}
 
-          {
-            isOpenPostCreateModal &&
-              (isLoggedInUser ? (
-                <div
-                  id="overlay"
-                  className={styles.overlay}
-                  onClick={handleOverlayClick}
-                >
-                  <div className={styles.modal}>
-                    <PostCreate />
-                  </div>
+          {isOpenPostCreateModal &&
+            (isLoggedInUser ? (
+              <div
+                id="overlay"
+                className={styles.overlay}
+                onClick={handleOverlayClick}
+              >
+                <div className={styles.modal}>
+                  <PostCreate />
                 </div>
-              ) : (
-                ''
-              ))
-            /// isLoggedInUser ? <DeleteUser /> : ''
-          }
+              </div>
+            ) : (
+              ''
+            ))}
         </>
       )}
       {showButton && (

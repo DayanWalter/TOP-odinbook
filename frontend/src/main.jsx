@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProfileSite from './components/sites/ProfileSite.jsx';
 import SignUpSite from './components/sites/SignUpSite.jsx';
 import LoginSite from './components/sites/LoginSite.jsx';
+import LogoutSite from './components/sites/LogoutSite.jsx';
 
 const router = createBrowserRouter([
   // User
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginSite />,
+  },
+  {
+    path: '/logout',
+    element: <LogoutSite />,
   },
 
   {
