@@ -166,7 +166,7 @@ export default function UserLogin() {
           onClick={handleLoginDemoUser}
           disabled={loading}
         >
-          {loading ? `Login User: ${userData.user_name}` : 'Demo User Login'}
+          Demo User Login
         </button>
         {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
