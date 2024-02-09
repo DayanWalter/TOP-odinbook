@@ -57,6 +57,58 @@ export default function UserLogin() {
     }
   };
 
+  const handleLoginDemoUser = async (e) => {
+    e.preventDefault();
+    setUserData({
+      user_name: 'DemoUser',
+      password: '111111',
+    });
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        user_name: 'DemoUser',
+        password: '111111',
+      }),
+    };
+
+    try {
+      setLoading(true);
+
+      const response = await fetch(
+        'http://localhost:3000/api/user/login',
+        requestOptions
+      );
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error.errors[0].msg);
+        return;
+      }
+      // Save the token, e.g., in local storage
+      localStorage.setItem('authToken', data.token);
+      // Split the payload of the jwt and convert the ._id part
+      const payload = JSON.parse(atob(data.token.split('.')[1]));
+      // Define the username you are looking for
+      const userId = payload._id;
+
+      console.log('Successfully logged in:', data);
+      setUserData({
+        user_name: '',
+        password: '',
+      });
+      navigate(`/user/${userId}`);
+    } catch (error) {
+      console.error('Error during user login:', error);
+      setError('Error during user login. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
@@ -85,7 +137,6 @@ export default function UserLogin() {
             Username must be at least 6 characters long
           </span>
         </div>
-
         <div className={styles.inputGroup}>
           <label htmlFor="password" className={styles.inputGroup_label}>
             Password:
@@ -109,6 +160,13 @@ export default function UserLogin() {
           disabled={loading}
         >
           {loading ? `Login User: ${userData.user_name}` : 'Login User'}
+        </button>{' '}
+        <button
+          className={styles.formBtn}
+          onClick={handleLoginDemoUser}
+          disabled={loading}
+        >
+          {loading ? `Login User: ${userData.user_name}` : 'Demo User Login'}
         </button>
         {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
