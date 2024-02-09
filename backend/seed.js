@@ -1,13 +1,14 @@
 // require the necessary libraries
 const faker = require('@faker-js/faker');
 const mongoose = require('mongoose');
+require('dotenv').config();
+
 const User = require('./models/user');
 const Post = require('./models/post');
 
 async function seedData() {
   // Connection URL
-  const uri =
-    'mongodb+srv://synthcyrax:UAlQLzUjRekhEcaf@cluster0.q8cadaa.mongodb.net/?retryWrites=true&w=majority';
+  const uri = process.env.DEV_DB_URL;
   const seed_count = Math.floor(Math.random() * 20) + 1;
   const user_count = Math.floor(Math.random() * 20) + 1;
   const post_count = Math.floor(Math.random() * 20) + 1;
