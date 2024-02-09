@@ -93,7 +93,7 @@ export default function UserUpdate() {
       [name]: value,
     }));
   };
-
+  console.log(userData);
   return (
     <>
       {/* User Name */}
@@ -181,7 +181,7 @@ export default function UserUpdate() {
           name="bio"
           value={userData.bio}
           onChange={handleChange}
-          pattern="[a-zA-Z0-9 ]{0,60}"
+          pattern="^(?:.{0,60})$"
           autoComplete="off"
         />
         <span className={styles.inputGroup_error}>

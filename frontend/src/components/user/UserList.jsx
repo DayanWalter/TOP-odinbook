@@ -3,6 +3,8 @@ import styles from '../../css/UserList.module.css';
 import UserListCard from './UserListCard';
 
 export default function UserList({ users }) {
+  users.sort((a, b) => new Date(b.reg_date) - new Date(a.reg_date));
+
   const handleScrollUp = () => {
     document
       .getElementById('profileUserContainer')
