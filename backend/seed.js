@@ -8,7 +8,7 @@ async function seedData() {
   // Connection URL
   const uri =
     'mongodb+srv://synthcyrax:UAlQLzUjRekhEcaf@cluster0.q8cadaa.mongodb.net/?retryWrites=true&w=majority';
-  const seed_count = 2;
+  const seed_count = 20;
   mongoose.set('strictQuery', false);
   mongoose
     .connect(uri, {
@@ -32,8 +32,9 @@ async function seedData() {
     const location = faker.faker.location.city();
     const bio = faker.faker.person.bio();
     const img_url = faker.faker.image.url();
-    const avatar_url = faker.faker.image.urlLoremFlickr();
+    const avatar_url = faker.faker.image.avatar();
     const reg_date = faker.faker.date.past();
+
     const user = new User({
       user_name,
       email,

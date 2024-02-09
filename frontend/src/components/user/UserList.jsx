@@ -3,11 +3,16 @@ import styles from '../../css/UserList.module.css';
 import UserListCard from './UserListCard';
 
 export default function UserList({ users }) {
+  const handleScrollUp = () => {
+    document
+      .getElementById('profileUserContainer')
+      .scrollTo({ top: 0, behavior: 'smooth' });
+  };
   return (
     <ul className={styles.listContainer}>
       {users.map((user) => (
         <li key={user._id}>
-          <Link to={`/user/${user._id}`}>
+          <Link to={`/user/${user._id}`} onClick={handleScrollUp}>
             <UserListCard
               user_name={user.user_name}
               avatar_url={user.avatar_url}
