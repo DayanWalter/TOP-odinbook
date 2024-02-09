@@ -8,7 +8,8 @@ export default function PostCreate() {
 
   const [success, setSuccess] = useState(false);
 
-  const handleCreatePost = async () => {
+  const handleCreatePost = async (e) => {
+    e.preventDefault();
     const authToken = localStorage.getItem('authToken');
 
     // Log an error if authentication token is not available

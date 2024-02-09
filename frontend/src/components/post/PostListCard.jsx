@@ -126,12 +126,12 @@ export default function PostListCard({ postId }) {
                 ''
               )}
 
-              <Icon
+              {/* <Icon
                 path={mdiChatPlusOutline}
                 size={1}
                 onClick={handleCommentCreate}
                 className={styles.icon}
-              />
+              /> */}
             </div>
 
             <div className={styles.stats}>
@@ -144,7 +144,7 @@ export default function PostListCard({ postId }) {
               <div className={styles.footer}>
                 <div className={styles.iconGroup}>
                   <Icon
-                    onClick={handleShowCommentList}
+                    onClick={handleCommentCreate}
                     path={mdiChatOutline}
                     size={1}
                     className={styles.icon}
@@ -179,20 +179,24 @@ export default function PostListCard({ postId }) {
             </div>
           )}
           {isOpenCommentCreate && (
-            <div className={styles.commentCreate}>
-              <CommentCreate
-                postId={postId}
-                commentCreated={commentCreated}
-                setCommentCreated={setCommentCreated}
-              />
+            <div className={styles.commentSection}>
+              <div className={styles.commentCreate}>
+                <CommentCreate
+                  postId={postId}
+                  commentCreated={commentCreated}
+                  setCommentCreated={setCommentCreated}
+                />
+              </div>
+              <div className={styles.commentList}>
+                <CommentList comments={postData.comments_id} />
+              </div>
             </div>
           )}
-          {/* Todo: show real comment list under post */}
-          <div className={styles.commentList}>
+          {/* <div className={styles.commentList}>
             {isOpenCommentList && (
               <CommentList comments={postData.comments_id} />
             )}
-          </div>
+          </div> */}
         </>
       )}
     </>

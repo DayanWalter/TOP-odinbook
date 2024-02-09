@@ -51,11 +51,7 @@ export default function UsersRead() {
   return (
     <div id="userList">
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      {usersData ? (
-        <UserList users={usersData.allUsers} />
-      ) : (
-        <div>Click on search button...</div>
-      )}
+      {usersData && <UserList users={usersData.allUsers} />}
     </div>
   );
 }
