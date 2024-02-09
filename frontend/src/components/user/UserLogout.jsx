@@ -1,4 +1,29 @@
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 export default function UserLogout() {
-  // localStorage delete
-  return <div>Bye, see you soon!</div>;
+  const navigate = useNavigate();
+  const [remainingTime, setRemainingTime] = useState(5);
+  // Redirect user to login after x seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRemainingTime((v) => v - 1);
+    }, 1000);
+
+    setTimeout(() => {
+      localStorage.setItem('authToken', '');
+      navigate('/login');
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      <div>Bye, see you soon!</div>
+
+      <div>You will be redirected in {remainingTime} seconds...</div>
+      <Link to={'/login'}> ...back to Login </Link>
+    </>
+  );
 }

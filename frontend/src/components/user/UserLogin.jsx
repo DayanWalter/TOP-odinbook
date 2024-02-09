@@ -4,11 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 export default function UserLogin() {
   const navigate = useNavigate();
-  const authToken = localStorage.getItem('authToken');
-  // Split the payload of the jwt and convert the ._id part
-  const payload = JSON.parse(atob(authToken.split('.')[1]));
-  // Define the username you are looking for
-  const userId = payload._id;
 
   const [userData, setUserData] = useState({
     user_name: '',
@@ -42,6 +37,11 @@ export default function UserLogin() {
       }
       // Save the token, e.g., in local storage
       localStorage.setItem('authToken', data.token);
+      const authToken = localStorage.getItem('authToken');
+      // Split the payload of the jwt and convert the ._id part
+      const payload = JSON.parse(atob(authToken.split('.')[1]));
+      // Define the username you are looking for
+      const userId = payload._id;
 
       console.log('Successfully logged in:', data);
       setUserData({
