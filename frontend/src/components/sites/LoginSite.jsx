@@ -9,7 +9,7 @@ export default function LoginSite() {
         <p className={styles.top}>Welcome to</p>
         <p className={styles.main}>
           BitFeather
-          <img src="../../../public/bitfeather.png" alt="" />
+          <img src="../../../bitfeather.png" alt="" />
         </p>
         <p className={styles.bottom}>
           the chirping ground for bitcoin enthusiasts.
