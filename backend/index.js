@@ -35,7 +35,14 @@ const db = require('./db');
 db();
 // END DB
 // Enable Cross-Origin Resource Sharing.
-app.use(cors());
+app.use(
+  cors()
+  //   {
+  //   origin: ['https://top-odinbook-frontend.vercel.app/'],
+  //   methods: ['POST', 'GET'],
+  //   credentials: true,
+  // }
+);
 // Use 'dev' format for HTTP request logging.
 app.use(logger('dev'));
 // Parse incoming JSON requests.
