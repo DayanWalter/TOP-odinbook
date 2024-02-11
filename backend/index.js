@@ -4,6 +4,8 @@ const createError = require('http-errors');
 const express = require('express');
 // Import the 'cors' middleware for handling Cross-Origin Resource Sharing.
 const cors = require('cors');
+// Import the 'helmet' middleware for setting http headers appropriately.
+const helmet = require('helmet');
 // Import the 'passport' authentication middleware.
 const passport = require('passport');
 // Import the 'JwtStrategy' for passport.
@@ -41,6 +43,7 @@ app.use(
   //   origin: ['https://bitfeather.onrender.com/'],
   // })
 );
+app.use(helmet());
 // Use 'dev' format for HTTP request logging.
 app.use(logger('dev'));
 // Parse incoming JSON requests.
