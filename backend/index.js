@@ -36,9 +36,10 @@ db();
 // END DB
 // Enable Cross-Origin Resource Sharing.
 app.use(
-  cors()({
-    origin: ['https://bitfeather.onrender.com/'],
-  })
+  cors()
+  // ({
+  //   origin: ['https://bitfeather.onrender.com/'],
+  // })
 );
 // Use 'dev' format for HTTP request logging.
 app.use(logger('dev'));
