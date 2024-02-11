@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import UserList from './UserList';
 
 export default function UsersRead() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [usersData, setUsersData] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -26,10 +28,7 @@ export default function UsersRead() {
 
     try {
       setLoading(true);
-      const response = await fetch(
-        'http://localhost:3000/api/user/all',
-        requestOptions
-      );
+      const response = await fetch(`${BASE_URL}/api/user/all`, requestOptions);
       if (!response.ok) {
         setError(data.error.errors[0].msg);
         return;
