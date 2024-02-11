@@ -4,6 +4,8 @@ import Icon from '@mdi/react';
 
 import { mdiHeartOutline } from '@mdi/js';
 export default function PostLike({ postId, setIsLiking }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const handlePostLike = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -19,7 +21,7 @@ export default function PostLike({ postId, setIsLiking }) {
     try {
       // Execute the backend request
       const response = await fetch(
-        `http://localhost:3000/api/post/${postId}/like`,
+        `${BASE_URL}/api/post/${postId}/like`,
         requestOptions
       );
 

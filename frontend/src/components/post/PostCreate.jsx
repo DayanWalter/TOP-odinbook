@@ -2,6 +2,8 @@ import styles from '../../css/Form.module.css';
 import { useState } from 'react';
 
 export default function PostCreate() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -34,7 +36,7 @@ export default function PostCreate() {
 
       // Make the POST request to create a new post
       const response = await fetch(
-        'http://localhost:3000/api/post/create',
+        `${BASE_URL}/api/post/create`,
         requestOptions
       );
 

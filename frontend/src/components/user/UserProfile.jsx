@@ -24,6 +24,8 @@ import PostCreate from '../post/PostCreate';
 import UsersRead from './UsersRead';
 
 export default function UserProfile() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -60,7 +62,7 @@ export default function UserProfile() {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3000/api/user/${userIdFromParams}`,
+        `${BASE_URL}/api/user/${userIdFromParams}`,
         requestOptions
       );
       const data = await response.json();

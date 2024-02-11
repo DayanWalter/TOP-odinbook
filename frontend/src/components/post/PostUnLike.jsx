@@ -5,6 +5,8 @@ import Icon from '@mdi/react';
 import { mdiHeart } from '@mdi/js';
 
 export default function PostUnLike({ postId, setIsLiking }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const handleUnLikePost = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -20,7 +22,7 @@ export default function PostUnLike({ postId, setIsLiking }) {
     try {
       // Execute the backend request
       const response = await fetch(
-        `http://localhost:3000/api/post/${postId}/unlike`,
+        `${BASE_URL}/api/post/${postId}/unlike`,
         requestOptions
       );
 

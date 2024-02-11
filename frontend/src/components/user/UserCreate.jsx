@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function UserCreate() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     user_name: '',
@@ -32,7 +34,7 @@ export default function UserCreate() {
       setLoading(true);
 
       const response = await fetch(
-        'http://localhost:3000/api/user/create',
+        `${BASE_URL}/api/user/create`,
         requestOptions
       );
       const data = await response.json();

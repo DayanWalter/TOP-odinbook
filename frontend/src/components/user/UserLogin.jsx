@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function UserLogin() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
@@ -26,7 +28,7 @@ export default function UserLogin() {
       setLoading(true);
 
       const response = await fetch(
-        'http://localhost:3000/api/user/login',
+        `${BASE_URL}/api/user/login`,
         requestOptions
       );
       const data = await response.json();
@@ -79,7 +81,7 @@ export default function UserLogin() {
       setLoading(true);
 
       const response = await fetch(
-        'http://localhost:3000/api/user/login',
+        `${BASE_URL}/api/user/login`,
         requestOptions
       );
       const data = await response.json();

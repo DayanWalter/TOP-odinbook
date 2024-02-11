@@ -12,6 +12,8 @@ import PostLike from './PostLike';
 import PostEdit from './PostEdit';
 
 export default function ReadPost() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [postData, setPostData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -47,7 +49,7 @@ export default function ReadPost() {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:3000/api/post/${postId}`,
+          `${BASE_URL}/api/post/${postId}`,
           requestOptions
         );
         const data = await response.json();

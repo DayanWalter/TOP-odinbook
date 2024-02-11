@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PostList from './PostList';
 
 export default function PostFeed() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [feed, setFeed] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -31,10 +33,7 @@ export default function PostFeed() {
       setLoading(true);
 
       // Make the GET request to get the feed
-      const response = await fetch(
-        'http://localhost:3000/api/post/feed',
-        requestOptions
-      );
+      const response = await fetch('${BASE_URL}/api/post/feed', requestOptions);
 
       // Throw an error if the response indicates a failure
       if (!response.ok) {

@@ -38,9 +38,8 @@ db();
 app.use(
   cors()
   //   {
-  //   origin: ['https://top-odinbook-frontend.vercel.app/'],
-  //   methods: ['POST', 'GET'],
-  //   credentials: true,
+  //   origin: ['https://top-odinbook-frontend.render.com/'],
+
   // }
 );
 // Use 'dev' format for HTTP request logging.

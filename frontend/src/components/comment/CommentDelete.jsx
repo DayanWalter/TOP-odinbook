@@ -1,5 +1,7 @@
 import styles from '../../css/Form.module.css';
 export default function CommentDelete({ commentId }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const handleDeleteComment = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -14,7 +16,7 @@ export default function CommentDelete({ commentId }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/comment/${commentId}/delete`,
+        `${BASE_URL}/api/comment/${commentId}/delete`,
         requestOptions
       );
 

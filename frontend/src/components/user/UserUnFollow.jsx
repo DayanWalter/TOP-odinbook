@@ -1,4 +1,6 @@
 export default function UserUnFollow({ userId, setIsFollowing }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const handleUnFollowUser = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -14,7 +16,7 @@ export default function UserUnFollow({ userId, setIsFollowing }) {
     try {
       // Execute the backend request
       const response = await fetch(
-        `http://localhost:3000/api/user/${userId}/unfollow`,
+        `${BASE_URL}/api/user/${userId}/unfollow`,
         requestOptions
       );
 

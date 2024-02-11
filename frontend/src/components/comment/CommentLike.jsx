@@ -5,6 +5,8 @@ import Icon from '@mdi/react';
 import { mdiHeartOutline } from '@mdi/js';
 
 export default function CommentLike({ commentId, setIsLiking }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const handleCommentLike = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -20,7 +22,7 @@ export default function CommentLike({ commentId, setIsLiking }) {
     try {
       // Execute the backend request
       const response = await fetch(
-        `http://localhost:3000/api/comment/${commentId}/like`,
+        `${BASE_URL}/api/comment/${commentId}/like`,
         requestOptions
       );
 

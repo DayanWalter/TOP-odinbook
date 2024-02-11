@@ -1,4 +1,6 @@
 export default function UserFollow({ userId, setIsFollowing }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const handleFollowUser = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -14,7 +16,7 @@ export default function UserFollow({ userId, setIsFollowing }) {
     try {
       // Execute the backend request
       const response = await fetch(
-        `http://localhost:3000/api/user/${userId}/follow`,
+        `${BASE_URL}/api/user/${userId}/follow`,
         requestOptions
       );
 

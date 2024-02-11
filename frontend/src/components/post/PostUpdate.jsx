@@ -3,6 +3,8 @@ import styles from '../../css/Form.module.css';
 import { useState, useEffect } from 'react';
 
 export default function UpdatePost({ postId }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -21,7 +23,7 @@ export default function UpdatePost({ postId }) {
       };
       try {
         const response = await fetch(
-          `http://localhost:3000/api/post/${postId}`,
+          `${BASE_URL}/api/post/${postId}`,
           requestOptions
         );
         const data = await response.json();
@@ -57,7 +59,7 @@ export default function UpdatePost({ postId }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/post/${postId}/update`,
+        `${BASE_URL}/api/post/${postId}/update`,
         requestOptions
       );
       const data = await response.json();

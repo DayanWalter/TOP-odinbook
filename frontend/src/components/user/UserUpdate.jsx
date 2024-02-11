@@ -2,6 +2,8 @@ import styles from '../../css/Form.module.css';
 import { useState, useEffect } from 'react';
 
 export default function UserUpdate() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [userData, setUserData] = useState({
     user_name: '',
     email: '',
@@ -31,7 +33,7 @@ export default function UserUpdate() {
       };
       try {
         const response = await fetch(
-          `http://localhost:3000/api/user/${userId}`,
+          `${BASE_URL}/api/user/${userId}`,
           requestOptions
         );
         const data = await response.json();
@@ -65,7 +67,7 @@ export default function UserUpdate() {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/user/update`,
+        `${BASE_URL}/api/user/update`,
         requestOptions
       );
       const data = await response.json();

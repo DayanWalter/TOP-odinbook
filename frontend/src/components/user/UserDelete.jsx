@@ -5,6 +5,8 @@ import Icon from '@mdi/react';
 import { mdiAlertOutline } from '@mdi/js';
 
 export default function UserDelete() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const handleDeleteUser = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -19,7 +21,7 @@ export default function UserDelete() {
 
     try {
       const response = await fetch(
-        'http://localhost:3000/api/user/delete',
+        `${BASE_URL}/api/user/delete`,
         requestOptions
       );
 

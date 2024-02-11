@@ -7,6 +7,8 @@ export default function CommentCreate({
   commentCreated,
   setCommentCreated,
 }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -36,7 +38,7 @@ export default function CommentCreate({
 
       // Make the POST request to create a new post
       const response = await fetch(
-        `http://localhost:3000/api/comment/${postId}/create`,
+        `${BASE_URL}/api/comment/${postId}/create`,
         requestOptions
       );
 

@@ -16,6 +16,8 @@ import CommentList from '../comment/CommentList';
 import { Link } from 'react-router-dom';
 
 export default function PostListCard({ postId }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [postData, setPostData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -55,7 +57,7 @@ export default function PostListCard({ postId }) {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3000/api/post/${postId}`,
+        `${BASE_URL}/api/post/${postId}`,
         requestOptions
       );
       const data = await response.json();

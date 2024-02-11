@@ -3,9 +3,8 @@ import styles from '../../css/Form.module.css';
 import { useState, useEffect } from 'react';
 
 export default function CommentUpdate({ commentId }) {
-  // const [commentData, setCommentData] = useState({
-  //   content: '',
-  // });
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [content, setContent] = useState('');
 
   const [error, setError] = useState('');
@@ -25,7 +24,7 @@ export default function CommentUpdate({ commentId }) {
       };
       try {
         const response = await fetch(
-          `http://localhost:3000/api/comment/${commentId}`,
+          `${BASE_URL}/api/comment/${commentId}`,
           requestOptions
         );
         const data = await response.json();
@@ -61,7 +60,7 @@ export default function CommentUpdate({ commentId }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/comment/${commentId}/update`,
+        `${BASE_URL}/api/comment/${commentId}/update`,
         requestOptions
       );
       const data = await response.json();

@@ -15,6 +15,8 @@ import CommentEdit from './CommentEdit';
 import { Link } from 'react-router-dom';
 
 export default function CommentListCard({ commentId }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [commentData, setCommentData] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -53,7 +55,7 @@ export default function CommentListCard({ commentId }) {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:3000/api/comment/${commentId}`,
+        `${BASE_URL}/api/comment/${commentId}`,
         requestOptions
       );
       const data = await response.json();

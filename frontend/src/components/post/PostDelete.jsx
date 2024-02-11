@@ -1,5 +1,7 @@
 import styles from '../../css/Form.module.css';
 export default function DeletePost({ postId }) {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const handleDeletePost = async () => {
     const authToken = localStorage.getItem('authToken');
 
@@ -14,7 +16,7 @@ export default function DeletePost({ postId }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/post/${postId}/delete`,
+        `${BASE_URL}/api/post/${postId}/delete`,
         requestOptions
       );
 
