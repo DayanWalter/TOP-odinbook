@@ -33,7 +33,7 @@ export default function PostFeed() {
       setLoading(true);
 
       // Make the GET request to get the feed
-      const response = await fetch('${BASE_URL}/api/post/feed', requestOptions);
+      const response = await fetch(`${BASE_URL}/api/post/feed`, requestOptions);
 
       // Throw an error if the response indicates a failure
       if (!response.ok) {
