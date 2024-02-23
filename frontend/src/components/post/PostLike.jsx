@@ -1,8 +1,6 @@
-import styles from '../../css/PostLikeUnlike.module.css';
-
 import Icon from '@mdi/react';
-
 import { mdiHeartOutline } from '@mdi/js';
+
 export default function PostLike({ postId, setIsLiking }) {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -40,12 +38,7 @@ export default function PostLike({ postId, setIsLiking }) {
 
   return (
     <div>
-      <Icon
-        onClick={handlePostLike}
-        path={mdiHeartOutline}
-        size={1}
-        className={styles.icon}
-      />
+      <Icon onClick={handlePostLike} path={mdiHeartOutline} size={1} />
     </div>
   );
 }

@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
-import styles from '../../css/UserProfile.module.css';
 import PostList from '../post/PostList';
 import CommentList from '../comment/CommentList';
 import UserUnFollow from './UserUnFollow';
 import UserFollow from '../user/UserFollow';
 import UserList from './UserList';
 import UserEdit from './UserEdit';
-// import UpdateUser from '../user/UpdateUser';
-// import DeleteUser from '../user/DeleteUser';
 
 // Icons
 import Icon from '@mdi/react';
@@ -141,56 +138,39 @@ export default function UserProfile() {
   }
 
   return (
-    <div id="profileUserContainer" className={styles.profileUserContainer}>
+    <div id="profileUserContainer">
       {loading && <div></div>}
       {userData && (
         <>
           <Link to={`/user/${loggedInUserId}`}>
-            <div className={styles.iconGroup}>
+            <div>
               <Icon path={mdiArrowLeft} size={1} />
               <p>{loggedInUserName}</p>
             </div>
           </Link>
 
-          <div className={styles.headerSection}>
-            <img
-              className={styles.profilePicture}
-              src={userData.avatar_url}
-              alt="Avatar"
-            />
-            <img
-              className={styles.heroImage}
-              src={userData.img_url}
-              alt="Hero Image"
-            />
+          <div>
+            <img src={userData.avatar_url} alt="Avatar" />
+            <img src={userData.img_url} alt="Hero Image" />
           </div>
 
-          <button className={styles.editProfileBtn} onClick={handleModal}>
-            Edit Profile
-          </button>
+          <button onClick={handleModal}>Edit Profile</button>
           <Link to={'/logout'}>
-            <button className={styles.logoutBtn}>Logout</button>
+            <button>Logout</button>
           </Link>
 
           {isLoggedInUser && (
-            <div className={styles.iconContainer}>
+            <div>
               <Icon
                 path={mdiNotePlusOutline}
                 size={2}
                 onClick={handlePostCreateModal}
-                className={styles.icon}
               />
             </div>
-            // <button
-            //   className={styles.postCreateBtn}
-            //   onClick={handlePostCreateModal}
-            // >
-            //   New Post
-            // </button>
           )}
 
           {/* Main */}
-          <div className={styles.contactInfo}>
+          <div>
             <h1>{userData.user_name}</h1>
             {/* Show follow/unfollow button, if profile is not logged in user */}
             {!isLoggedInUser &&
@@ -205,28 +185,25 @@ export default function UserProfile() {
                   setIsFollowing={setIsFollowing}
                 />
               ))}
-            <div className={styles.contactInfo}>
-              <div className={styles.iconGroup}>
+            <div>
+              <div>
                 <Icon path={mdiFeather} size={1} />
                 {userData.bio}
               </div>
-              <div className={styles.iconGroup}>
+              <div>
                 <Icon path={mdiMapMarkerOutline} size={1} />
                 {userData.location}
               </div>
-              <div className={styles.iconGroup}>
+              <div>
                 <Icon path={mdiCalendarMonthOutline} size={1} />
                 {new Date(userData.reg_date).toLocaleDateString()}
               </div>
             </div>
           </div>
           {/* List Buttons */}
-          <div className={styles.listButtons}>
+          <div>
             {isLoggedInUser && (
               <button
-                className={`${styles.listButton} ${
-                  activeIndex === 0 ? styles.activeButton : ''
-                }`}
                 onClick={() => {
                   setActiveIndex(0);
                 }}
@@ -236,9 +213,6 @@ export default function UserProfile() {
             )}
 
             <button
-              className={`${styles.listButton} ${
-                activeIndex === 1 ? styles.activeButton : ''
-              }`}
               onClick={() => {
                 setActiveIndex(1);
               }}
@@ -247,9 +221,6 @@ export default function UserProfile() {
             </button>
 
             <button
-              className={`${styles.listButton} ${
-                activeIndex === 2 ? styles.activeButton : ''
-              }`}
               onClick={() => {
                 setActiveIndex(2);
               }}
@@ -258,9 +229,6 @@ export default function UserProfile() {
             </button>
 
             <button
-              className={`${styles.listButton} ${
-                activeIndex === 3 ? styles.activeButton : ''
-              }`}
               onClick={() => {
                 setActiveIndex(3);
               }}
@@ -269,9 +237,6 @@ export default function UserProfile() {
             </button>
 
             <button
-              className={`${styles.listButton} ${
-                activeIndex === 4 ? styles.activeButton : ''
-              }`}
               onClick={() => {
                 setActiveIndex(4);
               }}
@@ -280,9 +245,6 @@ export default function UserProfile() {
             </button>
             {isLoggedInUser && (
               <button
-                className={`${styles.listButton} ${
-                  activeIndex === 5 ? styles.activeButton : ''
-                }`}
                 onClick={() => {
                   setActiveIndex(5);
                 }}
@@ -292,7 +254,7 @@ export default function UserProfile() {
             )}
           </div>
           {/* List Container */}
-          <div className={styles.listContainer}>
+          <div>
             {activeIndex === 0 && <PostFeed />}
             {activeIndex === 1 && userData.follows_id && (
               <UserList users={userData.follows_id} />
@@ -311,12 +273,8 @@ export default function UserProfile() {
 
           {isOpenModal &&
             (isLoggedInUser ? (
-              <div
-                id="overlay"
-                className={styles.overlay}
-                onClick={handleOverlayClick}
-              >
-                <div className={styles.modal}>
+              <div id="overlay" onClick={handleOverlayClick}>
+                <div>
                   <UserEdit />
                 </div>
               </div>
@@ -326,12 +284,8 @@ export default function UserProfile() {
 
           {isOpenPostCreateModal &&
             (isLoggedInUser ? (
-              <div
-                id="overlay"
-                className={styles.overlay}
-                onClick={handleOverlayClick}
-              >
-                <div className={styles.modal}>
+              <div id="overlay" onClick={handleOverlayClick}>
+                <div>
                   <PostCreate />
                 </div>
               </div>
@@ -341,11 +295,7 @@ export default function UserProfile() {
         </>
       )}
       {showButton && (
-        <button
-          title="Scroll Up"
-          className={styles.scrollUpButton}
-          onClick={handleScrollUp}
-        >
+        <button title="Scroll Up" onClick={handleScrollUp}>
           <Icon path={mdiArrowUp} size={2} />
         </button>
       )}

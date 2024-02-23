@@ -1,4 +1,3 @@
-import styles from '../../css/UserListCard.module.css';
 import Icon from '@mdi/react';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiChatOutline } from '@mdi/js';
@@ -10,19 +9,19 @@ export default function UserListCard({
   posts_id,
 }) {
   return (
-    <div className={styles.card}>
+    <div>
       {/* <div className={styles.profilePicture}> */}
-      <img className={styles.roundedImage} src={avatar_url} alt="Avatar" />
+      <img src={avatar_url} alt="Avatar" />
       {/* </div> */}
-      <div className={styles.stats}>
+      <div>
         <div>{user_name}</div>
 
-        <div className={styles.iconGroup}>
+        <div>
           <Icon path={mdiChatOutline} size={1} />
 
           <div>{posts_id.length}</div>
         </div>
-        <div className={styles.iconGroup}>
+        <div>
           <Icon path={mdiCalendarMonthOutline} size={1} />
           {new Date(reg_date).toLocaleDateString()}
         </div>

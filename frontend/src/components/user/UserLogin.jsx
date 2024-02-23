@@ -1,4 +1,3 @@
-import styles from '../../css/Form.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +13,7 @@ export default function UserLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // User Login
   const handleLoginUser = async (e) => {
     e.preventDefault();
     const requestOptions = {
@@ -58,7 +58,7 @@ export default function UserLogin() {
       setLoading(false);
     }
   };
-
+  // Demo User Login
   const handleLoginDemoUser = async (e) => {
     e.preventDefault();
     setUserData({
@@ -111,6 +111,7 @@ export default function UserLogin() {
     }
   };
 
+  // Change userData
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
@@ -120,51 +121,45 @@ export default function UserLogin() {
   };
 
   return (
-    <div id="loginUserComponent">
-      <form className={styles.form}>
-        <div className={styles.inputGroup}>
-          <label htmlFor="user_name" className={styles.inputGroup_label}>
-            Username:
-          </label>
+    <div className="border">
+      <form className="flex flex-col items-start justify-start w-full mt-6">
+        <label htmlFor="user_name" className="w-full max-w-sm mb-5">
+          Username:
+          <span className="text-red-500">*</span>
           <input
+            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-blue-400/20 focus:border-blue-400 dark:text-black"
             id="user_name"
-            className={styles.inputGroup_input}
             type="text"
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
             pattern="[a-zA-Z0-9]{6,}"
           />
-          <span className={styles.inputGroup_error}>
-            Username must be at least 6 characters long
-          </span>
-        </div>
-        <div className={styles.inputGroup}>
-          <label htmlFor="password" className={styles.inputGroup_label}>
-            Password:
-          </label>
+          <span>Username must be at least 6 characters long</span>
+        </label>
+        <label htmlFor="user_password" className="w-full max-w-sm mb-5">
+          Password:
+          <span className="text-red-500">*</span>
           <input
-            id="password"
-            className={styles.inputGroup_input}
+            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-blue-400/20 focus:border-blue-400 dark:text-black"
+            id="user_password"
             type="password"
             name="password"
             value={userData.password}
             onChange={handleChange}
             pattern="[a-zA-Z0-9]{6,}"
           />
-          <span className={styles.inputGroup_error}>
-            Password must be at least 6 characters long
-          </span>
-        </div>
+          <span>Password must be at least 6 characters long</span>
+        </label>
         <button
-          className={styles.formBtn}
+          className="px-4 py-2 mb-5 font-medium text-white rounded-lg bg-primary hover:bg-primary/80"
           onClick={handleLoginUser}
           disabled={loading}
         >
           {loading ? `Login User: ${userData.user_name}` : 'Login User'}
         </button>{' '}
         <button
-          className={styles.formBtn}
+          className="px-4 py-2 font-medium text-white rounded-lg bg-primary hover:bg-primary/80"
           onClick={handleLoginDemoUser}
           disabled={loading}
         >

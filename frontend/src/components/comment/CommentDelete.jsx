@@ -1,4 +1,3 @@
-import styles from '../../css/Form.module.css';
 export default function CommentDelete({ commentId }) {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -32,9 +31,7 @@ export default function CommentDelete({ commentId }) {
 
   return (
     <div id="deleteComment">
-      <button onClick={handleDeleteComment} className={styles.deleteBtn}>
-        Delete Comment
-      </button>
+      <button onClick={handleDeleteComment}>Delete Comment</button>
     </div>
   );
 }

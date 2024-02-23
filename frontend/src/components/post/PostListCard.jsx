@@ -1,9 +1,7 @@
-import styles from '../../css/PostListCard.module.css';
 import Icon from '@mdi/react';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiChatOutline } from '@mdi/js';
 import { mdiFileEditOutline } from '@mdi/js';
-import { mdiChatPlusOutline } from '@mdi/js';
 
 import PostEdit from './PostEdit';
 import CommentCreate from '../comment/CommentCreate';
@@ -100,60 +98,43 @@ export default function PostListCard({ postId }) {
       ? setIsOpenCommentCreate(false)
       : setIsOpenCommentCreate(true);
   };
-  const handleShowCommentList = () => {
-    isOpenCommentList
-      ? setIsOpenCommentList(false)
-      : setIsOpenCommentList(true);
-  };
+
   return (
     <>
       {loading && <div></div>}
       {postData && (
         <>
-          <div
-            id="card"
-            className={styles.card}
-            // onClick={handleShowCommentList}
-          >
-            <div className={styles.editSection}>
+          <div id="card">
+            <div>
               {/* Open modal for editing post if user is author */}
               {isAuthor ? (
                 <Icon
                   path={mdiFileEditOutline}
                   size={1}
                   onClick={handlePostEdit}
-                  className={styles.icon}
                 />
               ) : (
                 ''
               )}
-
-              {/* <Icon
-                path={mdiChatPlusOutline}
-                size={1}
-                onClick={handleCommentCreate}
-                className={styles.icon}
-              /> */}
             </div>
 
-            <div className={styles.stats}>
-              <div className={styles.author}>
+            <div>
+              <div>
                 <Link to={`/user/${postData.author_id._id}`}>
                   {postData.author_id.user_name}
                 </Link>
               </div>
-              <div className={styles.content}>{postData.content}</div>
-              <div className={styles.footer}>
-                <div className={styles.iconGroup}>
+              <div>{postData.content}</div>
+              <div>
+                <div>
                   <Icon
                     onClick={handleCommentCreate}
                     path={mdiChatOutline}
                     size={1}
-                    className={styles.icon}
                   />
                   <div>{postData.comments_id.length}</div>
                 </div>
-                <div className={styles.iconGroup}>
+                <div>
                   {isLiking ? (
                     <PostUnLike postId={postId} setIsLiking={setIsLiking} />
                   ) : (
@@ -162,7 +143,7 @@ export default function PostListCard({ postId }) {
                   <div>{postData.likes_id.length}</div>
                 </div>
 
-                <div className={styles.iconGroup}>
+                <div>
                   <Icon path={mdiCalendarMonthOutline} size={1} />
                   {new Date(postData.posting_date).toLocaleDateString()}
                 </div>
@@ -170,35 +151,26 @@ export default function PostListCard({ postId }) {
             </div>
           </div>
           {isOpenModal && (
-            <div
-              id="overlay"
-              className={styles.overlay}
-              onClick={handleOverlayClick}
-            >
-              <div className={styles.modal}>
+            <div id="overlay" onClick={handleOverlayClick}>
+              <div>
                 <PostEdit postId={postId} />
               </div>
             </div>
           )}
           {isOpenCommentCreate && (
-            <div className={styles.commentSection}>
-              <div className={styles.commentCreate}>
+            <div>
+              <div>
                 <CommentCreate
                   postId={postId}
                   commentCreated={commentCreated}
                   setCommentCreated={setCommentCreated}
                 />
               </div>
-              <div className={styles.commentList}>
+              <div>
                 <CommentList comments={postData.comments_id} />
               </div>
             </div>
           )}
-          {/* <div className={styles.commentList}>
-            {isOpenCommentList && (
-              <CommentList comments={postData.comments_id} />
-            )}
-          </div> */}
         </>
       )}
     </>

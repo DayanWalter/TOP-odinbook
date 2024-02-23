@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import styles from '../../css/UserList.module.css';
 import UserListCard from './UserListCard';
 
 export default function UserList({ users }) {
@@ -11,7 +10,7 @@ export default function UserList({ users }) {
       .scrollTo({ top: 0, behavior: 'smooth' });
   };
   return (
-    <ul className={styles.listContainer}>
+    <ul>
       {users.map((user) => (
         <li key={user._id}>
           <Link to={`/user/${user._id}`} onClick={handleScrollUp}>

@@ -1,5 +1,3 @@
-import styles from '../../css/Form.module.css';
-
 import { useState, useEffect } from 'react';
 
 export default function CommentUpdate({ commentId }) {
@@ -83,13 +81,10 @@ export default function CommentUpdate({ commentId }) {
 
   return (
     <>
-      <div className={styles.inputGroup}>
-        <label htmlFor="content" className={styles.inputGroup_label}>
-          Comment:
-        </label>
+      <div>
+        <label htmlFor="content">Comment:</label>
         <input
           id="content"
-          className={styles.inputGroup_input}
           type="text"
           name="content"
           value={content}
@@ -97,11 +92,9 @@ export default function CommentUpdate({ commentId }) {
           autoComplete="off"
         />
       </div>
-      <span className={styles.inputGroup_error}>Something did not work...</span>
+      <span>Something did not work...</span>
 
-      <button onClick={handleUpdateComment} className={styles.formBtn}>
-        Update Comment
-      </button>
+      <button onClick={handleUpdateComment}>Update Comment</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>Comment updated!</div>}
     </>

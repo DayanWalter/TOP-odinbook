@@ -1,5 +1,4 @@
 // DeleteUser.jsx
-import styles from '../../css/Form.module.css';
 import Icon from '@mdi/react';
 
 import { mdiAlertOutline } from '@mdi/js';
@@ -37,7 +36,7 @@ export default function UserDelete() {
 
   return (
     <div id="deleteUser">
-      <button className={styles.deleteBtn} onClick={handleDeleteUser}>
+      <button onClick={handleDeleteUser}>
         <Icon path={mdiAlertOutline} size={1} />
         Delete User
       </button>

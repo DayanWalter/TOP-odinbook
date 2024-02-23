@@ -1,4 +1,3 @@
-import styles from '../../css/Form.module.css';
 import { useState, useEffect } from 'react';
 
 export default function UserUpdate() {
@@ -95,17 +94,13 @@ export default function UserUpdate() {
       [name]: value,
     }));
   };
-  console.log(userData);
   return (
     <>
       {/* User Name */}
-      <div className={styles.inputGroup}>
-        <label htmlFor="user_name" className={styles.inputGroup_label}>
-          Username:
-        </label>
+      <div>
+        <label htmlFor="user_name">Username:</label>
         <input
           id="user_name"
-          className={styles.inputGroup_input}
           type="text"
           name="user_name"
           value={userData.user_name}
@@ -113,72 +108,52 @@ export default function UserUpdate() {
           pattern="[a-zA-Z0-9]{6,}"
           autoComplete="off"
         />
-        <span className={styles.inputGroup_error}>
-          Username must be at least 6 characters long
-        </span>
+        <span>Username must be at least 6 characters long</span>
       </div>
       {/* Email */}
-      <div className={styles.inputGroup}>
-        <label htmlFor="email" className={styles.inputGroup_label}>
-          Email:
-        </label>
+      <div>
+        <label htmlFor="email">Email:</label>
         <input
           id="email"
-          className={styles.inputGroup_input}
           type="email"
           name="email"
           value={userData.email}
           onChange={handleChange}
           autoComplete="true"
         />
-        <span className={styles.inputGroup_error}>
-          Email has the wrong format
-        </span>
+        <span>Email has the wrong format</span>
       </div>
       {/* Header Image */}
-      <div className={styles.inputGroup}>
-        <label htmlFor="img_url" className={styles.inputGroup_label}>
-          Header url:
-        </label>
+      <div>
+        <label htmlFor="img_url">Header url:</label>
         <input
           id="img_url"
-          className={styles.inputGroup_input}
           type="text"
           name="img_url"
           value={userData.img_url}
           onChange={handleChange}
           autoComplete="off"
         />
-        <span className={styles.inputGroup_error}>
-          img_url has the wrong format
-        </span>
+        <span>img_url has the wrong format</span>
       </div>
       {/* Avatar */}
-      <div className={styles.inputGroup}>
-        <label htmlFor="avatar_url" className={styles.inputGroup_label}>
-          Profile picture url:
-        </label>
+      <div>
+        <label htmlFor="avatar_url">Profile picture url:</label>
         <input
           id="avatar_url"
-          className={styles.inputGroup_input}
           type="text"
           name="avatar_url"
           value={userData.avatar_url}
           onChange={handleChange}
           autoComplete="off"
         />
-        <span className={styles.inputGroup_error}>
-          Profile picture url has the wrong format
-        </span>
+        <span>Profile picture url has the wrong format</span>
       </div>
       {/* Bio */}
-      <div className={styles.inputGroup}>
-        <label htmlFor="user_name" className={styles.inputGroup_label}>
-          Bio:
-        </label>
+      <div>
+        <label htmlFor="user_name">Bio:</label>
         <input
           id="bio"
-          className={styles.inputGroup_input}
           type="text"
           name="bio"
           value={userData.bio}
@@ -186,18 +161,13 @@ export default function UserUpdate() {
           pattern="^(?:.{0,60})$"
           autoComplete="off"
         />
-        <span className={styles.inputGroup_error}>
-          Bio must be shorter than 60 chars
-        </span>
+        <span>Bio must be shorter than 60 chars</span>
       </div>
       {/* Location */}
-      <div className={styles.inputGroup}>
-        <label htmlFor="location" className={styles.inputGroup_label}>
-          Location:
-        </label>
+      <div>
+        <label htmlFor="location">Location:</label>
         <input
           id="location"
-          className={styles.inputGroup_input}
           type="text"
           name="location"
           value={userData.location}
@@ -206,14 +176,10 @@ export default function UserUpdate() {
           pattern="[a-zA-Z0-9]{3,}"
           autoComplete="off"
         />
-        <span className={styles.inputGroup_error}>
-          Location must be at least 3 characters long
-        </span>
+        <span>Location must be at least 3 characters long</span>
       </div>
 
-      <button className={styles.formBtn} onClick={handleUpdateUser}>
-        Update User
-      </button>
+      <button onClick={handleUpdateUser}>Update User</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>User updated!</div>}
     </>

@@ -1,29 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
-
-* {
-  font-family: Poppins, serif;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-a {
-  text-decoration: none;
-  color: inherit;
-}
-li {
-  list-style: none;
-}
-/* body {
-  background: url(https://images.unsplash.com/photo-1510784722466-f2aa9c52fff6?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjd8fG5hdHVyZXxlbnwwfHwwfHx8MA%3D%3D)
-    no-repeat;
-} */
-:root {
-  --primary-color-cta-button: rgba(64, 0, 255, 1);
-  --secondary-color-cta-button: rgba(64, 0, 255, 0.75);
-  --secondary-color: #c000ff;
-  --tertiary-color: #003fff;
-  --primary-color: #4000ff;
-  --background-color: #f0f2f5;
-  --error-color: red;
-  --danger-color: red;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,4 +1,3 @@
-import styles from '../../css/Form.module.css';
 import { useState } from 'react';
 
 export default function PostCreate() {
@@ -63,14 +62,11 @@ export default function PostCreate() {
 
   return (
     <>
-      <form className={styles.form}>
-        <div className={styles.inputGroup}>
-          <label htmlFor="content" className={styles.inputGroup_label}>
-            Post:
-          </label>
+      <form>
+        <div>
+          <label htmlFor="content">Post:</label>
           <input
             id="content"
-            className={styles.inputGroup_input}
             type="text"
             name="content"
             value={content}
@@ -78,13 +74,9 @@ export default function PostCreate() {
             autoComplete="off"
           />
         </div>
-        <span className={styles.inputGroup_error}>
-          Something did not work...
-        </span>
+        <span>Something did not work...</span>
 
-        <button onClick={handleCreatePost} className={styles.formBtn}>
-          Create Post
-        </button>
+        <button onClick={handleCreatePost}>Create Post</button>
         {error && <div style={{ color: 'red' }}>{error}</div>}
         {success && <div style={{ color: 'green' }}>Post created!</div>}
       </form>

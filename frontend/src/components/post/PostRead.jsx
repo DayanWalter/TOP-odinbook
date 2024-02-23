@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import styles from '../../css/PostRead.module.css';
 // Comment
 import CommentList from '../comment/CommentList';
 import CommentCreate from '../comment/CommentCreate';
 // Post
 import PostUnLike from './PostUnLike';
 import PostLike from './PostLike';
-// import UpdatePost from '../post/UpdatePost';
-// import DeletePost from '../post/DeletePost';
+
 import PostEdit from './PostEdit';
 
 export default function ReadPost() {
@@ -80,9 +78,6 @@ export default function ReadPost() {
   const handleShowComments = () => {
     showComments ? setShowComments(false) : setShowComments(true);
   };
-  //   const handleShowFollower = () => {
-  //     showFollower ? setShowFollower(false) : setShowFollower(true);
-  //   };
 
   function searchForAuthor(author, loggedInUserId) {
     return author._id === loggedInUserId;
@@ -101,18 +96,15 @@ export default function ReadPost() {
   };
 
   return (
-    <div className={styles.postContainer}>
+    <div>
       {loading && <div></div>}
       {postData && (
         <>
-          <button className={styles.editPostButton} onClick={handleModal}>
-            Edit Post
-          </button>
+          <button onClick={handleModal}>Edit Post</button>
           <p>ID: {postData._id}</p>
           <p>Content: {postData.content}</p>
           <p>Author: {postData.author_id.user_name}</p>
           <p>Has {postData.comments_id.length} Comments:</p>
-          {console.log(postData.comments_id)}
           {showComments && postData.comments_id && (
             <CommentList comments={postData.comments_id} />
           )}
@@ -126,25 +118,17 @@ export default function ReadPost() {
             <PostLike postId={postId} setIsLiking={setIsLiking} />
           )}
           <CommentCreate postId={postId} />
-          {/* {isAuthor ? <UpdatePost postId={postId} /> : ''} */}
-          {/* {isAuthor ? <DeletePost postId={postId} /> : ''} */}
-          {
-            isOpenModal &&
-              (isAuthor ? (
-                <div
-                  id="overlay"
-                  className={styles.overlay}
-                  onClick={handleOverlayClick}
-                >
-                  <div className={styles.modal}>
-                    <PostEdit postId={postId} />
-                  </div>
+
+          {isOpenModal &&
+            (isAuthor ? (
+              <div id="overlay" onClick={handleOverlayClick}>
+                <div>
+                  <PostEdit postId={postId} />
                 </div>
-              ) : (
-                ''
-              ))
-            /// isLoggedInUser ? <DeleteUser /> : ''
-          }
+              </div>
+            ) : (
+              ''
+            ))}
         </>
       )}
     </div>

@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
-import styles from '../../css/CommentRead.module.css';
-
 import CommentUnlike from './CommentUnlike';
 import CommentLike from './CommentLike';
 import CommentUpdate from './CommentUpdate';
@@ -68,10 +66,6 @@ export default function CommentRead() {
     fetchData();
   }, [commentId, isLiking, authToken, loggedInUserId]);
 
-  //   const handleShowFollower = () => {
-  //     showFollower ? setShowFollower(false) : setShowFollower(true);
-  //   };
-
   function searchForAuthor(author, loggedInUserId) {
     return author._id === loggedInUserId;
   }
@@ -80,7 +74,7 @@ export default function CommentRead() {
   }
 
   return (
-    <div className={styles.commentContainer}>
+    <div>
       {loading && <div></div>}
       {commentData && (
         <>

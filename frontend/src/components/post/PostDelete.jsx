@@ -1,4 +1,3 @@
-import styles from '../../css/Form.module.css';
 export default function DeletePost({ postId }) {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -32,9 +31,7 @@ export default function DeletePost({ postId }) {
 
   return (
     <div id="deletePost">
-      <button onClick={handleDeletePost} className={styles.deleteBtn}>
-        Delete Post
-      </button>
+      <button onClick={handleDeletePost}>Delete Post</button>
     </div>
   );
 }

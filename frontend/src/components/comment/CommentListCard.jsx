@@ -1,11 +1,8 @@
-import styles from '../../css/CommentListCard.module.css';
 // Icons
 import Icon from '@mdi/react';
 import { mdiCalendarMonthOutline } from '@mdi/js';
-import { mdiHeartOutline } from '@mdi/js';
-import { mdiChatOutline } from '@mdi/js';
+
 import { mdiFileEditOutline } from '@mdi/js';
-import { mdiChatPlusOutline } from '@mdi/js';
 
 import { useEffect, useState } from 'react';
 
@@ -23,8 +20,7 @@ export default function CommentListCard({ commentId }) {
   const [isAuthor, setIsAuthor] = useState(false);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
-  const [isOpenCommentList, setIsOpenCommentList] = useState(false);
+
   const [isLiking, setIsLiking] = useState(false);
 
   // id from logged in user
@@ -98,30 +94,29 @@ export default function CommentListCard({ commentId }) {
       {loading && <div></div>}
       {commentData && (
         <>
-          <div className={styles.card}>
-            <div className={styles.editSection}>
+          <div>
+            <div>
               {/* Open modal for editing post if user is author */}
               {isAuthor ? (
                 <Icon
                   path={mdiFileEditOutline}
                   size={1}
                   onClick={handleCommentEdit}
-                  className={styles.icon}
                 />
               ) : (
                 ''
               )}
             </div>
 
-            <div className={styles.stats}>
-              <div className={styles.author}>
+            <div>
+              <div>
                 <Link to={`/user/${commentData.author_id._id}`}>
                   {commentData.author_id.user_name}
                 </Link>
               </div>
-              <div className={styles.content}>{commentData.content}</div>
-              <div className={styles.footer}>
-                <div className={styles.iconGroup}>
+              <div>{commentData.content}</div>
+              <div>
+                <div>
                   {isLiking ? (
                     <CommentUnlike
                       commentId={commentId}
@@ -137,7 +132,7 @@ export default function CommentListCard({ commentId }) {
                   <div>{commentData.likes_id.length}</div>
                 </div>
 
-                <div className={styles.iconGroup}>
+                <div>
                   <Icon path={mdiCalendarMonthOutline} size={1} />
                   {new Date(commentData.posting_date).toLocaleDateString()}
                 </div>
@@ -145,12 +140,8 @@ export default function CommentListCard({ commentId }) {
             </div>
           </div>
           {isOpenModal && (
-            <div
-              id="overlay"
-              className={styles.overlay}
-              onClick={handleOverlayClick}
-            >
-              <div className={styles.modal}>
+            <div id="overlay" onClick={handleOverlayClick}>
+              <div>
                 <CommentEdit commentId={commentId} />
               </div>
             </div>
