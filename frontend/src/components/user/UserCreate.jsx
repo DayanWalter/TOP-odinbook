@@ -1,6 +1,7 @@
 // Signup
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AuthSite from '../sites/AuthSite';
 
 export default function UserCreate() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
@@ -74,14 +75,13 @@ export default function UserCreate() {
   };
 
   return (
-    <>
-      <h1>Signup</h1>
-      <form className="flex flex-col items-start justify-start w-full max-w-sm p-5 mt-6 bg-white border ">
+    <AuthSite title={'Sign up'}>
+      <form onSubmit={handleCreateUser}>
         <label htmlFor="user_name" className="w-full mb-5">
           Username:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
+            className="w-full px-2 py-1 mt-2 mb-6 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="user_name"
             type="text"
             name="user_name"
@@ -95,7 +95,7 @@ export default function UserCreate() {
           Email:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
+            className="w-full px-2 py-1 mt-2 mb-6 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="email"
             type="email"
             name="email"
@@ -110,7 +110,7 @@ export default function UserCreate() {
           Password:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
+            className="w-full px-2 py-1 mt-2 mb-6 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="password"
             type="password"
             name="password"
@@ -124,7 +124,7 @@ export default function UserCreate() {
           Repeat Password:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
+            className="w-full px-2 py-1 mt-2 mb-6 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="repeatPassword"
             type="password"
             name="repeatPassword"
@@ -136,7 +136,7 @@ export default function UserCreate() {
 
         <button
           className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
-          onClick={handleCreateUser}
+          type="submit"
           disabled={loading}
         >
           {loading ? `Creating User: ${userData.user_name}` : 'Signup'}
@@ -144,6 +144,6 @@ export default function UserCreate() {
         {/* Error from backend */}
         {error && <div style={{ color: 'red', fontSize: '1rem' }}>{error}</div>}
       </form>
-    </>
+    </AuthSite>
   );
 }
