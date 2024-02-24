@@ -75,8 +75,8 @@ export default function UserCreate() {
 
   return (
     <div className="border ">
-      <form className="flex flex-col items-start justify-start w-full mt-6 border">
-        <label htmlFor="user_name" className="w-full max-w-sm mb-5">
+      <form className="flex flex-col items-start justify-start w-full max-w-sm p-5 mt-6 bg-white border ">
+        <label htmlFor="user_name" className="w-full mb-5">
           Username:
           <span className="text-red-500">*</span>
           <input
@@ -86,12 +86,11 @@ export default function UserCreate() {
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
-            pattern="[a-zA-Z0-9]{6,}"
+            required={true}
           />
-          <span>Username must be at least 6 characters long</span>
         </label>
 
-        <label htmlFor="email" className="w-full max-w-sm mb-5">
+        <label htmlFor="email" className="w-full mb-5 ">
           Email:
           <span className="text-red-500">*</span>
           <input
@@ -102,11 +101,11 @@ export default function UserCreate() {
             value={userData.email}
             onChange={handleChange}
             autoComplete="true"
+            required={true}
           />
-          <span>Email has the wrong format</span>
         </label>
 
-        <label htmlFor="password" className="w-full max-w-sm mb-5">
+        <label htmlFor="password" className="w-full mb-5">
           Password:
           <span className="text-red-500">*</span>
           <input
@@ -116,12 +115,11 @@ export default function UserCreate() {
             name="password"
             value={userData.password}
             onChange={handleChange}
-            pattern="[a-zA-Z0-9]{6,}"
+            required={true}
           />
-          <span>Password must be at least 6 characters long</span>
         </label>
 
-        <label htmlFor="repeatPassword" className="w-full max-w-sm mb-5">
+        <label htmlFor="repeatPassword" className="w-full mb-5">
           Repeat Password:
           <span className="text-red-500">*</span>
           <input
@@ -131,12 +129,12 @@ export default function UserCreate() {
             name="repeatPassword"
             value={userData.repeatPassword}
             onChange={handleChange}
+            required={true}
           />
-          <span>Passwords do not match</span>
         </label>
 
         <button
-          className="px-4 py-2 mb-5 font-medium text-white rounded-lg bg-primary hover:bg-primary/80"
+          className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
           onClick={handleCreateUser}
           disabled={loading}
         >
