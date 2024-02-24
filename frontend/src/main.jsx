@@ -3,17 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 // Sites
-import ProfileSite from './components/sites/ProfileSite.jsx';
-import SignUpSite from './components/sites/SignUpSite.jsx';
-import LoginSite from './components/sites/LoginSite.jsx';
-import LogoutSite from './components/sites/LogoutSite.jsx';
 import Index from './components/sites/Index.jsx';
+import UserLogin from './components/user/UserLogin.jsx';
+import UserCreate from './components/user/UserCreate.jsx';
+import UserLogout from './components/user/UserLogout.jsx';
+import UserProfile from './components/user/UserProfile.jsx';
 
 const router = createBrowserRouter([
   // User
   {
     path: '/signup',
-    element: <SignUpSite />,
+    element: <UserCreate />,
   },
   {
     index: true,
@@ -28,16 +28,16 @@ const router = createBrowserRouter([
   // },
   {
     path: '/login',
-    element: <LoginSite />,
+    element: <UserLogin />,
   },
   {
     path: '/logout',
-    element: <LogoutSite />,
+    element: <UserLogout />,
   },
 
   {
     path: '/user/:userid',
-    element: <ProfileSite />,
+    element: <UserProfile />,
     loader({ params }) {
       return params;
     },

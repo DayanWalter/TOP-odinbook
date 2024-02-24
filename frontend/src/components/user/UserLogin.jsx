@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthSite from '../sites/AuthSite';
 
 export default function UserLogin() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
@@ -121,8 +122,8 @@ export default function UserLogin() {
   };
 
   return (
-    <div className="border">
-      <form className="flex flex-col items-start justify-start w-full max-w-sm p-5 mt-6 bg-white border ">
+    <AuthSite title={'Login'}>
+      <form onSubmit={handleLoginUser}>
         <label htmlFor="user_name" className="w-full mb-5">
           Username:
           <span className="text-red-500">*</span>
@@ -151,10 +152,10 @@ export default function UserLogin() {
         </label>
         <button
           className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
-          onClick={handleLoginUser}
+          type="submit"
           disabled={loading}
         >
-          {loading ? `Login User: ${userData.user_name}` : 'Login User'}
+          {loading ? `Loggin in ${userData.user_name}` : 'Login User'}
         </button>{' '}
         <button
           className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
@@ -163,8 +164,11 @@ export default function UserLogin() {
         >
           Demo User Login
         </button>
+        <div className="w-2/5 py-1 mt-5 mb-5 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
+          <Link to={'/signup'}>or sign up</Link>
+        </div>
         {error && <div style={{ color: 'red' }}>{error}</div>}
       </form>
-    </div>
+    </AuthSite>
   );
 }

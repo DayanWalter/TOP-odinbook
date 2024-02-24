@@ -30,7 +30,7 @@ export default function AuthSite({ children, title }) {
           <div className="hidden gap-5 lg:w-full lg:items-center lg:justify-center lg:flex-col lg:flex">
             <img src="./bitfeather.png" alt="bitfeather logo" />
             <h2 className="text-5xl font-semibold text-primary">BitFeather</h2>
-            <p>The place where you can think out loud...</p>
+            <p>The place where you can chirp out loud...</p>
           </div>
 
           <div className="flex items-center w-full lg:justify-center lg:border-l lg:border-primary/20">

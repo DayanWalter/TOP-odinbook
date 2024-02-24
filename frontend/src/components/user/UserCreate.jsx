@@ -1,6 +1,6 @@
 // Signup
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthSite from '../sites/AuthSite';
 
 export default function UserCreate() {
@@ -135,12 +135,15 @@ export default function UserCreate() {
         </label>
 
         <button
-          className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
+          className="w-full py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
           type="submit"
           disabled={loading}
         >
           {loading ? `Creating User: ${userData.user_name}` : 'Signup'}
         </button>
+        <div className="w-2/5 py-1 mt-5 mb-5 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
+          <Link to={'/login'}>or login</Link>
+        </div>
         {/* Error from backend */}
         {error && <div style={{ color: 'red', fontSize: '1rem' }}>{error}</div>}
       </form>

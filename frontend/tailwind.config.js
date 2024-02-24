@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'rgb(59 130 246)',
+        primary: '#3B82F6',
+        success: '#54C130',
+        info: '#7488FC',
+        warning: '#FFA100',
+        danger: '#FF5444',
       },
     },
   },
