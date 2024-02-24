@@ -122,44 +122,42 @@ export default function UserLogin() {
 
   return (
     <div className="border">
-      <form className="flex flex-col items-start justify-start w-full mt-6">
-        <label htmlFor="user_name" className="w-full max-w-sm mb-5">
+      <form className="flex flex-col items-start justify-start w-full max-w-sm p-5 mt-6 bg-white border ">
+        <label htmlFor="user_name" className="w-full mb-5">
           Username:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-blue-400/20 focus:border-blue-400 dark:text-black"
+            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="user_name"
             type="text"
             name="user_name"
             value={userData.user_name}
             onChange={handleChange}
-            pattern="[a-zA-Z0-9]{6,}"
+            required={true}
           />
-          <span>Username must be at least 6 characters long</span>
         </label>
-        <label htmlFor="user_password" className="w-full max-w-sm mb-5">
+        <label htmlFor="user_password" className="w-full mb-5">
           Password:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-blue-400/20 focus:border-blue-400 dark:text-black"
+            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="user_password"
             type="password"
             name="password"
             value={userData.password}
             onChange={handleChange}
-            pattern="[a-zA-Z0-9]{6,}"
+            required={true}
           />
-          <span>Password must be at least 6 characters long</span>
         </label>
         <button
-          className="px-4 py-2 mb-5 font-medium text-white rounded-lg bg-primary hover:bg-primary/80"
+          className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
           onClick={handleLoginUser}
           disabled={loading}
         >
           {loading ? `Login User: ${userData.user_name}` : 'Login User'}
         </button>{' '}
         <button
-          className="px-4 py-2 font-medium text-white rounded-lg bg-primary hover:bg-primary/80"
+          className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
           onClick={handleLoginDemoUser}
           disabled={loading}
         >

@@ -74,13 +74,14 @@ export default function UserCreate() {
   };
 
   return (
-    <div className="border ">
+    <>
+      <h1>Signup</h1>
       <form className="flex flex-col items-start justify-start w-full max-w-sm p-5 mt-6 bg-white border ">
         <label htmlFor="user_name" className="w-full mb-5">
           Username:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-blue-400/20 focus:border-blue-400 dark:text-black"
+            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="user_name"
             type="text"
             name="user_name"
@@ -94,7 +95,7 @@ export default function UserCreate() {
           Email:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-blue-400/20 focus:border-blue-400 dark:text-black"
+            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="email"
             type="email"
             name="email"
@@ -109,7 +110,7 @@ export default function UserCreate() {
           Password:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-blue-400/20 focus:border-blue-400 dark:text-black"
+            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="password"
             type="password"
             name="password"
@@ -123,7 +124,7 @@ export default function UserCreate() {
           Repeat Password:
           <span className="text-red-500">*</span>
           <input
-            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-blue-400/20 focus:border-blue-400 dark:text-black"
+            className="w-full px-2 py-1 mt-2 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
             id="repeatPassword"
             type="password"
             name="repeatPassword"
@@ -143,6 +144,6 @@ export default function UserCreate() {
         {/* Error from backend */}
         {error && <div style={{ color: 'red', fontSize: '1rem' }}>{error}</div>}
       </form>
-    </div>
+    </>
   );
 }
