@@ -82,7 +82,6 @@ export default function UserProfile() {
       console.error('Error while fetching user:', error);
     } finally {
       setLoading(false);
-      // setActiveIndex(0);
     }
   };
   // Get Profile(User) Data
@@ -142,14 +141,14 @@ export default function UserProfile() {
       {loading && <div></div>}
       {userData && (
         <>
-          <Link to={`/user/${loggedInUserId}`}>
-            <div>
+          <div className="border">
+            <Link to={`/user/${loggedInUserId}`}>
               <Icon path={mdiArrowLeft} size={1} />
               <p>{loggedInUserName}</p>
-            </div>
-          </Link>
+            </Link>
+          </div>
 
-          <div>
+          <div className="border ">
             <img src={userData.avatar_url} alt="Avatar" />
             <img src={userData.img_url} alt="Hero Image" />
           </div>

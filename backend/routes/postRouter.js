@@ -6,20 +6,20 @@ const passport = require('passport');
 const protectedRoute = passport.authenticate('jwt', { session: false });
 
 // create new post
-router.post('/create', protectedRoute, postController.createPost);
+router.post('/create', postController.createPost);
 // read feed posts
-router.get('/feed', protectedRoute, postController.readFeedPosts);
+router.get('/feed', postController.readFeedPosts);
 // read user posts
-router.get('/user/:userid', protectedRoute, postController.readUserPosts);
+router.get('/user/:userid', postController.readUserPosts);
 // read single post
-router.get('/:postid', protectedRoute, postController.readPostById);
+router.get('/:postid', postController.readPostById);
 // change post
-router.put('/:postid/update', protectedRoute, postController.updatePost);
+router.put('/:postid/update', postController.updatePost);
 // delete post
-router.delete('/:postid/delete', protectedRoute, postController.deletePost);
+router.delete('/:postid/delete', postController.deletePost);
 // like post
-router.put('/:postid/like', protectedRoute, postController.likePost);
+router.put('/:postid/like', postController.likePost);
 // unlike post
-router.put('/:postid/unlike', protectedRoute, postController.unlikePost);
+router.put('/:postid/unlike', postController.unlikePost);
 
 module.exports = router;

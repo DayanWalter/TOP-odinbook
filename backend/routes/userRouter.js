@@ -10,16 +10,16 @@ router.post('/login', userController.loginUser);
 // create new user
 router.post('/create', userController.createUser);
 // read all users
-router.get('/all', protectedRoute, userController.readUsers);
+router.get('/all', userController.readUsers);
 // read single user
-router.get('/:userid', protectedRoute, userController.readUserById);
+router.get('/:userid', userController.readUserById);
 // change user
-router.put('/update', protectedRoute, userController.updateUser);
+router.put('/update', userController.updateUser);
 // delete user
-router.delete('/delete', protectedRoute, userController.deleteUser);
+router.delete('/delete', userController.deleteUser);
 // follow user
-router.put('/:userid/follow', protectedRoute, userController.followUser);
+router.put('/:userid/follow', userController.followUser);
 // unfollow user
-router.put('/:userid/unfollow', protectedRoute, userController.unFollowUser);
+router.put('/:userid/unfollow', userController.unFollowUser);
 
 module.exports = router;

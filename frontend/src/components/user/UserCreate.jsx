@@ -1,3 +1,4 @@
+// Signup
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,6 +6,7 @@ export default function UserCreate() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
   const navigate = useNavigate();
+
   const [userData, setUserData] = useState({
     user_name: '',
     email: '',
@@ -15,6 +17,7 @@ export default function UserCreate() {
   const [error, setError] = useState('');
   const [passwordsMatchError, setPasswordsMatchError] = useState(false);
 
+  // Submit Form
   const handleCreateUser = async (e) => {
     e.preventDefault();
     if (passwordsMatchError) {
@@ -71,8 +74,8 @@ export default function UserCreate() {
   };
 
   return (
-    <div className="border">
-      <form className="flex flex-col items-start justify-start w-full mt-6">
+    <div className="border ">
+      <form className="flex flex-col items-start justify-start w-full mt-6 border">
         <label htmlFor="user_name" className="w-full max-w-sm mb-5">
           Username:
           <span className="text-red-500">*</span>
@@ -139,6 +142,7 @@ export default function UserCreate() {
         >
           {loading ? `Creating User: ${userData.user_name}` : 'Signup'}
         </button>
+        {/* Error from backend */}
         {error && <div style={{ color: 'red', fontSize: '1rem' }}>{error}</div>}
       </form>
     </div>
