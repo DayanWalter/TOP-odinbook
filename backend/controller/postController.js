@@ -55,7 +55,7 @@ const readPostById = asyncHandler(async (req, res, next) => {
   const searchedPost = await Post.findById(req.params.postid)
     .populate({
       path: 'author_id',
-      select: 'user_name',
+      select: 'user_name avatar_url',
     })
     .populate({
       path: 'comments_id',

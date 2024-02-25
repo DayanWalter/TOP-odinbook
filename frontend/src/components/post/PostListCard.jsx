@@ -98,17 +98,27 @@ export default function PostListCard({ postId }) {
       ? setIsOpenCommentCreate(false)
       : setIsOpenCommentCreate(true);
   };
-
   return (
     <>
       {loading && <div></div>}
       {postData && (
         <>
-          <div id="card" className="mb-3 border rounded ">
-            <div>
-              <div className="flex justify-between">
+          <div
+            id="card"
+            className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl "
+          >
+            <Link to={`/user/${postData.author_id._id}`}>
+              <img
+                className="absolute w-20 h-20 rounded-full shadow-lg -left-8 top-3"
+                src={postData.author_id.avatar_url}
+                alt="Avatar"
+              />
+            </Link>
+
+            <div className="flex flex-col w-full gap-5 p-5 pl-16">
+              <div className="flex justify-between ">
                 {/* Author Name */}
-                <div>
+                <div className="underline underline-offset-2 text-slate-500">
                   <Link to={`/user/${postData.author_id._id}`}>
                     {postData.author_id.user_name}
                   </Link>
@@ -128,8 +138,8 @@ export default function PostListCard({ postId }) {
                 </div>
               </div>
 
-              <div>{postData.content}</div>
-              <div className="flex">
+              <p className="break-all ">{postData.content}</p>
+              <div className="flex justify-between">
                 {/* CommentIcon */}
                 <div className="flex">
                   <Icon
