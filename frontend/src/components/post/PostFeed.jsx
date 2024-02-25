@@ -10,7 +10,7 @@ export default function PostFeed() {
 
   const handleFetchFeed = async () => {
     const authToken = localStorage.getItem('authToken');
-
+    console.log(authToken);
     // Log an error if authentication token is not available
     if (!authToken) {
       console.error('Authentication token not available.');

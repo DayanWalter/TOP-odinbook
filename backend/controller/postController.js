@@ -30,6 +30,7 @@ const createPost = [
   }),
 ];
 const readFeedPosts = asyncHandler(async (req, res, next) => {
+  console.log(req.user);
   // take req.user._id's follows array
   const user = await User.findById(req.user._id).select('follows_id');
   // Map over array and pull out ._id of every user

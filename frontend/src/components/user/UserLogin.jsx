@@ -51,7 +51,7 @@ export default function UserLogin() {
         user_name: '',
         password: '',
       });
-      navigate(`/user/${userId}`);
+      navigate(`/home`);
     } catch (error) {
       console.error('Error during user login:', error);
       setError('Error during user login. Please try again.');
@@ -103,7 +103,7 @@ export default function UserLogin() {
         user_name: '',
         password: '',
       });
-      navigate(`/user/${userId}`);
+      navigate(`/home`);
     } catch (error) {
       console.error('Error during user login:', error);
       setError('Error during user login. Please try again.');

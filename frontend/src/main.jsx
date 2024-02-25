@@ -8,6 +8,7 @@ import UserLogin from './components/user/UserLogin.jsx';
 import UserCreate from './components/user/UserCreate.jsx';
 import UserLogout from './components/user/UserLogout.jsx';
 import UserProfile from './components/user/UserProfile.jsx';
+import Home from './components/sites/Home.jsx';
 
 const router = createBrowserRouter([
   // User
@@ -18,14 +19,13 @@ const router = createBrowserRouter([
   {
     index: true,
     path: '/',
-    element: <Index />,
+    element: <UserCreate />,
+  },
+  {
+    path: '/home',
+    element: <Home />,
   },
 
-  // {
-  //   index: true,
-  //   path: '/',
-  //   element: <LoginSite />,
-  // },
   {
     path: '/login',
     element: <UserLogin />,
