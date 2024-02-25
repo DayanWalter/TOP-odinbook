@@ -62,7 +62,7 @@ export default function PostCreate() {
 
   return (
     <>
-      <form>
+      <form className="fixed top-1/2 left-1/2">
         <div>
           <label htmlFor="content">Post:</label>
           <input
@@ -74,7 +74,6 @@ export default function PostCreate() {
             autoComplete="off"
           />
         </div>
-        <span>Something did not work...</span>
 
         <button onClick={handleCreatePost}>Create Post</button>
         {error && <div style={{ color: 'red' }}>{error}</div>}

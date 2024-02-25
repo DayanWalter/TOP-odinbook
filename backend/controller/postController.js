@@ -30,11 +30,12 @@ const createPost = [
   }),
 ];
 const readFeedPosts = asyncHandler(async (req, res, next) => {
-  console.log(req.user);
   // take req.user._id's follows array
   const user = await User.findById(req.user._id).select('follows_id');
   // Map over array and pull out ._id of every user
   const followedUserIds = user.follows_id.map((follow) => follow._id);
+  // Add user._id to feed array
+  followedUserIds.push(req.user._id);
   // Search for posts in which the author_id is the same as the user._id
   const feed = await Post.find({ author_id: { $in: followedUserIds } });
 

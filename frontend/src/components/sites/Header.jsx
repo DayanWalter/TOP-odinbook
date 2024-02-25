@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PostCreate from '../post/PostCreate';
 
 // import { useContext } from 'react';
 // import { LanguageContext } from '../App';
 
 export default function Header() {
   // const [language] = useContext(LanguageContext);
-
+  const [showPostCreate, setShowPostCreate] = useState(false);
   return (
     <header
       role="banner"
@@ -22,10 +23,7 @@ export default function Header() {
           role="navigation"
           className="w-full sm:w-3/4 lg:w-2/3"
         >
-          <ul
-            role="menubar"
-            className="flex justify-between text-primary dark:text-white"
-          >
+          <ul role="menubar" className="flex justify-between text-primary ">
             <li role="none" className="hover:scale-105">
               <a href="/main" role="menuitem">
                 Home
@@ -37,12 +35,21 @@ export default function Header() {
               </a>
             </li>
             <li role="none" className="hover:scale-105">
-              <a href="#" role="menuitem">
+              <a
+                href="#"
+                onClick={() => {
+                  showPostCreate
+                    ? setShowPostCreate(false)
+                    : setShowPostCreate(true);
+                }}
+                role="menuitem"
+              >
                 Post
               </a>
             </li>
           </ul>
         </nav>
+        {showPostCreate && <PostCreate />}
         <div></div>
       </div>
     </header>

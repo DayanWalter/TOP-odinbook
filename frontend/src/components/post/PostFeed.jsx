@@ -10,7 +10,6 @@ export default function PostFeed() {
 
   const handleFetchFeed = async () => {
     const authToken = localStorage.getItem('authToken');
-    console.log(authToken);
     // Log an error if authentication token is not available
     if (!authToken) {
       console.error('Authentication token not available.');
@@ -56,7 +55,8 @@ export default function PostFeed() {
   }, []);
 
   return (
-    <div id="feedList">
+    <div id="feedList" className="border">
+      feed
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {loading && <p>Loading feed...</p>}
       {feed && <PostList posts={feed} />}

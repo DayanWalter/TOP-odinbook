@@ -6,31 +6,31 @@ const passport = require('passport');
 const protectedRoute = passport.authenticate('jwt', { session: false });
 
 // create new comment
-router.post('/:postid/create', commentController.createComment);
+router.post('/:postid/create', protectedRoute, commentController.createComment);
 // read post comments
-router.get('/post/:postid', commentController.readPostComments);
+router.get('/post/:postid', protectedRoute, commentController.readPostComments);
 // read user comments
-router.get('/user/:userid', commentController.readUserComments);
+router.get('/user/:userid', protectedRoute, commentController.readUserComments);
 // read single comment
-router.get('/:commentid', commentController.readCommentById);
+router.get('/:commentid', protectedRoute, commentController.readCommentById);
 // change comment
 router.put(
   '/:commentid/update',
-
+  protectedRoute,
   commentController.updateComment
 );
 // delete comment
 router.delete(
   '/:commentid/delete',
-
+  protectedRoute,
   commentController.deleteComment
 );
 // like comment
-router.put('/:commentid/like', commentController.likeComment);
+router.put('/:commentid/like', protectedRoute, commentController.likeComment);
 // unlike comment
 router.put(
   '/:commentid/unlike',
-
+  protectedRoute,
   commentController.unlikeComment
 );
 

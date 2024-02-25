@@ -8,10 +8,10 @@ export default function Home() {
   const userId = payload._id;
   const userName = payload.user_name;
   return (
-    <>
+    <div className="flex flex-col justify-between h-screen">
       <Header />
       <div className="mb-48"></div>
       <PostFeed />
-    </>
+    </div>
   );
 }
