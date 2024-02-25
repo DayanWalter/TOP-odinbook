@@ -94,7 +94,7 @@ export default function CommentListCard({ commentId }) {
       {loading && <div></div>}
       {commentData && (
         <>
-          <div>
+          <div className="border">
             <div>
               {/* Open modal for editing post if user is author */}
               {isAuthor ? (

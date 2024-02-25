@@ -64,17 +64,18 @@ export default function CommentCreate({
   const handleChange = (e) => setContent(e.target.value);
 
   return (
-    <div>
+    <div className="p-5 -mt-5 bg-white border shadow-lg rounded-b-xl">
       <div>
-        <label htmlFor="content"></label>
-        <input
-          id="content"
-          value={content}
-          onChange={handleChange}
-          autoComplete="off"
-        />
+        <label htmlFor="content">
+          <input
+            className="mt-5 border"
+            id="content"
+            value={content}
+            onChange={handleChange}
+            autoComplete="off"
+          />
+        </label>
       </div>
-      <span>Something did not work...</span>
 
       <button onClick={handleCreateComment} disabled={loading}>
         {error && <div style={{ color: 'red' }}>{error}</div>}
