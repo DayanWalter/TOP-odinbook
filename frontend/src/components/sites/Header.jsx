@@ -49,7 +49,18 @@ export default function Header() {
             </li>
           </ul>
         </nav>
-        {showPostCreate && <PostCreate />}
+        {showPostCreate && (
+          <div
+            onClick={() => {
+              setShowPostCreate(false);
+            }}
+            className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+          >
+            <div className="p-8 bg-white rounded-lg">
+              <PostCreate />
+            </div>
+          </div>
+        )}
         <div></div>
       </div>
     </header>

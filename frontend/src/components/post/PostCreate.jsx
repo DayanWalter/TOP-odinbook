@@ -62,7 +62,7 @@ export default function PostCreate() {
 
   return (
     <>
-      <form className="fixed top-1/2 left-1/2">
+      <form className="z-20">
         <div>
           <label htmlFor="content">Post:</label>
           <input
