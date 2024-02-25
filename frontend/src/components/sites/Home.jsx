@@ -10,7 +10,6 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-between h-screen">
       <Header />
-      <div className="mb-48"></div>
       <PostFeed />
     </div>
   );

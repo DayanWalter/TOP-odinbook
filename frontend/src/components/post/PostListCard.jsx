@@ -104,7 +104,7 @@ export default function PostListCard({ postId }) {
       {loading && <div></div>}
       {postData && (
         <>
-          <div id="card">
+          <div id="card" className="mb-3 border rounded ">
             <div>
               {/* Open modal for editing post if user is author */}
               {isAuthor ? (
