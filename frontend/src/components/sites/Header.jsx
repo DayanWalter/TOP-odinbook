@@ -7,6 +7,12 @@ import PostCreate from '../post/PostCreate';
 export default function Header() {
   // const [language] = useContext(LanguageContext);
   const [showPostCreate, setShowPostCreate] = useState(false);
+
+  const handleOverlayClick = (event) => {
+    if (event.target.id === 'overlay') {
+      setShowPostCreate(false);
+    }
+  };
   return (
     <header
       role="banner"
@@ -25,7 +31,7 @@ export default function Header() {
         >
           <ul role="menubar" className="flex justify-between text-primary ">
             <li role="none" className="hover:scale-105">
-              <a href="/main" role="menuitem">
+              <a href="/home" role="menuitem">
                 Home
               </a>
             </li>
@@ -51,9 +57,8 @@ export default function Header() {
         </nav>
         {showPostCreate && (
           <div
-            onClick={() => {
-              setShowPostCreate(false);
-            }}
+            id="overlay"
+            onClick={handleOverlayClick}
             className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
           >
             <div className="p-8 bg-white rounded-lg">

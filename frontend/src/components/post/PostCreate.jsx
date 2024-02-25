@@ -66,6 +66,7 @@ export default function PostCreate() {
         <div>
           <label htmlFor="content">Post:</label>
           <input
+            className="border"
             id="content"
             type="text"
             name="content"

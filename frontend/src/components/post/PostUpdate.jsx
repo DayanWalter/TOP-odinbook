@@ -80,6 +80,7 @@ export default function UpdatePost({ postId }) {
       <div>
         <label htmlFor="content">Post:</label>
         <input
+          className="border"
           id="content"
           type="text"
           name="content"
@@ -88,7 +89,6 @@ export default function UpdatePost({ postId }) {
           autoComplete="off"
         />
       </div>
-      <span>Something did not work...</span>
 
       <button onClick={handleUpdatePost}>Update Post</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
