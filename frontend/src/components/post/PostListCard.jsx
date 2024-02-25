@@ -106,27 +106,32 @@ export default function PostListCard({ postId }) {
         <>
           <div id="card" className="mb-3 border rounded ">
             <div>
-              {/* Open modal for editing post if user is author */}
-              {isAuthor ? (
-                <Icon
-                  path={mdiFileEditOutline}
-                  size={1}
-                  onClick={handlePostEdit}
-                />
-              ) : (
-                ''
-              )}
-            </div>
-
-            <div>
-              <div>
-                <Link to={`/user/${postData.author_id._id}`}>
-                  {postData.author_id.user_name}
-                </Link>
-              </div>
-              <div>{postData.content}</div>
-              <div>
+              <div className="flex justify-between">
+                {/* Author Name */}
                 <div>
+                  <Link to={`/user/${postData.author_id._id}`}>
+                    {postData.author_id.user_name}
+                  </Link>
+                </div>
+                {/* Edit Comment */}
+                <div>
+                  {/* Open modal for editing post if user is author */}
+                  {isAuthor ? (
+                    <Icon
+                      path={mdiFileEditOutline}
+                      size={1}
+                      onClick={handlePostEdit}
+                    />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </div>
+
+              <div>{postData.content}</div>
+              <div className="flex">
+                {/* CommentIcon */}
+                <div className="flex">
                   <Icon
                     onClick={handleCommentCreate}
                     path={mdiChatOutline}
@@ -134,7 +139,8 @@ export default function PostListCard({ postId }) {
                   />
                   <div>{postData.comments_id.length}</div>
                 </div>
-                <div>
+                {/* LikeIcon */}
+                <div className="flex">
                   {isLiking ? (
                     <PostUnLike postId={postId} setIsLiking={setIsLiking} />
                   ) : (
@@ -142,8 +148,8 @@ export default function PostListCard({ postId }) {
                   )}
                   <div>{postData.likes_id.length}</div>
                 </div>
-
-                <div>
+                {/* CalendarIcon */}
+                <div className="flex">
                   <Icon path={mdiCalendarMonthOutline} size={1} />
                   {new Date(postData.posting_date).toLocaleDateString()}
                 </div>
