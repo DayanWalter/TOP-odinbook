@@ -10,9 +10,9 @@ export default function UserList({ users }) {
       .scrollTo({ top: 0, behavior: 'smooth' });
   };
   return (
-    <ul>
+    <ul className="grid gap-3 md:grid-cols-2 ">
       {users.map((user) => (
-        <li key={user._id} className="border">
+        <li key={user._id} className="">
           <Link to={`/user/${user._id}`} onClick={handleScrollUp}>
             <UserListCard
               user_name={user.user_name}
