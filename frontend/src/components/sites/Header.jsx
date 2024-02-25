@@ -53,6 +53,9 @@ export default function Header() {
                 Post
               </a>
             </li>
+            <li>
+              <a href="">Profile</a>
+            </li>
           </ul>
         </nav>
         {showPostCreate && (

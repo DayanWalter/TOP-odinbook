@@ -12,7 +12,7 @@ export default function UserList({ users }) {
   return (
     <ul>
       {users.map((user) => (
-        <li key={user._id}>
+        <li key={user._id} className="border">
           <Link to={`/user/${user._id}`} onClick={handleScrollUp}>
             <UserListCard
               user_name={user.user_name}

@@ -9,6 +9,7 @@ import UserCreate from './components/user/UserCreate.jsx';
 import UserLogout from './components/user/UserLogout.jsx';
 import UserProfile from './components/user/UserProfile.jsx';
 import Home from './components/sites/Home.jsx';
+import Friends from './components/sites/Friends.jsx';
 
 const router = createBrowserRouter([
   // User
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Home />,
+  },
+  {
+    path: '/friends',
+    element: <Friends />,
   },
 
   {
