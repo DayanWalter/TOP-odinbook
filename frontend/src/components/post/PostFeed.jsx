@@ -55,10 +55,7 @@ export default function PostFeed() {
   }, []);
 
   return (
-    <div
-      id="feedList"
-      className="w-3/4 mx-auto mt-20 bg-yellow-100 border lg:w-1/2"
-    >
+    <div id="feedList" className="mx-auto mt-20 w-fit ">
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {loading && <p>Loading feed...</p>}
       {feed && <PostList posts={feed} />}

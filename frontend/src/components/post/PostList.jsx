@@ -5,7 +5,7 @@ export default function PostList({ posts }) {
   return (
     <ul className="grid gap-3">
       {posts.map((post) => (
-        <li key={post._id} className="w-3/4 ">
+        <li key={post._id}>
           <PostListCard postId={post._id} />
         </li>
       ))}
