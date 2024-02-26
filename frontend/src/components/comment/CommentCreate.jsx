@@ -68,7 +68,7 @@ export default function CommentCreate({
       <div>
         <label htmlFor="content">
           <input
-            className="mt-5 border"
+            className="mt-5 mb-3 border"
             id="content"
             value={content}
             onChange={handleChange}
@@ -77,7 +77,11 @@ export default function CommentCreate({
         </label>
       </div>
 
-      <button onClick={handleCreateComment} disabled={loading}>
+      <button
+        className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
+        onClick={handleCreateComment}
+        disabled={loading}
+      >
         {error && <div style={{ color: 'red' }}>{error}</div>}
         {loading ? 'Creating Comment...' : 'Create Comment'}
       </button>
