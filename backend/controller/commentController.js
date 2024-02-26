@@ -68,7 +68,7 @@ const readCommentById = asyncHandler(async (req, res, next) => {
   const searchedComment = await Comment.findById(req.params.commentid).populate(
     {
       path: 'author_id',
-      select: 'user_name',
+      select: 'user_name avatar_url',
     }
   );
   res.json({ readCommentById: 'Route works', searchedComment });

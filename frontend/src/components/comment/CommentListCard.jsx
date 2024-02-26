@@ -94,29 +94,41 @@ export default function CommentListCard({ commentId }) {
       {loading && <div></div>}
       {commentData && (
         <>
-          <div className="border">
-            <div>
-              {/* Open modal for editing post if user is author */}
-              {isAuthor ? (
-                <Icon
-                  path={mdiFileEditOutline}
-                  size={1}
-                  onClick={handleCommentEdit}
-                />
-              ) : (
-                ''
-              )}
-            </div>
+          <div className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl ">
+            <Link to={`/user/${commentData.author_id._id}`}>
+              <img
+                className="absolute w-20 h-20 rounded-full shadow-lg -left-8 top-3"
+                src={commentData.author_id.avatar_url}
+                alt="Avatar"
+              />
+            </Link>
 
-            <div>
-              <div>
-                <Link to={`/user/${commentData.author_id._id}`}>
-                  {commentData.author_id.user_name}
-                </Link>
-              </div>
-              <div>{commentData.content}</div>
-              <div>
+            <div className="flex flex-col w-full gap-5 p-5 pl-16">
+              <div className="flex justify-between ">
+                <div className="underline underline-offset-2 text-slate-500">
+                  <Link to={`/user/${commentData.author_id._id}`}>
+                    {commentData.author_id.user_name}
+                  </Link>
+                </div>
+
                 <div>
+                  {/* Open modal for editing post if user is author */}
+                  {isAuthor ? (
+                    <Icon
+                      path={mdiFileEditOutline}
+                      size={1}
+                      onClick={handleCommentEdit}
+                    />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              </div>
+
+              <p className="break-all ">{commentData.content}</p>
+
+              <div className="flex justify-between">
+                <div className="flex">
                   {isLiking ? (
                     <CommentUnlike
                       commentId={commentId}
@@ -132,7 +144,7 @@ export default function CommentListCard({ commentId }) {
                   <div>{commentData.likes_id.length}</div>
                 </div>
 
-                <div>
+                <div className="flex">
                   <Icon path={mdiCalendarMonthOutline} size={1} />
                   {new Date(commentData.posting_date).toLocaleDateString()}
                 </div>
