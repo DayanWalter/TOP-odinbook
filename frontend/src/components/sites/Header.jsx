@@ -47,7 +47,7 @@ export default function Header() {
             </li>
             <li role="none" className="hover:scale-105">
               <a href="/friends" role="menuitem">
-                Friends
+                All User
               </a>
             </li>
             <li role="none" className="hover:scale-105">

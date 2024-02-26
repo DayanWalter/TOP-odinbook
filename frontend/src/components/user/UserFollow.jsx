@@ -35,7 +35,12 @@ export default function UserFollow({ userId, setIsFollowing }) {
 
   return (
     <div>
-      <button onClick={handleFollowUser}>Follow User</button>
+      <button
+        className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
+        onClick={handleFollowUser}
+      >
+        Follow User
+      </button>
     </div>
   );
 }

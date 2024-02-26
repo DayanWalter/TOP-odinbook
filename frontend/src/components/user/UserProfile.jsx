@@ -137,32 +137,42 @@ export default function UserProfile() {
   }
 
   return (
-    <div id="profileUserContainer">
+    <div id="profileUserContainer" className="h-screen p-5 ">
       {loading && <div></div>}
       {userData && (
         <>
           <Link className="flex gap-3 mb-3" to={`/home`}>
             <Icon path={mdiArrowLeft} size={1} />
-            <p>{loggedInUserName}</p>
+            <p>back to feed</p>
           </Link>
           {/* Avatar and Background Image Section */}
-          <div className="relative w-3/4 h-48 mx-auto shadow-lg">
+          <div className="relative w-5/6 h-48 mx-auto shadow-lg">
             <img
               className="object-cover object-center w-full h-full rounded-md"
               src={userData.img_url}
               alt="Backgroundimage"
             />
             <img
-              className="absolute -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-full shadow-lg md:translate-x-0 h-30 w-30 md:-left-8 top-1/2 left-1/2"
+              className="absolute -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-full shadow-lg h-44 w-44 md:translate-x-0 md:-left-8 top-1/2 left-1/2"
               src={userData.avatar_url}
               alt="Avatar"
             />
           </div>
-
-          <button onClick={handleModal}>Edit Profile</button>
-          <Link to={'/logout'}>
-            <button>Logout</button>
-          </Link>
+          {isLoggedInUser && (
+            <>
+              <button
+                className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
+                onClick={handleModal}
+              >
+                Edit Profile
+              </button>
+              <Link to={'/logout'}>
+                <button className="px-2 py-1 text-sm text-white border rounded-md bg-info hover:bg-info/80">
+                  Logout
+                </button>
+              </Link>
+            </>
+          )}
 
           {/* {isLoggedInUser && (
             <div>
@@ -176,7 +186,7 @@ export default function UserProfile() {
 
           {/* Main */}
           <div>
-            <h1>{userData.user_name}</h1>
+            <h1 className="mt-5 text-2xl">{userData.user_name}</h1>
             {/* Show follow/unfollow button, if profile is not logged in user */}
             {!isLoggedInUser &&
               (isFollowing ? (
@@ -190,23 +200,23 @@ export default function UserProfile() {
                   setIsFollowing={setIsFollowing}
                 />
               ))}
-            <div>
-              <div>
+            <div className="mt-5 mb-5">
+              <div className="flex gap-3">
                 <Icon path={mdiFeather} size={1} />
                 {userData.bio}
               </div>
-              <div>
+              <div className="flex gap-3">
                 <Icon path={mdiMapMarkerOutline} size={1} />
                 {userData.location}
               </div>
-              <div>
+              <div className="flex gap-3">
                 <Icon path={mdiCalendarMonthOutline} size={1} />
                 {new Date(userData.reg_date).toLocaleDateString()}
               </div>
             </div>
           </div>
           {/* List Buttons */}
-          <div>
+          <div className="flex flex-col items-start mb-10 border-b sm:justify-between sm:flex-row">
             {/* {isLoggedInUser && (
               <button
                 onClick={() => {
@@ -218,7 +228,9 @@ export default function UserProfile() {
             )} */}
 
             <button
-              className="border"
+              className={` border-b-2 border-white ${
+                activeIndex === 1 ? 'border-blue-600 border-b-2' : ''
+              }`}
               onClick={() => {
                 setActiveIndex(1);
               }}
@@ -227,7 +239,9 @@ export default function UserProfile() {
             </button>
 
             <button
-              className="border"
+              className={` border-b-2 border-white ${
+                activeIndex === 2 ? 'border-blue-600 border-b-2' : ''
+              }`}
               onClick={() => {
                 setActiveIndex(2);
               }}
@@ -236,7 +250,9 @@ export default function UserProfile() {
             </button>
 
             <button
-              className="border"
+              className={` border-b-2 border-white ${
+                activeIndex === 3 ? 'border-blue-600 border-b-2' : ''
+              }`}
               onClick={() => {
                 setActiveIndex(3);
               }}
@@ -245,23 +261,15 @@ export default function UserProfile() {
             </button>
 
             <button
-              className="border"
+              className={` border-b-2 border-white ${
+                activeIndex === 4 ? 'border-blue-600 border-b-2' : ''
+              }`}
               onClick={() => {
                 setActiveIndex(4);
               }}
             >
               {userData.comments_id.length} Comments
             </button>
-            {isLoggedInUser && (
-              <button
-                className="border"
-                onClick={() => {
-                  setActiveIndex(5);
-                }}
-              >
-                All User
-              </button>
-            )}
           </div>
           {/* List Container */}
           <div>
@@ -277,7 +285,6 @@ export default function UserProfile() {
             {activeIndex === 4 && userData.comments_id && (
               <CommentList comments={userData.comments_id} />
             )}
-            {activeIndex === 5 && <UsersRead />}
           </div>
 
           {isOpenModal &&
