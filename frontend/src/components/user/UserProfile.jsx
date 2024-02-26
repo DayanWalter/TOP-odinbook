@@ -19,6 +19,7 @@ import { mdiNotePlusOutline } from '@mdi/js';
 import PostFeed from '../post/PostFeed';
 import PostCreate from '../post/PostCreate';
 import UsersRead from './UsersRead';
+import UserUpdate from './UserUpdate';
 
 export default function UserProfile() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
@@ -289,10 +290,12 @@ export default function UserProfile() {
 
           {isOpenModal &&
             (isLoggedInUser ? (
-              <div id="overlay" onClick={handleOverlayClick}>
-                <div>
-                  <UserEdit />
-                </div>
+              <div
+                className="fixed inset-0 flex items-center justify-center bg-gray-500/50"
+                id="overlay"
+                onClick={handleOverlayClick}
+              >
+                <UserUpdate />
               </div>
             ) : (
               ''

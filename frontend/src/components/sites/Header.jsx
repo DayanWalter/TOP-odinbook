@@ -80,7 +80,7 @@ export default function Header() {
           <div
             id="overlay"
             onClick={handleOverlayClick}
-            className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50"
+            className="fixed inset-0 flex items-center justify-center bg-gray-500/50"
           >
             <div className="p-8 bg-white rounded-lg">
               <PostCreate />

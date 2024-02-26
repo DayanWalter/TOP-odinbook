@@ -3,9 +3,9 @@ import UserDelete from './UserDelete';
 
 export default function UserEdit() {
   return (
-    <form>
+    <div>
       <UserUpdate />
       <UserDelete />
-    </form>
+    </div>
   );
 }

@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import Icon from '@mdi/react';
+
+import { mdiAlertOutline } from '@mdi/js';
 
 export default function UserUpdate() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
@@ -94,12 +97,41 @@ export default function UserUpdate() {
       [name]: value,
     }));
   };
+  const handleDeleteUser = async () => {
+    const authToken = localStorage.getItem('authToken');
+
+    // Parameters for the backend request
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/api/user/delete`,
+        requestOptions
+      );
+
+      if (response.status === 200) {
+        console.log('User deleted.');
+      } else {
+        console.error('Error deleting user:', response.status);
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+
   return (
-    <>
+    <form className="flex flex-col w-full max-w-md px-10 py-12 bg-white rounded shadow-md ">
       {/* User Name */}
-      <div>
-        <label htmlFor="user_name">Username:</label>
+      <label className="" htmlFor="user_name">
+        Username:
         <input
+          className="w-full px-2 py-1 mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="user_name"
           type="text"
           name="user_name"
@@ -108,12 +140,12 @@ export default function UserUpdate() {
           pattern="[a-zA-Z0-9]{6,}"
           autoComplete="off"
         />
-        <span>Username must be at least 6 characters long</span>
-      </div>
+      </label>
       {/* Email */}
-      <div>
-        <label htmlFor="email">Email:</label>
+      <label htmlFor="email">
+        Email:
         <input
+          className="w-full px-2 py-1 mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="email"
           type="email"
           name="email"
@@ -121,12 +153,12 @@ export default function UserUpdate() {
           onChange={handleChange}
           autoComplete="true"
         />
-        <span>Email has the wrong format</span>
-      </div>
+      </label>
       {/* Header Image */}
-      <div>
-        <label htmlFor="img_url">Header url:</label>
+      <label htmlFor="img_url">
+        Header url:
         <input
+          className="w-full px-2 py-1 mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="img_url"
           type="text"
           name="img_url"
@@ -134,12 +166,12 @@ export default function UserUpdate() {
           onChange={handleChange}
           autoComplete="off"
         />
-        <span>img_url has the wrong format</span>
-      </div>
+      </label>
       {/* Avatar */}
-      <div>
-        <label htmlFor="avatar_url">Profile picture url:</label>
+      <label htmlFor="avatar_url">
+        Profile picture url:
         <input
+          className="w-full px-2 py-1 mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="avatar_url"
           type="text"
           name="avatar_url"
@@ -147,12 +179,12 @@ export default function UserUpdate() {
           onChange={handleChange}
           autoComplete="off"
         />
-        <span>Profile picture url has the wrong format</span>
-      </div>
+      </label>
       {/* Bio */}
-      <div>
-        <label htmlFor="user_name">Bio:</label>
+      <label htmlFor="bio" className="w-full mb-5">
+        Bio:
         <input
+          className="w-full px-2 py-1 mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="bio"
           type="text"
           name="bio"
@@ -161,12 +193,12 @@ export default function UserUpdate() {
           pattern="^(?:.{0,60})$"
           autoComplete="off"
         />
-        <span>Bio must be shorter than 60 chars</span>
-      </div>
+      </label>
       {/* Location */}
-      <div>
-        <label htmlFor="location">Location:</label>
+      <label htmlFor="location" className="w-full mb-5">
+        Location:
         <input
+          className="w-full px-2 py-1 mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="location"
           type="text"
           name="location"
@@ -176,12 +208,25 @@ export default function UserUpdate() {
           pattern="[a-zA-Z0-9]{3,}"
           autoComplete="off"
         />
-        <span>Location must be at least 3 characters long</span>
-      </div>
+      </label>
 
-      <button onClick={handleUpdateUser}>Update User</button>
+      <button
+        className="p-2 mb-5 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
+        onClick={handleUpdateUser}
+      >
+        Update User
+      </button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>User updated!</div>}
-    </>
+
+      <button
+        className="flex justify-between px-2 py-1 text-sm text-white border rounded-md bg-danger hover:bg-danger/80"
+        onClick={handleDeleteUser}
+      >
+        <Icon path={mdiAlertOutline} size={0.9} />
+        <p>Delete User</p>
+        <Icon path={mdiAlertOutline} size={0.9} />
+      </button>
+    </form>
   );
 }

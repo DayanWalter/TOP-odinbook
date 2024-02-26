@@ -124,7 +124,7 @@ export default function UserLogin() {
   return (
     <AuthSite title={'Login'}>
       <form onSubmit={handleLoginUser}>
-        <label htmlFor="user_name" className="w-full mb-5">
+        <label htmlFor="user_name">
           Username:
           <span className="text-red-500">*</span>
           <input
@@ -137,7 +137,7 @@ export default function UserLogin() {
             required={true}
           />
         </label>
-        <label htmlFor="user_password" className="w-full mb-5">
+        <label htmlFor="user_password">
           Password:
           <span className="text-red-500">*</span>
           <input
