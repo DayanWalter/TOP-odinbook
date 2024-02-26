@@ -128,6 +128,7 @@ export default function PostListCard({ postId }) {
                   {/* Open modal for editing post if user is author */}
                   {isAuthor ? (
                     <Icon
+                      className="hover:cursor-pointer"
                       path={mdiFileEditOutline}
                       size={1}
                       onClick={handlePostEdit}
@@ -143,6 +144,7 @@ export default function PostListCard({ postId }) {
                 {/* CommentIcon */}
                 <div className="flex">
                   <Icon
+                    className="hover:cursor-pointer"
                     onClick={handleCommentCreate}
                     path={mdiChatOutline}
                     size={1}

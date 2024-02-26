@@ -115,6 +115,7 @@ export default function CommentListCard({ commentId }) {
                   {/* Open modal for editing post if user is author */}
                   {isAuthor ? (
                     <Icon
+                      className="hover:cursor-pointer"
                       path={mdiFileEditOutline}
                       size={1}
                       onClick={handleCommentEdit}
