@@ -216,7 +216,7 @@ export default function UserProfile() {
             </div>
           </div>
           {/* List Buttons */}
-          <div className="flex flex-col items-start mb-10 border-b sm:justify-between sm:flex-row">
+          <div className="flex flex-col items-start pb-5 mb-10 border-b sm:justify-between sm:flex-row">
             {/* {isLoggedInUser && (
               <button
                 onClick={() => {

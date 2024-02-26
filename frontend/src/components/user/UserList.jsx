@@ -11,6 +11,7 @@ export default function UserList({ users }) {
   };
   return (
     <ul className="grid gap-3 md:grid-cols-2 ">
+      {users.length === 0 && 'No one :('}
       {users.map((user) => (
         <li key={user._id} className="">
           <Link to={`/user/${user._id}`} onClick={handleScrollUp}>
