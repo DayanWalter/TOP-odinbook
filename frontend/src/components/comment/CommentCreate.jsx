@@ -64,11 +64,11 @@ export default function CommentCreate({
   const handleChange = (e) => setContent(e.target.value);
 
   return (
-    <div className="p-5 -mt-5 bg-white border shadow-lg rounded-b-xl">
+    <div className="max-w-md p-5 -mt-5 bg-white border shadow-lg rounded-b-xl">
       <div>
         <label htmlFor="content">
           <input
-            className="mt-5 mb-3 border"
+            className="w-full mt-8 mb-5 border"
             id="content"
             value={content}
             onChange={handleChange}

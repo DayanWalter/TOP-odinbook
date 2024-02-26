@@ -273,7 +273,7 @@ export default function UserProfile() {
             </button>
           </div>
           {/* List Container */}
-          <div>
+          <div className="mx-auto mt-20 w-fit ">
             {activeIndex === 1 && userData.follows_id && (
               <UserList users={userData.follows_id} />
             )}

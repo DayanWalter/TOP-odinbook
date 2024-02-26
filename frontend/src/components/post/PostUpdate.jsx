@@ -106,9 +106,8 @@ export default function UpdatePost({ postId }) {
   return (
     <>
       <label htmlFor="content">
-        Post:
         <input
-          className="mt-5 mb-3 ml-5 border"
+          className="w-full mt-8 mb-5 border"
           id="content"
           type="text"
           name="content"

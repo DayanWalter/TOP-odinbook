@@ -84,11 +84,11 @@ export default function PostListCard({ postId }) {
     fetchPostData();
   }, [postId, isLiking, commentCreated, authToken, loggedInUserId]);
 
-  const handleOverlayClick = (event) => {
-    if (event.target.id === 'overlay') {
-      setIsOpenModal(false);
-    }
-  };
+  // const handleOverlayClick = (event) => {
+  //   if (event.target.id === 'overlay') {
+  //     setIsOpenModal(false);
+  //   }
+  // };
   const handlePostEdit = () => {
     isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
   };
@@ -105,7 +105,7 @@ export default function PostListCard({ postId }) {
         <>
           <div
             id="card"
-            className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl "
+            className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl"
           >
             <Link to={`/user/${postData.author_id._id}`}>
               <img
@@ -169,25 +169,19 @@ export default function PostListCard({ postId }) {
             </div>
           </div>
           {isOpenModal && (
-            <div id="overlay" onClick={handleOverlayClick}>
-              <div>
-                <PostEdit postId={postId} />
-              </div>
-            </div>
+            <>
+              <PostEdit postId={postId} />
+            </>
           )}
           {isOpenCommentCreate && (
-            <div>
-              <div>
-                <CommentCreate
-                  postId={postId}
-                  commentCreated={commentCreated}
-                  setCommentCreated={setCommentCreated}
-                />
-              </div>
-              <div>
-                <CommentList comments={postData.comments_id} />
-              </div>
-            </div>
+            <>
+              <CommentCreate
+                postId={postId}
+                commentCreated={commentCreated}
+                setCommentCreated={setCommentCreated}
+              />
+              <CommentList comments={postData.comments_id} />
+            </>
           )}
         </>
       )}
