@@ -75,12 +75,40 @@ export default function UpdatePost({ postId }) {
     setSuccess(true);
   };
 
+  const handleDeletePost = async () => {
+    const authToken = localStorage.getItem('authToken');
+
+    // Parameters for the backend request
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/api/post/${postId}/delete`,
+        requestOptions
+      );
+
+      if (response.status === 200) {
+        console.log('Post deleted.');
+      } else {
+        console.error('Error deleting post:', response.status);
+      }
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
+
   return (
     <>
-      <div>
-        <label htmlFor="content">Post:</label>
+      <label htmlFor="content">
+        Post:
         <input
-          className="border"
+          className="mt-5 border"
           id="content"
           type="text"
           name="content"
@@ -88,9 +116,10 @@ export default function UpdatePost({ postId }) {
           onChange={(e) => setContent(e.target.value)}
           autoComplete="off"
         />
-      </div>
+      </label>
 
       <button onClick={handleUpdatePost}>Update Post</button>
+      <button onClick={handleDeletePost}>Delete Post</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {success && <div style={{ color: 'green' }}>Post updated!</div>}
     </>

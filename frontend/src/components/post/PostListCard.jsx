@@ -90,7 +90,7 @@ export default function PostListCard({ postId }) {
     }
   };
   const handlePostEdit = () => {
-    setIsOpenModal(true);
+    isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
   };
 
   const handleCommentCreate = () => {
