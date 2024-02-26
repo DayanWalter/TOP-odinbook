@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import PostCreate from '../post/PostCreate';
+import { Link } from 'react-router-dom';
 
 // import { useContext } from 'react';
 // import { LanguageContext } from '../App';
 
 export default function Header() {
   // const [language] = useContext(LanguageContext);
+
+  // id from logged in user
+  const authToken = localStorage.getItem('authToken');
+  // Split the payload of the jwt and convert the ._id part
+  const payload = JSON.parse(atob(authToken.split('.')[1]));
+  // Define the username you are looking for
+  const loggedInUserId = payload._id;
+  const loggedInUserName = payload.user_name;
+
   const [showPostCreate, setShowPostCreate] = useState(false);
 
   const handleOverlayClick = (event) => {
@@ -54,7 +64,15 @@ export default function Header() {
               </a>
             </li>
             <li>
-              <a href="">Profile</a>
+              {/* <Link to={`/user/${postData.author_id._id}`}>
+              <img
+                className="absolute w-20 h-20 rounded-full shadow-lg -left-8 top-3"
+                src={postData.author_id.avatar_url}
+                alt="Avatar"
+              />
+            </Link> */}
+
+              <a href={`/user/${loggedInUserId}`}>Profile</a>
             </li>
           </ul>
         </nav>
