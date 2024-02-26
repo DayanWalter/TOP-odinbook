@@ -1,14 +1,11 @@
-import CommentDelete from './CommentDelete';
 import CommentUpdate from './CommentUpdate';
 
 export default function CommentEdit({ commentId }) {
   return (
     <>
-      <form>
+      <div className="flex flex-col p-5 -mt-5 bg-white border shadow-lg rounded-b-xl">
         <CommentUpdate commentId={commentId} />
-
-        <CommentDelete commentId={commentId} />
-      </form>
+      </div>
     </>
   );
 }

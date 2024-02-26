@@ -86,7 +86,7 @@ export default function CommentListCard({ commentId }) {
     }
   };
   const handleCommentEdit = () => {
-    setIsOpenModal(true);
+    isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
   };
 
   return (
