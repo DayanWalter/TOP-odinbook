@@ -38,7 +38,12 @@ export default function CommentLike({ commentId, setIsLiking }) {
 
   return (
     <div>
-      <Icon onClick={handleCommentLike} path={mdiHeartOutline} size={1} />
+      <Icon
+        onClick={handleCommentLike}
+        className="text-red-600 hover:animate-ping hover:cursor-pointer "
+        path={mdiHeartOutline}
+        size={1}
+      />
     </div>
   );
 }

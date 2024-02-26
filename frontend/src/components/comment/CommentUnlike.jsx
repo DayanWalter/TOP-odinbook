@@ -38,7 +38,12 @@ export default function CommentUnlike({ commentId, setIsLiking }) {
 
   return (
     <div>
-      <Icon onClick={handleCommentUnlike} path={mdiHeart} size={1} />
+      <Icon
+        onClick={handleCommentUnlike}
+        className="text-red-600 hover:cursor-pointer"
+        path={mdiHeart}
+        size={1}
+      />
     </div>
   );
 }

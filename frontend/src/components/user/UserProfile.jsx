@@ -25,7 +25,7 @@ export default function UserProfile() {
 
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(1);
 
   const [isLoggedInUser, setIsLoggedInUser] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -90,35 +90,35 @@ export default function UserProfile() {
   }, [userIdFromParams, isFollowing, authToken, loggedInUserId, activeIndex]);
 
   // ScrollUp Button
-  useEffect(() => {
-    const userContainer = document.getElementById('profileUserContainer');
+  // useEffect(() => {
+  //   const userContainer = document.getElementById('profileUserContainer');
 
-    const handleScrollButtonVisibility = () => {
-      setShowButton(userContainer.scrollTop > 10);
-    };
+  //   const handleScrollButtonVisibility = () => {
+  //     setShowButton(userContainer.scrollTop > 10);
+  //   };
 
-    userContainer.addEventListener('scroll', handleScrollButtonVisibility);
+  //   userContainer.addEventListener('scroll', handleScrollButtonVisibility);
 
-    return () => {
-      userContainer.removeEventListener('scroll', handleScrollButtonVisibility);
-    };
-  }, []);
+  //   return () => {
+  //     userContainer.removeEventListener('scroll', handleScrollButtonVisibility);
+  //   };
+  // }, []);
 
-  const handleScrollUp = () => {
-    document
-      .getElementById('profileUserContainer')
-      .scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  // const handleScrollUp = () => {
+  //   document
+  //     .getElementById('profileUserContainer')
+  //     .scrollTo({ top: 0, behavior: 'smooth' });
+  // };
 
   const handleModal = () => {
     isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
   };
 
-  const handlePostCreateModal = () => {
-    isOpenPostCreateModal
-      ? setIsOpenPostCreateModal(false)
-      : setIsOpenPostCreateModal(true);
-  };
+  // const handlePostCreateModal = () => {
+  //   isOpenPostCreateModal
+  //     ? setIsOpenPostCreateModal(false)
+  //     : setIsOpenPostCreateModal(true);
+  // };
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
@@ -141,16 +141,22 @@ export default function UserProfile() {
       {loading && <div></div>}
       {userData && (
         <>
-          <div className="border">
-            <Link to={`/user/${loggedInUserId}`}>
-              <Icon path={mdiArrowLeft} size={1} />
-              <p>{loggedInUserName}</p>
-            </Link>
-          </div>
-
-          <div className="border ">
-            <img src={userData.avatar_url} alt="Avatar" />
-            <img src={userData.img_url} alt="Hero Image" />
+          <Link className="flex gap-3 mb-3" to={`/home`}>
+            <Icon path={mdiArrowLeft} size={1} />
+            <p>{loggedInUserName}</p>
+          </Link>
+          {/* Avatar and Background Image Section */}
+          <div className="relative w-3/4 h-48 mx-auto shadow-lg">
+            <img
+              className="object-cover object-center w-full h-full rounded-md"
+              src={userData.img_url}
+              alt="Backgroundimage"
+            />
+            <img
+              className="absolute -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-full shadow-lg md:translate-x-0 h-30 w-30 md:-left-8 top-1/2 left-1/2"
+              src={userData.avatar_url}
+              alt="Avatar"
+            />
           </div>
 
           <button onClick={handleModal}>Edit Profile</button>
@@ -158,7 +164,7 @@ export default function UserProfile() {
             <button>Logout</button>
           </Link>
 
-          {isLoggedInUser && (
+          {/* {isLoggedInUser && (
             <div>
               <Icon
                 path={mdiNotePlusOutline}
@@ -166,7 +172,7 @@ export default function UserProfile() {
                 onClick={handlePostCreateModal}
               />
             </div>
-          )}
+          )} */}
 
           {/* Main */}
           <div>
@@ -201,7 +207,7 @@ export default function UserProfile() {
           </div>
           {/* List Buttons */}
           <div>
-            {isLoggedInUser && (
+            {/* {isLoggedInUser && (
               <button
                 onClick={() => {
                   setActiveIndex(0);
@@ -209,9 +215,10 @@ export default function UserProfile() {
               >
                 Feed
               </button>
-            )}
+            )} */}
 
             <button
+              className="border"
               onClick={() => {
                 setActiveIndex(1);
               }}
@@ -220,6 +227,7 @@ export default function UserProfile() {
             </button>
 
             <button
+              className="border"
               onClick={() => {
                 setActiveIndex(2);
               }}
@@ -228,6 +236,7 @@ export default function UserProfile() {
             </button>
 
             <button
+              className="border"
               onClick={() => {
                 setActiveIndex(3);
               }}
@@ -236,6 +245,7 @@ export default function UserProfile() {
             </button>
 
             <button
+              className="border"
               onClick={() => {
                 setActiveIndex(4);
               }}
@@ -244,6 +254,7 @@ export default function UserProfile() {
             </button>
             {isLoggedInUser && (
               <button
+                className="border"
                 onClick={() => {
                   setActiveIndex(5);
                 }}
@@ -254,7 +265,6 @@ export default function UserProfile() {
           </div>
           {/* List Container */}
           <div>
-            {activeIndex === 0 && <PostFeed />}
             {activeIndex === 1 && userData.follows_id && (
               <UserList users={userData.follows_id} />
             )}
@@ -281,7 +291,7 @@ export default function UserProfile() {
               ''
             ))}
 
-          {isOpenPostCreateModal &&
+          {/* {isOpenPostCreateModal &&
             (isLoggedInUser ? (
               <div id="overlay" onClick={handleOverlayClick}>
                 <div>
@@ -290,14 +300,14 @@ export default function UserProfile() {
               </div>
             ) : (
               ''
-            ))}
+            ))} */}
         </>
       )}
-      {showButton && (
+      {/* {showButton && (
         <button title="Scroll Up" onClick={handleScrollUp}>
           <Icon path={mdiArrowUp} size={2} />
         </button>
-      )}
+      )} */}
     </div>
   );
 }

@@ -38,7 +38,12 @@ export default function PostLike({ postId, setIsLiking }) {
 
   return (
     <div>
-      <Icon onClick={handlePostLike} path={mdiHeartOutline} size={1} />
+      <Icon
+        onClick={handlePostLike}
+        className="text-red-600 hover:animate-ping hover:cursor-pointer "
+        path={mdiHeartOutline}
+        size={1}
+      />
     </div>
   );
 }
