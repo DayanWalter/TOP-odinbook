@@ -1,5 +1,5 @@
 import PostFeed from '../post/PostFeed';
-import Header from './Header';
+import MainSite from './MainSite';
 
 export default function Home() {
   const token = localStorage.getItem('authToken');
@@ -8,9 +8,8 @@ export default function Home() {
   const userId = payload._id;
   const userName = payload.user_name;
   return (
-    <div className="flex flex-col justify-between h-screen">
-      <Header />
+    <MainSite>
       <PostFeed />
-    </div>
+    </MainSite>
   );
 }
