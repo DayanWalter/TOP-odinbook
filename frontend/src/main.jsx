@@ -10,6 +10,7 @@ import UserLogout from './components/user/UserLogout.jsx';
 import UserProfile from './components/user/UserProfile.jsx';
 import Home from './components/sites/Home.jsx';
 import AllUser from './components/sites/AllUser.jsx';
+import ProfileSite from './components/sites/ProfileSite.jsx';
 
 const router = createBrowserRouter([
   // User
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
 
   {
     path: '/user/:userid',
-    element: <UserProfile />,
+    element: <ProfileSite />,
     loader({ params }) {
       return params;
     },
