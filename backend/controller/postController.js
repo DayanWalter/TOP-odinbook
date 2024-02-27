@@ -39,7 +39,7 @@ const readFeedPosts = asyncHandler(async (req, res, next) => {
   // Search for posts in which the author_id is the same as the user._id
   const feed = await Post.find({ author_id: { $in: followedUserIds } });
 
-  res.json({ readFeedPosts: 'Route works', feed });
+  res.json(feed);
 });
 // Useful?
 const readUserPosts = asyncHandler(async (req, res, next) => {
