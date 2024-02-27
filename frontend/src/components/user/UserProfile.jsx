@@ -20,6 +20,7 @@ import PostFeed from '../post/PostFeed';
 import PostCreate from '../post/PostCreate';
 import UsersRead from './UsersRead';
 import UserUpdate from './UserUpdate';
+import Header from '../sites/Header';
 
 export default function UserProfile() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
@@ -142,12 +143,10 @@ export default function UserProfile() {
       {loading && <div></div>}
       {userData && (
         <>
-          <Link className="flex gap-3 mb-3" to={`/home`}>
-            <Icon path={mdiArrowLeft} size={1} />
-            <p>back to feed</p>
-          </Link>
+          <Header />
+
           {/* Avatar and Background Image Section */}
-          <div className="relative w-5/6 h-48 mx-auto shadow-lg">
+          <div className="relative w-5/6 h-48 mx-auto mt-20 shadow-lg">
             <img
               className="object-cover object-center w-full h-full rounded-md"
               src={userData.img_url}
@@ -160,19 +159,17 @@ export default function UserProfile() {
             />
           </div>
           {isLoggedInUser && (
-            <>
+            <div className="flex justify-end mt-5 border">
               <button
                 className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
                 onClick={handleModal}
               >
                 Edit Profile
               </button>
-              <Link to={'/logout'}>
-                <button className="px-2 py-1 text-sm text-white border rounded-md bg-info hover:bg-info/80">
-                  Logout
-                </button>
-              </Link>
-            </>
+              <button className="px-2 py-1 text-sm text-white border rounded-md bg-info hover:bg-info/80">
+                <Link to={'/logout'}>Logout</Link>
+              </button>
+            </div>
           )}
 
           {/* {isLoggedInUser && (
@@ -229,8 +226,8 @@ export default function UserProfile() {
             )} */}
 
             <button
-              className={` border-b-2 border-white ${
-                activeIndex === 1 ? 'border-blue-600 border-b-2' : ''
+              className={`  border-b-2 ${
+                activeIndex === 1 ? 'border-blue-600 ' : ' border-transparent'
               }`}
               onClick={() => {
                 setActiveIndex(1);
@@ -240,8 +237,8 @@ export default function UserProfile() {
             </button>
 
             <button
-              className={` border-b-2 border-white ${
-                activeIndex === 2 ? 'border-blue-600 border-b-2' : ''
+              className={`  border-b-2 ${
+                activeIndex === 2 ? 'border-blue-600 ' : ' border-transparent'
               }`}
               onClick={() => {
                 setActiveIndex(2);
@@ -251,8 +248,8 @@ export default function UserProfile() {
             </button>
 
             <button
-              className={` border-b-2 border-white ${
-                activeIndex === 3 ? 'border-blue-600 border-b-2' : ''
+              className={`  border-b-2 ${
+                activeIndex === 3 ? 'border-blue-600 ' : ' border-transparent'
               }`}
               onClick={() => {
                 setActiveIndex(3);
@@ -262,8 +259,8 @@ export default function UserProfile() {
             </button>
 
             <button
-              className={` border-b-2 border-white ${
-                activeIndex === 4 ? 'border-blue-600 border-b-2' : ''
+              className={`  border-b-2 ${
+                activeIndex === 4 ? 'border-blue-600 ' : ' border-transparent'
               }`}
               onClick={() => {
                 setActiveIndex(4);
