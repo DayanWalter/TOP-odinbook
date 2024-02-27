@@ -139,14 +139,14 @@ export default function UserProfile() {
   }
 
   return (
-    <div id="profileUserContainer" className="h-screen p-5 ">
+    <div id="profileUserContainer" className="h-full p-5 bg-gray-100">
       {loading && <div></div>}
       {userData && (
         <>
           <Header />
 
           {/* Avatar and Background Image Section */}
-          <div className="relative w-5/6 h-48 mx-auto mt-20 shadow-lg">
+          <div className="relative w-5/6 h-48 mx-auto mt-20 mb-10 shadow-lg">
             <img
               className="object-cover object-center w-full h-full rounded-md"
               src={userData.img_url}
@@ -158,19 +158,6 @@ export default function UserProfile() {
               alt="Avatar"
             />
           </div>
-          {isLoggedInUser && (
-            <div className="flex justify-end mt-5 border">
-              <button
-                className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
-                onClick={handleModal}
-              >
-                Edit Profile
-              </button>
-              <button className="px-2 py-1 text-sm text-white border rounded-md bg-info hover:bg-info/80">
-                <Link to={'/logout'}>Logout</Link>
-              </button>
-            </div>
-          )}
 
           {/* {isLoggedInUser && (
             <div>
@@ -183,9 +170,24 @@ export default function UserProfile() {
           )} */}
 
           {/* Main */}
-          <div>
-            <h1 className="mt-5 text-2xl">{userData.user_name}</h1>
+          <div className="p-3 mb-5 bg-white rounded-lg">
+            <h1 className="text-2xl ">{userData.user_name}</h1>
             {/* Show follow/unfollow button, if profile is not logged in user */}
+
+            {isLoggedInUser && (
+              <div className="flex justify-between ">
+                <button
+                  className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
+                  onClick={handleModal}
+                >
+                  Edit Profile
+                </button>
+                <button className="px-2 py-1 text-sm text-white border rounded-md bg-info hover:bg-info/80">
+                  <Link to={'/logout'}>Logout</Link>
+                </button>
+              </div>
+            )}
+
             {!isLoggedInUser &&
               (isFollowing ? (
                 <UserUnFollow
@@ -198,7 +200,7 @@ export default function UserProfile() {
                   setIsFollowing={setIsFollowing}
                 />
               ))}
-            <div className="mt-5 mb-5">
+            <div className="mt-3 ">
               <div className="flex gap-3">
                 <Icon path={mdiFeather} size={1} />
                 {userData.bio}

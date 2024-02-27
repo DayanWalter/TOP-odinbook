@@ -29,7 +29,7 @@ export default function Header() {
       className="fixed top-0 left-0 z-10 w-full h-16 shadow-md bg-neutral-50 "
     >
       <div className="flex items-center w-full h-full px-5 sm:justify-between lg:px-16">
-        <a href="#home" className="hidden text-2xl sm:block ">
+        <a href="/home" className="hidden text-2xl sm:block ">
           {' '}
           {'BITFEATHER'}{' '}
         </a>

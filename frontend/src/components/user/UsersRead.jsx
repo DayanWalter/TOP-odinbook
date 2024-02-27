@@ -48,7 +48,7 @@ export default function UsersRead() {
   }, []);
 
   return (
-    <div id="userList" className="w-3/4 mx-auto mt-20 xl:w-1/2 ">
+    <div id="userList" className="w-3/4 mx-auto mt-20 xl:w-1/2">
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {usersData && <UserList users={usersData.allUsers} />}
     </div>
