@@ -146,9 +146,9 @@ export default function UserProfile() {
           <Header />
 
           {/* Avatar and Background Image Section */}
-          <div className="relative w-5/6 h-48 mx-auto mt-20 mb-10 shadow-lg">
+          <div className="relative w-5/6 h-48 mx-auto mt-20 mb-10 overflow-hidden border rounded-md shadow-lg">
             <img
-              className="object-cover object-center w-full h-full rounded-md"
+              className="object-cover object-center w-full h-full "
               src={userData.img_url}
               alt="Backgroundimage"
             />
@@ -170,7 +170,7 @@ export default function UserProfile() {
           )} */}
 
           {/* Main */}
-          <div className="p-3 mb-5 bg-white rounded-lg">
+          <div className="p-3 mb-5 bg-white rounded-lg sm:w-1/2">
             <h1 className="text-2xl ">{userData.user_name}</h1>
             {/* Show follow/unfollow button, if profile is not logged in user */}
 
@@ -215,6 +215,7 @@ export default function UserProfile() {
               </div>
             </div>
           </div>
+
           {/* List Buttons */}
           <div className="flex flex-col items-start pb-5 mb-10 border-b sm:justify-between sm:flex-row">
             {/* {isLoggedInUser && (
@@ -271,6 +272,7 @@ export default function UserProfile() {
               {userData.comments_id.length} Comments
             </button>
           </div>
+
           {/* List Container */}
           <div className="mx-auto mt-20 w-fit ">
             {activeIndex === 1 && userData.follows_id && (

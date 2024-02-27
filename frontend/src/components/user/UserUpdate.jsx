@@ -126,7 +126,7 @@ export default function UserUpdate() {
   };
 
   return (
-    <form className="flex flex-col w-full max-w-md px-10 py-12 bg-white rounded shadow-md ">
+    <form className="flex flex-col max-w-md px-5 py-6 mt-16 bg-white rounded shadow-md sm:mt-0 sm:py-12 sm:px-10 ">
       {/* User Name */}
       <label className="" htmlFor="user_name">
         Username:
@@ -181,7 +181,7 @@ export default function UserUpdate() {
         />
       </label>
       {/* Bio */}
-      <label htmlFor="bio" className="w-full mb-5">
+      <label htmlFor="bio">
         Bio:
         <input
           className="w-full px-2 py-1 mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
@@ -195,7 +195,7 @@ export default function UserUpdate() {
         />
       </label>
       {/* Location */}
-      <label htmlFor="location" className="w-full mb-5">
+      <label htmlFor="location">
         Location:
         <input
           className="w-full px-2 py-1 mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"

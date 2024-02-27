@@ -46,7 +46,7 @@ export default function Header() {
               </a>
             </li>
             <li role="none" className="hover:scale-105">
-              <a href="/friends" role="menuitem">
+              <a href="/alluser" role="menuitem">
                 All User
               </a>
             </li>
@@ -54,9 +54,7 @@ export default function Header() {
               <a
                 href="#"
                 onClick={() => {
-                  showPostCreate
-                    ? setShowPostCreate(false)
-                    : setShowPostCreate(true);
+                  setShowPostCreate(true);
                 }}
                 role="menuitem"
               >
