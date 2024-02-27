@@ -122,12 +122,12 @@ const createUser = [
   }),
 ];
 const readUsers = asyncHandler(async (req, res, next) => {
-  const allUsers = await User.find()
+  const users = await User.find()
     // Projection(just send to client the following:)
     // .select('user_name')
     .exec();
   // Send data to client
-  res.json({ allUsers });
+  res.json(users);
 });
 const readUserById = asyncHandler(async (req, res, next) => {
   const searchedUser = await User.findById(req.params.userid)
