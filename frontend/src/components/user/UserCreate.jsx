@@ -1,77 +1,37 @@
 // Signup
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthSite from '../sites/AuthSite';
+import useUserCreate from '../../hooks/useUserCreate';
 
 export default function UserCreate() {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const { signup, loading, error } = useUserCreate();
 
-  const navigate = useNavigate();
-
-  const [userData, setUserData] = useState({
+  const [formData, setFormData] = useState({
     user_name: '',
     email: '',
     password: '',
     repeatPassword: '',
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [passwordsMatchError, setPasswordsMatchError] = useState(false);
+
+  // const [passwordsMatchError, setPasswordsMatchError] = useState(false);
 
   // Submit Form
   const handleCreateUser = async (e) => {
     e.preventDefault();
-    if (passwordsMatchError) {
-      return;
-    }
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    };
-
-    try {
-      setLoading(true);
-
-      const response = await fetch(
-        `${BASE_URL}/api/user/create`,
-        requestOptions
-      );
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.error.errors[0].msg);
-        return;
-      }
-
-      console.log('New user created:', data);
-      setUserData({
-        user_name: '',
-        email: '',
-        password: '',
-        repeatPassword: '',
-      });
-      navigate('/login');
-    } catch (error) {
-      console.error('Error during user creation:', error);
-      setError('Error during user creation. Please try again.');
-    } finally {
-      setLoading(false);
-    }
+    signup(formData);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prevData) => ({
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
     // Check if passwords are equal
-    if (name === 'repeatPassword') {
-      setPasswordsMatchError(value !== userData.password);
-    }
+    // if (name === 'repeatPassword') {
+    //   setPasswordsMatchError(value !== userData.password);
+    // }
   };
 
   return (
@@ -85,7 +45,7 @@ export default function UserCreate() {
             id="user_name"
             type="text"
             name="user_name"
-            value={userData.user_name}
+            value={formData.user_name}
             onChange={handleChange}
             required={true}
           />
@@ -99,7 +59,7 @@ export default function UserCreate() {
             id="email"
             type="email"
             name="email"
-            value={userData.email}
+            value={formData.email}
             onChange={handleChange}
             autoComplete="true"
             required={true}
@@ -114,7 +74,7 @@ export default function UserCreate() {
             id="password"
             type="password"
             name="password"
-            value={userData.password}
+            value={formData.password}
             onChange={handleChange}
             required={true}
           />
@@ -128,7 +88,7 @@ export default function UserCreate() {
             id="repeatPassword"
             type="password"
             name="repeatPassword"
-            value={userData.repeatPassword}
+            value={formData.repeatPassword}
             onChange={handleChange}
             required={true}
           />
@@ -139,7 +99,7 @@ export default function UserCreate() {
           type="submit"
           disabled={loading}
         >
-          {loading ? `Creating User: ${userData.user_name}` : 'Signup'}
+          {loading ? `Creating User: ${formData.user_name}` : 'Signup'}
         </button>
         <div className="w-2/5 py-1 mt-5 mb-5 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
           <Link to={'/login'}>or login</Link>
