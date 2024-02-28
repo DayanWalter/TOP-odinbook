@@ -1,124 +1,34 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthSite from '../sites/AuthSite';
+import useLogin from '../../hooks/useLogin';
 
 export default function UserLogin() {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const { login, loading, error } = useLogin();
 
-  const navigate = useNavigate();
-
-  const [userData, setUserData] = useState({
+  const [formData, setFormData] = useState({
     user_name: '',
     password: '',
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  // User Login
-  const handleLoginUser = async (e) => {
-    e.preventDefault();
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    };
-
-    try {
-      setLoading(true);
-
-      const response = await fetch(
-        `${BASE_URL}/api/user/login`,
-        requestOptions
-      );
-      const data = await response.json();
-      console.log(data);
-      if (!response.ok) {
-        setError(data);
-        return;
-      }
-      // Save the token, e.g., in local storage
-      localStorage.setItem('authToken', data.token);
-      const authToken = localStorage.getItem('authToken');
-      // Split the payload of the jwt and convert the ._id part
-      const payload = JSON.parse(atob(authToken.split('.')[1]));
-      // Define the username you are looking for
-      const userId = payload._id;
-
-      console.log('Successfully logged in:', data);
-      setUserData({
-        user_name: '',
-        password: '',
-      });
-      navigate(`/home`);
-    } catch (error) {
-      console.error('Error during user login:', error);
-      setError({ msg: 'Error during user login. Please try again.' });
-    } finally {
-      setLoading(false);
-    }
-  };
-  // Demo User Login
-  const handleLoginDemoUser = async (e) => {
-    e.preventDefault();
-    setUserData({
-      user_name: 'DemoUser',
-      password: '111111',
-    });
-
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_name: 'DemoUser',
-        password: '111111',
-      }),
-    };
-
-    try {
-      setLoading(true);
-
-      const response = await fetch(
-        `${BASE_URL}/api/user/login`,
-        requestOptions
-      );
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.error.errors[0].msg);
-        return;
-      }
-      // Save the token, e.g., in local storage
-      localStorage.setItem('authToken', data.token);
-      // Split the payload of the jwt and convert the ._id part
-      const payload = JSON.parse(atob(data.token.split('.')[1]));
-      // Define the username you are looking for
-      const userId = payload._id;
-
-      console.log('Successfully logged in:', data);
-      setUserData({
-        user_name: '',
-        password: '',
-      });
-      navigate(`/home`);
-    } catch (error) {
-      console.error('Error during user login:', error);
-      setError('Error during user login. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Change userData
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prevData) => ({
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+  };
+
+  // User Login
+  const handleLoginUser = async (e) => {
+    e.preventDefault();
+    login(formData);
+  };
+  // Demo User Login
+  const handleLoginDemoUser = async (e) => {
+    e.preventDefault();
+    login({ user_name: 'DemoUser', password: '111111' });
   };
 
   return (
@@ -132,7 +42,7 @@ export default function UserLogin() {
             id="user_name"
             type="text"
             name="user_name"
-            value={userData.user_name}
+            value={formData.user_name}
             onChange={handleChange}
             required={true}
           />
@@ -145,7 +55,7 @@ export default function UserLogin() {
             id="user_password"
             type="password"
             name="password"
-            value={userData.password}
+            value={formData.password}
             onChange={handleChange}
             required={true}
           />
@@ -155,7 +65,7 @@ export default function UserLogin() {
           type="submit"
           disabled={loading}
         >
-          {loading ? `Loggin in ${userData.user_name}` : 'Login User'}
+          {loading ? `Loggin in ${formData.user_name}` : 'Login User'}
         </button>{' '}
         <button
           className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"

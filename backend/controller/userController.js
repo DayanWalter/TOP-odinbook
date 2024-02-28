@@ -41,7 +41,7 @@ const loginUser = [
         // Generate a token
         const token = generateToken(user);
         // send a success message and the token to the client
-        res.status(200).json(token);
+        res.status(200).json({ token });
       } else {
         // else send a failure message to the client
         res.status(400).json([{ msg: 'Password incorrect' }]);
