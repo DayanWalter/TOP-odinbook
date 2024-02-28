@@ -33,9 +33,9 @@ export default function UserLogin() {
         requestOptions
       );
       const data = await response.json();
-
+      console.log(data);
       if (!response.ok) {
-        setError(data.error.errors[0].msg);
+        setError(data);
         return;
       }
       // Save the token, e.g., in local storage
@@ -54,7 +54,7 @@ export default function UserLogin() {
       navigate(`/home`);
     } catch (error) {
       console.error('Error during user login:', error);
-      setError('Error during user login. Please try again.');
+      setError({ msg: 'Error during user login. Please try again.' });
     } finally {
       setLoading(false);
     }
@@ -167,7 +167,16 @@ export default function UserLogin() {
         <div className="w-2/5 py-1 mt-5 mb-5 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
           <Link to={'/signup'}>or sign up</Link>
         </div>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+        {/* Display error from backend */}
+        <ul>
+          {error &&
+            error.map((err, index) => (
+              <li key={index} style={{ color: 'red', fontSize: '1rem' }}>
+                {' '}
+                {err.msg}
+              </li>
+            ))}
+        </ul>
       </form>
     </AuthSite>
   );

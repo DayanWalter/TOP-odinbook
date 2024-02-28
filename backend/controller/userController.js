@@ -28,8 +28,8 @@ const loginUser = [
   }),
 
   asyncHandler(async (req, res, next) => {
-    const result = validationResult(req);
-    if (result.isEmpty()) {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
       //Take the user_name and password from body
       const { user_name, password } = req.body;
       // Search for a user with the entered user_name
@@ -41,16 +41,16 @@ const loginUser = [
         // Generate a token
         const token = generateToken(user);
         // send a success message and the token to the client
-        res.json({ userLogin: 'Success', token });
+        res.status(200).json(token);
       } else {
         // else send a failure message to the client
-        res.json({ userLogin: 'Failure' });
+        res.status(400).json([{ msg: 'Password incorrect' }]);
       }
     } else {
       // List all errors in the console
-      result.array().map((error) => console.log(error.msg));
+      errors.array().map((error) => console.log(error.msg));
       // Send failure message to client and the error object
-      res.status(400).json({ error: result });
+      res.status(400).json(errors.array());
     }
   }),
 ];
