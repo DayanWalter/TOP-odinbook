@@ -13,7 +13,7 @@ import PostUnLike from './PostUnLike';
 import CommentList from '../comment/CommentList';
 import { Link } from 'react-router-dom';
 
-export default function PostListCard({ postId }) {
+export default function PostCard({ postId }) {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
   const [postData, setPostData] = useState(null);

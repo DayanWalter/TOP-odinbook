@@ -5,23 +5,14 @@ import CommentList from '../comment/CommentList';
 import UserUnFollow from './UserUnFollow';
 import UserFollow from '../user/UserFollow';
 import UserList from './UserList';
-import UserEdit from './UserEdit';
 
 // Icons
 import Icon from '@mdi/react';
 import { mdiMapMarkerOutline } from '@mdi/js';
 import { mdiCalendarMonthOutline } from '@mdi/js';
-import { mdiArrowUp } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
-import { mdiArrowLeft } from '@mdi/js';
-import { mdiNotePlusOutline } from '@mdi/js';
 
-import PostFeed from '../post/PostFeed';
-import PostCreate from '../post/PostCreate';
-import UsersRead from './UsersRead';
 import UserUpdate from './UserUpdate';
-import Header from '../sites/Header';
-import MainSite from '../sites/MainSite';
 
 export default function UserProfile() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
@@ -280,9 +271,7 @@ export default function UserProfile() {
             {activeIndex === 2 && userData.follower_id && (
               <UserList users={userData.follower_id} />
             )}
-            {activeIndex === 3 && userData.posts_id && (
-              <PostList posts={userData.posts_id} />
-            )}
+            {activeIndex === 3 && userData.posts_id && <PostList />}
             {activeIndex === 4 && userData.comments_id && (
               <CommentList comments={userData.comments_id} />
             )}
