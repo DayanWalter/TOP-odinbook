@@ -97,10 +97,10 @@ const createUser = [
   }),
 
   asyncHandler(async (req, res, next) => {
-    const result = validationResult(req);
+    const errors = validationResult(req);
 
     // If no errors:
-    if (result.isEmpty()) {
+    if (errors.isEmpty()) {
       // create new User with hashed password
       bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
         const user = new User({
@@ -110,14 +110,14 @@ const createUser = [
         });
         // After successful creation, save user in database
         user.save();
-        res.json({ createUser: 'Success', user });
+        res.status(200).json({ user: { user_name: req.body.user_name } });
       });
       // send success message to client
     } else {
       // List all errors in the console
-      result.array().map((error) => console.log(error.msg));
-      // Send failure message to client and the error object
-      res.status(400).json({ error: result });
+      errors.array().map((error) => console.log(error.msg));
+      // Send failure message to client and the error array
+      res.status(400).json(errors.array());
     }
   }),
 ];

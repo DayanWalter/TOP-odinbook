@@ -1,48 +1,45 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function useSignup() {
-  const handleCreateUser = async (e) => {
-    e.preventDefault();
-    if (passwordsMatchError) {
-      return;
-    }
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData),
-    };
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const navigate = useNavigate();
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const signup = async (formData) => {
     try {
       setLoading(true);
 
-      const response = await fetch(
-        `${BASE_URL}/api/user/create`,
-        requestOptions
-      );
-      const data = await response.json();
+      const response = await fetch(`${BASE_URL}/api/user/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      if (!response.ok) {
-        setError(data.error.errors[0].msg);
+      const responseJSON = await response.json();
+      if (responseJSON.user) {
+        setError(null);
+        setLoading(false);
+        // After successfull signup, navigate to login
+        navigate('/login');
+        return;
+        // if the response is an array, set the error to this array
+      } else if (responseJSON.length) {
+        setError(responseJSON);
+        setLoading(false);
         return;
       }
-
-      console.log('New user created:', data);
-      setUserData({
-        user_name: '',
-        email: '',
-        password: '',
-        repeatPassword: '',
-      });
-      navigate('/login');
     } catch (error) {
-      console.error('Error during user creation:', error);
-      setError('Error during user creation. Please try again.');
+      setError(error);
+      setLoading(false);
     } finally {
       setLoading(false);
     }
   };
 
-  return { loading, error, userData };
+  return { signup, loading, error };
 }

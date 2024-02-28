@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthSite from '../sites/AuthSite';
-import useUserCreate from '../../hooks/useUserCreate';
+import useSignup from '../../hooks/useSignup';
 
 export default function UserCreate() {
-  const { signup, loading, error } = useUserCreate();
+  const { signup, loading, error } = useSignup();
 
   const [formData, setFormData] = useState({
     user_name: '',
@@ -14,24 +14,18 @@ export default function UserCreate() {
     repeatPassword: '',
   });
 
-  // const [passwordsMatchError, setPasswordsMatchError] = useState(false);
-
-  // Submit Form
-  const handleCreateUser = async (e) => {
-    e.preventDefault();
-    signup(formData);
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    // Check if passwords are equal
-    // if (name === 'repeatPassword') {
-    //   setPasswordsMatchError(value !== userData.password);
-    // }
+  };
+
+  // Submit Form
+  const handleCreateUser = async (e) => {
+    e.preventDefault();
+    signup(formData);
   };
 
   return (
@@ -104,9 +98,18 @@ export default function UserCreate() {
         <div className="w-2/5 py-1 mt-5 mb-5 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
           <Link to={'/login'}>or login</Link>
         </div>
-        {/* Error from backend */}
-        {error && <div style={{ color: 'red', fontSize: '1rem' }}>{error}</div>}
       </form>
+
+      {/* Display error from backend */}
+      <ul>
+        {error &&
+          error.map((err, index) => (
+            <li key={index} style={{ color: 'red', fontSize: '1rem' }}>
+              {' '}
+              {err.msg}
+            </li>
+          ))}
+      </ul>
     </AuthSite>
   );
 }
