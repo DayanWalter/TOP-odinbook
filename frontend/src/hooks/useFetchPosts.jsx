@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 export default function useFetchPosts() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
@@ -6,6 +7,10 @@ export default function useFetchPosts() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // id from params
+  const loaderData = useLoaderData();
+  const userId = loaderData.userid;
 
   const authToken = localStorage.getItem('authToken');
 
@@ -21,7 +26,7 @@ export default function useFetchPosts() {
           return;
         }
 
-        const response = await fetch(`${BASE_URL}/api/post/feed`, {
+        const response = await fetch(`${BASE_URL}/api/post/user/${userId}`, {
           method: `GET`,
           headers: {
             Authorization: `Bearer ${authToken}`,

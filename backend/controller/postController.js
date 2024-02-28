@@ -49,7 +49,7 @@ const readUserPosts = asyncHandler(async (req, res, next) => {
     .populate('posts_id');
   const posts = userPosts.posts_id;
   // Return posts object to client
-  res.json({ readUserPosts: 'Route works', posts });
+  res.status(200).json(posts);
 });
 const readPostById = asyncHandler(async (req, res, next) => {
   const searchedPost = await Post.findById(req.params.postid)
