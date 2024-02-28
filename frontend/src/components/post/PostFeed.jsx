@@ -1,14 +1,8 @@
 import PostList from './PostList';
-import useFetch from '../../hooks/useFetch';
+import useFetchFeed from '../../hooks/useFetchFeed';
 
 export default function PostFeed() {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
-
-  const {
-    data: feed,
-    loading,
-    error,
-  } = useFetch(`${BASE_URL}/api/post/feed`, 'GET');
+  const { data: feed, loading, error } = useFetchFeed();
 
   return (
     <>

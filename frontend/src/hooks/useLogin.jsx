@@ -9,7 +9,6 @@ export default function useLogin() {
   const [error, setError] = useState(null);
 
   const login = async (formData) => {
-    console.log(formData);
     try {
       setLoading(true);
 

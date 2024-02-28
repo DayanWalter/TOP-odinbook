@@ -1,19 +1,14 @@
 import { useState, useEffect } from 'react';
 
-export default function useFetch(url, method) {
+export default function useFetchFeed() {
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const authToken = localStorage.getItem('authToken');
 
-  const requestOptions = {
-    method: `${method}`,
-    headers: {
-      Authorization: `Bearer ${authToken}`,
-      'Content-Type': 'application/json',
-    },
-  };
   useEffect(() => {
     async function fetchData() {
       try {
@@ -26,7 +21,13 @@ export default function useFetch(url, method) {
           return;
         }
 
-        const response = await fetch(url, requestOptions);
+        const response = await fetch(`${BASE_URL}/api/post/feed`, {
+          method: `GET`,
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            'Content-Type': 'application/json',
+          },
+        });
 
         const responseJSON = await response.json();
         setData(responseJSON);
@@ -37,6 +38,6 @@ export default function useFetch(url, method) {
       }
     }
     fetchData();
-  }, [url]);
+  }, []);
   return { data, loading, error };
 }
