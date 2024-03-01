@@ -159,7 +159,7 @@ const readUserById = asyncHandler(async (req, res, next) => {
 
     .exec();
   // Send data to client
-  res.json({ searchedUser });
+  res.json(searchedUser);
 });
 const updateUser = [
   body('user_name').custom(async (value, { req }) => {

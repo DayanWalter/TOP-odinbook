@@ -13,96 +13,26 @@ import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
 
 import UserUpdate from './UserUpdate';
+import useFetchUser from '../../hooks/useFetchUser';
+import useVerifyUser from '../../hooks/useVerifyUser';
 
 export default function UserProfile() {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
-
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(1);
 
-  const [isLoggedInUser, setIsLoggedInUser] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenPostCreateModal, setIsOpenPostCreateModal] = useState(false);
 
   const [isFollowing, setIsFollowing] = useState(false);
 
-  const [showButton, setShowButton] = useState(false);
-  // id from params
-  const loaderData = useLoaderData();
-  const userIdFromParams = loaderData.userid;
+  const { isLoggedInUser, userIdFromParams } = useVerifyUser();
+  const { data, loading, error } = useFetchUser();
 
-  // id from logged in user
-  const authToken = localStorage.getItem('authToken');
-  // Split the payload of the jwt and convert the ._id part
-  const payload = JSON.parse(atob(authToken.split('.')[1]));
-  // Define the username you are looking for
-  const loggedInUserId = payload._id;
-  const loggedInUserName = payload.user_name;
-
-  const fetchUserData = async () => {
-    // Parameters for the backend request
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `${BASE_URL}/api/user/${userIdFromParams}`,
-        requestOptions
-      );
-      const data = await response.json();
-      setUserData(data.searchedUser);
-
-      // Check if the user is logged in user
-      const userIsLoggedIn = searchLoggedInUser(
-        data.searchedUser._id,
-        loggedInUserId
-      );
-
-      setIsLoggedInUser(userIsLoggedIn);
-
-      const isFollowingUser = searchForFollower(
-        data.searchedUser.follower_id,
-        loggedInUserId
-      );
-      setIsFollowing(isFollowingUser);
-    } catch (error) {
-      console.error('Error while fetching user:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  // Get Profile(User) Data
-  useEffect(() => {
-    fetchUserData();
-  }, [userIdFromParams, isFollowing, authToken, loggedInUserId, activeIndex]);
-
-  // ScrollUp Button
-  // useEffect(() => {
-  //   const userContainer = document.getElementById('profileUserContainer');
-
-  //   const handleScrollButtonVisibility = () => {
-  //     setShowButton(userContainer.scrollTop > 10);
-  //   };
-
-  //   userContainer.addEventListener('scroll', handleScrollButtonVisibility);
-
-  //   return () => {
-  //     userContainer.removeEventListener('scroll', handleScrollButtonVisibility);
-  //   };
-  // }, []);
-
-  // const handleScrollUp = () => {
-  //   document
-  //     .getElementById('profileUserContainer')
-  //     .scrollTo({ top: 0, behavior: 'smooth' });
-  // };
+  //     const isFollowingUser = searchForFollower(
+  //       data.searchedUser.follower_id,
+  //       loggedInUserId
+  //     );
+  //     setIsFollowing(isFollowingUser);
+  //
 
   const handleModal = () => {
     isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
@@ -117,51 +47,38 @@ export default function UserProfile() {
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
       setIsOpenModal(false);
-      setIsOpenPostCreateModal(false);
-      fetchUserData();
+      // setIsOpenPostCreateModal(false);
+      // fetchUserData();
     }
   };
 
-  function searchLoggedInUser(profileId, loggedInUserId) {
-    return profileId === loggedInUserId;
-  }
-
-  function searchForFollower(arr, loggedInUserId) {
-    return arr.some((obj) => obj._id === loggedInUserId);
-  }
+  // function searchForFollower(arr, loggedInUserId) {
+  //   return arr.some((obj) => obj._id === loggedInUserId);
+  // }
 
   return (
     <>
+      {error && <div>{error}</div>}
       {loading && <div></div>}
-      {userData && (
+      {data && (
         <>
           {/* Avatar and Background Image Section */}
           <div className="relative w-5/6 h-48 mx-auto mt-20 mb-10 overflow-hidden border rounded-md shadow-lg">
             <img
               className="object-cover object-center w-full h-full "
-              src={userData.img_url}
+              src={data.img_url}
               alt="Backgroundimage"
             />
             <img
               className="absolute -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-full shadow-lg h-44 w-44 md:translate-x-0 md:-left-8 top-1/2 left-1/2"
-              src={userData.avatar_url}
+              src={data.avatar_url}
               alt="Avatar"
             />
           </div>
 
-          {/* {isLoggedInUser && (
-            <div>
-              <Icon
-                path={mdiNotePlusOutline}
-                size={2}
-                onClick={handlePostCreateModal}
-              />
-            </div>
-          )} */}
-
           {/* Main */}
           <div className="p-3 mb-5 bg-white rounded-lg sm:w-1/2">
-            <h1 className="text-2xl ">{userData.user_name}</h1>
+            <h1 className="text-2xl ">{data.user_name}</h1>
             {/* Show follow/unfollow button, if profile is not logged in user */}
 
             {isLoggedInUser && (
@@ -193,31 +110,21 @@ export default function UserProfile() {
             <div className="mt-3 ">
               <div className="flex gap-3">
                 <Icon path={mdiFeather} size={1} />
-                {userData.bio}
+                {data.bio}
               </div>
               <div className="flex gap-3">
                 <Icon path={mdiMapMarkerOutline} size={1} />
-                {userData.location}
+                {data.location}
               </div>
               <div className="flex gap-3">
                 <Icon path={mdiCalendarMonthOutline} size={1} />
-                {new Date(userData.reg_date).toLocaleDateString()}
+                {new Date(data.reg_date).toLocaleDateString()}
               </div>
             </div>
           </div>
 
           {/* List Buttons */}
           <div className="flex flex-col items-start pb-5 mb-10 border-b sm:justify-between sm:flex-row">
-            {/* {isLoggedInUser && (
-              <button
-                onClick={() => {
-                  setActiveIndex(0);
-                }}
-              >
-                Feed
-              </button>
-            )} */}
-
             <button
               className={`  border-b-2 ${
                 activeIndex === 1 ? 'border-blue-600 ' : ' border-transparent'
@@ -226,7 +133,7 @@ export default function UserProfile() {
                 setActiveIndex(1);
               }}
             >
-              {userData.follows_id.length} Following
+              {data.follows_id.length} Following
             </button>
 
             <button
@@ -237,7 +144,7 @@ export default function UserProfile() {
                 setActiveIndex(2);
               }}
             >
-              {userData.follower_id.length} Followers
+              {data.follower_id.length} Followers
             </button>
 
             <button
@@ -248,7 +155,7 @@ export default function UserProfile() {
                 setActiveIndex(3);
               }}
             >
-              {userData.posts_id.length} Posts
+              {data.posts_id.length} Posts
             </button>
 
             <button
@@ -259,21 +166,21 @@ export default function UserProfile() {
                 setActiveIndex(4);
               }}
             >
-              {userData.comments_id.length} Comments
+              {data.comments_id.length} Comments
             </button>
           </div>
 
           {/* List Container */}
           <div className="mx-auto mt-20 w-fit ">
-            {activeIndex === 1 && userData.follows_id && (
-              <UserList users={userData.follows_id} />
+            {activeIndex === 1 && data.follows_id && (
+              <UserList users={data.follows_id} />
             )}
-            {activeIndex === 2 && userData.follower_id && (
-              <UserList users={userData.follower_id} />
+            {activeIndex === 2 && data.follower_id && (
+              <UserList users={data.follower_id} />
             )}
-            {activeIndex === 3 && userData.posts_id && <PostList />}
-            {activeIndex === 4 && userData.comments_id && (
-              <CommentList comments={userData.comments_id} />
+            {activeIndex === 3 && data.posts_id && <PostList />}
+            {activeIndex === 4 && data.comments_id && (
+              <CommentList comments={data.comments_id} />
             )}
           </div>
 
