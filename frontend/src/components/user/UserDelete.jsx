@@ -2,44 +2,37 @@
 import Icon from '@mdi/react';
 
 import { mdiAlertOutline } from '@mdi/js';
+import { useNavigate } from 'react-router-dom';
+import useDeleteUser from '../../hooks/useDeleteUser';
 
 export default function UserDelete() {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const navigate = useNavigate();
 
-  const handleDeleteUser = async () => {
-    const authToken = localStorage.getItem('authToken');
+  const {
+    deleteUser,
+    loading: deleteUserLoading,
+    error: deleteUserError,
+  } = useDeleteUser();
 
-    // Parameters for the backend request
-    const requestOptions = {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    try {
-      const response = await fetch(
-        `${BASE_URL}/api/user/delete`,
-        requestOptions
-      );
-
-      if (response.status === 200) {
-        console.log('User deleted.');
-      } else {
-        console.error('Error deleting user:', response.status);
-      }
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
+  const handleDeleteUser = async (e) => {
+    e.preventDefault();
+    deleteUser();
+    navigate('/');
   };
 
   return (
-    <div id="deleteUser">
-      <button onClick={handleDeleteUser}>
-        <Icon path={mdiAlertOutline} size={1} />
+    <>
+      {deleteUserError && <div>{deleteUserError}</div>}
+      {deleteUserLoading && <div>Delete User...</div>}
+
+      <button
+        className="flex justify-between px-2 py-1 text-sm text-white border rounded-md bg-danger hover:bg-danger/80"
+        onClick={handleDeleteUser}
+      >
+        <Icon path={mdiAlertOutline} size={0.9} />
         Delete User
+        <Icon path={mdiAlertOutline} size={0.9} />
       </button>
-    </div>
+    </>
   );
 }

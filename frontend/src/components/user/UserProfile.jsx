@@ -15,6 +15,7 @@ import { mdiFeather } from '@mdi/js';
 import UserUpdate from './UserUpdate';
 import useFetchUser from '../../hooks/useFetchUser';
 import useVerifyUser from '../../hooks/useVerifyUser';
+import UserEdit from './UserEdit';
 
 export default function UserProfile() {
   // const [loading, setLoading] = useState(false);
@@ -191,7 +192,7 @@ export default function UserProfile() {
                 id="overlay"
                 onClick={handleOverlayClick}
               >
-                <UserUpdate />
+                <UserEdit />
               </div>
             ) : (
               ''
