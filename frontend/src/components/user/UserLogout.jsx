@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 export default function UserLogout() {
   const navigate = useNavigate();
-  const [remainingTime, setRemainingTime] = useState(5);
+  const [remainingTime, setRemainingTime] = useState(3);
   // Redirect user to login after x seconds
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,7 +13,7 @@ export default function UserLogout() {
     setTimeout(() => {
       localStorage.setItem('authToken', '');
       navigate('/login');
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
   }, []);

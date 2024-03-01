@@ -31,6 +31,7 @@ export default function useDeleteUser() {
     } catch (error) {
       setError(error);
     } finally {
+      localStorage.setItem('authToken', '');
       setLoading(false);
     }
   };
