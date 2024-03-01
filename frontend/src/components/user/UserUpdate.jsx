@@ -4,11 +4,16 @@ import Icon from '@mdi/react';
 import { mdiAlertOutline } from '@mdi/js';
 import useFetchUser from '../../hooks/useFetchUser';
 import useUpdateUser from '../../hooks/useUpdateUser';
+import useDeleteUser from '../../hooks/useDeleteUser';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserUpdate() {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({});
+  // After successfull update, display message
+  const [success, setSuccess] = useState(false);
+
   const {
     data: userData,
     loading: fetchUserLoading,
@@ -21,22 +26,29 @@ export default function UserUpdate() {
     error: updateUserError,
   } = useUpdateUser();
 
-  const {delete,loading:deleteUserLoading, error:deleteUserError} = useDeleteUser()
+  const {
+    deleteUser,
+    loading: deleteUserLoading,
+    error: deleteUserError,
+  } = useDeleteUser();
 
+  // Fetch user data, then setFormData
   useEffect(() => {
     if (userData) {
       setFormData(userData);
     }
   }, [userData]);
 
-  const [success, setSuccess] = useState(false);
-
-  // console.log(userData);
-
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     update(formData);
     setSuccess(true);
+  };
+
+  const handleDeleteUser = async (e) => {
+    e.preventDefault();
+    deleteUser();
+    navigate('/');
   };
 
   const handleChange = (e) => {
@@ -46,40 +58,15 @@ export default function UserUpdate() {
       [name]: value,
     }));
   };
-  const handleDeleteUser = async () => {
-    const authToken = localStorage.getItem('authToken');
-
-    // Parameters for the backend request
-    const requestOptions = {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    try {
-      const response = await fetch(
-        `${BASE_URL}/api/user/delete`,
-        requestOptions
-      );
-
-      if (response.status === 200) {
-        console.log('User deleted.');
-      } else {
-        console.error('Error deleting user:', response.status);
-      }
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  };
 
   return (
     <>
       {fetchUserError && <div>{fetchUserError}</div>}
+      {deleteUserError && <div>{deleteUserError}</div>}
       {updateUserError && <div>{updateUserError}</div>}
       {fetchUserLoading && <div>Fetching Data...</div>}
       {updateUserLoading && <div>Update User...</div>}
+      {deleteUserLoading && <div>Delete User...</div>}
       {formData && (
         <form className="flex flex-col max-w-md px-5 py-6 mt-16 bg-white rounded shadow-md sm:mt-0 sm:py-12 sm:px-10 ">
           {/* User Name */}

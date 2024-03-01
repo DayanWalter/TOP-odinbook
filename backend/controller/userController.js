@@ -226,7 +226,7 @@ const deleteUser = asyncHandler(async (req, res, next) => {
     return;
   }
 
-  res.json({ deletedUser });
+  res.json(deletedUser);
 });
 const followUser = asyncHandler(async (req, res, next) => {
   // update the req.user._id
