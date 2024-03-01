@@ -37,8 +37,10 @@ const readFeedPosts = asyncHandler(async (req, res, next) => {
   // Add user._id to feed array
   followedUserIds.push(req.user._id);
   // Search for posts in which the author_id is the same as the user._id
-  const feed = await Post.find({ author_id: { $in: followedUserIds } });
-
+  const feed = await Post.find({
+    author_id: { $in: followedUserIds },
+  }).populate('author_id');
+  console.log(feed);
   res.json(feed);
 });
 // Useful?
@@ -47,9 +49,9 @@ const readUserPosts = asyncHandler(async (req, res, next) => {
   const userPosts = await User.findById(req.params.userid)
     .select('posts_id')
     .populate('posts_id');
-  const posts = userPosts.posts_id;
+  // const posts = userPosts.posts_id;
   // Return posts object to client
-  res.status(200).json(posts);
+  res.status(200).json(userPosts);
 });
 const readPostById = asyncHandler(async (req, res, next) => {
   const searchedPost = await Post.findById(req.params.postid)

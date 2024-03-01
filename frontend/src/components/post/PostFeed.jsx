@@ -18,7 +18,7 @@ export default function PostFeed() {
             .sort((a, b) => new Date(b.posting_date) - new Date(a.posting_date))
             .map((post) => (
               <li key={post._id}>
-                <PostCard postId={post._id} />
+                <PostCard post={post} />
               </li>
             ))}
         </ul>

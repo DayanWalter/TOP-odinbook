@@ -12,179 +12,166 @@ import PostLike from './PostLike';
 import PostUnLike from './PostUnLike';
 import CommentList from '../comment/CommentList';
 import { Link } from 'react-router-dom';
+import useUserIsAuthor from '../../hooks/useUserIsAuthor';
 
-export default function PostCard({ postId }) {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+export default function PostCard({ post }) {
+  // const [post, setpost] = useState(null);
+  // const [loading, setLoading] = useState(false);
 
-  const [postData, setPostData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { isAuthor } = useUserIsAuthor(post);
 
-  const [isAuthor, setIsAuthor] = useState(false);
+  // const [isOpenModal, setIsOpenModal] = useState(false);
+  // const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
+  // const [isOpenCommentList, setIsOpenCommentList] = useState(false);
+  // const [isLiking, setIsLiking] = useState(false);
+  // const [commentCreated, setCommentCreated] = useState(null);
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
-  const [isOpenCommentList, setIsOpenCommentList] = useState(false);
-  const [isLiking, setIsLiking] = useState(false);
-  const [commentCreated, setCommentCreated] = useState(null);
+  // function searchForAuthor(author, loggedInUserId) {
+  //   return author._id === loggedInUserId;
+  // }
 
-  // id from logged in user
-  const authToken = localStorage.getItem('authToken');
-  // Split the payload of the jwt and convert the ._id part
-  const payload = JSON.parse(atob(authToken.split('.')[1]));
-  // Define the username you are looking for
-  const loggedInUserId = payload._id;
+  // function searchForLikes(arr, loggedInUserId) {
+  //   return arr.some((obj) => obj === loggedInUserId);
+  // }
 
-  function searchForAuthor(author, loggedInUserId) {
-    return author._id === loggedInUserId;
-  }
+  // const fetchpost = async () => {
+  //   // Parameters for the backend request
+  //   const requestOptions = {
+  //     method: 'GET',
+  //     headers: {
+  //       Authorization: `Bearer ${authToken}`,
+  //       'Content-Type': 'application/json',
+  //     },
+  //   };
 
-  function searchForLikes(arr, loggedInUserId) {
-    return arr.some((obj) => obj === loggedInUserId);
-  }
+  //   try {
+  //     setLoading(true);
+  //     const response = await fetch(
+  //       `${BASE_URL}/api/post/${postId}`,
+  //       requestOptions
+  //     );
+  //     const data = await response.json();
+  //     setpost(data.searchedPost);
 
-  const fetchPostData = async () => {
-    // Parameters for the backend request
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      },
-    };
+  //     const isAuthorOfPost = searchForAuthor(
+  //       data.searchedPost.author_id,
+  //       loggedInUserId
+  //     );
+  //     setIsAuthor(isAuthorOfPost);
 
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `${BASE_URL}/api/post/${postId}`,
-        requestOptions
-      );
-      const data = await response.json();
-      setPostData(data.searchedPost);
+  //     const isLikingPost = searchForLikes(
+  //       data.searchedPost.likes_id,
+  //       loggedInUserId
+  //     );
+  //     setIsLiking(isLikingPost);
+  //   } catch (error) {
+  //     console.error('Error while fetching user:', error);
+  //   } finally {
+  //     setLoading(false);
+  //     // remove show...
+  //   }
+  // };
 
-      const isAuthorOfPost = searchForAuthor(
-        data.searchedPost.author_id,
-        loggedInUserId
-      );
-      setIsAuthor(isAuthorOfPost);
-
-      const isLikingPost = searchForLikes(
-        data.searchedPost.likes_id,
-        loggedInUserId
-      );
-      setIsLiking(isLikingPost);
-    } catch (error) {
-      console.error('Error while fetching user:', error);
-    } finally {
-      setLoading(false);
-      // remove show...
-    }
-  };
-
-  useEffect(() => {
-    fetchPostData();
-  }, [postId, isLiking, commentCreated, authToken, loggedInUserId]);
+  // useEffect(() => {
+  //   fetchpost();
+  // }, [postId, isLiking, commentCreated, authToken, loggedInUserId]);
 
   // const handleOverlayClick = (event) => {
   //   if (event.target.id === 'overlay') {
   //     setIsOpenModal(false);
   //   }
   // };
-  const handlePostEdit = () => {
-    isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
-  };
+  // const handlePostEdit = () => {
+  //   isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
+  // };
 
-  const handleCommentCreate = () => {
-    isOpenCommentCreate
-      ? setIsOpenCommentCreate(false)
-      : setIsOpenCommentCreate(true);
-  };
+  // const handleCommentCreate = () => {
+  //   isOpenCommentCreate
+  //     ? setIsOpenCommentCreate(false)
+  //     : setIsOpenCommentCreate(true);
+  // };
   return (
     <>
-      {loading && <div></div>}
-      {postData && (
-        <>
-          <div
-            id="card"
-            className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl"
-          >
-            <Link to={`/user/${postData.author_id._id}`}>
-              <img
-                className="absolute w-20 h-20 rounded-full shadow-lg -left-8 top-3"
-                src={postData.author_id.avatar_url}
-                alt="Avatar"
-              />
-            </Link>
+      <div
+        id="card"
+        className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl"
+      >
+        <Link to={`/user/${post.author_id._id}`}>
+          <img
+            className="absolute w-20 h-20 rounded-full shadow-lg -left-8 top-3"
+            src={post.author_id.avatar_url}
+            alt="Avatar"
+          />
+        </Link>
 
-            <div className="flex flex-col w-full gap-5 p-5 pl-16">
-              <div className="flex justify-between ">
-                {/* Author Name */}
-                <div className="underline underline-offset-2 text-slate-500">
-                  <Link to={`/user/${postData.author_id._id}`}>
-                    {postData.author_id.user_name}
-                  </Link>
-                </div>
-                {/* Edit Comment */}
-                <div>
-                  {/* Open modal for editing post if user is author */}
-                  {isAuthor ? (
-                    <Icon
-                      className="hover:cursor-pointer"
-                      path={mdiFileEditOutline}
-                      size={1}
-                      onClick={handlePostEdit}
-                    />
-                  ) : (
-                    ''
-                  )}
-                </div>
-              </div>
-
-              <p className="break-all ">{postData.content}</p>
-              <div className="flex justify-between">
-                {/* CommentIcon */}
-                <div className="flex">
-                  <Icon
-                    className="hover:cursor-pointer"
-                    onClick={handleCommentCreate}
-                    path={mdiChatOutline}
-                    size={1}
-                  />
-                  <div>{postData.comments_id.length}</div>
-                </div>
-                {/* LikeIcon */}
-                <div className="flex">
-                  {isLiking ? (
-                    <PostUnLike postId={postId} setIsLiking={setIsLiking} />
-                  ) : (
-                    <PostLike postId={postId} setIsLiking={setIsLiking} />
-                  )}
-                  <div>{postData.likes_id.length}</div>
-                </div>
-                {/* CalendarIcon */}
-                <div className="flex">
-                  <Icon path={mdiCalendarMonthOutline} size={1} />
-                  {new Date(postData.posting_date).toLocaleDateString()}
-                </div>
-              </div>
+        <div className="flex flex-col w-full gap-5 p-5 pl-16">
+          <div className="flex justify-between ">
+            {/* Author Name */}
+            <div className="underline underline-offset-2 text-slate-500">
+              <Link to={`/user/${post.author_id._id}`}>
+                {post.author_id.user_name}
+              </Link>
+            </div>
+            {/* Edit Comment */}
+            <div>
+              {/* Open modal for editing post if user is author */}
+              {isAuthor ? (
+                <Icon
+                  className="hover:cursor-pointer"
+                  path={mdiFileEditOutline}
+                  size={1}
+                  // onClick={handlePostEdit}
+                />
+              ) : (
+                ''
+              )}
             </div>
           </div>
-          {isOpenModal && (
-            <>
-              <PostEdit postId={postId} />
-            </>
-          )}
-          {isOpenCommentCreate && (
-            <>
-              <CommentCreate
-                postId={postId}
-                commentCreated={commentCreated}
-                setCommentCreated={setCommentCreated}
+
+          <p className="break-all ">{post.content}</p>
+          <div className="flex justify-between">
+            {/* CommentIcon */}
+            <div className="flex">
+              <Icon
+                className="hover:cursor-pointer"
+                // onClick={handleCommentCreate}
+                path={mdiChatOutline}
+                size={1}
               />
-              <CommentList comments={postData.comments_id} />
-            </>
-          )}
+              <div>{post.comments_id.length}</div>
+            </div>
+            {/* LikeIcon */}
+            <div className="flex">
+              {/* {isLiking ? (
+                <PostUnLike postId={postId} setIsLiking={setIsLiking} />
+              ) : (
+                <PostLike postId={postId} setIsLiking={setIsLiking} />
+              )} */}
+              <div>{post.likes_id.length}</div>
+            </div>
+            {/* CalendarIcon */}
+            <div className="flex">
+              <Icon path={mdiCalendarMonthOutline} size={1} />
+              {new Date(post.posting_date).toLocaleDateString()}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* {isOpenModal && (
+        <>
+          <PostEdit postId={postId} />
         </>
       )}
+      {isOpenCommentCreate && (
+        <>
+          <CommentCreate
+            postId={postId}
+            commentCreated={commentCreated}
+            setCommentCreated={setCommentCreated}
+          />
+          <CommentList comments={post.comments_id} />
+        </>
+      )} */}
     </>
   );
 }
