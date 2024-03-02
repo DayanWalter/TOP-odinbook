@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import useFetchPost from '../../hooks/useFetchPost';
 import PostUpdate from './PostUpdate';
+import PostDelete from './PostDelete';
 
 export default function PostEdit({ postId }) {
   const [formData, setFormData] = useState('');
@@ -25,40 +26,6 @@ export default function PostEdit({ postId }) {
       [name]: value,
     }));
   };
-
-  // const handleUpdatePost = async (e) => {
-  //   e.preventDefault();
-  //   setSuccess(false);
-  //   // Parameters for the backend request
-  //   const requestOptions = {
-  //     method: 'PUT',
-  //     headers: {
-  //       Authorization: `Bearer ${authToken}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //     // body: JSON.stringify(postData),
-  //     body: JSON.stringify({ content }),
-  //   };
-
-  //   try {
-  //     const response = await fetch(
-  //       `${BASE_URL}/api/post/${postId}/update`,
-  //       requestOptions
-  //     );
-  //     const data = await response.json();
-  //     if (!response.ok) {
-  //       setError(data.error.errors[0].msg);
-  //       return;
-  //     }
-
-  //     console.log(data);
-  //     setError('');
-  //   } catch (error) {
-  //     console.error('Error while updating post:', error);
-  //     setError(error);
-  //   }
-  //   setSuccess(true);
-  // };
 
   // const handleDeletePost = async () => {
   //   const authToken = localStorage.getItem('authToken');
@@ -108,7 +75,7 @@ export default function PostEdit({ postId }) {
           </label>
 
           <PostUpdate formData={formData} />
-          <PostDelete />
+          <PostDelete formData={formData} />
 
           <div className="flex justify-between">
             {/* <button

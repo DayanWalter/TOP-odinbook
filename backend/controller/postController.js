@@ -109,7 +109,7 @@ const deletePost = asyncHandler(async (req, res, next) => {
       { new: true } // Return the updated user document
     );
 
-    res.json({ deletePost: 'Route works', deletedPost });
+    res.json({ deletedPost });
     return;
   } else {
     res.json({ deletePost: 'You did not write this post' });
