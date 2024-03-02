@@ -9,7 +9,7 @@ export default function PostFeed() {
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {loading && <p>Loading feed...</p>}
       {feed && (
-        <ul className="grid gap-5">
+        <ul className="flex flex-col gap-5 ">
           {/* If nothing is in the feed */}
           {feed.length === 0 && 'Start writing :)'}
 
@@ -17,7 +17,7 @@ export default function PostFeed() {
           {feed
             .sort((a, b) => new Date(b.posting_date) - new Date(a.posting_date))
             .map((post) => (
-              <li key={post._id}>
+              <li className="" key={post._id}>
                 <PostCard post={post} />
               </li>
             ))}

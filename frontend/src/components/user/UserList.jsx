@@ -20,7 +20,7 @@ export default function UserList({ users }) {
               avatar_url={user.avatar_url}
               posts_id={user.posts_id}
               reg_date={user.reg_date}
-            ></UserListCard>
+            />
           </Link>
         </li>
       ))}

@@ -5,7 +5,11 @@ export default function AllUser() {
   return (
     <>
       <MainSite>
-        <UsersRead />
+        <div className="grid grid-cols-3">
+          <UsersRead />
+          <UsersRead />
+          <UsersRead />
+        </div>
       </MainSite>
     </>
   );

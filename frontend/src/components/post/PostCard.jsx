@@ -20,8 +20,8 @@ export default function PostCard({ post }) {
 
   const { isAuthor } = useUserIsAuthor(post);
 
-  // const [isOpenModal, setIsOpenModal] = useState(false);
-  // const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
+  const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
+  const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
   // const [isOpenCommentList, setIsOpenCommentList] = useState(false);
   // const [isLiking, setIsLiking] = useState(false);
   // const [commentCreated, setCommentCreated] = useState(null);
@@ -53,6 +53,7 @@ export default function PostCard({ post }) {
   //     const data = await response.json();
   //     setpost(data.searchedPost);
 
+  // Mit extra hook erledigt
   //     const isAuthorOfPost = searchForAuthor(
   //       data.searchedPost.author_id,
   //       loggedInUserId
@@ -81,20 +82,22 @@ export default function PostCard({ post }) {
   //     setIsOpenModal(false);
   //   }
   // };
-  // const handlePostEdit = () => {
-  //   isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
-  // };
+  const handlePostEdit = () => {
+    isOpenUpdateModal
+      ? setIsOpenUpdateModal(false)
+      : setIsOpenUpdateModal(true);
+  };
 
-  // const handleCommentCreate = () => {
-  //   isOpenCommentCreate
-  //     ? setIsOpenCommentCreate(false)
-  //     : setIsOpenCommentCreate(true);
-  // };
+  const handleCommentCreate = () => {
+    isOpenCommentCreate
+      ? setIsOpenCommentCreate(false)
+      : setIsOpenCommentCreate(true);
+  };
   return (
     <>
       <div
         id="card"
-        className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl"
+        className="relative flex max-w-md gap-6 overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl"
       >
         <Link to={`/user/${post.author_id._id}`}>
           <img
@@ -120,7 +123,7 @@ export default function PostCard({ post }) {
                   className="hover:cursor-pointer"
                   path={mdiFileEditOutline}
                   size={1}
-                  // onClick={handlePostEdit}
+                  onClick={handlePostEdit}
                 />
               ) : (
                 ''
@@ -157,21 +160,21 @@ export default function PostCard({ post }) {
           </div>
         </div>
       </div>
-      {/* {isOpenModal && (
+      {isOpenUpdateModal && (
         <>
-          <PostEdit postId={postId} />
+          <PostEdit postId={post._id} />
         </>
       )}
       {isOpenCommentCreate && (
         <>
           <CommentCreate
-            postId={postId}
+            postId={post._id}
             commentCreated={commentCreated}
             setCommentCreated={setCommentCreated}
           />
           <CommentList comments={post.comments_id} />
         </>
-      )} */}
+      )}
     </>
   );
 }
