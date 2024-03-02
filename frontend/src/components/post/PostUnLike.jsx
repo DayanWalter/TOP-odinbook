@@ -1,6 +1,6 @@
 import Icon from '@mdi/react';
-
 import { mdiHeart } from '@mdi/js';
+
 import usePostUnlike from '../../hooks/usePostUnlike';
 
 export default function PostUnLike({ postId, setIsLiking }) {

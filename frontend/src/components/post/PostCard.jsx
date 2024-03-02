@@ -24,9 +24,8 @@ export default function PostCard({ post }) {
 
   const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
-  // const [isOpenCommentList, setIsOpenCommentList] = useState(false);
-  // const [isLiking, setIsLiking] = useState(false);
-  // const [commentCreated, setCommentCreated] = useState(null);
+  const [isOpenCommentList, setIsOpenCommentList] = useState(false);
+  const [commentCreated, setCommentCreated] = useState(null);
 
   // function searchForAuthor(author, loggedInUserId) {
   //   return author._id === loggedInUserId;
@@ -35,49 +34,6 @@ export default function PostCard({ post }) {
   // function searchForLikes(arr, loggedInUserId) {
   //   return arr.some((obj) => obj === loggedInUserId);
   // }
-
-  // const fetchpost = async () => {
-  //   // Parameters for the backend request
-  //   const requestOptions = {
-  //     method: 'GET',
-  //     headers: {
-  //       Authorization: `Bearer ${authToken}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //   };
-
-  //   try {
-  //     setLoading(true);
-  //     const response = await fetch(
-  //       `${BASE_URL}/api/post/${postId}`,
-  //       requestOptions
-  //     );
-  //     const data = await response.json();
-  //     setpost(data.searchedPost);
-
-  // Done with hook
-  //     const isAuthorOfPost = searchForAuthor(
-  //       data.searchedPost.author_id,
-  //       loggedInUserId
-  //     );
-  //     setIsAuthor(isAuthorOfPost);
-  // TODO: create hook
-  //     const isLikingPost = searchForLikes(
-  //       data.searchedPost.likes_id,
-  //       loggedInUserId
-  //     );
-  //     setIsLiking(isLikingPost);
-  //   } catch (error) {
-  //     console.error('Error while fetching user:', error);
-  //   } finally {
-  //     setLoading(false);
-  //     // remove show...
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchpost();
-  // }, [postId, isLiking, commentCreated, authToken, loggedInUserId]);
 
   // const handleOverlayClick = (event) => {
   //   if (event.target.id === 'overlay') {
@@ -139,7 +95,7 @@ export default function PostCard({ post }) {
             <div className="flex">
               <Icon
                 className="hover:cursor-pointer"
-                // onClick={handleCommentCreate}
+                onClick={handleCommentCreate}
                 path={mdiChatOutline}
                 size={1}
               />
@@ -175,7 +131,7 @@ export default function PostCard({ post }) {
             commentCreated={commentCreated}
             setCommentCreated={setCommentCreated}
           />
-          <CommentList comments={post.comments_id} />
+          {/* <CommentList comments={post.comments_id} /> */}
         </>
       )}
     </>

@@ -5,7 +5,6 @@ export default function usePostUnlike() {
     const authToken = localStorage.getItem('authToken');
 
     try {
-      // Execute the backend request
       const response = await fetch(`${BASE_URL}/api/post/${postId}/unlike`, {
         method: 'PUT',
         headers: {

@@ -1,5 +1,6 @@
 import Icon from '@mdi/react';
 import { mdiHeartOutline } from '@mdi/js';
+
 import usePostLike from '../../hooks/usePostLike';
 
 export default function PostLike({ postId, setIsLiking }) {
@@ -7,7 +8,7 @@ export default function PostLike({ postId, setIsLiking }) {
 
   const handleLikePost = async () => {
     postLike(postId);
-    setIsLiking(false);
+    setIsLiking(true);
   };
   return (
     <div>

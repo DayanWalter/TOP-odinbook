@@ -5,7 +5,6 @@ export default function usePostLike() {
     const authToken = localStorage.getItem('authToken');
 
     try {
-      // Execute the backend request
       const response = await fetch(`${BASE_URL}/api/post/${postId}/like`, {
         method: 'PUT',
         headers: {
