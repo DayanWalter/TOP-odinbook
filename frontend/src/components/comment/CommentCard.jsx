@@ -11,7 +11,7 @@ import CommentUnlike from './CommentUnlike';
 import CommentEdit from './CommentEdit';
 import { Link } from 'react-router-dom';
 
-export default function CommentCard({ commentId }) {
+export default function CommentCard({ comment }) {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
   const [commentData, setCommentData] = useState(null);
@@ -51,7 +51,7 @@ export default function CommentCard({ commentId }) {
     try {
       setLoading(true);
       const response = await fetch(
-        `${BASE_URL}/api/comment/${commentId}`,
+        `${BASE_URL}/api/comment/${comment}`,
         requestOptions
       );
       const data = await response.json();
@@ -78,7 +78,7 @@ export default function CommentCard({ commentId }) {
 
   useEffect(() => {
     fetchCommentData();
-  }, [commentId, isLiking, authToken, loggedInUserId]);
+  }, [comment, isLiking, authToken, loggedInUserId]);
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
@@ -132,14 +132,11 @@ export default function CommentCard({ commentId }) {
                 <div className="flex">
                   {isLiking ? (
                     <CommentUnlike
-                      commentId={commentId}
+                      comment={comment}
                       setIsLiking={setIsLiking}
                     />
                   ) : (
-                    <CommentLike
-                      commentId={commentId}
-                      setIsLiking={setIsLiking}
-                    />
+                    <CommentLike comment={comment} setIsLiking={setIsLiking} />
                   )}
 
                   <div>{commentData.likes_id.length}</div>
@@ -155,7 +152,7 @@ export default function CommentCard({ commentId }) {
           {isOpenModal && (
             <div id="overlay" onClick={handleOverlayClick}>
               <div>
-                <CommentEdit commentId={commentId} />
+                <CommentEdit comment={comment} />
               </div>
             </div>
           )}

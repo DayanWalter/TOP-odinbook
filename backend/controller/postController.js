@@ -40,7 +40,6 @@ const readFeedPosts = asyncHandler(async (req, res, next) => {
   const feed = await Post.find({
     author_id: { $in: followedUserIds },
   }).populate('author_id');
-  console.log(feed);
   res.status(200).json(feed);
 });
 // Useful?
@@ -63,7 +62,7 @@ const readPostById = asyncHandler(async (req, res, next) => {
       path: 'comments_id',
     });
 
-  res.json({ readPostById: 'Route works', searchedPost });
+  res.json({ searchedPost });
 });
 const updatePost = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the post

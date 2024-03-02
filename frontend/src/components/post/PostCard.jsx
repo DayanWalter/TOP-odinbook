@@ -124,8 +124,8 @@ export default function PostCard({ post }) {
       )}
       {isOpenCommentCreate && (
         <>
-          <CommentCreate postId={post._id} />
-          <CommentList comments={post.comments_id} />
+          <CommentCreate post={post._id} />
+          <CommentList postId={post._id} />
         </>
       )}
     </>

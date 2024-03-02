@@ -51,7 +51,7 @@ const readPostComments = asyncHandler(async (req, res, next) => {
   // get the comments_id array
   const comments = postComments.comments_id;
   // Send the comments array to client
-  res.status(200).json({ comments });
+  res.status(200).json(comments);
 });
 const readUserComments = asyncHandler(async (req, res, next) => {
   // Take userid from params and search for user
