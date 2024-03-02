@@ -77,7 +77,7 @@ const readCommentById = asyncHandler(async (req, res, next) => {
       select: 'user_name avatar_url',
     }
   );
-  res.json({ readCommentById: 'Route works', searchedComment });
+  res.json(searchedComment);
 });
 const updateComment = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the comment

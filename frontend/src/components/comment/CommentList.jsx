@@ -4,7 +4,6 @@ import CommentCard from './CommentCard';
 export default function CommentList({ postId }) {
   // Search for comments from post
   const { data: comments, loading, error } = useFetchComments(postId);
-  console.log(comments);
 
   return (
     <>
