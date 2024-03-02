@@ -4,7 +4,7 @@ const Post = require('../models/post');
 const Comment = require('../models/comment');
 const { body, validationResult } = require('express-validator');
 const createComment = [
-  body('content').trim().isLength({ max: 200 }).escape(),
+  body('formData').trim().isLength({ max: 200 }).escape(),
 
   asyncHandler(async (req, res, next) => {
     // Validate and sanitize input(body)
@@ -16,7 +16,7 @@ const createComment = [
         // Get the author_id from the jwt
         author_id: req.user._id,
         // Get the content from the body
-        content: req.body.content,
+        content: req.body.formData,
         // Get the post_id from the params
         post_id: req.params.postid,
       });
@@ -34,7 +34,7 @@ const createComment = [
         $push: { comments_id: comment._id },
       });
       // Send comment to client
-      res.json({ createComment: 'Route works', comment });
+      res.status(200).json(comment);
     } else {
       // List all errors in the console
       result.array().map((error) => console.log(error.msg));
