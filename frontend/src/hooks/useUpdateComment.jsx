@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function useUpdatePost() {
+export default function useUpdateComment() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
   const [loading, setLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function useUpdatePost() {
       }
 
       const response = await fetch(
-        `${BASE_URL}/api/post/${formData._id}/update`,
+        `${BASE_URL}/api/comment/${formData._id}/update`,
         {
           method: `PUT`,
           headers: {
@@ -37,7 +37,7 @@ export default function useUpdatePost() {
         setLoading(false);
         localStorage.setItem('authToken', responseJSON.token);
 
-        console.log('Post udated');
+        console.log('Comment udated');
       }
     } catch (error) {
       setError(error);

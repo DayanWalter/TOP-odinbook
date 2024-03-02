@@ -21,7 +21,7 @@ export default function CommentCard({ comment }) {
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
-      setIsOpenModal(false);
+      setIsOpenUpdateModal(false);
     }
   };
   const handleCommentEdit = () => {
@@ -71,9 +71,15 @@ export default function CommentCard({ comment }) {
           <div className="flex justify-between">
             <div className="flex">
               {isLiking ? (
-                <CommentUnlike comment={comment} setIsLiking={setIsLiking} />
+                <CommentUnlike
+                  commentId={comment._id}
+                  setIsLiking={setIsLiking}
+                />
               ) : (
-                <CommentLike comment={comment} setIsLiking={setIsLiking} />
+                <CommentLike
+                  commentId={comment._id}
+                  setIsLiking={setIsLiking}
+                />
               )}
 
               <div>{comment.likes_id.length}</div>

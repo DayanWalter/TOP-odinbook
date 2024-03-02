@@ -1,14 +1,16 @@
 import { useState } from 'react';
-
-export default function useUpdatePost() {
+import { useNavigate } from 'react-router-dom';
+// CHANGE NAME
+export default function useDeleteComment() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const authToken = localStorage.getItem('authToken');
 
-  const update = async (formData) => {
+  const deleteComment = async (formData) => {
     try {
       setLoading(true);
 
@@ -20,24 +22,27 @@ export default function useUpdatePost() {
       }
 
       const response = await fetch(
-        `${BASE_URL}/api/post/${formData._id}/update`,
+        `${BASE_URL}/api/comment/${formData._id}/delete`,
         {
-          method: `PUT`,
+          method: `DELETE`,
           headers: {
             Authorization: `Bearer ${authToken}`,
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
         }
       );
 
       const responseJSON = await response.json();
-      if (responseJSON.user) {
+      if (responseJSON.deletedComment) {
         setError(null);
         setLoading(false);
-        localStorage.setItem('authToken', responseJSON.token);
 
-        console.log('Post udated');
+        return;
+        // if the response is an array, set the error to this array
+      } else if (responseJSON.length) {
+        setError(responseJSON);
+        setLoading(false);
+        return;
       }
     } catch (error) {
       setError(error);
@@ -46,5 +51,5 @@ export default function useUpdatePost() {
     }
   };
 
-  return { update, loading, error };
+  return { deleteComment, loading, error };
 }
