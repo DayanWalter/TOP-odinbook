@@ -47,7 +47,13 @@ const readPostComments = asyncHandler(async (req, res, next) => {
   // Take postid from params and search for post
   const postComments = await Post.findById(req.params.postid)
     .select('comments_id')
-    .populate('comments_id');
+    .populate({
+      path: 'comments_id',
+
+      populate: {
+        path: 'author_id',
+      },
+    });
   // get the comments_id array
   const comments = postComments.comments_id;
   // Send the comments array to client

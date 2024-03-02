@@ -10,75 +10,14 @@ import CommentLike from './CommentLike';
 import CommentUnlike from './CommentUnlike';
 import CommentEdit from './CommentEdit';
 import { Link } from 'react-router-dom';
+import useUserIsAuthor from '../../hooks/useUserIsAuthor';
+import useUserIsLiking from '../../hooks/useUserIsLiking';
 
 export default function CommentCard({ comment }) {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const { isAuthor } = useUserIsAuthor(comment);
+  const { isLiking, setIsLiking } = useUserIsLiking(comment);
 
-  const [commentData, setCommentData] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const [isAuthor, setIsAuthor] = useState(false);
-
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
-  const [isLiking, setIsLiking] = useState(false);
-
-  // id from logged in user
-  const authToken = localStorage.getItem('authToken');
-  // Split the payload of the jwt and convert the ._id part
-  const payload = JSON.parse(atob(authToken.split('.')[1]));
-  // Define the username you are looking for
-  const loggedInUserId = payload._id;
-
-  function searchForAuthor(author, loggedInUserId) {
-    return author._id === loggedInUserId;
-  }
-
-  function searchForLikes(arr, loggedInUserId) {
-    return arr.some((obj) => obj === loggedInUserId);
-  }
-
-  const fetchCommentData = async () => {
-    // Parameters for the backend request
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    try {
-      setLoading(true);
-      const response = await fetch(
-        `${BASE_URL}/api/comment/${comment}`,
-        requestOptions
-      );
-      const data = await response.json();
-      setCommentData(data.searchedComment);
-
-      const isAuthorOfComment = searchForAuthor(
-        data.searchedComment.author_id,
-        loggedInUserId
-      );
-      setIsAuthor(isAuthorOfComment);
-
-      const isLikingComment = searchForLikes(
-        data.searchedComment.likes_id,
-        loggedInUserId
-      );
-      setIsLiking(isLikingComment);
-    } catch (error) {
-      console.error('Error while fetching comment:', error);
-    } finally {
-      setLoading(false);
-      // remove show...
-    }
-  };
-
-  useEffect(() => {
-    fetchCommentData();
-  }, [comment, isLiking, authToken, loggedInUserId]);
+  const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
@@ -86,76 +25,67 @@ export default function CommentCard({ comment }) {
     }
   };
   const handleCommentEdit = () => {
-    isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
+    isOpenUpdateModal
+      ? setIsOpenUpdateModal(false)
+      : setIsOpenUpdateModal(true);
   };
-
   return (
     <>
-      {loading && <div></div>}
-      {commentData && (
-        <>
-          <div className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl ">
-            <Link to={`/user/${commentData.author_id._id}`}>
-              <img
-                className="absolute w-20 h-20 rounded-full shadow-lg -left-8 top-3"
-                src={commentData.author_id.avatar_url}
-                alt="Avatar"
-              />
-            </Link>
+      <div className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl ">
+        <Link to={`/user/${comment.author_id._id}`}>
+          <img
+            className="absolute w-20 h-20 rounded-full shadow-lg -left-8 top-3"
+            src={comment.author_id.avatar_url}
+            alt="Avatar"
+          />
+        </Link>
 
-            <div className="flex flex-col w-full gap-5 p-5 pl-16">
-              <div className="flex justify-between ">
-                <div className="underline underline-offset-2 text-slate-500">
-                  <Link to={`/user/${commentData.author_id._id}`}>
-                    {commentData.author_id.user_name}
-                  </Link>
-                </div>
+        <div className="flex flex-col w-full gap-5 p-5 pl-16">
+          <div className="flex justify-between ">
+            <div className="underline underline-offset-2 text-slate-500">
+              <Link to={`/user/${comment.author_id._id}`}>
+                {comment.author_id.user_name}
+              </Link>
+            </div>
 
-                <div>
-                  {/* Open modal for editing post if user is author */}
-                  {isAuthor ? (
-                    <Icon
-                      className="hover:cursor-pointer"
-                      path={mdiFileEditOutline}
-                      size={1}
-                      onClick={handleCommentEdit}
-                    />
-                  ) : (
-                    ''
-                  )}
-                </div>
-              </div>
-
-              <p className="break-all ">{commentData.content}</p>
-
-              <div className="flex justify-between">
-                <div className="flex">
-                  {isLiking ? (
-                    <CommentUnlike
-                      comment={comment}
-                      setIsLiking={setIsLiking}
-                    />
-                  ) : (
-                    <CommentLike comment={comment} setIsLiking={setIsLiking} />
-                  )}
-
-                  <div>{commentData.likes_id.length}</div>
-                </div>
-
-                <div className="flex">
-                  <Icon path={mdiCalendarMonthOutline} size={1} />
-                  {new Date(commentData.posting_date).toLocaleDateString()}
-                </div>
-              </div>
+            <div>
+              {/* Open modal for editing post if user is author */}
+              {isAuthor ? (
+                <Icon
+                  className="hover:cursor-pointer"
+                  path={mdiFileEditOutline}
+                  size={1}
+                  onClick={handleCommentEdit}
+                />
+              ) : (
+                ''
+              )}
             </div>
           </div>
-          {isOpenModal && (
-            <div id="overlay" onClick={handleOverlayClick}>
-              <div>
-                <CommentEdit comment={comment} />
-              </div>
+
+          <p className="break-all ">{comment.content}</p>
+
+          <div className="flex justify-between">
+            <div className="flex">
+              {isLiking ? (
+                <CommentUnlike comment={comment} setIsLiking={setIsLiking} />
+              ) : (
+                <CommentLike comment={comment} setIsLiking={setIsLiking} />
+              )}
+
+              <div>{comment.likes_id.length}</div>
             </div>
-          )}
+
+            <div className="flex">
+              <Icon path={mdiCalendarMonthOutline} size={1} />
+              {new Date(comment.posting_date).toLocaleDateString()}
+            </div>
+          </div>
+        </div>
+      </div>
+      {isOpenUpdateModal && (
+        <>
+          <CommentEdit commentId={comment._id} />
         </>
       )}
     </>

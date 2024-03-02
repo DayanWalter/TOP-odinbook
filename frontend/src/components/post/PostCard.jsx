@@ -16,22 +16,11 @@ import useUserIsAuthor from '../../hooks/useUserIsAuthor';
 import useUserIsLiking from '../../hooks/useUserIsLiking';
 
 export default function PostCard({ post }) {
-  // const [post, setpost] = useState(null);
-  // const [loading, setLoading] = useState(false);
-
   const { isAuthor } = useUserIsAuthor(post);
   const { isLiking, setIsLiking } = useUserIsLiking(post);
 
   const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
-
-  // function searchForAuthor(author, loggedInUserId) {
-  //   return author._id === loggedInUserId;
-  // }
-
-  // function searchForLikes(arr, loggedInUserId) {
-  //   return arr.some((obj) => obj === loggedInUserId);
-  // }
 
   // const handleOverlayClick = (event) => {
   //   if (event.target.id === 'overlay') {

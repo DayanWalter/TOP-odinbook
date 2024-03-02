@@ -19,7 +19,6 @@ export default function CommentList({ postId }) {
             .sort((a, b) => new Date(b.posting_date) - new Date(a.posting_date))
             .map((comment) => (
               <li key={comment._id}>
-                {console.log(comment)}
                 <CommentCard comment={comment} />
               </li>
             ))}
