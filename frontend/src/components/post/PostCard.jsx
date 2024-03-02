@@ -13,12 +13,14 @@ import PostUnLike from './PostUnLike';
 import CommentList from '../comment/CommentList';
 import { Link } from 'react-router-dom';
 import useUserIsAuthor from '../../hooks/useUserIsAuthor';
+import useUserIsLiking from '../../hooks/useUserIsLiking';
 
 export default function PostCard({ post }) {
   // const [post, setpost] = useState(null);
   // const [loading, setLoading] = useState(false);
 
   const { isAuthor } = useUserIsAuthor(post);
+  const { isLiking, setIsLiking } = useUserIsLiking(post);
 
   const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
@@ -53,13 +55,13 @@ export default function PostCard({ post }) {
   //     const data = await response.json();
   //     setpost(data.searchedPost);
 
-  // Mit extra hook erledigt
+  // Done with hook
   //     const isAuthorOfPost = searchForAuthor(
   //       data.searchedPost.author_id,
   //       loggedInUserId
   //     );
   //     setIsAuthor(isAuthorOfPost);
-
+  // TODO: create hook
   //     const isLikingPost = searchForLikes(
   //       data.searchedPost.likes_id,
   //       loggedInUserId
@@ -145,11 +147,12 @@ export default function PostCard({ post }) {
             </div>
             {/* LikeIcon */}
             <div className="flex">
-              {/* {isLiking ? (
-                <PostUnLike postId={postId} setIsLiking={setIsLiking} />
+              {isLiking ? (
+                <PostUnLike postId={post._id} setIsLiking={setIsLiking} />
               ) : (
-                <PostLike postId={postId} setIsLiking={setIsLiking} />
-              )} */}
+                <PostLike postId={post._id} setIsLiking={setIsLiking} />
+              )}
+              {/* length of array after like? */}
               <div>{post.likes_id.length}</div>
             </div>
             {/* CalendarIcon */}
