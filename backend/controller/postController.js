@@ -62,7 +62,7 @@ const readPostById = asyncHandler(async (req, res, next) => {
       path: 'comments_id',
     });
 
-  res.json({ searchedPost });
+  res.status(200).json(searchedPost);
 });
 const updatePost = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the post
