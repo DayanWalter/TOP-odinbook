@@ -41,7 +41,7 @@ export default function PostCard({ post }) {
   return (
     <>
       <div
-        id="card"
+        id="postCard"
         className="relative flex max-w-md gap-6 overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl"
       >
         <Link to={`/user/${post.author_id._id}`}>

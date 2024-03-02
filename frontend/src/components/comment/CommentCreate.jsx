@@ -16,6 +16,7 @@ export default function CommentCreate({ post }) {
 
   return (
     <form
+      id="createCommentForm"
       onSubmit={handleCreateComment}
       className="max-w-md p-5 -mt-5 bg-white border shadow-lg rounded-b-xl"
     >

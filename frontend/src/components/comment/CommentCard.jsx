@@ -31,7 +31,10 @@ export default function CommentCard({ comment }) {
   };
   return (
     <>
-      <div className="relative flex items-center max-w-md gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl ">
+      <div
+        id="commentCard"
+        className="relative flex items-center max-w-md gap-6 overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl "
+      >
         <Link to={`/user/${comment.author_id._id}`}>
           <img
             className="absolute w-20 h-20 rounded-full shadow-lg -left-8 top-3"
