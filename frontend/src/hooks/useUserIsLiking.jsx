@@ -16,7 +16,3 @@ export default function useUserIsLiking(post) {
 
   return { isLiking, setIsLiking };
 }
-
-// function searchForLikes(arr, loggedInUserId) {
-//     return arr.some((obj) => obj === loggedInUserId);
-//   }

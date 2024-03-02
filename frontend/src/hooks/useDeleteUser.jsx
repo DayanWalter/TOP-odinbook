@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+// CHANGE NAME
 export default function useDeleteUser() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
