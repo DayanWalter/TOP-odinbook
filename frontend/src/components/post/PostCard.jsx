@@ -24,8 +24,6 @@ export default function PostCard({ post }) {
 
   const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
-  const [isOpenCommentList, setIsOpenCommentList] = useState(false);
-  const [commentCreated, setCommentCreated] = useState(null);
 
   // function searchForAuthor(author, loggedInUserId) {
   //   return author._id === loggedInUserId;
@@ -126,12 +124,8 @@ export default function PostCard({ post }) {
       )}
       {isOpenCommentCreate && (
         <>
-          <CommentCreate
-            postId={post._id}
-            commentCreated={commentCreated}
-            setCommentCreated={setCommentCreated}
-          />
-          {/* <CommentList comments={post.comments_id} /> */}
+          <CommentCreate postId={post._id} />
+          <CommentList comments={post.comments_id} />
         </>
       )}
     </>

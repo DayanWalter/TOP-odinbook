@@ -11,7 +11,7 @@ import CommentUnlike from './CommentUnlike';
 import CommentEdit from './CommentEdit';
 import { Link } from 'react-router-dom';
 
-export default function CommentListCard({ commentId }) {
+export default function CommentCard({ commentId }) {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
   const [commentData, setCommentData] = useState(null);

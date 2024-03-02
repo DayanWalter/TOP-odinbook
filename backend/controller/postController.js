@@ -41,7 +41,7 @@ const readFeedPosts = asyncHandler(async (req, res, next) => {
     author_id: { $in: followedUserIds },
   }).populate('author_id');
   console.log(feed);
-  res.json(feed);
+  res.status(200).json(feed);
 });
 // Useful?
 const readUserPosts = asyncHandler(async (req, res, next) => {
@@ -86,7 +86,7 @@ const updatePost = asyncHandler(async (req, res, next) => {
       return;
     }
 
-    res.json({ updatePost: 'Route works', updatedPost });
+    res.status(200).json(updatedPost);
   } else {
     res.json({ updatePost: 'You did not write this post' });
   }

@@ -66,7 +66,7 @@ export default function UpdatePost({ postId }) {
         return;
       }
 
-      console.log('Post updated:', data);
+      console.log(data);
       setError('');
     } catch (error) {
       console.error('Error while updating post:', error);

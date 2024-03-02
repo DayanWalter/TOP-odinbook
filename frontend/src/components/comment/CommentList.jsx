@@ -1,4 +1,4 @@
-import CommentListCard from './CommentListCard';
+import CommentCard from './CommentCard';
 
 export default function CommentList({ comments }) {
   comments.sort((a, b) => new Date(b.posting_date) - new Date(a.posting_date));
@@ -8,8 +8,8 @@ export default function CommentList({ comments }) {
       {comments.length === 0 && 'Start writing :)'}
 
       {comments.map((comment) => (
-        <li key={comment._id}>
-          <CommentListCard commentId={comment._id} />
+        <li key={comment}>
+          <CommentCard commentId={comment} />
         </li>
       ))}
     </ul>
