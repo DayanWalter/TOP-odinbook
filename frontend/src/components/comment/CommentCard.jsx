@@ -17,13 +17,10 @@ export default function CommentCard({ comment }) {
   const { isAuthor } = useUserIsAuthor(comment);
   const { isLiking, setIsLiking } = useUserIsLiking(comment);
 
+  const [likes, setLikes] = useState(comment.likes_id.length);
+
   const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
 
-  const handleOverlayClick = (event) => {
-    if (event.target.id === 'overlay') {
-      setIsOpenUpdateModal(false);
-    }
-  };
   const handleCommentEdit = () => {
     isOpenUpdateModal
       ? setIsOpenUpdateModal(false)
@@ -33,7 +30,7 @@ export default function CommentCard({ comment }) {
     <>
       <div
         id="commentCard"
-        className="relative flex items-center gap-6 overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl "
+        className="relative flex items-center gap-6 mt-2 overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl "
       >
         <Link to={`/user/${comment.author_id._id}`}>
           <img
@@ -72,17 +69,19 @@ export default function CommentCard({ comment }) {
             <div className="flex">
               {isLiking ? (
                 <CommentUnlike
-                  commentId={comment._id}
+                  comment={comment}
                   setIsLiking={setIsLiking}
+                  setLikes={setLikes}
                 />
               ) : (
                 <CommentLike
-                  commentId={comment._id}
+                  comment={comment}
                   setIsLiking={setIsLiking}
+                  setLikes={setLikes}
                 />
               )}
 
-              <div>{comment.likes_id.length}</div>
+              <div>{likes}</div>
             </div>
 
             <div className="flex">

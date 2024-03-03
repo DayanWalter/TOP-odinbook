@@ -2,11 +2,12 @@ import Icon from '@mdi/react';
 import { mdiHeart } from '@mdi/js';
 import useCommentUnlike from '../../hooks/useCommentUnlike';
 
-export default function CommentUnlike({ commentId, setIsLiking }) {
+export default function CommentUnlike({ comment, setIsLiking, setLikes }) {
   const { commentUnlike } = useCommentUnlike();
 
   const handleUnlikeComment = async () => {
-    commentUnlike(commentId);
+    setLikes((prev) => prev - 1);
+    commentUnlike(comment._id);
     setIsLiking(false);
   };
 
