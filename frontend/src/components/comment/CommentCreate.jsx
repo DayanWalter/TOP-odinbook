@@ -7,7 +7,6 @@ export default function CommentCreate({ post }) {
   const { commentCreate, loading, error } = useCommentCreate();
 
   const handleCreateComment = async (e) => {
-    e.preventDefault();
     commentCreate(post, formData);
     setFormData('');
   };
@@ -18,22 +17,21 @@ export default function CommentCreate({ post }) {
     <form
       id="createCommentForm"
       onSubmit={handleCreateComment}
-      className="p-5 -mt-5 bg-white border shadow-lg rounded-b-xl"
+      className="flex flex-col p-5 -mt-5 bg-white border shadow-lg rounded-b-xl"
     >
-      <div>
-        <label htmlFor="formData">
-          <input
-            className="w-full mt-8 mb-5 border"
-            id="formData"
-            type="text"
-            name="formData"
-            value={formData}
-            onChange={handleChange}
-            autoComplete="off"
-            required={true}
-          />
-        </label>
-      </div>
+      <label htmlFor="formData">
+        <textarea
+          className="w-full p-2 mt-8 mb-5 border"
+          placeholder="What is happening?"
+          id="formData"
+          type="text"
+          name="formData"
+          value={formData}
+          onChange={handleChange}
+          autoComplete="off"
+          required={true}
+        />
+      </label>
 
       <button
         className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
@@ -41,7 +39,7 @@ export default function CommentCreate({ post }) {
         disabled={loading}
       >
         {error && <div style={{ color: 'red' }}>{error}</div>}
-        {loading ? 'Creating Comment...' : 'Create Comment'}
+        {loading ? 'Creating Comment...' : 'Comment'}
       </button>
     </form>
   );

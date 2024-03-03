@@ -15,21 +15,25 @@ export default function PostCreate() {
 
   return (
     <>
-      <form id="createPostForm" onSubmit={handleCreatePost} className="z-20">
-        <div>
-          <label htmlFor="formData">
-            <input
-              className="border"
-              id="formData"
-              type="text"
-              name="formData"
-              value={formData}
-              onChange={handleChange}
-              autoComplete="off"
-              required={true}
-            />
-          </label>
-        </div>
+      <h1 className="mb-5 text-xl border-b">Write a post</h1>
+      <form
+        id="createPostForm"
+        onSubmit={handleCreatePost}
+        className="z-20 flex flex-col gap-5"
+      >
+        <label htmlFor="formData">
+          <textarea
+            className="p-2 border"
+            placeholder="What is happening?"
+            id="formData"
+            type="text"
+            name="formData"
+            value={formData}
+            onChange={handleChange}
+            autoComplete="off"
+            required={true}
+          />
+        </label>
 
         <button
           className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
@@ -37,7 +41,7 @@ export default function PostCreate() {
           disabled={loading}
         >
           {error && <div style={{ color: 'red' }}>{error}</div>}
-          {loading ? 'Creating Post...' : 'Write Post'}
+          {loading ? 'Creating Post...' : 'Post'}
         </button>
       </form>
     </>

@@ -3,11 +3,12 @@ import { mdiHeart } from '@mdi/js';
 
 import usePostUnlike from '../../hooks/usePostUnlike';
 
-export default function PostUnLike({ postId, setIsLiking }) {
+export default function PostUnLike({ post, setIsLiking, setLikes }) {
   const { postUnlike } = usePostUnlike();
 
   const handleUnLikePost = async () => {
-    postUnlike(postId);
+    setLikes((prev) => prev - 1);
+    postUnlike(post._id);
     setIsLiking(false);
   };
 

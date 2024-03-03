@@ -19,6 +19,8 @@ export default function PostCard({ post }) {
   const { isAuthor } = useUserIsAuthor(post);
   const { isLiking, setIsLiking } = useUserIsLiking(post);
 
+  const [likes, setLikes] = useState(post.likes_id.length);
+
   const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
 
@@ -91,12 +93,20 @@ export default function PostCard({ post }) {
             {/* LikeIcon */}
             <div className="flex">
               {isLiking ? (
-                <PostUnLike postId={post._id} setIsLiking={setIsLiking} />
+                <PostUnLike
+                  post={post}
+                  setIsLiking={setIsLiking}
+                  setLikes={setLikes}
+                />
               ) : (
-                <PostLike postId={post._id} setIsLiking={setIsLiking} />
+                <PostLike
+                  post={post}
+                  setIsLiking={setIsLiking}
+                  setLikes={setLikes}
+                />
               )}
               {/* length of array after like? */}
-              <div>{post.likes_id.length}</div>
+              <div>{likes}</div>
             </div>
             {/* CalendarIcon */}
             <div className="flex">
