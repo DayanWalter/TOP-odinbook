@@ -127,7 +127,7 @@ export default function UserProfile() {
           {/* List Buttons */}
           <div className="flex flex-col items-start pb-5 mb-10 border-b sm:justify-around sm:flex-row">
             <button
-              className={`  border-b-2 ${
+              className={`border-b-2 rounded-sm px-2 py-1 hover:bg-slate-200 ${
                 activeIndex === 'follows'
                   ? 'border-blue-600 '
                   : ' border-transparent'
@@ -140,7 +140,7 @@ export default function UserProfile() {
             </button>
 
             <button
-              className={`  border-b-2 ${
+              className={`border-b-2 rounded-sm px-2 py-1 hover:bg-slate-200 ${
                 activeIndex === 'follower'
                   ? 'border-blue-600 '
                   : ' border-transparent'
@@ -153,7 +153,7 @@ export default function UserProfile() {
             </button>
 
             <button
-              className={`  border-b-2 ${
+              className={`border-b-2 rounded-sm px-2 py-1 hover:bg-slate-200 ${
                 activeIndex === 'posts'
                   ? 'border-blue-600 '
                   : ' border-transparent'
@@ -167,7 +167,7 @@ export default function UserProfile() {
           </div>
 
           {/* List Container */}
-          <div className="w-1/3 mx-auto mt-20 ">
+          <div className="mx-auto mt-20 sm:w-1/3 ">
             {activeIndex === 'follows' && data.follows_id && (
               <UserList users={data.follows_id} />
             )}
