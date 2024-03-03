@@ -3,6 +3,7 @@ import PostCard from './PostCard';
 
 export default function PostList() {
   const { data: posts, loading, error } = useFetchPosts();
+
   console.log(posts);
   return (
     <>

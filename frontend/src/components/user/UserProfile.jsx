@@ -128,10 +128,12 @@ export default function UserProfile() {
           <div className="flex flex-col items-start pb-5 mb-10 border-b sm:justify-between sm:flex-row">
             <button
               className={`  border-b-2 ${
-                activeIndex === 1 ? 'border-blue-600 ' : ' border-transparent'
+                activeIndex === 'follows'
+                  ? 'border-blue-600 '
+                  : ' border-transparent'
               }`}
               onClick={() => {
-                setActiveIndex(1);
+                setActiveIndex('follows');
               }}
             >
               {data.follows_id.length} Following
@@ -139,10 +141,12 @@ export default function UserProfile() {
 
             <button
               className={`  border-b-2 ${
-                activeIndex === 2 ? 'border-blue-600 ' : ' border-transparent'
+                activeIndex === 'follower'
+                  ? 'border-blue-600 '
+                  : ' border-transparent'
               }`}
               onClick={() => {
-                setActiveIndex(2);
+                setActiveIndex('follower');
               }}
             >
               {data.follower_id.length} Followers
@@ -150,10 +154,12 @@ export default function UserProfile() {
 
             <button
               className={`  border-b-2 ${
-                activeIndex === 3 ? 'border-blue-600 ' : ' border-transparent'
+                activeIndex === 'posts'
+                  ? 'border-blue-600 '
+                  : ' border-transparent'
               }`}
               onClick={() => {
-                setActiveIndex(3);
+                setActiveIndex('posts');
               }}
             >
               {data.posts_id.length} Posts
@@ -161,10 +167,12 @@ export default function UserProfile() {
 
             <button
               className={`  border-b-2 ${
-                activeIndex === 4 ? 'border-blue-600 ' : ' border-transparent'
+                activeIndex === 'comments'
+                  ? 'border-blue-600 '
+                  : ' border-transparent'
               }`}
               onClick={() => {
-                setActiveIndex(4);
+                setActiveIndex('comments');
               }}
             >
               {data.comments_id.length} Comments
@@ -173,14 +181,14 @@ export default function UserProfile() {
 
           {/* List Container */}
           <div className="mx-auto mt-20 w-fit ">
-            {activeIndex === 1 && data.follows_id && (
+            {activeIndex === 'follows' && data.follows_id && (
               <UserList users={data.follows_id} />
             )}
-            {activeIndex === 2 && data.follower_id && (
+            {activeIndex === 'follower' && data.follower_id && (
               <UserList users={data.follower_id} />
             )}
-            {activeIndex === 3 && data.posts_id && <PostList />}
-            {activeIndex === 4 && data.comments_id && (
+            {activeIndex === 'posts' && data.posts_id && <PostList />}
+            {activeIndex === 'comments' && data.comments_id && (
               <CommentList comments={data.comments_id} />
             )}
           </div>

@@ -2,7 +2,6 @@ import Icon from '@mdi/react';
 import { mdiHeartOutline } from '@mdi/js';
 
 import usePostLike from '../../hooks/usePostLike';
-import { useState } from 'react';
 
 export default function PostLike({ post, setIsLiking, setLikes }) {
   const { postLike } = usePostLike();

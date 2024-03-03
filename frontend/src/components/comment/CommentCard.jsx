@@ -4,7 +4,7 @@ import { mdiCalendarMonthOutline } from '@mdi/js';
 
 import { mdiFileEditOutline } from '@mdi/js';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import CommentLike from './CommentLike';
 import CommentUnlike from './CommentUnlike';

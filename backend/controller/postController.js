@@ -45,10 +45,10 @@ const readFeedPosts = asyncHandler(async (req, res, next) => {
 // Useful?
 const readUserPosts = asyncHandler(async (req, res, next) => {
   // Take userid from params
-  const userPosts = await User.findById(req.params.userid)
-    .select('posts_id')
-    .populate('posts_id');
-  // const posts = userPosts.posts_id;
+  const userPosts = await Post.find({ author_id: req.params.userid }).populate(
+    'author_id'
+  );
+
   // Return posts object to client
   res.status(200).json(userPosts);
 });
