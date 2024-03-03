@@ -125,7 +125,7 @@ export default function UserProfile() {
           </div>
 
           {/* List Buttons */}
-          <div className="flex flex-col items-start pb-5 mb-10 border-b sm:justify-between sm:flex-row">
+          <div className="flex flex-col items-start pb-5 mb-10 border-b sm:justify-around sm:flex-row">
             <button
               className={`  border-b-2 ${
                 activeIndex === 'follows'
@@ -164,23 +164,10 @@ export default function UserProfile() {
             >
               {data.posts_id.length} Posts
             </button>
-
-            <button
-              className={`  border-b-2 ${
-                activeIndex === 'comments'
-                  ? 'border-blue-600 '
-                  : ' border-transparent'
-              }`}
-              onClick={() => {
-                setActiveIndex('comments');
-              }}
-            >
-              {data.comments_id.length} Comments
-            </button>
           </div>
 
           {/* List Container */}
-          <div className="mx-auto mt-20 w-fit ">
+          <div className="w-1/3 mx-auto mt-20 ">
             {activeIndex === 'follows' && data.follows_id && (
               <UserList users={data.follows_id} />
             )}
@@ -188,9 +175,6 @@ export default function UserProfile() {
               <UserList users={data.follower_id} />
             )}
             {activeIndex === 'posts' && data.posts_id && <PostList />}
-            {activeIndex === 'comments' && data.comments_id && (
-              <CommentList comments={data.comments_id} />
-            )}
           </div>
 
           {isOpenModal &&
