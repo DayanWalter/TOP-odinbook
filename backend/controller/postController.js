@@ -103,9 +103,15 @@ const deletePost = asyncHandler(async (req, res, next) => {
     }
 
     // Remove post._id from user.posts_id
+    // Remove comment._id from user.comment_id
     await User.findByIdAndUpdate(
       req.user._id,
-      { $pull: { posts_id: req.params.postid } },
+      {
+        $pull: {
+          posts_id: req.params.postid,
+          comments_id: { $in: deletedPost.comments_id },
+        },
+      },
       { new: true } // Return the updated user document
     );
 

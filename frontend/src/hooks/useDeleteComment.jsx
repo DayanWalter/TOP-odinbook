@@ -11,6 +11,7 @@ export default function useDeleteComment() {
   const authToken = localStorage.getItem('authToken');
 
   const deleteComment = async (formData) => {
+    console.log(formData);
     try {
       setLoading(true);
 
@@ -22,7 +23,7 @@ export default function useDeleteComment() {
       }
 
       const response = await fetch(
-        `${BASE_URL}/api/comment/${formData._id}/delete`,
+        `${BASE_URL}/api/comment/${formData._id}/post/${formData.post_id}/delete`,
         {
           method: `DELETE`,
           headers: {

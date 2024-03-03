@@ -21,7 +21,7 @@ router.put(
 );
 // delete comment
 router.delete(
-  '/:commentid/delete',
+  '/:commentid/post/:postid/delete',
   protectedRoute,
   commentController.deleteComment
 );

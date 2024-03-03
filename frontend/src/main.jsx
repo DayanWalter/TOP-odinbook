@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 // Sites
-import Index from './components/sites/Index.jsx';
 import UserLogin from './components/user/UserLogin.jsx';
 import UserCreate from './components/user/UserCreate.jsx';
 import UserLogout from './components/user/UserLogout.jsx';
-import UserProfile from './components/user/UserProfile.jsx';
 import Home from './components/sites/Home.jsx';
 import AllUser from './components/sites/AllUser.jsx';
 import ProfileSite from './components/sites/ProfileSite.jsx';
