@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-export default function useCommentCreate() {
+export default function useCreatePost() {
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const commentCreate = async (postId, formData) => {
+  const createPost = async (formData) => {
     const authToken = localStorage.getItem('authToken');
     try {
       setLoading(true);
 
-      const response = await fetch(`${BASE_URL}/api/comment/${postId}/create`, {
+      const response = await fetch(`${BASE_URL}/api/post/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,5 +30,5 @@ export default function useCommentCreate() {
     }
   };
 
-  return { commentCreate, loading, error };
+  return { createPost, loading, error };
 }

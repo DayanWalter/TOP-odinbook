@@ -11,7 +11,7 @@ const createPost = [
       // Validate and sanitize input(body)
       const post = new Post({
         author_id: req.user._id,
-        content: req.body.content,
+        content: req.body.formData,
       });
       // Save to database
       await post.save();

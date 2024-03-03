@@ -18,18 +18,19 @@ export default function CommentCreate({ post }) {
     <form
       id="createCommentForm"
       onSubmit={handleCreateComment}
-      className="p-5 -mt-5 bg-white border shadow-lg  rounded-b-xl"
+      className="p-5 -mt-5 bg-white border shadow-lg rounded-b-xl"
     >
       <div>
         <label htmlFor="formData">
           <input
             className="w-full mt-8 mb-5 border"
             id="formData"
+            type="text"
+            name="formData"
             value={formData}
             onChange={handleChange}
             autoComplete="off"
             required={true}
-            type="text"
           />
         </label>
       </div>
