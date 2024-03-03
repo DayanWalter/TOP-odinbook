@@ -36,7 +36,7 @@ export default function CommentEdit({ commentId }) {
           className="flex flex-col p-5 -mt-5 bg-white border shadow-lg rounded-b-xl"
         >
           <label htmlFor="content">
-            <input
+            <textarea
               className="w-full mt-8 mb-5 border"
               id="content"
               type="text"
