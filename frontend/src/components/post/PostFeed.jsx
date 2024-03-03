@@ -9,7 +9,7 @@ export default function PostFeed() {
       {error && <div style={{ color: 'red' }}>{error}</div>}
       {loading && <p>Loading feed...</p>}
       {feed && (
-        <ul className="flex flex-col gap-5 ">
+        <ul className="flex flex-col gap-5">
           {/* If nothing is in the feed */}
           {feed.length === 0 && 'Start writing :)'}
 
