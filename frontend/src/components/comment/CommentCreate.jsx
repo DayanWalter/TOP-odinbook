@@ -39,7 +39,7 @@ export default function CommentCreate({ post }) {
         type="submit"
         disabled={loading}
       >
-        {/* {error && <div style={{ color: 'red' }}>{error}</div>} */}
+        {error && <div style={{ color: 'red' }}>{error}</div>}
         {loading ? 'Creating Comment...' : 'Create Comment'}
       </button>
     </form>

@@ -5,7 +5,6 @@ import CommentDelete from './CommentDelete';
 
 export default function CommentEdit({ commentId }) {
   const [formData, setFormData] = useState('');
-  console.log(formData);
   const {
     data: commentData,
     loading: fetchCommentLoading,
