@@ -33,7 +33,7 @@ export default function CommentEdit({ commentId }) {
       {formData && (
         <form
           id="editCommentForm"
-          className="flex flex-col max-w-md p-5 -mt-5 bg-white border shadow-lg rounded-b-xl"
+          className="flex flex-col p-5 -mt-5 bg-white border shadow-lg rounded-b-xl"
         >
           <label htmlFor="content">
             <input

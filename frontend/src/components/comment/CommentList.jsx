@@ -11,12 +11,12 @@ export default function CommentList({ postId }) {
       {loading && <p>Loading comments...</p>}
 
       {comments && (
-        <ul className="flex flex-col gap-3">
+        <ul className="flex flex-col gap-3 border-l">
           {/* Sort comments(Date) and map them on cards */}
           {comments
             .sort((a, b) => new Date(b.posting_date) - new Date(a.posting_date))
             .map((comment) => (
-              <li className="ml-5 " key={comment._id}>
+              <li className="ml-10 " key={comment._id}>
                 <CommentCard comment={comment} />
               </li>
             ))}
