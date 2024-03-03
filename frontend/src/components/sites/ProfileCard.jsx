@@ -8,7 +8,7 @@ export default function ProfileCard() {
       {error && <div>{error}</div>}
       {loading && <div></div>}
       {data && (
-        <div className="hidden max-w-lg overflow-hidden bg-white border rounded  sm:block h-80">
+        <div className="fixed hidden w-1/3 bg-white border rounded xl:w-1/4 sm:block h-80">
           <div className="relative mx-auto overflow-hidden border rounded-sm h-1/3">
             <Link to={`/user/${data._id}`}>
               <img

@@ -6,7 +6,9 @@ export default function Home() {
   return (
     <MainSite>
       <div className="grid px-16 gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
-        <ProfileCard />
+        <div className="w-full">
+          <ProfileCard />
+        </div>
 
         <PostFeed />
         <div className="border">Empty col</div>
