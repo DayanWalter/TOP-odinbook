@@ -39,5 +39,6 @@ export default function useFetchUsers() {
     }
     fetchData();
   }, []);
+
   return { data, loading, error };
 }
