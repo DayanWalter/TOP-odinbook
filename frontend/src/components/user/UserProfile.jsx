@@ -16,46 +16,25 @@ import UserUpdate from './UserUpdate';
 import useFetchUser from '../../hooks/useFetchUser';
 import useVerifyUser from '../../hooks/useVerifyUser';
 import UserEdit from './UserEdit';
+import useUserIsFollowing from '../../hooks/useUserIsFollowing';
 
 export default function UserProfile() {
   // const [loading, setLoading] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState('follower');
 
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const [isFollowing, setIsFollowing] = useState(false);
+  const { isFollowing, setIsFollowing } = useUserIsFollowing(data);
 
   const { isLoggedInUser, userIdFromParams } = useVerifyUser();
+
   const { data, loading, error } = useFetchUser();
-
-  //     const isFollowingUser = searchForFollower(
-  //       data.searchedUser.follower_id,
-  //       loggedInUserId
-  //     );
-  //     setIsFollowing(isFollowingUser);
-  //
-
-  const handleModal = () => {
-    isOpenModal ? setIsOpenModal(false) : setIsOpenModal(true);
-  };
-
-  // const handlePostCreateModal = () => {
-  //   isOpenPostCreateModal
-  //     ? setIsOpenPostCreateModal(false)
-  //     : setIsOpenPostCreateModal(true);
-  // };
 
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
       setIsOpenModal(false);
-      // setIsOpenPostCreateModal(false);
-      // fetchUserData();
     }
   };
-
-  // function searchForFollower(arr, loggedInUserId) {
-  //   return arr.some((obj) => obj._id === loggedInUserId);
-  // }
 
   return (
     <>
@@ -64,7 +43,7 @@ export default function UserProfile() {
       {data && (
         <>
           {/* Avatar and Background Image Section */}
-          <div className="relative w-5/6 h-48 mx-auto mt-20 mb-10 overflow-hidden border rounded-md shadow-lg">
+          <div className="relative w-full h-48 mx-auto mt-20 mb-10 overflow-hidden border rounded-md shadow-lg md:w-5/6">
             <img
               className="object-cover object-center w-full h-full "
               src={data.img_url}
@@ -81,20 +60,6 @@ export default function UserProfile() {
           <div className="p-3 mb-5 bg-white rounded-lg sm:w-1/2">
             <h1 className="text-2xl ">{data.user_name}</h1>
             {/* Show follow/unfollow button, if profile is not logged in user */}
-
-            {/* {isLoggedInUser && (
-              <div className="flex justify-between ">
-                <button
-                  className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
-                  onClick={handleModal}
-                >
-                  Edit Profile
-                </button>
-                <button className="px-2 py-1 text-sm text-white border rounded-md bg-info hover:bg-info/80">
-                  <Link to={'/logout'}>Logout</Link>
-                </button>
-              </div>
-            )} */}
 
             {!isLoggedInUser &&
               (isFollowing ? (
@@ -176,37 +141,8 @@ export default function UserProfile() {
             )}
             {activeIndex === 'posts' && data.posts_id && <PostList />}
           </div>
-
-          {isOpenModal &&
-            (isLoggedInUser ? (
-              <div
-                className="fixed inset-0 flex items-center justify-center bg-gray-500/50"
-                id="overlay"
-                onClick={handleOverlayClick}
-              >
-                <UserEdit />
-              </div>
-            ) : (
-              ''
-            ))}
-
-          {/* {isOpenPostCreateModal &&
-            (isLoggedInUser ? (
-              <div id="overlay" onClick={handleOverlayClick}>
-                <div>
-                  <PostCreate />
-                </div>
-              </div>
-            ) : (
-              ''
-            ))} */}
         </>
       )}
-      {/* {showButton && (
-        <button title="Scroll Up" onClick={handleScrollUp}>
-          <Icon path={mdiArrowUp} size={2} />
-        </button>
-      )} */}
     </>
   );
 }

@@ -19,7 +19,7 @@ export default function useVerifyUser() {
     userIdFromParams === loggedInUserId
       ? setIsLoggedInUser(true)
       : setIsLoggedInUser(false);
-  }, []);
+  }, [userIdFromParams]);
 
   return { isLoggedInUser, userIdFromParams };
 }
