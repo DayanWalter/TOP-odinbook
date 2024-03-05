@@ -43,6 +43,6 @@ export default function useFetchUser() {
       }
     }
     fetchData();
-  }, []);
+  }, [userId]);
   return { data, loading, error };
 }

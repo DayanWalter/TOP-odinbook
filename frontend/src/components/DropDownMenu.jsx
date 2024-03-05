@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 import UserEdit from './user/UserEdit';
+import Icon from '@mdi/react';
+import { mdiAccountOutline } from '@mdi/js';
+import { mdiAccountCogOutline } from '@mdi/js';
+import { mdiLogout } from '@mdi/js';
 
 export default function DropDownMenu({ user, setShowEditProfile }) {
   const handleSetShowEditProfile = () => {
@@ -9,14 +13,26 @@ export default function DropDownMenu({ user, setShowEditProfile }) {
   return (
     <ul className="absolute p-5 bg-white border rounded right-5 top-16">
       <Link to={`/user/${user._id}`}>
-        <li>View Profile</li>
+        <li className="flex gap-2 mb-2">
+          <Icon path={mdiAccountOutline} size={1} />
+
+          <p>View Profile</p>
+        </li>
       </Link>
 
-      <li className="hover:cursor-pointer" onClick={handleSetShowEditProfile}>
-        Edit Profile
-      </li>
+      <li
+        className="flex gap-2 mb-2 hover:cursor-pointer"
+        onClick={handleSetShowEditProfile}
+      >
+        <Icon path={mdiAccountCogOutline} size={1} />
 
-      <li className="border-t">Logout</li>
+        <p>Edit Profile</p>
+      </li>
+      <Link to={'/logout'}>
+        <li className="flex gap-2 pt-4 border-t">
+          <Icon path={mdiLogout} size={1} /> <p>Logout</p>
+        </li>
+      </Link>
     </ul>
   );
 }
