@@ -82,7 +82,7 @@ export default function UserProfile() {
             <h1 className="text-2xl ">{data.user_name}</h1>
             {/* Show follow/unfollow button, if profile is not logged in user */}
 
-            {isLoggedInUser && (
+            {/* {isLoggedInUser && (
               <div className="flex justify-between ">
                 <button
                   className="px-2 py-1 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
@@ -94,7 +94,7 @@ export default function UserProfile() {
                   <Link to={'/logout'}>Logout</Link>
                 </button>
               </div>
-            )}
+            )} */}
 
             {!isLoggedInUser &&
               (isFollowing ? (

@@ -3,7 +3,7 @@ import UserDelete from './UserDelete';
 
 import { useState, useEffect } from 'react';
 
-import useFetchUser from '../../hooks/useFetchUser';
+import useFetchLoggedInUser from '../../hooks/useFetchLoggedInUser';
 
 export default function UserEdit() {
   const [formData, setFormData] = useState({});
@@ -12,7 +12,7 @@ export default function UserEdit() {
     data: userData,
     loading: fetchUserLoading,
     error: fetchUserError,
-  } = useFetchUser();
+  } = useFetchLoggedInUser();
 
   // Fetch user data, then setFormData
   useEffect(() => {

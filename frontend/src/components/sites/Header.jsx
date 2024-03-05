@@ -3,6 +3,8 @@ import PostCreate from '../post/PostCreate';
 import { Link } from 'react-router-dom';
 import useFetchUser from '../../hooks/useFetchUser';
 import useFetchLoggedInUser from '../../hooks/useFetchLoggedInUser';
+import DropDownMenu from '../DropDownMenu';
+import UserEdit from '../user/UserEdit';
 
 // import { useContext } from 'react';
 // import { LanguageContext } from '../App';
@@ -11,7 +13,8 @@ export default function Header() {
   // const [language] = useContext(LanguageContext);
 
   const { data, error, loading } = useFetchLoggedInUser();
-
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState(false);
   // id from logged in user
   const authToken = localStorage.getItem('authToken');
   // Split the payload of the jwt and convert the ._id part
@@ -25,6 +28,7 @@ export default function Header() {
   const handleOverlayClick = (event) => {
     if (event.target.id === 'overlay') {
       setShowPostCreate(false);
+      setShowEditProfile(false);
     }
   };
   return (
@@ -69,17 +73,31 @@ export default function Header() {
                     Post
                   </a>
                 </li>
-                <li className="flex">
-                  <Link to={`/user/${data._id}`}>
-                    <img
-                      className="absolute w-10 h-10 -translate-y-1/2 rounded-full shadow-lg right-5 top-1/2 "
-                      src={data.avatar_url}
-                      alt="Avatar"
+                <li>
+                  <img
+                    className="absolute w-10 h-10 -translate-y-1/2 rounded-full shadow-lg hover:cursor-pointer right-5 top-1/2 "
+                    src={data.avatar_url}
+                    alt="Avatar"
+                    onClick={() => setOpenDropdown((prev) => !prev)}
+                  />
+                  {openDropdown && (
+                    <DropDownMenu
+                      user={data}
+                      setShowEditProfile={setShowEditProfile}
                     />
-                  </Link>
+                  )}
                 </li>
               </ul>
             </nav>
+            {showEditProfile && (
+              <div
+                className="fixed inset-0 flex items-center justify-center bg-gray-500/50"
+                id="overlay"
+                onClick={handleOverlayClick}
+              >
+                <UserEdit />
+              </div>
+            )}
             {showPostCreate && (
               <div
                 id="overlay"
