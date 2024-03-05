@@ -6,6 +6,12 @@ import useFetchLoggedInUser from '../../hooks/useFetchLoggedInUser';
 import DropDownMenu from '../DropDownMenu';
 import UserEdit from '../user/UserEdit';
 
+import Icon from '@mdi/react';
+
+import { mdiFilePlusOutline } from '@mdi/js';
+import { mdiAccountMultiple } from '@mdi/js';
+import { mdiHomeOutline } from '@mdi/js';
+
 // import { useContext } from 'react';
 // import { LanguageContext } from '../App';
 
@@ -52,26 +58,32 @@ export default function Header() {
               className="w-full sm:w-3/4 lg:w-2/3"
             >
               <ul role="menubar" className="flex justify-between text-primary ">
-                <li role="none" className="hover:scale-105">
-                  <a href="/home" role="menuitem">
-                    Home
-                  </a>
-                </li>
-                <li role="none" className="hover:scale-105">
-                  <a href="/alluser" role="menuitem">
-                    All User
-                  </a>
-                </li>
-                <li role="none" className="hover:scale-105">
-                  <a
-                    href="#"
-                    onClick={() => {
-                      setShowPostCreate(true);
-                    }}
+                <Link to={'/home'}>
+                  <li
                     role="menuitem"
+                    className="flex items-center gap-3 hover:scale-105"
                   >
-                    Post
-                  </a>
+                    <Icon path={mdiHomeOutline} size={0.9} />
+                    <p className="hidden sm:block">Home</p>
+                  </li>
+                </Link>
+
+                <Link to={'/alluser'}>
+                  <li role="menuitem" className="flex gap-3 hover:scale-105">
+                    <Icon path={mdiAccountMultiple} size={0.9} />
+                    <p className="hidden sm:block">All User</p>
+                  </li>
+                </Link>
+
+                <li
+                  role="menuitem"
+                  onClick={() => {
+                    setShowPostCreate(true);
+                  }}
+                  className="flex gap-3 hover:scale-105 hover:cursor-pointer"
+                >
+                  <Icon path={mdiFilePlusOutline} size={0.9} />
+                  <p className="hidden sm:block">Post</p>
                 </li>
                 <li>
                   <img
