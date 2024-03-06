@@ -17,7 +17,9 @@ export default function useUserIsFollowing(data) {
 
   useEffect(() => {
     if (data && data.follower_id) {
-      setIsFollowing(data.follower_id.some((id) => id === loggedInUserId));
+      setIsFollowing(
+        data.follower_id.some((obj) => obj._id === loggedInUserId)
+      );
     }
   }, [data, loggedInUserId]);
 
