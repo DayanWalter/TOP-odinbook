@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import PostCreate from "../post/PostCreate";
 import { Link } from "react-router-dom";
-import useFetchUser from "../../hooks/useFetchUser";
 import useFetchLoggedInUser from "../../hooks/useFetchLoggedInUser";
 import DropDownMenu from "../DropDownMenu";
 import UserEdit from "../user/UserEdit";
@@ -118,6 +117,7 @@ export default function Header() {
                 <DropDownMenu
                   user={data}
                   setShowEditProfile={setShowEditProfile}
+                  setShowOpenDropdown={setShowDropdown}
                 />
               </div>
             )}

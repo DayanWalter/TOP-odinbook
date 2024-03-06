@@ -1,12 +1,17 @@
-import { Link } from 'react-router-dom';
-import Icon from '@mdi/react';
-import { mdiAccountOutline } from '@mdi/js';
-import { mdiAccountCogOutline } from '@mdi/js';
-import { mdiLogout } from '@mdi/js';
+import { Link } from "react-router-dom";
+import Icon from "@mdi/react";
+import { mdiAccountOutline } from "@mdi/js";
+import { mdiAccountCogOutline } from "@mdi/js";
+import { mdiLogout } from "@mdi/js";
 
-export default function DropDownMenu({ user, setShowEditProfile }) {
+export default function DropDownMenu({
+  user,
+  setShowEditProfile,
+  setShowOpenDropdown,
+}) {
   const handleSetShowEditProfile = () => {
     setShowEditProfile((prev) => !prev);
+    setShowOpenDropdown(false);
   };
   return (
     <ul className="absolute p-5 bg-white border rounded right-5 top-16">
@@ -26,7 +31,7 @@ export default function DropDownMenu({ user, setShowEditProfile }) {
 
         <p>Edit Profile</p>
       </li>
-      <Link to={'/logout'}>
+      <Link to={"/logout"}>
         <li className="flex gap-2 pt-4 border-t hover:text-primary/80">
           <Icon path={mdiLogout} size={1} /> <p>Logout</p>
         </li>
