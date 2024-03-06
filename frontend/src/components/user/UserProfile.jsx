@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import {  useState } from 'react';
 import PostList from '../post/PostList';
-import CommentList from '../comment/CommentList';
 import UserUnFollow from './UserUnFollow';
 import UserFollow from '../user/UserFollow';
 import UserList from './UserList';
@@ -12,29 +10,27 @@ import { mdiMapMarkerOutline } from '@mdi/js';
 import { mdiCalendarMonthOutline } from '@mdi/js';
 import { mdiFeather } from '@mdi/js';
 
-import UserUpdate from './UserUpdate';
 import useFetchUser from '../../hooks/useFetchUser';
 import useVerifyUser from '../../hooks/useVerifyUser';
-import UserEdit from './UserEdit';
 import useUserIsFollowing from '../../hooks/useUserIsFollowing';
 
 export default function UserProfile() {
+  const { data, loading, error } = useFetchUser();
   // const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState('follower');
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  // const [isOpenModal, setIsOpenModal] = useState(false);
 
   const { isFollowing, setIsFollowing } = useUserIsFollowing(data);
 
   const { isLoggedInUser, userIdFromParams } = useVerifyUser();
 
-  const { data, loading, error } = useFetchUser();
 
-  const handleOverlayClick = (event) => {
-    if (event.target.id === 'overlay') {
-      setIsOpenModal(false);
-    }
-  };
+  // const handleOverlayClick = (event) => {
+  //   if (event.target.id === 'overlay') {
+  //     setIsOpenModal(false);
+  //   }
+  // };
 
   return (
     <>
@@ -73,6 +69,7 @@ export default function UserProfile() {
                   setIsFollowing={setIsFollowing}
                 />
               ))}
+              
             <div className="mt-3 ">
               <div className="flex gap-3">
                 <Icon path={mdiFeather} size={1} />
