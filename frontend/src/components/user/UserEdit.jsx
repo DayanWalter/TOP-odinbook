@@ -1,9 +1,9 @@
-import UserUpdate from './UserUpdate';
-import UserDelete from './UserDelete';
+import UserUpdate from "./UserUpdate";
+import UserDelete from "./UserDelete";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import useFetchLoggedInUser from '../../hooks/useFetchLoggedInUser';
+import useFetchLoggedInUser from "../../hooks/useFetchLoggedInUser";
 
 export default function UserEdit() {
   const [formData, setFormData] = useState({});
@@ -34,7 +34,7 @@ export default function UserEdit() {
       {fetchUserError && <div>{fetchUserError}</div>}
       {fetchUserLoading && <div>Fetching Data...</div>}
       {formData && (
-        <form className="flex flex-col max-w-md px-5 py-6 mt-16 bg-white rounded shadow-md sm:mt-0 sm:py-12 sm:px-10 ">
+        <form className="flex flex-col max-w-md px-5 py-6 mt-16 bg-white rounded shadow-md  sm:mt-0 sm:py-12 sm:px-10">
           {/* User Name */}
           <label className="" htmlFor="user_name">
             Username:
@@ -121,7 +121,7 @@ export default function UserEdit() {
           <UserDelete />
 
           {fetchUserError && (
-            <div style={{ color: 'red' }}>{fetchUserError}</div>
+            <div style={{ color: "red" }}>{fetchUserError}</div>
           )}
         </form>
       )}
