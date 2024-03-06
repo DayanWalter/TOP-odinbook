@@ -11,7 +11,7 @@ export default function DropDownMenu({ user, setShowEditProfile }) {
   return (
     <ul className="absolute p-5 bg-white border rounded right-5 top-16">
       <Link to={`/user/${user._id}`}>
-        <li className="flex gap-2 mb-2">
+        <li className="flex gap-2 mb-2 hover:text-primary/80">
           <Icon path={mdiAccountOutline} size={1} />
 
           <p>View Profile</p>
@@ -19,7 +19,7 @@ export default function DropDownMenu({ user, setShowEditProfile }) {
       </Link>
 
       <li
-        className="flex gap-2 mb-2 hover:cursor-pointer"
+        className="flex gap-2 mb-2 hover:cursor-pointer hover:text-primary/80"
         onClick={handleSetShowEditProfile}
       >
         <Icon path={mdiAccountCogOutline} size={1} />
@@ -27,7 +27,7 @@ export default function DropDownMenu({ user, setShowEditProfile }) {
         <p>Edit Profile</p>
       </li>
       <Link to={'/logout'}>
-        <li className="flex gap-2 pt-4 border-t">
+        <li className="flex gap-2 pt-4 border-t hover:text-primary/80">
           <Icon path={mdiLogout} size={1} /> <p>Logout</p>
         </li>
       </Link>
