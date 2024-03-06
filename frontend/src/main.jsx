@@ -1,46 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./assets/index.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Sites
-import UserLogin from './components/user/UserLogin.jsx';
-import UserCreate from './components/user/UserCreate.jsx';
-import UserLogout from './components/user/UserLogout.jsx';
-import Home from './components/sites/Home.jsx';
-import AllUser from './components/sites/AllUser.jsx';
-import ProfileSite from './components/sites/ProfileSite.jsx';
+import UserLogin from "./components/user/UserLogin.jsx";
+import UserCreate from "./components/user/UserCreate.jsx";
+import UserLogout from "./components/user/UserLogout.jsx";
+import Home from "./components/sites/Home.jsx";
+import AllUser from "./components/sites/AllUser.jsx";
+import ProfileSite from "./components/sites/ProfileSite.jsx";
 
 const router = createBrowserRouter([
   // User
   {
-    path: '/signup',
+    path: "/signup",
     element: <UserCreate />,
   },
   {
     index: true,
-    path: '/',
+    path: "/",
     element: <UserCreate />,
   },
   {
-    path: '/home',
+    path: "/home",
     element: <Home />,
   },
   {
-    path: '/alluser',
+    path: "/alluser",
     element: <AllUser />,
   },
 
   {
-    path: '/login',
+    path: "/login",
     element: <UserLogin />,
   },
   {
-    path: '/logout',
+    path: "/logout",
     element: <UserLogout />,
   },
 
   {
-    path: '/user/:userid',
+    path: "/user/:userid",
     element: <ProfileSite />,
     loader({ params }) {
       return params;
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
