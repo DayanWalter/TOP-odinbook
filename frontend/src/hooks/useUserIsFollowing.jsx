@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
 
 export default function useUserIsFollowing(data) {
   const [isFollowing, setIsFollowing] = useState(false);
-
-  // // id from params
-  // const loaderData = useLoaderData();
-  // const userIdFromParams = loaderData.userid;
 
   // id from logged in user
   const authToken = localStorage.getItem("authToken");
