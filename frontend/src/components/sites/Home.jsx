@@ -1,7 +1,7 @@
-import PostFeed from '../post/PostFeed';
-import ContributeCard from './ContributeCard';
-import MainSite from './MainSite';
-import ProfileCard from './ProfileCard';
+import PostFeed from "../post/PostFeed";
+import ContributeCard from "./ContributeCard";
+import MainSite from "./MainSite";
+import ProfileCard from "./ProfileCard";
 
 export default function Home() {
   return (
@@ -12,6 +12,7 @@ export default function Home() {
         </div>
 
         <PostFeed />
+
         <div className="flex justify-end w-full ">
           <ContributeCard />
         </div>
