@@ -32,9 +32,9 @@ export default function UserEdit() {
   return (
     <>
       {fetchUserError && <div>{fetchUserError}</div>}
-      {fetchUserLoading && <div>Fetching Data...</div>}
+      {fetchUserLoading && <div></div>}
       {formData && (
-        <form className="flex flex-col max-w-md px-5 py-6 mt-16 bg-white rounded shadow-md  sm:mt-0 sm:py-12 sm:px-10">
+        <form className="flex flex-col max-w-md px-5 py-6 mt-16 bg-white rounded shadow-md sm:mt-0 sm:py-12 sm:px-10">
           {/* User Name */}
           <label className="" htmlFor="user_name">
             Username:

@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import useUpdateUser from '../../hooks/useUpdateUser';
+import useUpdateUser from "../../hooks/useUpdateUser";
 
 export default function UserUpdate({ formData }) {
   // After successfull update, display message
@@ -21,7 +21,7 @@ export default function UserUpdate({ formData }) {
   return (
     <>
       {updateUserError && <div>{updateUserError}</div>}
-      {updateUserLoading && <div>Update User...</div>}
+      {updateUserLoading && <div></div>}
 
       <button
         className="p-2 mb-5 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
@@ -29,7 +29,7 @@ export default function UserUpdate({ formData }) {
       >
         Update User
       </button>
-      {success && <div style={{ color: 'green' }}>User updated!</div>}
+      {success && <div style={{ color: "green" }}>User updated!</div>}
     </>
   );
 }
