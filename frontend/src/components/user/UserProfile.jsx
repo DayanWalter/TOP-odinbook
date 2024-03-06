@@ -41,23 +41,25 @@ export default function UserProfile() {
           </div>
 
           {/* Main */}
+          <div className="mb-5">
+            {!isLoggedInUser &&
+              (isFollowing ? (
+                <UserUnFollow
+                  userId={userIdFromParams}
+                  setIsFollowing={setIsFollowing}
+                />
+              ) : (
+                <UserFollow
+                  userId={userIdFromParams}
+                  setIsFollowing={setIsFollowing}
+                />
+              ))}
+          </div>
+
           <div className="flex justify-between w-full gap-10 mb-5">
             <div className="w-full p-5 bg-white border rounded-md sm:w-1/2 ">
               <h1 className="text-2xl border-b">About</h1>
               {/* Show follow/unfollow button, if profile is not logged in user */}
-
-              {!isLoggedInUser &&
-                (isFollowing ? (
-                  <UserUnFollow
-                    userId={userIdFromParams}
-                    setIsFollowing={setIsFollowing}
-                  />
-                ) : (
-                  <UserFollow
-                    userId={userIdFromParams}
-                    setIsFollowing={setIsFollowing}
-                  />
-                ))}
 
               <div className="flex flex-col gap-3 mt-3 lg:flex-row lg:justify-between">
                 <div className="flex gap-3">
