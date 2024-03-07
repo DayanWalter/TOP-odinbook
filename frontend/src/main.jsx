@@ -1,5 +1,5 @@
 // React
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -13,6 +13,7 @@ import HomePage from "./pages/Home/HomePage.jsx";
 import AllUserPage from "./pages/AllUser/AllUserPage.jsx";
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
 import LogoutPage from "./pages/Logout/LogoutPage.jsx";
+import ErrorPage from "./pages/ErrorPage/ErrorPage.jsx";
 
 // Router
 const router = createBrowserRouter([
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     index: true,
     path: "/",
     element: <SignupPage />,
+    errorElement: <ErrorPage />,
   },
 
   {
@@ -45,6 +47,7 @@ const router = createBrowserRouter([
     loader({ params }) {
       return params;
     },
+    errorElement: <ErrorPage />,
   },
 
   {
