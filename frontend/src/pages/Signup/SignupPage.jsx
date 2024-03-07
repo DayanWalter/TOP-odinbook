@@ -1,4 +1,4 @@
-import UserCreate from "../../components/user/UserCreate";
+import UserCreate from "./UserCreate";
 import AuthPageContainer from "../AuthPageContainer";
 
 export default function SignupPage() {

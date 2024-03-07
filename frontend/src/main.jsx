@@ -4,7 +4,7 @@ import "./assets/index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Sites
 import UserLogin from "./components/user/UserLogin.jsx";
-import UserCreate from "./components/user/UserCreate.jsx";
+import UserCreate from "./pages/Signup/UserCreate.jsx";
 import UserLogout from "./components/user/UserLogout.jsx";
 import Home from "./components/sites/Home.jsx";
 import AllUser from "./components/sites/AllUser.jsx";
@@ -13,19 +13,13 @@ import SignupPage from "./pages/Signup/SignupPage.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/test",
+    path: "/signup",
     element: <SignupPage />,
   },
-
-  {
-    path: "/signup",
-    element: <UserCreate />,
-  },
-
   {
     index: true,
     path: "/",
-    element: <UserCreate />,
+    element: <SignupPage />,
   },
   {
     path: "/home",

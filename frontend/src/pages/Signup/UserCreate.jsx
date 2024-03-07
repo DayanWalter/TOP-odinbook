@@ -1,8 +1,7 @@
 // Signup
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import AuthSite from "../sites/AuthSite";
-import useSignup from "../../hooks/useSignup";
+import useSignup from "./useSignup";
 
 export default function UserCreate() {
   const { signup, loading, error } = useSignup();
