@@ -1,17 +1,17 @@
 // Signup
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import AuthSite from '../sites/AuthSite';
-import useSignup from '../../hooks/useSignup';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import AuthSite from "../sites/AuthSite";
+import useSignup from "../../hooks/useSignup";
 
 export default function UserCreate() {
   const { signup, loading, error } = useSignup();
 
   const [formData, setFormData] = useState({
-    user_name: '',
-    email: '',
-    password: '',
-    repeatPassword: '',
+    user_name: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
   });
 
   const handleChange = (e) => {
@@ -29,7 +29,7 @@ export default function UserCreate() {
   };
 
   return (
-    <AuthSite title={'Sign up'}>
+    <>
       <form onSubmit={handleCreateUser}>
         <label htmlFor="user_name" className="w-full mb-5">
           Username:
@@ -93,10 +93,10 @@ export default function UserCreate() {
           type="submit"
           disabled={loading}
         >
-          {loading ? `Creating User: ${formData.user_name}` : 'Signup'}
+          {loading ? `Creating User: ${formData.user_name}` : "Signup"}
         </button>
         <div className="w-2/5 py-1 mt-5 mb-5 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
-          <Link to={'/login'}>or login</Link>
+          <Link to={"/login"}>or login</Link>
         </div>
       </form>
 
@@ -104,12 +104,12 @@ export default function UserCreate() {
       <ul>
         {error &&
           error.map((err, index) => (
-            <li key={index} style={{ color: 'red', fontSize: '1rem' }}>
-              {' '}
+            <li key={index} style={{ color: "red", fontSize: "1rem" }}>
+              {" "}
               {err.msg}
             </li>
           ))}
       </ul>
-    </AuthSite>
+    </>
   );
 }

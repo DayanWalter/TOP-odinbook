@@ -9,13 +9,19 @@ import UserLogout from "./components/user/UserLogout.jsx";
 import Home from "./components/sites/Home.jsx";
 import AllUser from "./components/sites/AllUser.jsx";
 import ProfileSite from "./components/sites/ProfileSite.jsx";
+import SignupPage from "./pages/Signup/SignupPage.jsx";
 
 const router = createBrowserRouter([
-  // User
+  {
+    path: "/test",
+    element: <SignupPage />,
+  },
+
   {
     path: "/signup",
     element: <UserCreate />,
   },
+
   {
     index: true,
     path: "/",
