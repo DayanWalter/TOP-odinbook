@@ -1,5 +1,5 @@
 import PostFeed from "../../pages/Home/PostFeed";
-import UsersRead from "../user/UsersRead";
+import UsersRead from "../../pages/AllUser/UsersRead";
 import ContributeCard from "./ContributeCard";
 import MainSite from "./MainSite";
 import ProfileCard from "./ProfileCard";
@@ -13,6 +13,7 @@ export default function AllUser() {
         </div>
 
         <UsersRead />
+
         <div className="flex justify-end w-full ">
           <ContributeCard />
         </div>

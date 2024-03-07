@@ -12,6 +12,7 @@ import ProfileSite from "./components/sites/ProfileSite.jsx";
 import SignupPage from "./pages/Signup/SignupPage.jsx";
 import LoginPage from "./pages/Login/LoginPage.jsx";
 import HomePage from "./pages/Home/HomePage.jsx";
+import AllUserPage from "./pages/AllUser/AllUserPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/alluser",
-    element: <AllUser />,
+    element: <AllUserPage />,
   },
 
   {

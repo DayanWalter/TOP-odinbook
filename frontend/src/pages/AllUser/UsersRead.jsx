@@ -1,5 +1,5 @@
-import UserList from './UserList';
-import useFetchUsers from '../../hooks/useFetchUsers';
+import UserList from "../../components/user/UserList";
+import useFetchUsers from "./useFetchUsers";
 
 export default function UsersRead() {
   const { data: users, loading, error } = useFetchUsers();
@@ -7,7 +7,7 @@ export default function UsersRead() {
   return (
     <>
       {loading && <div>Loading...</div>}
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {error && <div style={{ color: "red" }}>{error}</div>}
       {users && <UserList users={users} />}
     </>
   );
