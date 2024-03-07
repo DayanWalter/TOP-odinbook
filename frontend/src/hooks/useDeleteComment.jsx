@@ -1,24 +1,24 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// CHANGE NAME
-export default function useDeleteComment() {
-  const BASE_URL = import.meta.env.VITE_SERVER_URL;
-  const navigate = useNavigate();
+// React
+import { useState } from "react";
 
+export default function useDeleteComment() {
+  // Variables
+  const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const authToken = localStorage.getItem("authToken");
+
+  // Hooks
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const authToken = localStorage.getItem('authToken');
-
+  // Functions
   const deleteComment = async (formData) => {
-    console.log(formData);
     try {
       setLoading(true);
 
       // Log an error if authentication token is not available
       if (!authToken) {
-        console.error('Authentication token not available.');
-        setError('Authentication token not available.');
+        console.error("Authentication token not available.");
+        setError("Authentication token not available.");
         return;
       }
 
@@ -28,7 +28,7 @@ export default function useDeleteComment() {
           method: `DELETE`,
           headers: {
             Authorization: `Bearer ${authToken}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         }
       );

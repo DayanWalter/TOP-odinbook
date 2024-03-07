@@ -1,7 +1,11 @@
+// React
 import { Link } from "react-router-dom";
+
+// Hooks
 import useFetchLoggedInUser from "./header/useFetchLoggedInUser";
 
 export default function ProfileCard() {
+  // Custom hooks
   const { data, error, loading } = useFetchLoggedInUser();
   return (
     <>
