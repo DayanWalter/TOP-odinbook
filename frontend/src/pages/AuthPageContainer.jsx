@@ -1,4 +1,4 @@
-import Footer from "../components/sites/Footer";
+import Footer from "../components/Footer";
 
 export default function AuthPageContainer({ children, title }) {
   return (

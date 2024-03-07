@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function UserLogout() {
   const navigate = useNavigate();
@@ -11,8 +11,8 @@ export default function UserLogout() {
     }, 1000);
 
     setTimeout(() => {
-      localStorage.setItem('authToken', '');
-      navigate('/login');
+      localStorage.setItem("authToken", "");
+      navigate("/login");
     }, 3000);
 
     return () => clearInterval(interval);
@@ -20,10 +20,12 @@ export default function UserLogout() {
 
   return (
     <>
-      <div>Bye, see you soon!</div>
+      <h1 className="text-xl">Bye, see you soon!</h1>
 
-      <div>You will be redirected in {remainingTime} seconds...</div>
-      <Link to={'/login'}> ...back to Login </Link>
+      <h2>You will be redirected in {remainingTime} seconds...</h2>
+      <Link to={"/login"}>
+        <p className="text-primary hover:text-primary/80">...back to Login</p>
+      </Link>
     </>
   );
 }
