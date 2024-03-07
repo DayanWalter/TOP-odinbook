@@ -1,24 +1,21 @@
-const faker = require('@faker-js/faker');
-const mongoose = require('mongoose');
-const User = require('./models/user');
-const Post = require('./models/post');
+const faker = require("@faker-js/faker");
+
+const mongoose = require("mongoose");
+const User = require("./models/user");
+const Post = require("./models/post");
 
 async function seedData() {
   // Connection URL
-  const uri =
-    'mongodb+srv://dayanwalter:bePBGumgE1JDxor4@cluster0.sqbj7pm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
-  const seed_count = 2;
-  mongoose.set('strictQuery', false);
+  const uri = process.env.DEV_DB_URL;
+  const seed_count = 7;
+  mongoose.set("strictQuery", false);
   mongoose
-    .connect(uri, {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-    })
+    .connect(uri)
     .then(() => {
-      console.log('Connected to db');
+      console.log("Connected to db");
     })
     .catch((err) => {
-      console.log('error', err);
+      console.log("error", err);
     });
 
   let userData = [];
@@ -66,7 +63,7 @@ async function seedData() {
 
   seedDB().then(() => {
     mongoose.connection.close();
-    console.log('seed success');
+    console.log("seed success");
   });
 }
 

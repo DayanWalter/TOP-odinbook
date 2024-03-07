@@ -1,5 +1,5 @@
-import AuthPageContainer from "../AuthPageContainer";
 import UserCreate from "./UserCreate";
+import AuthPageContainer from "../AuthPageContainer";
 
 export default function SignupPage() {
   return (
