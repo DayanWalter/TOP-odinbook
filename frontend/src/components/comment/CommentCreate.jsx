@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import useCommentCreate from '../../hooks/useCommentCreate';
+import { useState } from "react";
+import useCommentCreate from "../../hooks/useCommentCreate";
 
-export default function CommentCreate({ post }) {
-  const [formData, setFormData] = useState('');
+export default function CommentCreate({ postId }) {
+  const [formData, setFormData] = useState("");
 
   const { commentCreate, loading, error } = useCommentCreate();
 
-  const handleCreateComment = async (e) => {
-    commentCreate(post, formData);
-    setFormData('');
+  const handleCreateComment = async () => {
+    commentCreate(postId, formData);
+    setFormData("");
   };
 
   const handleChange = (e) => setFormData(e.target.value);
@@ -38,8 +38,8 @@ export default function CommentCreate({ post }) {
         type="submit"
         disabled={loading}
       >
-        {error && <div style={{ color: 'red' }}>{error}</div>}
-        {loading ? 'Creating Comment...' : 'Comment'}
+        {error && <div style={{ color: "red" }}>{error}</div>}
+        {loading ? "Creating Comment..." : "Comment"}
       </button>
     </form>
   );

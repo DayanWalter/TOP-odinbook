@@ -1,5 +1,5 @@
-import useFetchFeed from "./useFetchFeed";
 import PostCard from "../../components/post/PostCard";
+import useFetchFeed from "./useFetchFeed";
 
 export default function PostFeed() {
   const { data: feed, loading, error } = useFetchFeed();
