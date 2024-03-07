@@ -2,7 +2,7 @@ import Icon from "@mdi/react";
 import { mdiCalendarMonthOutline } from "@mdi/js";
 import { mdiChatOutline } from "@mdi/js";
 
-export default function UserListCard({ user }) {
+export default function UserCard({ user }) {
   return (
     <div className="relative flex items-center max-w-sm gap-6 mx-auto overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl ">
       {/* <div className={styles.profilePicture}> */}

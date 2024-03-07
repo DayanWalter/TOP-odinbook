@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import UserListCard from "./UserListCard";
+import UserCard from "./UserCard";
 
 export default function UserList({ users }) {
   users.sort((a, b) => new Date(b.reg_date) - new Date(a.reg_date));
@@ -10,7 +10,7 @@ export default function UserList({ users }) {
       {users.map((user) => (
         <li key={user._id}>
           <Link to={`/user/${user._id}`}>
-            <UserListCard user={user} />
+            <UserCard user={user} />
           </Link>
         </li>
       ))}
