@@ -1,8 +1,12 @@
 import { useState } from "react";
-import PostList from "../post/PostList";
+
+// Shared
+import UserList from "../../components/user/UserList";
+import PostList from "../../components/post/PostList";
+
+// Only on UserProfile
 import UserUnFollow from "./UserUnFollow";
-import UserFollow from "../user/UserFollow";
-import UserList from "./UserList";
+import UserFollow from "./UserFollow";
 
 // Icons
 import Icon from "@mdi/react";
@@ -10,16 +14,20 @@ import { mdiMapMarkerOutline } from "@mdi/js";
 import { mdiCalendarMonthOutline } from "@mdi/js";
 import { mdiFeather } from "@mdi/js";
 
-import useFetchUser from "../../hooks/useFetchUser";
-import useVerifyUser from "../../hooks/useVerifyUser";
-import useUserIsFollowing from "../../hooks/useUserIsFollowing";
+import useFetchUser from "./useFetchUser";
+
+import useVerifyUser from "./useVerifyUser";
+
+import useUserIsFollowing from "./useUserIsFollowing";
 
 export default function UserProfile() {
+  // Custom Hooks
   const { data, loading, error } = useFetchUser();
-  const [activeIndex, setActiveIndex] = useState("follower");
   const { isFollowing, setIsFollowing } = useUserIsFollowing(data);
   const { isLoggedInUser, userIdFromParams } = useVerifyUser();
 
+  // Hooks
+  const [activeIndex, setActiveIndex] = useState("follower");
   return (
     <>
       {error && <div>{error}</div>}

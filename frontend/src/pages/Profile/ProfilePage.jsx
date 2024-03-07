@@ -1,4 +1,4 @@
-import UserProfile from "../../components/user/UserProfile";
+import UserProfile from "./UserProfile";
 import MainPageContainer from "../MainPageContainer";
 
 export default function ProfilePage() {
