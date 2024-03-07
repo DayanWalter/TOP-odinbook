@@ -1,8 +1,8 @@
-import PostFeed from '../post/PostFeed';
-import UsersRead from '../user/UsersRead';
-import ContributeCard from './ContributeCard';
-import MainSite from './MainSite';
-import ProfileCard from './ProfileCard';
+import PostFeed from "../../pages/Home/PostFeed";
+import UsersRead from "../user/UsersRead";
+import ContributeCard from "./ContributeCard";
+import MainSite from "./MainSite";
+import ProfileCard from "./ProfileCard";
 
 export default function AllUser() {
   return (

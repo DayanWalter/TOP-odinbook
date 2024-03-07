@@ -1,4 +1,4 @@
-import PostFeed from "../post/PostFeed";
+import PostFeed from "../../pages/Home/PostFeed";
 import ContributeCard from "./ContributeCard";
 import MainSite from "./MainSite";
 import ProfileCard from "./ProfileCard";

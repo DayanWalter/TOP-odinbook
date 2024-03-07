@@ -1,17 +1,17 @@
-import useFetchFeed from '../../hooks/useFetchFeed';
-import PostCard from './PostCard';
+import useFetchFeed from "./useFetchFeed";
+import PostCard from "../../components/post/PostCard";
 
 export default function PostFeed() {
   const { data: feed, loading, error } = useFetchFeed();
 
   return (
     <>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {error && <div style={{ color: "red" }}>{error}</div>}
       {loading && <p>Loading feed...</p>}
       {feed && (
         <ul className="flex flex-col gap-5">
           {/* If nothing is in the feed */}
-          {feed.length === 0 && 'Start writing :)'}
+          {feed.length === 0 && "Start writing :)"}
 
           {/* Sort posts(Date) and map them on cards */}
           {feed

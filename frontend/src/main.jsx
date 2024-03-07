@@ -3,37 +3,41 @@ import ReactDOM from "react-dom/client";
 import "./assets/index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Sites
-import UserLogin from "./components/user/UserLogin.jsx";
+import UserLogin from "./pages/Login/UserLogin.jsx";
 import UserCreate from "./pages/Signup/UserCreate.jsx";
 import UserLogout from "./components/user/UserLogout.jsx";
 import Home from "./components/sites/Home.jsx";
 import AllUser from "./components/sites/AllUser.jsx";
 import ProfileSite from "./components/sites/ProfileSite.jsx";
 import SignupPage from "./pages/Signup/SignupPage.jsx";
+import LoginPage from "./pages/Login/LoginPage.jsx";
+import HomePage from "./pages/Home/HomePage.jsx";
 
 const router = createBrowserRouter([
-  {
-    path: "/signup",
-    element: <SignupPage />,
-  },
   {
     index: true,
     path: "/",
     element: <SignupPage />,
   },
+
+  {
+    path: "/signup",
+    element: <SignupPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  // TODO:
   {
     path: "/home",
-    element: <Home />,
+    element: <HomePage />,
   },
   {
     path: "/alluser",
     element: <AllUser />,
   },
 
-  {
-    path: "/login",
-    element: <UserLogin />,
-  },
   {
     path: "/logout",
     element: <UserLogout />,
