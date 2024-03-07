@@ -1,17 +1,21 @@
-import { useState } from 'react';
+// React
+import { useState } from "react";
 
-import useUpdatePost from '../../hooks/useUpdatePost';
+// Hooks
+import useUpdatePost from "../../hooks/useUpdatePost";
 
 export default function PostUpdate({ formData }) {
-  // After successfull update, display message
-  const [success, setSuccess] = useState(false);
-
+  // Custom hooks
   const {
     update,
     loading: updatePostLoading,
     error: updatePostError,
   } = useUpdatePost();
 
+  // Hooks
+  const [success, setSuccess] = useState(false);
+
+  // Functions
   const handleUpdatePost = async (e) => {
     e.preventDefault();
     update(formData);
@@ -29,7 +33,7 @@ export default function PostUpdate({ formData }) {
       >
         Update Post
       </button>
-      {success && <div style={{ color: 'green' }}>Post updated!</div>}
+      {success && <div style={{ color: "green" }}>Post updated!</div>}
     </>
   );
 }

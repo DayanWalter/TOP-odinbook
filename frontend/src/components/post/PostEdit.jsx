@@ -1,24 +1,32 @@
-import { useState, useEffect } from 'react';
-import useFetchPost from '../../hooks/useFetchPost';
-import PostUpdate from './PostUpdate';
-import PostDelete from './PostDelete';
+// React
+import { useState, useEffect } from "react";
+
+// Components
+import PostUpdate from "./PostUpdate";
+import PostDelete from "./PostDelete";
+
+// Hooks
+import useFetchPost from "../../hooks/useFetchPost";
 
 export default function PostEdit({ postId }) {
-  const [formData, setFormData] = useState('');
-
+  // Custom hooks
   const {
     data: postData,
     loading: fetchPostLoading,
     error: fetchPostError,
   } = useFetchPost(postId);
 
-  // Fetch post data, then setFormData
+  // Hooks
+  const [formData, setFormData] = useState("");
+
+  // Effect
   useEffect(() => {
     if (postData) {
       setFormData(postData);
     }
   }, [postData]);
 
+  // Functions
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({

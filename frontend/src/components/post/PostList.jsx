@@ -4,6 +4,7 @@ import PostCard from "./PostCard";
 import useFetchPosts from "../../hooks/useFetchPosts";
 
 export default function PostList() {
+  // Custom hooks
   const { data: posts, loading, error } = useFetchPosts();
 
   return (

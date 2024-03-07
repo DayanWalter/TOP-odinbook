@@ -1,15 +1,19 @@
-import Icon from '@mdi/react';
+// Icons
+import Icon from "@mdi/react";
+import { mdiAlertOutline } from "@mdi/js";
 
-import { mdiAlertOutline } from '@mdi/js';
-import useDeletePost from '../../hooks/useDeletePost';
+// Hooks
+import useDeletePost from "../../hooks/useDeletePost";
 
 export default function PostDelete({ formData }) {
+  // Custom hooks
   const {
     deletePost,
     loading: deletePostLoading,
     error: deletePostError,
   } = useDeletePost();
 
+  // Functions
   const handleDeletePost = async () => {
     deletePost(formData);
   };
