@@ -1,5 +1,6 @@
-import AuthPageContainer from "../AuthPageContainer";
+// Components
 import UserLogout from "./UserLogout";
+import AuthPageContainer from "../AuthPageContainer";
 
 export default function LogoutPage() {
   return (

@@ -1,7 +1,8 @@
+// Components
+import UsersRead from "./UsersRead";
+import MainPageContainer from "../MainPageContainer";
 import ContributeCard from "../../components/ContributeCard";
 import ProfileCard from "../../components/ProfileCard";
-import MainPageContainer from "../MainPageContainer";
-import UsersRead from "./UsersRead";
 
 export default function AllUserPage() {
   return (

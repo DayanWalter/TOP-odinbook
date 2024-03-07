@@ -1,3 +1,4 @@
+// Components
 import UserProfile from "./UserProfile";
 import MainPageContainer from "../MainPageContainer";
 

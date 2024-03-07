@@ -1,16 +1,21 @@
+// React
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
+// Hooks
 import useLogin from "./useLogin";
 
 export default function UserLogin() {
+  // Custom hooks
   const { login, loading, error } = useLogin();
 
+  // Hooks
   const [formData, setFormData] = useState({
     user_name: "",
     password: "",
   });
 
-  // Change userData
+  // Functions
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -19,13 +24,11 @@ export default function UserLogin() {
     }));
   };
 
-  // User Login
   const handleLoginUser = async (e) => {
     e.preventDefault();
     login(formData);
   };
 
-  // Demo User Login
   const handleLoginDemoUser = async (e) => {
     e.preventDefault();
     login({ user_name: "DemoUser", password: "111111" });

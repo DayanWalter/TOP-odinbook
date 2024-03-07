@@ -1,3 +1,4 @@
+// Components
 import Footer from "../components/Footer";
 
 export default function AuthPageContainer({ children, title }) {

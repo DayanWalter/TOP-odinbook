@@ -1,8 +1,12 @@
+// React
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./assets/index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-// Sites
+
+// CSS
+import "./assets/index.css";
+
+// Pages
 import SignupPage from "./pages/Signup/SignupPage.jsx";
 import LoginPage from "./pages/Login/LoginPage.jsx";
 import HomePage from "./pages/Home/HomePage.jsx";
@@ -10,6 +14,7 @@ import AllUserPage from "./pages/AllUser/AllUserPage.jsx";
 import ProfilePage from "./pages/Profile/ProfilePage.jsx";
 import LogoutPage from "./pages/Logout/LogoutPage.jsx";
 
+// Router
 const router = createBrowserRouter([
   {
     index: true,

@@ -1,7 +1,8 @@
+// Components
 import PostFeed from "./PostFeed";
+import MainPageContainer from "../MainPageContainer";
 import ContributeCard from "../../components/ContributeCard";
 import ProfileCard from "../../components/ProfileCard";
-import MainPageContainer from "../MainPageContainer";
 
 export default function HomePage() {
   return (

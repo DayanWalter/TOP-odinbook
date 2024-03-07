@@ -1,10 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+// React
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function UserLogout() {
+  // Hooks
   const navigate = useNavigate();
   const [remainingTime, setRemainingTime] = useState(3);
-  // Redirect user to login after x seconds
+
+  // Effect
   useEffect(() => {
     const interval = setInterval(() => {
       setRemainingTime((v) => v - 1);
