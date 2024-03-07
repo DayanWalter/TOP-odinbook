@@ -1,17 +1,19 @@
 // Icons
-import Icon from '@mdi/react';
-import { mdiCalendarMonthOutline } from '@mdi/js';
+import Icon from "@mdi/react";
+import { mdiCalendarMonthOutline } from "@mdi/js";
+import { mdiFileEditOutline } from "@mdi/js";
 
-import { mdiFileEditOutline } from '@mdi/js';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { useState } from 'react';
+// Components
+import CommentLike from "./CommentLike";
+import CommentUnlike from "./CommentUnlike";
+import CommentEdit from "./CommentEdit";
 
-import CommentLike from './CommentLike';
-import CommentUnlike from './CommentUnlike';
-import CommentEdit from './CommentEdit';
-import { Link } from 'react-router-dom';
-import useUserIsAuthor from '../../hooks/useUserIsAuthor';
-import useUserIsLiking from '../../hooks/useUserIsLiking';
+// Hooks
+import useUserIsAuthor from "../../hooks/useUserIsAuthor";
+import useUserIsLiking from "../../hooks/useUserIsLiking";
 
 export default function CommentCard({ comment }) {
   const { isAuthor } = useUserIsAuthor(comment);
@@ -58,7 +60,7 @@ export default function CommentCard({ comment }) {
                   onClick={handleCommentEdit}
                 />
               ) : (
-                ''
+                ""
               )}
             </div>
           </div>
