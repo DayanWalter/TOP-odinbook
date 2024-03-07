@@ -1,23 +1,31 @@
-import { useEffect, useState } from 'react';
-import CommentUpdate from './CommentUpdate';
-import useFetchComment from '../../hooks/useFetchComment';
-import CommentDelete from './CommentDelete';
+// React
+import { useEffect, useState } from "react";
+
+// Components
+import CommentUpdate from "./CommentUpdate";
+import CommentDelete from "./CommentDelete";
+// Hooks
+import useFetchComment from "../../hooks/useFetchComment";
 
 export default function CommentEdit({ commentId }) {
-  const [formData, setFormData] = useState('');
+  // Custom hooks
   const {
     data: commentData,
     loading: fetchCommentLoading,
     error: fetchCommentError,
   } = useFetchComment(commentId);
 
-  // Fetch post data, then setFormData
+  // Hooks
+  const [formData, setFormData] = useState("");
+
+  // Effect
   useEffect(() => {
     if (commentData) {
       setFormData(commentData);
     }
   }, [commentData]);
 
+  // Functions
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({

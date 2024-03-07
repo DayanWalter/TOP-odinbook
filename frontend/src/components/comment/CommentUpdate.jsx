@@ -1,17 +1,21 @@
-import { useState } from 'react';
+// React
+import { useState } from "react";
 
-import useUpdateComment from '../../hooks/useUpdateComment';
+// Hooks
+import useUpdateComment from "../../hooks/useUpdateComment";
 
 export default function CommentUpdate({ formData }) {
-  // After successfull update, display message
-  const [success, setSuccess] = useState(false);
-
+  // Custom hooks
   const {
     update,
     loading: updateCommentLoading,
     error: updateCommentError,
   } = useUpdateComment();
 
+  // Hooks
+  const [success, setSuccess] = useState(false);
+
+  // Functions
   const handleUpdateComment = async (e) => {
     e.preventDefault();
     update(formData);
@@ -29,7 +33,7 @@ export default function CommentUpdate({ formData }) {
       >
         Update Comment
       </button>
-      {success && <div style={{ color: 'green' }}>Comment updated!</div>}
+      {success && <div style={{ color: "green" }}>Comment updated!</div>}
     </>
   );
 }

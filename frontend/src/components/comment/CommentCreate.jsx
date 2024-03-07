@@ -1,11 +1,17 @@
+// React
 import { useState } from "react";
+
+// Hooks
 import useCommentCreate from "../../hooks/useCommentCreate";
 
 export default function CommentCreate({ postId }) {
-  const [formData, setFormData] = useState("");
-
+  // Custom hooks
   const { commentCreate, loading, error } = useCommentCreate();
 
+  // Hooks
+  const [formData, setFormData] = useState("");
+
+  // Functions
   const handleCreateComment = async () => {
     commentCreate(postId, formData);
     setFormData("");

@@ -1,13 +1,16 @@
-import useFetchComments from '../../hooks/useFetchComments';
-import CommentCard from './CommentCard';
+// Components
+import CommentCard from "./CommentCard";
+
+// Hooks
+import useFetchComments from "../../hooks/useFetchComments";
 
 export default function CommentList({ postId }) {
-  // Search for comments from post
+  // Custom hooks
   const { data: comments, loading, error } = useFetchComments(postId);
 
   return (
     <>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+      {error && <div style={{ color: "red" }}>{error}</div>}
       {loading && <p>Loading comments...</p>}
 
       {comments && (

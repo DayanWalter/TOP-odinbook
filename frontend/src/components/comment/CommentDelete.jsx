@@ -1,15 +1,19 @@
-import Icon from '@mdi/react';
+// Icons
+import Icon from "@mdi/react";
+import { mdiAlertOutline } from "@mdi/js";
 
-import { mdiAlertOutline } from '@mdi/js';
-import useDeleteComment from '../../hooks/useDeleteComment';
+// Hooks
+import useDeleteComment from "../../hooks/useDeleteComment";
 
 export default function CommentDelete({ formData }) {
+  // Custom hooks
   const {
     deleteComment,
     loading: deleteCommentLoading,
     error: deleteCommentError,
   } = useDeleteComment();
 
+  // Functions
   const handleDeleteComment = async () => {
     deleteComment(formData);
   };

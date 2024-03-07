@@ -29,6 +29,8 @@ export default function PostCard({ post }) {
   const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
   const [isOpenCommentCreate, setIsOpenCommentCreate] = useState(false);
 
+  // Effect
+
   // Functions
   const handlePostEdit = () => {
     isOpenUpdateModal
