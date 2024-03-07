@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import useUpdateUser from "../../hooks/useUpdateUser";
+import useUpdateUser from "./useUpdateUser";
 
 export default function UserUpdate({ formData }) {
   // After successfull update, display message

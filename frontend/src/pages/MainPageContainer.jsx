@@ -1,4 +1,4 @@
-import Header from "../components/sites/Header";
+import Header from "../components/header/Header";
 
 export default function MainPageContainer({ children }) {
   return (

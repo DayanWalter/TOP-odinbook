@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 // Components
-import PostCreate from "../post/PostCreate";
-import UserEdit from "../user/UserEdit";
-import DropDownMenu from "../DropDownMenu";
+import PostCreate from "./PostCreate";
+
+import UserEdit from "./UserEdit";
+
+import DropDownMenu from "./DropDownMenu";
 
 // Hooks
-import useFetchLoggedInUser from "../../hooks/useFetchLoggedInUser";
+import useFetchLoggedInUser from "./useFetchLoggedInUser";
 
 // Icons
 import Icon from "@mdi/react";
@@ -21,10 +23,12 @@ import { mdiHomeOutline } from "@mdi/js";
 export default function Header() {
   // const [language] = useContext(LanguageContext);
 
+  // Custom Hooks
   const { data, error, loading } = useFetchLoggedInUser();
+
+  // Hooks
   const [showDropdown, setShowDropdown] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
-
   const [showPostCreate, setShowPostCreate] = useState(false);
 
   const handleOverlayClick = (event) => {

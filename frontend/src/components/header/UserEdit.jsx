@@ -1,9 +1,11 @@
+import { useState, useEffect } from "react";
+
+// Components
 import UserUpdate from "./UserUpdate";
 import UserDelete from "./UserDelete";
 
-import { useState, useEffect } from "react";
-
-import useFetchLoggedInUser from "../../hooks/useFetchLoggedInUser";
+// Hooks
+import useFetchLoggedInUser from "./useFetchLoggedInUser";
 
 export default function UserEdit() {
   const [formData, setFormData] = useState({});

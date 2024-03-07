@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import useFetchLoggedInUser from "../../hooks/useFetchLoggedInUser";
+import useFetchLoggedInUser from "../header/useFetchLoggedInUser";
 
 export default function ProfileCard() {
   const { data, error, loading } = useFetchLoggedInUser();

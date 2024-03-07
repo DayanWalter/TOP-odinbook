@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import useCreatePost from '../../hooks/useCreatePost';
+import { useState } from "react";
+import useCreatePost from "./useCreatePost";
 
 export default function PostCreate() {
-  const [formData, setFormData] = useState('');
+  const [formData, setFormData] = useState("");
 
   const { createPost, loading, error } = useCreatePost();
 
   const handleCreatePost = async () => {
     createPost(formData);
-    setFormData('');
+    setFormData("");
   };
 
   const handleChange = (e) => setFormData(e.target.value);
@@ -40,8 +40,8 @@ export default function PostCreate() {
           type="submit"
           disabled={loading}
         >
-          {error && <div style={{ color: 'red' }}>{error}</div>}
-          {loading ? 'Creating Post...' : 'Post'}
+          {error && <div style={{ color: "red" }}>{error}</div>}
+          {loading ? "Creating Post..." : "Post"}
         </button>
       </form>
     </>
