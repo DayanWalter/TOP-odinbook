@@ -1,12 +1,16 @@
 import { useState } from "react";
-import PostCreate from "../post/PostCreate";
 import { Link } from "react-router-dom";
-import useFetchLoggedInUser from "../../hooks/useFetchLoggedInUser";
-import DropDownMenu from "../DropDownMenu";
+
+// Components
+import PostCreate from "../post/PostCreate";
 import UserEdit from "../user/UserEdit";
+import DropDownMenu from "../DropDownMenu";
 
+// Hooks
+import useFetchLoggedInUser from "../../hooks/useFetchLoggedInUser";
+
+// Icons
 import Icon from "@mdi/react";
-
 import { mdiFilePlusOutline } from "@mdi/js";
 import { mdiAccountMultiple } from "@mdi/js";
 import { mdiHomeOutline } from "@mdi/js";

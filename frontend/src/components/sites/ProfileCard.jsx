@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import useFetchLoggedInUser from '../../hooks/useFetchLoggedInUser';
+import { Link } from "react-router-dom";
+import useFetchLoggedInUser from "../../hooks/useFetchLoggedInUser";
 
 export default function ProfileCard() {
   const { data, error, loading } = useFetchLoggedInUser();
@@ -24,15 +24,6 @@ export default function ProfileCard() {
             </Link>
           </div>
 
-          {/* <div className="flex items-center justify-center border-b rounded-sm h-1/3 bg-primary/50">
-            <Link to={`/user/${data._id}`}>
-              <img
-                className="w-20 h-20 rounded-full shadow-lg "
-                src={data.avatar_url}
-                alt="Avatar"
-              />
-            </Link>
-          </div> */}
           <div className="flex flex-col items-center h-2/3">
             <h1 className="mt-8 text-2xl font-bold">{data.user_name}</h1>
             <p>Posts: {data.posts_id.length}</p>
