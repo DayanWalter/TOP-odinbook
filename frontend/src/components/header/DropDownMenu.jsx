@@ -1,3 +1,4 @@
+// React
 import { Link } from "react-router-dom";
 
 // Icons
@@ -11,6 +12,7 @@ export default function DropDownMenu({
   setShowEditProfile,
   setShowOpenDropdown,
 }) {
+  // Functions
   const handleSetShowEditProfile = () => {
     setShowEditProfile((prev) => !prev);
     setShowOpenDropdown(false);

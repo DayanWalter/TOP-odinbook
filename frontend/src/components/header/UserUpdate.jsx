@@ -1,17 +1,21 @@
+// React
 import { useState } from "react";
 
+// Hooks
 import useUpdateUser from "./useUpdateUser";
 
 export default function UserUpdate({ formData }) {
-  // After successfull update, display message
-  const [success, setSuccess] = useState(false);
-
+  // Custom hooks
   const {
     update,
     loading: updateUserLoading,
     error: updateUserError,
   } = useUpdateUser();
 
+  // Hooks
+  const [success, setSuccess] = useState(false);
+
+  // Functions
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     update(formData);

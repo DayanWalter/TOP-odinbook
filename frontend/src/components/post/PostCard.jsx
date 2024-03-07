@@ -20,6 +20,8 @@ import useUserIsAuthor from "../../hooks/useUserIsAuthor";
 import useUserIsLiking from "../../hooks/useUserIsLiking";
 
 export default function PostCard({ post }) {
+  // Variables
+
   // Custom hooks
   const { isAuthor } = useUserIsAuthor(post);
   const { isLiking, setIsLiking } = useUserIsLiking(post);

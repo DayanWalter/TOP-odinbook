@@ -1,3 +1,4 @@
+// React
 import { useState, useEffect } from "react";
 
 // Components
@@ -8,21 +9,24 @@ import UserDelete from "./UserDelete";
 import useFetchLoggedInUser from "./useFetchLoggedInUser";
 
 export default function UserEdit() {
-  const [formData, setFormData] = useState({});
-
+  // Custom hooks
   const {
     data: userData,
     loading: fetchUserLoading,
     error: fetchUserError,
   } = useFetchLoggedInUser();
 
-  // Fetch user data, then setFormData
+  // Hooks
+  const [formData, setFormData] = useState({});
+
+  // Effect
   useEffect(() => {
     if (userData) {
       setFormData(userData);
     }
   }, [userData]);
 
+  // Functions
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({

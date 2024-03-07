@@ -1,11 +1,17 @@
+// React
 import { useState } from "react";
+
+// Hooks
 import useCreatePost from "./useCreatePost";
 
 export default function PostCreate() {
-  const [formData, setFormData] = useState("");
-
+  // Custom hooks
   const { createPost, loading, error } = useCreatePost();
 
+  // Hooks
+  const [formData, setFormData] = useState("");
+
+  // Functions
   const handleCreatePost = async () => {
     createPost(formData);
     setFormData("");

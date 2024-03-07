@@ -1,19 +1,20 @@
-import { useState, useEffect } from 'react';
+// React
+import { useState, useEffect } from "react";
 
 export default function useFetchLoggedInUser() {
+  // Variable
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const authToken = localStorage.getItem("authToken");
+  // Split the payload of the jwt and convert the ._id part
+  const payload = JSON.parse(atob(authToken.split(".")[1]));
+  const userId = payload._id;
 
+  // Hooks
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // id from logged in user
-  const authToken = localStorage.getItem('authToken');
-  // Split the payload of the jwt and convert the ._id part
-  const payload = JSON.parse(atob(authToken.split('.')[1]));
-  // Define the username you are looking for
-  const userId = payload._id;
-
+  // Functions
   useEffect(() => {
     async function fetchData() {
       try {
@@ -21,8 +22,8 @@ export default function useFetchLoggedInUser() {
 
         // Log an error if authentication token is not available
         if (!authToken) {
-          console.error('Authentication token not available.');
-          setError('Authentication token not available.');
+          console.error("Authentication token not available.");
+          setError("Authentication token not available.");
           return;
         }
 
@@ -30,7 +31,7 @@ export default function useFetchLoggedInUser() {
           method: `GET`,
           headers: {
             Authorization: `Bearer ${authToken}`,
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         });
 

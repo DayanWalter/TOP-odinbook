@@ -1,20 +1,25 @@
-// DeleteUser.jsx
-import Icon from "@mdi/react";
-
-import { mdiAlertOutline } from "@mdi/js";
+// React
 import { useNavigate } from "react-router-dom";
 
+// Icons
+import Icon from "@mdi/react";
+import { mdiAlertOutline } from "@mdi/js";
+
+// Components
 import useDeleteUser from "./useDeleteUser";
 
 export default function UserDelete() {
-  const navigate = useNavigate();
-
+  // Custom hooks
   const {
     deleteUser,
     loading: deleteUserLoading,
     error: deleteUserError,
   } = useDeleteUser();
 
+  // Hooks
+  const navigate = useNavigate();
+
+  // Functions
   const handleDeleteUser = async (e) => {
     e.preventDefault();
     deleteUser();

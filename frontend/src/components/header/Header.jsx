@@ -1,15 +1,6 @@
+// React
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-// Components
-import PostCreate from "./PostCreate";
-
-import UserEdit from "./UserEdit";
-
-import DropDownMenu from "./DropDownMenu";
-
-// Hooks
-import useFetchLoggedInUser from "./useFetchLoggedInUser";
 
 // Icons
 import Icon from "@mdi/react";
@@ -17,12 +8,15 @@ import { mdiFilePlusOutline } from "@mdi/js";
 import { mdiAccountMultiple } from "@mdi/js";
 import { mdiHomeOutline } from "@mdi/js";
 
-// import { useContext } from 'react';
-// import { LanguageContext } from '../App';
+// Components
+import PostCreate from "./PostCreate";
+import UserEdit from "./UserEdit";
+import DropDownMenu from "./DropDownMenu";
+
+// Hooks
+import useFetchLoggedInUser from "./useFetchLoggedInUser";
 
 export default function Header() {
-  // const [language] = useContext(LanguageContext);
-
   // Custom Hooks
   const { data, error, loading } = useFetchLoggedInUser();
 
@@ -31,6 +25,7 @@ export default function Header() {
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showPostCreate, setShowPostCreate] = useState(false);
 
+  // Functions
   const handleOverlayClick = (event) => {
     if (event.target.id === "overlay") {
       setShowPostCreate(false);

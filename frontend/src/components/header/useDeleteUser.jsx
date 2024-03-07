@@ -1,21 +1,23 @@
-import { useState } from 'react';
-// CHANGE NAME
+// React
+import { useState } from "react";
 export default function useDeleteUser() {
+  // Variable
   const BASE_URL = import.meta.env.VITE_SERVER_URL;
+  const authToken = localStorage.getItem("authToken");
 
+  // Hooks
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const authToken = localStorage.getItem('authToken');
-
+  // Functions
   const deleteUser = async () => {
     try {
       setLoading(true);
 
       // Log an error if authentication token is not available
       if (!authToken) {
-        console.error('Authentication token not available.');
-        setError('Authentication token not available.');
+        console.error("Authentication token not available.");
+        setError("Authentication token not available.");
         return;
       }
 
@@ -23,7 +25,7 @@ export default function useDeleteUser() {
         method: `DELETE`,
         headers: {
           Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
@@ -31,7 +33,7 @@ export default function useDeleteUser() {
     } catch (error) {
       setError(error);
     } finally {
-      localStorage.setItem('authToken', '');
+      localStorage.setItem("authToken", "");
       setLoading(false);
     }
   };
