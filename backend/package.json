@@ -1,5 +1,5 @@
 {
-  "name": "bitfeather-api",
+  "name": "bitfeather-api-backend",
   "version": "0.1.0",
   "private": true,
   "scripts": {

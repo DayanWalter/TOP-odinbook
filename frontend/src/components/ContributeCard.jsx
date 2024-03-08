@@ -12,7 +12,7 @@ export default function ContributeCard() {
           <Link
             target="_blank"
             rel="noopener noreferrer"
-            to={`https://github.com/DayanWalter/TOP-odinbook`}
+            to={`https://github.com/DayanWalter/bitfeather`}
           >
             <p className="underline underline-offset-2 text-primary hover:text-primary/80">
               View Code

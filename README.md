@@ -2,8 +2,8 @@
 
 ## Description
 
-This is a Fullstack project consisting of a [frontend](https://github.com/DayanWalter/TOP-odinbook/tree/main/frontend)
-and a [backend](https://github.com/DayanWalter/TOP-odinbook/tree/main/backend). The frontend is built using React, while the backend is developed with Express and MongoDB.
+This is a Fullstack project consisting of a [frontend](https://github.com/DayanWalter/bitfeather/tree/main/frontend)
+and a [backend](https://github.com/DayanWalter/bitfeather/tree/main/backend). The frontend is built using React, while the backend is developed with Express and MongoDB.
 
 ## Frontend
 
