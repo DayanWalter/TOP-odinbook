@@ -10,9 +10,9 @@ export default function PostLike({ post, setIsLiking, setLikes }) {
   const { postLike } = usePostLike();
 
   // Functions
-  const handleLikePost = () => {
+  const handleLikePost = async () => {
     setLikes((prev) => prev + 1);
-    postLike(post._id);
+    await postLike(post._id);
     setIsLiking(true);
   };
   return (

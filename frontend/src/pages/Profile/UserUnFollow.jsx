@@ -7,7 +7,7 @@ export default function UserUnFollow({ userId, setIsFollowing }) {
 
   // Functions
   const handleUnFollowUser = async () => {
-    userUnfollow(userId);
+    await userUnfollow(userId);
     setIsFollowing(false);
   };
 

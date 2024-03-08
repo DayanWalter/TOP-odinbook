@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 export default function PostCreate() {
   // Custom hooks
   const { createPost, loading, error } = useCreatePost();
-  const navigate = useNavigate();
 
   // Hooks
   const [formData, setFormData] = useState("");
+  const navigate = useNavigate();
 
   // Functions
   const handleCreatePost = async (e) => {

@@ -12,7 +12,7 @@ export default function CommentUnlike({ comment, setIsLiking, setLikes }) {
   // Functions
   const handleUnlikeComment = async () => {
     setLikes((prev) => prev - 1);
-    commentUnlike(comment._id);
+    await commentUnlike(comment._id);
     setIsLiking(false);
   };
 

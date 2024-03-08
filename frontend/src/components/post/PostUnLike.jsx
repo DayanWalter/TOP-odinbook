@@ -12,7 +12,7 @@ export default function PostUnLike({ post, setIsLiking, setLikes }) {
   // Functions
   const handleUnLikePost = async () => {
     setLikes((prev) => prev - 1);
-    postUnlike(post._id);
+    await postUnlike(post._id);
     setIsLiking(false);
   };
 

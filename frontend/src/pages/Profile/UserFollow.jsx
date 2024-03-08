@@ -7,7 +7,7 @@ export default function UserFollow({ userId, setIsFollowing }) {
 
   // Functions
   const handleFollowUser = async () => {
-    userFollow(userId);
+    await userFollow(userId);
     setIsFollowing(true);
   };
 

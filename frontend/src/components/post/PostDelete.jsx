@@ -15,7 +15,7 @@ export default function PostDelete({ formData }) {
 
   // Functions
   const handleDeletePost = async () => {
-    deletePost(formData);
+    await deletePost(formData);
   };
 
   return (

@@ -22,7 +22,7 @@ export default function UserDelete() {
   // Functions
   const handleDeleteUser = async (e) => {
     e.preventDefault();
-    deleteUser();
+    await deleteUser();
     navigate("/");
   };
 

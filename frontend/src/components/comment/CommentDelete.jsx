@@ -15,7 +15,7 @@ export default function CommentDelete({ formData }) {
 
   // Functions
   const handleDeleteComment = async () => {
-    deleteComment(formData);
+    await deleteComment(formData);
   };
 
   return (

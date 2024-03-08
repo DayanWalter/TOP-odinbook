@@ -13,7 +13,7 @@ export default function CommentCreate({ postId }) {
 
   // Functions
   const handleCreateComment = async () => {
-    commentCreate(postId, formData);
+    await commentCreate(postId, formData);
     setFormData("");
   };
 

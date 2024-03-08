@@ -18,7 +18,7 @@ export default function UserUpdate({ formData }) {
   // Functions
   const handleUpdateUser = async (e) => {
     e.preventDefault();
-    update(formData);
+    await update(formData);
     setSuccess(true);
   };
 

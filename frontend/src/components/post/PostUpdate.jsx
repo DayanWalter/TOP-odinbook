@@ -18,7 +18,7 @@ export default function PostUpdate({ formData }) {
   // Functions
   const handleUpdatePost = async (e) => {
     e.preventDefault();
-    update(formData);
+    await update(formData);
     setSuccess(true);
   };
 

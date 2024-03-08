@@ -12,7 +12,7 @@ export default function CommentLike({ comment, setIsLiking, setLikes }) {
   // Functions
   const handleLikeComment = async () => {
     setLikes((prev) => prev + 1);
-    commentLike(comment._id);
+    await commentLike(comment._id);
     setIsLiking(true);
   };
 
