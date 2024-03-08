@@ -3,18 +3,22 @@ import { useState } from "react";
 
 // Hooks
 import useCreatePost from "./useCreatePost";
+import { useNavigate } from "react-router-dom";
 
 export default function PostCreate() {
   // Custom hooks
   const { createPost, loading, error } = useCreatePost();
+  const navigate = useNavigate();
 
   // Hooks
   const [formData, setFormData] = useState("");
 
   // Functions
-  const handleCreatePost = async () => {
-    createPost(formData);
+  const handleCreatePost = async (e) => {
+    e.preventDefault();
+    await createPost(formData);
     setFormData("");
+    navigate("/home");
   };
 
   const handleChange = (e) => setFormData(e.target.value);
