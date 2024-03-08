@@ -89,7 +89,7 @@ export default function Header() {
                 {/* Dropdown menu button */}
                 <li>
                   <img
-                    className="absolute w-10 h-10 -translate-y-1/2 rounded-full shadow-lg hover:cursor-pointer right-5 top-1/2 "
+                    className="absolute object-cover w-10 h-10 -translate-y-1/2 rounded-full shadow-lg hover:cursor-pointer right-5 top-1/2 "
                     src={data.avatar_url}
                     alt="Avatar"
                     onClick={() => setShowDropdown((prev) => !prev)}

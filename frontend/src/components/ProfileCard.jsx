@@ -21,7 +21,7 @@ export default function ProfileCard() {
                 alt="Backgroundimage"
               />
               <img
-                className="absolute w-20 h-20 -translate-x-1/2 -translate-y-1/2 border border-white rounded-full shadow-lg top-1/2 left-1/2"
+                className="absolute object-cover w-20 h-20 -translate-x-1/2 -translate-y-1/2 border border-white rounded-full shadow-lg top-1/2 left-1/2"
                 src={data.avatar_url}
                 alt="Avatar"
               />

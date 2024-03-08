@@ -43,7 +43,7 @@ export default function UserProfile() {
               alt="Backgroundimage"
             />
             <img
-              className="absolute -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-full shadow-lg h-44 w-44 md:translate-x-0 md:-left-8 top-1/2 left-1/2"
+              className="absolute object-cover object-center -translate-x-1/2 -translate-y-1/2 border-4 border-white rounded-full shadow-lg h-44 w-44 md:translate-x-0 md:-left-8 top-1/2 left-1/2"
               src={data.avatar_url}
               alt="Avatar"
             />
