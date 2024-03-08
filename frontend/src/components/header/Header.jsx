@@ -43,10 +43,11 @@ export default function Header() {
           className="fixed top-0 left-0 z-10 w-full h-16 shadow-md bg-blue-50 "
         >
           <div className="flex items-center w-full h-full px-5 sm:justify-between lg:px-16">
-            <a href="/home" className="hidden text-2xl sm:block ">
+            {/* Logo */}
+            <Link to="/home" className="hidden text-2xl sm:block ">
               {" "}
               {"BITFEATHER"}{" "}
-            </a>
+            </Link>
 
             <nav
               id="mainmenu"
@@ -54,6 +55,7 @@ export default function Header() {
               className="w-full sm:w-3/4 lg:w-2/3"
             >
               <ul role="menubar" className="flex justify-between text-primary ">
+                {/* Home link */}
                 <Link to={"/home"}>
                   <li
                     role="menuitem"
@@ -64,6 +66,7 @@ export default function Header() {
                   </li>
                 </Link>
 
+                {/* All user link */}
                 <Link to={"/alluser"}>
                   <li role="menuitem" className="flex gap-3 hover:scale-105">
                     <Icon path={mdiAccountMultiple} size={0.9} />
@@ -71,6 +74,7 @@ export default function Header() {
                   </li>
                 </Link>
 
+                {/* Create post button */}
                 <li
                   role="menuitem"
                   onClick={() => {
@@ -81,6 +85,8 @@ export default function Header() {
                   <Icon path={mdiFilePlusOutline} size={0.9} />
                   <p className="hidden sm:block">Post</p>
                 </li>
+
+                {/* Dropdown menu button */}
                 <li>
                   <img
                     className="absolute w-10 h-10 -translate-y-1/2 rounded-full shadow-lg hover:cursor-pointer right-5 top-1/2 "

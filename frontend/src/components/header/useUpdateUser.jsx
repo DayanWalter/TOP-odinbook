@@ -36,8 +36,6 @@ export default function useUpdateUser() {
         setError(null);
         setLoading(false);
         localStorage.setItem("authToken", responseJSON.token);
-
-        console.log("User udated");
       }
     } catch (error) {
       setError(error);

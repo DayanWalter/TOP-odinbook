@@ -19,13 +19,12 @@ export default function useCommentCreate() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authToken}`, // Include the authentication token in the request headers
+          Authorization: `Bearer ${authToken}`,
         },
         body: JSON.stringify({ formData }),
       });
 
       const responseJSON = await response.json();
-      console.log(responseJSON);
     } catch (error) {
       setError(error);
       setLoading(false);

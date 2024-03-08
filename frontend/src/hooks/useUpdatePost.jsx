@@ -39,8 +39,6 @@ export default function useUpdatePost() {
         setError(null);
         setLoading(false);
         localStorage.setItem("authToken", responseJSON.token);
-
-        console.log("Post udated");
       }
     } catch (error) {
       setError(error);

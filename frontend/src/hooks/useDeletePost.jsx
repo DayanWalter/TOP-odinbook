@@ -37,7 +37,6 @@ export default function useDeletePost() {
       if (responseJSON.deletedPost) {
         setError(null);
         setLoading(false);
-
         return;
         // if the response is an array, set the error to this array
       } else if (responseJSON.length) {

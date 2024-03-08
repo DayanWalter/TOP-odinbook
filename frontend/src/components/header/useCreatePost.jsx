@@ -25,7 +25,6 @@ export default function useCreatePost() {
       });
 
       const responseJSON = await response.json();
-      console.log(responseJSON);
     } catch (error) {
       setError(error);
       setLoading(false);

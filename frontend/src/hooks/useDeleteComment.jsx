@@ -37,7 +37,6 @@ export default function useDeleteComment() {
       if (responseJSON.deletedComment) {
         setError(null);
         setLoading(false);
-
         return;
         // if the response is an array, set the error to this array
       } else if (responseJSON.length) {

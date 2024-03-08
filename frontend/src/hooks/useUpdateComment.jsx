@@ -39,8 +39,6 @@ export default function useUpdateComment() {
         setError(null);
         setLoading(false);
         localStorage.setItem("authToken", responseJSON.token);
-
-        console.log("Comment udated");
       }
     } catch (error) {
       setError(error);

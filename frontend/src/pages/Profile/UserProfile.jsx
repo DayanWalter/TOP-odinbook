@@ -50,6 +50,7 @@ export default function UserProfile() {
           </div>
 
           {/* Main */}
+          {/* Show follow/unfollow button, if profile is not logged in user */}
           <div className="mb-5">
             {!isLoggedInUser &&
               (isFollowing ? (
@@ -66,9 +67,9 @@ export default function UserProfile() {
           </div>
 
           <div className="flex justify-between w-full gap-10 mb-5">
+            {/* About section */}
             <div className="w-full p-5 bg-white border rounded-md sm:w-1/2 ">
               <h1 className="text-2xl border-b">About</h1>
-              {/* Show follow/unfollow button, if profile is not logged in user */}
 
               <div className="flex flex-col gap-3 mt-3 lg:flex-row lg:justify-between">
                 <div className="flex gap-3">
@@ -85,6 +86,8 @@ export default function UserProfile() {
                 </div>
               </div>
             </div>
+
+            {/* Stats section */}
             <div className="hidden w-1/2 p-5 bg-white border rounded-md sm:block ">
               <h1 className="text-2xl border-b">Stats</h1>
 

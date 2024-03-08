@@ -6,13 +6,13 @@ import useFetchUsers from "./useFetchUsers";
 
 export default function UsersRead() {
   // Custom hooks
-  const { data: users, loading, error } = useFetchUsers();
+  const { data, loading, error } = useFetchUsers();
 
   return (
     <>
       {loading && <div>Loading...</div>}
       {error && <div style={{ color: "red" }}>{error}</div>}
-      {users && <UserList users={users} />}
+      {data && <UserList users={data} />}
     </>
   );
 }
