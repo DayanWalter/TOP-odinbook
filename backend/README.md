@@ -1,99 +1,45 @@
-# MERN-Backend-Template
+# BitFeather Backend README
 
-This is a template for the backend part of the template.
+## Description
 
-## What's configured?
-
-### express
-
-- express
-- express-async-handler
-- express-validator
-
-### mongoDB
-
-- mongoose
-
-### hashing passwords
-
-- bcryptjs
-
-### authentication and authorization
-
-- jsonwebtoken
-- passport
-- passport-jwt
-
-### hiding passwords and usernames from github
-
-- dotenv
-
-### debugging and logging
-
-- debug
-- morgan
-
-### Testing
-
-- supertest
-
-#### Usage of supertest
-
-- open routes/
-- open index.test.js
-
-```bash
-npm test
-```
-
-### Other middleware
-
-- cors
-- cookie-parser
-- http-errors
+This is the backend part of the Fullstack project. It is an Express application using MongoDB as the database.
 
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install dependencies.
+1. Open a terminal.
+2. Navigate to the `backend` directory.
+3. Run `npm install` to install the dependencies.
 
-```bash
-npm install
-```
+## Available Scripts
 
-## Environment Variables
+- `npm start`: Starts the production server.
+- `npm run devstart`: Starts the development server with Nodemon.
+- `npm run serverstart`: Starts the development server with debug mode.
+- `npm test`: Runs tests using Jest.
 
-- ACCESS_TOKEN_SECRET (for jwt)
-- Generate random key:
+## Dependencies
 
-```bash
-node
-require('crypto').randomBytes(64).toString('hex')
-```
+- bcryptjs
+- cookie-parser
+- cors
+- debug
+- dotenv
+- express
+- express-async-handler
+- express-validator
+- helmet
+- http-errors
+- jsonwebtoken
+- mongoose
+- morgan
+- nodemon
 
-- DEV_DB_URL (for mongoDB)
-- Example:
-  "mongodb+srv://[username]:[password]@cluster0.xxpddtx.mongodb.net/?retryWrites=true&w=majority"
+## Development Dependencies
 
-## Scripts
+- @faker-js/faker
+- Jest
+- supertest
 
-```bash
-npm run start
-npm run devstart
-npm run serverstart
-npm test
-```
+## Note
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## Fullstack and Frontend Template
-
-If you haven't set up the frontend yet, check out our [MERN-Frontend-Template](../frontend), or [MERN-Fullstack-Template](../)
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+Ensure that you have configured any required environment variables, especially for database connection and authentication purposes.
