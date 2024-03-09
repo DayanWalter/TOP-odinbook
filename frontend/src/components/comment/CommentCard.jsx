@@ -40,7 +40,7 @@ export default function CommentCard({ comment }) {
         {/* Avatar */}
         <Link to={`/user/${comment.author_id._id}`}>
           <img
-            className="absolute rounded-full shadow-lg w-14 h-14 left-3 top-3"
+            className="absolute object-cover rounded-full shadow-lg w-14 h-14 left-3 top-3"
             src={comment.author_id.avatar_url}
             alt="Avatar"
           />
