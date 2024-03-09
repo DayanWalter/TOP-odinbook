@@ -1,10 +1,10 @@
-const asyncHandler = require('express-async-handler');
-const User = require('../models/user');
-const Post = require('../models/post');
-const Comment = require('../models/comment');
-const { body, validationResult } = require('express-validator');
+const asyncHandler = require("express-async-handler");
+const User = require("../models/user");
+const Post = require("../models/post");
+const Comment = require("../models/comment");
+const { body, validationResult } = require("express-validator");
 const createComment = [
-  body('formData').trim().isLength({ max: 200 }).escape(),
+  body("formData").trim().isLength({ max: 400 }).escape(),
 
   asyncHandler(async (req, res, next) => {
     // Validate and sanitize input(body)
@@ -39,19 +39,19 @@ const createComment = [
       // List all errors in the console
       result.array().map((error) => console.log(error.msg));
       // Send status 404,failure message and result(error object) to client
-      res.status(404).json({ createComment: 'Failure', result });
+      res.status(404).json({ createComment: "Failure", result });
     }
   }),
 ];
 const readPostComments = asyncHandler(async (req, res, next) => {
   // Take postid from params and search for post
   const postComments = await Post.findById(req.params.postid)
-    .select('comments_id')
+    .select("comments_id")
     .populate({
-      path: 'comments_id',
+      path: "comments_id",
 
       populate: {
-        path: 'author_id',
+        path: "author_id",
       },
     });
   // get the comments_id array
@@ -62,19 +62,19 @@ const readPostComments = asyncHandler(async (req, res, next) => {
 const readUserComments = asyncHandler(async (req, res, next) => {
   // Take userid from params and search for user
   const userComments = await User.findById(req.params.userid)
-    .select('comments_id')
-    .populate('comments_id');
+    .select("comments_id")
+    .populate("comments_id");
   // get the comments_id array
   const comments = userComments.comments_id;
   // Send the comments array to client
-  res.json({ readUserComments: 'Route works', comments });
+  res.json({ readUserComments: "Route works", comments });
 });
 const readCommentById = asyncHandler(async (req, res, next) => {
   // get comment._id from params and search for comment
   const searchedComment = await Comment.findById(req.params.commentid).populate(
     {
-      path: 'author_id',
-      select: 'user_name avatar_url',
+      path: "author_id",
+      select: "user_name avatar_url",
     }
   );
   res.json(searchedComment);
@@ -83,7 +83,7 @@ const updateComment = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the comment
   // Get the comment._id from params and look for the author
   const comment = await Comment.findById(req.params.commentid).select(
-    'author_id'
+    "author_id"
   );
   // If the logged in user is the author of the comment...
   if (comment.author_id.equals(req.user._id)) {
@@ -101,18 +101,18 @@ const updateComment = asyncHandler(async (req, res, next) => {
       }
     );
     // Send the updated comment to client
-    res.json({ updateComment: 'Route works', updatedComment });
+    res.json({ updateComment: "Route works", updatedComment });
     return;
   } else {
     // If the logged in user is not the author of the comment, send 404 and message
-    res.status(404).json({ updateComment: 'You did not write this comment' });
+    res.status(404).json({ updateComment: "You did not write this comment" });
   }
 });
 const deleteComment = asyncHandler(async (req, res, next) => {
   // Check if the logged in user wrote the comment
   // Get the comment._id from params and look for the author
   const comment = await Comment.findById(req.params.commentid).select(
-    'author_id'
+    "author_id"
   );
   // If the logged in user is the author of the comment...
   if (comment.author_id.equals(req.user._id)) {
@@ -137,11 +137,11 @@ const deleteComment = asyncHandler(async (req, res, next) => {
       { new: true }
     );
     // Send the deleted comment to client
-    res.json({ deleteComment: 'Route works', deletedComment });
+    res.json({ deleteComment: "Route works", deletedComment });
     return;
   } else {
     // If the logged in user is not the author of the comment, send 404 and message
-    res.status(404).json({ deleteComment: 'You did not write this post' });
+    res.status(404).json({ deleteComment: "You did not write this post" });
     return;
   }
 });
@@ -166,9 +166,9 @@ const likeComment = asyncHandler(async (req, res, next) => {
         new: true,
       }
     );
-    res.json({ likeComment: 'Route works', addUserId });
+    res.json({ likeComment: "Route works", addUserId });
   } else {
-    res.json({ likeComment: 'User already liked comment' });
+    res.json({ likeComment: "User already liked comment" });
   }
 });
 const unlikeComment = asyncHandler(async (req, res, next) => {
@@ -185,7 +185,7 @@ const unlikeComment = asyncHandler(async (req, res, next) => {
     }
   );
 
-  res.json({ likeComment: 'Route works', removeUserId });
+  res.json({ likeComment: "Route works", removeUserId });
 });
 
 module.exports = {
