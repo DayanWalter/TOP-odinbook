@@ -5,6 +5,8 @@
 This is a Fullstack project consisting of a [frontend](https://github.com/DayanWalter/bitfeather/tree/main/frontend)
 and a [backend](https://github.com/DayanWalter/bitfeather/tree/main/backend). The frontend is built using React, while the backend is developed with Express and MongoDB.
 
+Live Preview: [BitFeather](https://bitfeather.onrender.com/)
+
 ## Frontend
 
 The frontend is a React application created with Vite as the build tool.
@@ -28,7 +30,6 @@ The frontend is a React application created with Vite as the build tool.
 - React
 - React-DOM
 - React Router DOM
-- Material Design Icons (MDI)
 - Vite (Development tool)
 - Jest (Test tool)
 - ESLint (Code linter)
@@ -71,4 +72,17 @@ The backend is an Express application using MongoDB as the database.
 
 ## Note
 
-Ensure you configure the environment variables appropriately, especially for the backend (e.g., MongoDB URI, JWT Secret).
+Ensure you configure the environment variables appropriately
+
+frontend:
+
+- VITE_SERVER_URL
+
+backend:
+
+- ACCESS_TOKEN_SECRET
+- DEV_DB_URL
+
+In development:
+
+- tests(front and backend)
