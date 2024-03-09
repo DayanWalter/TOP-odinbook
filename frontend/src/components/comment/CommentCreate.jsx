@@ -1,5 +1,6 @@
 // React
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Hooks
 import useCommentCreate from "../../hooks/useCommentCreate";
@@ -10,12 +11,14 @@ export default function CommentCreate({ postId }) {
 
   // Hooks
   const [formData, setFormData] = useState("");
+  const navigate = useNavigate();
 
   // Functions
   const handleCreateComment = async (e) => {
     e.preventDefault();
     await commentCreate(postId, formData);
     setFormData("");
+    navigate(0);
   };
 
   const handleChange = (e) => setFormData(e.target.value);
