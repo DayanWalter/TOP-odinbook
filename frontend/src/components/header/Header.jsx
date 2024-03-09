@@ -56,7 +56,7 @@ export default function Header() {
             >
               <ul role="menubar" className="flex justify-between text-primary ">
                 {/* Home link */}
-                <Link to={"/home"}>
+                <Link to="/home">
                   <li
                     role="menuitem"
                     className="flex items-center gap-3 hover:scale-105"
@@ -67,7 +67,7 @@ export default function Header() {
                 </Link>
 
                 {/* All user link */}
-                <Link to={"/alluser"}>
+                <Link to="/alluser">
                   <li role="menuitem" className="flex gap-3 hover:scale-105">
                     <Icon path={mdiAccountMultiple} size={0.9} />
                     <p className="hidden sm:block">All User</p>
