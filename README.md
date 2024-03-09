@@ -14,7 +14,7 @@ Live Preview: [BitFeather](https://bitfeather.onrender.com/)
 ## About the project
 
 [BitFeather](https://bitfeather.onrender.com/) is a social-network like twitter.
-The user can create a user account, edit/delete their profile, follow and unfollow other users, write/edit/delete posts and comments.
+The user can create an account, edit/delete their profile, follow/unfollow other users, write/edit/delete posts and comments.
 
 ### Features
 
