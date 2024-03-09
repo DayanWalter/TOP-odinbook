@@ -12,7 +12,8 @@ export default function CommentCreate({ postId }) {
   const [formData, setFormData] = useState("");
 
   // Functions
-  const handleCreateComment = async () => {
+  const handleCreateComment = async (e) => {
+    e.preventDefault();
     await commentCreate(postId, formData);
     setFormData("");
   };
