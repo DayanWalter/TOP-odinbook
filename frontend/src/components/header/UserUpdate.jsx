@@ -21,12 +21,10 @@ export default function UserUpdate({ formData }) {
     await update(formData);
     navigate(0);
   };
-
   return (
     <>
       {updateUserError && <div>{updateUserError}</div>}
       {updateUserLoading && <div></div>}
-
       <button
         className="p-2 mb-5 text-sm text-white border rounded-md bg-primary hover:bg-primary/80"
         onClick={handleUpdateUser}
