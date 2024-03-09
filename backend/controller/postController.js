@@ -1,9 +1,9 @@
-const asyncHandler = require('express-async-handler');
-const User = require('../models/user');
-const Post = require('../models/post');
-const { body, validationResult } = require('express-validator');
+const asyncHandler = require("express-async-handler");
+const User = require("../models/user");
+const Post = require("../models/post");
+const { body, validationResult } = require("express-validator");
 const createPost = [
-  body('content').trim().isLength({ max: 200 }).escape(),
+  body("content").trim().isLength({ max: 400 }).escape(),
 
   asyncHandler(async (req, res, next) => {
     const result = validationResult(req);
@@ -20,18 +20,18 @@ const createPost = [
       await User.findByIdAndUpdate(req.user._id, {
         $push: { posts_id: post._id },
       });
-      res.json({ createPost: 'Route works', post });
+      res.json({ createPost: "Route works", post });
     } else {
       // List all errors in the console
       result.array().map((error) => console.log(error.msg));
       // Send failure message to client and the error object
-      res.status(404).json({ createPost: 'Failure', result });
+      res.status(404).json({ createPost: "Failure", result });
     }
   }),
 ];
 const readFeedPosts = asyncHandler(async (req, res, next) => {
   // take req.user._id's follows array
-  const user = await User.findById(req.user._id).select('follows_id');
+  const user = await User.findById(req.user._id).select("follows_id");
   // Map over array and pull out ._id of every user
   const followedUserIds = user.follows_id.map((follow) => follow._id);
   // Add user._id to feed array
@@ -39,14 +39,14 @@ const readFeedPosts = asyncHandler(async (req, res, next) => {
   // Search for posts in which the author_id is the same as the user._id
   const feed = await Post.find({
     author_id: { $in: followedUserIds },
-  }).populate('author_id');
+  }).populate("author_id");
   res.status(200).json(feed);
 });
 // Useful?
 const readUserPosts = asyncHandler(async (req, res, next) => {
   // Take userid from params
   const userPosts = await Post.find({ author_id: req.params.userid }).populate(
-    'author_id'
+    "author_id"
   );
 
   // Return posts object to client
@@ -55,18 +55,18 @@ const readUserPosts = asyncHandler(async (req, res, next) => {
 const readPostById = asyncHandler(async (req, res, next) => {
   const searchedPost = await Post.findById(req.params.postid)
     .populate({
-      path: 'author_id',
-      select: 'user_name avatar_url',
+      path: "author_id",
+      select: "user_name avatar_url",
     })
     .populate({
-      path: 'comments_id',
+      path: "comments_id",
     });
 
   res.status(200).json(searchedPost);
 });
 const updatePost = asyncHandler(async (req, res, next) => {
   // Check if logged in user wrote the post
-  const post = await Post.findById(req.params.postid).select('author_id');
+  const post = await Post.findById(req.params.postid).select("author_id");
 
   if (post.author_id.equals(req.user._id)) {
     const content = req.body.content;
@@ -81,24 +81,24 @@ const updatePost = asyncHandler(async (req, res, next) => {
     );
 
     if (!updatedPost) {
-      res.status(404).json({ error: 'Post not found' });
+      res.status(404).json({ error: "Post not found" });
       return;
     }
 
     res.status(200).json(updatedPost);
   } else {
-    res.json({ updatePost: 'You did not write this post' });
+    res.json({ updatePost: "You did not write this post" });
   }
 });
 const deletePost = asyncHandler(async (req, res, next) => {
   // Check if the logged in user wrote the post
-  const post = await Post.findById(req.params.postid).select('author_id');
+  const post = await Post.findById(req.params.postid).select("author_id");
 
   if (post.author_id.equals(req.user._id)) {
     const deletedPost = await Post.findByIdAndDelete(req.params.postid);
 
     if (!deletedPost) {
-      res.status(404).json({ error: 'Post not found' });
+      res.status(404).json({ error: "Post not found" });
       return;
     }
 
@@ -118,7 +118,7 @@ const deletePost = asyncHandler(async (req, res, next) => {
     res.json({ deletedPost });
     return;
   } else {
-    res.json({ deletePost: 'You did not write this post' });
+    res.json({ deletePost: "You did not write this post" });
     return;
   }
 });
@@ -135,7 +135,7 @@ const likePost = asyncHandler(async (req, res, next) => {
       new: true,
     }
   );
-  res.json({ likePost: 'Route works', addUserId });
+  res.json({ likePost: "Route works", addUserId });
 });
 const unlikePost = asyncHandler(async (req, res, next) => {
   // update the req.params.postid
@@ -151,7 +151,7 @@ const unlikePost = asyncHandler(async (req, res, next) => {
     }
   );
 
-  res.json({ likePost: 'Route works', removeUserId });
+  res.json({ likePost: "Route works", removeUserId });
 });
 
 module.exports = {
