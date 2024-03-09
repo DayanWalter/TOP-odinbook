@@ -4,6 +4,7 @@ import { mdiAlertOutline } from "@mdi/js";
 
 // Hooks
 import useDeletePost from "../../hooks/useDeletePost";
+import { useNavigate } from "react-router-dom";
 
 export default function PostDelete({ formData }) {
   // Custom hooks
@@ -13,9 +14,15 @@ export default function PostDelete({ formData }) {
     error: deletePostError,
   } = useDeletePost();
 
+  // Hooks
+  const navigate = useNavigate();
+
+  // TODO:
   // Functions
-  const handleDeletePost = async () => {
+  const handleDeletePost = async (e) => {
+    e.preventDefault();
     await deletePost(formData);
+    navigate(0);
   };
 
   return (

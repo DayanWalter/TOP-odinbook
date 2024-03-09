@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Hooks
 import useUpdateComment from "../../hooks/useUpdateComment";
@@ -13,13 +13,13 @@ export default function CommentUpdate({ formData }) {
   } = useUpdateComment();
 
   // Hooks
-  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   // Functions
   const handleUpdateComment = async (e) => {
     e.preventDefault();
     await update(formData);
-    setSuccess(true);
+    navigate(0);
   };
 
   return (
@@ -33,7 +33,6 @@ export default function CommentUpdate({ formData }) {
       >
         Update Comment
       </button>
-      {success && <div style={{ color: "green" }}>Comment updated!</div>}
     </>
   );
 }

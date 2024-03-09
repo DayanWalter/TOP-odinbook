@@ -18,7 +18,7 @@ export default function PostCreate() {
     e.preventDefault();
     await createPost(formData);
     setFormData("");
-    navigate("/home");
+    navigate(0);
   };
 
   const handleChange = (e) => setFormData(e.target.value);

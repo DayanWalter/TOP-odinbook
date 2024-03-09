@@ -4,6 +4,7 @@ import { mdiAlertOutline } from "@mdi/js";
 
 // Hooks
 import useDeleteComment from "../../hooks/useDeleteComment";
+import { useNavigate } from "react-router-dom";
 
 export default function CommentDelete({ formData }) {
   // Custom hooks
@@ -13,9 +14,14 @@ export default function CommentDelete({ formData }) {
     error: deleteCommentError,
   } = useDeleteComment();
 
+  // Hooks
+  const navigate = useNavigate();
+
   // Functions
-  const handleDeleteComment = async () => {
+  const handleDeleteComment = async (e) => {
+    e.preventDefault();
     await deleteComment(formData);
+    navigate(0);
   };
 
   return (

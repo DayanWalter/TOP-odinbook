@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Hooks
 import useUpdatePost from "../../hooks/useUpdatePost";
@@ -13,13 +13,13 @@ export default function PostUpdate({ formData }) {
   } = useUpdatePost();
 
   // Hooks
-  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   // Functions
   const handleUpdatePost = async (e) => {
     e.preventDefault();
     await update(formData);
-    setSuccess(true);
+    navigate(0);
   };
 
   return (
@@ -33,7 +33,6 @@ export default function PostUpdate({ formData }) {
       >
         Update Post
       </button>
-      {success && <div style={{ color: "green" }}>Post updated!</div>}
     </>
   );
 }
