@@ -16,10 +16,10 @@ This is the backend part of the Fullstack project. It is an Express application 
 - `npm run serverstart`: Starts the development server with debug mode.
 - `npm test`: Runs tests using Jest.
 
-### Technologies
+### Dependencies
 
 - Express
-- Mongoose (MongoDB ODM)
+- Mongoose
 - bcryptjs
 - jsonwebtoken
 - passport
@@ -28,4 +28,8 @@ This is the backend part of the Fullstack project. It is an Express application 
 
 ## Note
 
-Ensure that you have configured any required environment variables, especially for database connection and authentication purposes.
+Ensure that you have configured `DEV_DB_URL` and `ACCESS_TOKEN_SECRET`.
+
+In development:
+
+- tests

@@ -17,15 +17,19 @@ This is the frontend part of the Fullstack project. It is a React application bu
 - `npm run lint`: Runs ESLint for code linting.
 - `npm run preview`: Starts the Vite development server in preview mode.
 
-### Technologies
+### Dependencies
 
 - React
 - React-DOM
 - React Router DOM
-- Vite (Development tool)
-- Jest (Test tool)
-- ESLint (Code linter)
+- Vite
+- Jest
+- ESLint
 
 ## Note
 
-Make sure to configure any additional settings or environment variables required for development.
+Make sure to configure the environment variable `VITE_SERVER_URL`.
+
+In development:
+
+- tests

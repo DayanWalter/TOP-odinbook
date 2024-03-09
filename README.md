@@ -12,7 +12,7 @@ Live Preview: [BitFeather](https://bitfeather.onrender.com/)
 ## About the project
 
 [BitFeather](https://bitfeather.onrender.com/) is a social-network like twitter.
-The user can create a user account, edit/delete their profile, follow and unfollow other users, write posts and comments.
+The user can create a user account, edit/delete their profile, follow and unfollow other users, write/edit/delete posts and comments.
 
 ### Features
 
@@ -23,12 +23,13 @@ The user can create a user account, edit/delete their profile, follow and unfoll
 - **Demo account:**
   Explore BitFeathers' features, sign-up-free with the demo account.
 
-### Technologies
+### Technologies used
 
 - [MongoDB](https://www.mongodb.com/)
 - [Express](https://expressjs.com/)
-- [React](https://reactjs.org/)
-- [NodeJS](https://nodejs.org/en/)
+- [React](https://react.dev/)
+- [NodeJS](https://nodejs.org/)
+- [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
 
 ## Note
@@ -46,4 +47,4 @@ backend:
 
 In development:
 
-- tests (front and backend)
+- tests (front- and backend)
