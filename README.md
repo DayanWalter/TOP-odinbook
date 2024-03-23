@@ -36,7 +36,7 @@ The user can create an account, edit/delete their profile, follow/unfollow other
 
 ## Note
 
-Ensure you configure the environment variables appropriately
+### Variables
 
 frontend:
 
@@ -47,6 +47,6 @@ backend:
 - ACCESS_TOKEN_SECRET
 - DEV_DB_URL
 
-In development:
+### In development
 
 - tests (front- and backend)
