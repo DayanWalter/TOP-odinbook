@@ -5,7 +5,7 @@ and a [backend](https://github.com/DayanWalter/bitfeather/tree/main/backend). Th
 
 This project was the final project from [The Odin Project](https://www.theodinproject.com/)
 
-Hosted on [render.com](https://render.com/). It takes about 30 seconds for the server to be live.
+Hosted on [render.com](https://render.com/). After hitting 'Demo User Login,' it takes about 30-50 seconds for the server to be live.
 
 Live Preview: [BitFeather](https://bitfeather.onrender.com/)
 

@@ -67,14 +67,18 @@ export default function UserLogin() {
         type="submit"
         disabled={loading}
       >
-        {loading ? `Loggin in ${formData.user_name}` : "Login User"}
+        {loading
+          ? `Server starts, please wait :) (30-50 seconds)`
+          : "Login User"}
       </button>{" "}
       <button
         className="w-full px-4 py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
         onClick={handleLoginDemoUser}
         disabled={loading}
       >
-        Demo User Login
+        {loading
+          ? "Server starts, please wait :) (30-50 seconds)"
+          : "Demo User Login"}
       </button>
       <div className="w-2/5 py-1 mt-5 mb-5 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
         <Link to={"/signup"}>or sign up</Link>
@@ -83,7 +87,10 @@ export default function UserLogin() {
       <ul>
         {error &&
           error.map((err, index) => (
-            <li key={index} style={{ color: "red", fontSize: "1rem" }}>
+            <li
+              key={index}
+              style={{ color: "red", fontSize: "1rem" }}
+            >
               {" "}
               {err.msg}
             </li>
