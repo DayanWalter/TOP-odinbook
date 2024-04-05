@@ -29,11 +29,14 @@ export default function UserCreate() {
 
   return (
     <form onSubmit={handleCreateUser}>
-      <label htmlFor="user_name" className="w-full mb-5">
+      <label
+        htmlFor="user_name"
+        className="w-full mb-5"
+      >
         Username:
         <span className="text-red-500">*</span>
         <input
-          className="w-full px-2 py-1 mt-2 mb-6 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
+          className="w-full px-2 py-1  mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="user_name"
           type="text"
           name="user_name"
@@ -43,11 +46,14 @@ export default function UserCreate() {
         />
       </label>
 
-      <label htmlFor="email" className="w-full mb-5 ">
+      <label
+        htmlFor="email"
+        className="w-full mb-5 "
+      >
         Email:
         <span className="text-red-500">*</span>
         <input
-          className="w-full px-2 py-1 mt-2 mb-6 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
+          className="w-full px-2 py-1  mb-5 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="email"
           type="email"
           name="email"
@@ -58,11 +64,14 @@ export default function UserCreate() {
         />
       </label>
 
-      <label htmlFor="password" className="w-full mb-5">
+      <label
+        htmlFor="password"
+        className="w-full mb-5"
+      >
         Password:
         <span className="text-red-500">*</span>
         <input
-          className="w-full px-2 py-1 mt-2 mb-6 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
+          className="w-full px-2 py-1  border mb-5 border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="password"
           type="password"
           name="password"
@@ -72,11 +81,14 @@ export default function UserCreate() {
         />
       </label>
 
-      <label htmlFor="repeatPassword" className="w-full mb-5">
+      <label
+        htmlFor="repeatPassword"
+        className="w-full mb-5"
+      >
         Repeat Password:
         <span className="text-red-500">*</span>
         <input
-          className="w-full px-2 py-1 mt-2 mb-6 border border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
+          className="w-full px-2 py-1  border  border-gray-400 rounded-sm shadow-sm focus:outline-none focus:ring ring-transparent ring-offset-2 ring-offset-primary/20 focus:border-primary dark:text-black"
           id="repeatPassword"
           type="password"
           name="repeatPassword"
@@ -85,22 +97,26 @@ export default function UserCreate() {
           required={true}
         />
       </label>
-
-      <button
-        className="w-full py-2 mt-5 mb-5 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
-        type="submit"
-        disabled={loading}
-      >
-        {loading ? `Creating User: ${formData.user_name}` : "Signup"}
-      </button>
-      <div className="w-2/5 py-1 mt-5 mb-5 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
-        <Link to={"/login"}>or login</Link>
+      <div className="flex flex-col items-center mt-8 gap-6">
+        <button
+          className="w-4/6 py-2 font-medium text-white rounded-sm bg-primary hover:bg-primary/80"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? `Creating User: ${formData.user_name}` : "Signup"}
+        </button>
+        <div className="w-2/5 py-1   text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
+          <Link to={"/login"}>or login</Link>
+        </div>
       </div>
       {/* Display error from backend */}
       <ul>
         {error &&
           error.map((err, index) => (
-            <li key={index} style={{ color: "red", fontSize: "1rem" }}>
+            <li
+              key={index}
+              style={{ color: "red", fontSize: "1rem" }}
+            >
               {" "}
               {err.msg}
             </li>
