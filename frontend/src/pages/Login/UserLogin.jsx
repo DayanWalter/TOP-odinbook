@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 // Hooks
 import useLogin from "./useLogin";
+import WelcomeModal from "./WelcomeModal";
 
 export default function UserLogin() {
   // Custom hooks
@@ -14,6 +15,7 @@ export default function UserLogin() {
     user_name: "",
     password: "",
   });
+  const [showWelcomeModal, setShowWelcomeModal] = useState(true);
 
   // Functions
   const handleChange = (e) => {
@@ -32,6 +34,13 @@ export default function UserLogin() {
   const handleLoginDemoUser = async (e) => {
     e.preventDefault();
     login({ user_name: "DemoUser", password: "111111" });
+  };
+
+  // Functions
+  const handleOverlayClick = (event) => {
+    if (event.target.id === "overlay") {
+      setShowWelcomeModal(false);
+    }
   };
 
   return (
@@ -138,7 +147,7 @@ export default function UserLogin() {
           onClick={handleLoginDemoUser}
           disabled={loading}
         >
-          {loading ? "Please wait (30-50 seconds)" : "Demo User Login"}
+          {loading ? "Server starts (~ 60s)" : "Demo User Login"}
         </button>
         <div className="w-2/5 py-1 mt-3 text-center text-white rounded-sm hover:cursor-pointer bg-info hover:bg-info/80">
           <Link to={"/signup"}>or sign up</Link>
@@ -157,6 +166,15 @@ export default function UserLogin() {
             </li>
           ))}
       </ul>
+      {showWelcomeModal && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-gray-500/50"
+          id="overlay"
+          onClick={handleOverlayClick}
+        >
+          <WelcomeModal />
+        </div>
+      )}
     </form>
   );
 }
