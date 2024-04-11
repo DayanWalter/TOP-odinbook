@@ -44,7 +44,10 @@ export default function Header() {
         >
           <div className="flex items-center w-full h-full px-5 sm:justify-between lg:px-16">
             {/* Logo */}
-            <Link to="/home" className="hidden text-2xl sm:block ">
+            <Link
+              to="/home"
+              className="hidden text-2xl sm:block "
+            >
               {" "}
               {"BITFEATHER"}{" "}
             </Link>
@@ -54,22 +57,34 @@ export default function Header() {
               role="navigation"
               className="w-full sm:w-3/4 lg:w-2/3"
             >
-              <ul role="menubar" className="flex justify-between text-primary ">
+              <ul
+                role="menubar"
+                className="flex justify-between text-primary "
+              >
                 {/* Home link */}
                 <Link to="/home">
                   <li
                     role="menuitem"
                     className="flex items-center gap-3 hover:scale-105"
                   >
-                    <Icon path={mdiHomeOutline} size={0.9} />
+                    <Icon
+                      path={mdiHomeOutline}
+                      size={0.9}
+                    />
                     <p className="hidden sm:block">Home</p>
                   </li>
                 </Link>
 
                 {/* All user link */}
                 <Link to="/alluser">
-                  <li role="menuitem" className="flex gap-3 hover:scale-105">
-                    <Icon path={mdiAccountMultiple} size={0.9} />
+                  <li
+                    role="menuitem"
+                    className="flex gap-3 hover:scale-105"
+                  >
+                    <Icon
+                      path={mdiAccountMultiple}
+                      size={0.9}
+                    />
                     <p className="hidden sm:block">All User</p>
                   </li>
                 </Link>
@@ -82,7 +97,10 @@ export default function Header() {
                   }}
                   className="flex gap-3 hover:scale-105 hover:cursor-pointer"
                 >
-                  <Icon path={mdiFilePlusOutline} size={0.9} />
+                  <Icon
+                    path={mdiFilePlusOutline}
+                    size={0.9}
+                  />
                   <p className="hidden sm:block">Post</p>
                 </li>
 
@@ -112,7 +130,7 @@ export default function Header() {
                 onClick={handleOverlayClick}
                 className="fixed inset-0 flex items-center justify-center bg-gray-500/50"
               >
-                <div className="p-8 bg-white rounded-lg">
+                <div className="p-8 bg-white rounded">
                   <PostCreate />
                 </div>
               </div>
