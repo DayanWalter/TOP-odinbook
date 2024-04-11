@@ -46,7 +46,7 @@ export default function PostEdit({ postId }) {
         >
           <label htmlFor="content">
             <textarea
-              className="w-full mt-8 mb-5 border"
+              className="w-full mt-8 mb-5 p-2 border"
               id="content"
               type="text"
               name="content"

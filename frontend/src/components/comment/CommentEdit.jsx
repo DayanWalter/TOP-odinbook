@@ -45,7 +45,7 @@ export default function CommentEdit({ commentId }) {
         >
           <label htmlFor="content">
             <textarea
-              className="w-full mt-8 mb-5 border"
+              className="w-full mt-8 p-2 mb-5 border"
               id="content"
               type="text"
               name="content"
