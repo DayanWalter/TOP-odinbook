@@ -49,7 +49,7 @@ export default function PostCard({ post }) {
     <>
       <div
         id="postCard"
-        className="relative flex gap-6 overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded-xl"
+        className="relative flex gap-6 overflow-hidden bg-white shadow-lg ring-1 ring-black/5 rounded"
       >
         {/* Avatar */}
         <Link to={`/user/${post.author_id._id}`}>
@@ -120,7 +120,10 @@ export default function PostCard({ post }) {
             </div>
             {/* Calendar*/}
             <div className="flex">
-              <Icon path={mdiCalendarMonthOutline} size={1} />
+              <Icon
+                path={mdiCalendarMonthOutline}
+                size={1}
+              />
               {new Date(post.posting_date).toLocaleDateString()}
             </div>
           </div>
